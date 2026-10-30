@@ -57,7 +57,7 @@ The agent inspects scene identity and capabilities, acquires write ownership, va
 
 ## Demonstrations
 
-[Actual walk/jog tour of twelve rigs](https://github.com/ros-claw/simpeople/releases/download/v0.2.0-preview/optimization_1031_gait_demo.mp4) · [Seat fit comparison](https://github.com/ros-claw/simpeople/releases/download/v0.2.0-preview/optimization_1031_seat_comparison.mp4). These are simulation renders; playback encoding rate is separate from measured runtime throughput.
+[Segmented/continuous motion comparison](https://github.com/ros-claw/simpeople/releases/download/demos-20261031/optimization_1031_motion_comparison.mp4) · [Actual walk/jog tour of twelve rigs](https://github.com/ros-claw/simpeople/releases/download/demos-20261031/optimization_1031_gait_demo.mp4) · [Seat fit comparison](https://github.com/ros-claw/simpeople/releases/download/demos-20261031/optimization_1031_seat_comparison.mp4). [Uncut native seat cycles and cancellation](https://github.com/ros-claw/simpeople/releases/download/demos-20261031/optimization_1031_seat_lifecycle.mp4). These are simulation renders; the six-second seat fit comparison uses stills, and playback encoding rate is separate from measured runtime throughput.
 
 ## API and quality
 

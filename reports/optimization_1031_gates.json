@@ -1,6 +1,6 @@
 {
   "scope": "1031 quality/product iteration; historical v0.1 population gates are separate",
-  "source_commit": "4121c1a3136903bf1665ab77d1fdbcbec7ae31cd",
+  "source_commit": "6203ed82ea25f4c8f9dc7c87c90e83743bdf2d6c",
   "gates": {
     "motion": {
       "passed": true,
@@ -31,10 +31,27 @@
       "status": "requires local host login; not executed",
       "evidence": "reports/optimization_1031_claude_status.json"
     },
-    "population50": {
+    "population50_first_attempt": {
       "passed": false,
       "status": "closed",
       "evidence": "runs/opt1031-regression50-seed17-01/acceptance_summary.json"
+    },
+    "population50": {
+      "passed": null,
+      "status": "pending native run",
+      "evidence": "runs/opt1031-regression50-seed17-02/acceptance_summary.json"
+    },
+    "cleanup_and_bounded_vias": {
+      "passed": true,
+      "evidence": "runs/opt1031-cleanup-corridor-13-02/cleanup_acceptance.json"
+    },
+    "performance30_realtime": {
+      "passed": false,
+      "evidence": "runs/opt1031-final30-full-01/metrics.json"
+    },
+    "tracy_steady_window": {
+      "passed": null,
+      "evidence": "runs/opt1031-final30-trace-02/profile_summary.json"
     }
   },
   "input_hashes": [
@@ -65,6 +82,14 @@
     {
       "path": "runs/opt1031-regression50-seed17-01/acceptance_summary.json",
       "sha256": "5738a2987fd5e23662662213fef585749aa84e24eaabb659dac92c3c9d90b739"
+    },
+    {
+      "path": "runs/opt1031-cleanup-corridor-13-02/cleanup_acceptance.json",
+      "sha256": "07cea30658fe851e915c2742691e74d3d3fee34bf95c45ccbc82caea6e426e2e"
+    },
+    {
+      "path": "runs/opt1031-final30-full-01/metrics.json",
+      "sha256": "a13c7e717e6c6133fefddf58f19fc2e94f5e853d3f6eb712948f5bf7b3ecd7b9"
     },
     {
       "path": "configs/quality_catalog.json",

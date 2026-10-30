@@ -1,0 +1,41 @@
+{
+  "repository": "https://github.com/ros-claw/simpeople",
+  "public_installation_verified": true,
+  "hosts": [
+    {
+      "host": "codex",
+      "steps": [
+        {
+          "marketplaceName": "ros-claw-simpeople",
+          "alreadyAdded": false
+        },
+        {
+          "pluginId": "simpeople@ros-claw-simpeople",
+          "name": "simpeople",
+          "marketplaceName": "ros-claw-simpeople",
+          "version": "0.2.0",
+          "authPolicy": "ON_INSTALL"
+        }
+      ],
+      "installation_scope": "own SimPeople marketplace/plugin; unrelated plugins unchanged"
+    },
+    {
+      "host": "claude",
+      "steps": [
+        {
+          "command": "marketplace-add",
+          "outcome": "ok",
+          "marketplace": "ros-claw-simpeople"
+        },
+        {
+          "command": "install",
+          "outcome": "ok",
+          "plugin": "simpeople@ros-claw-simpeople",
+          "pluginId": "simpeople@ros-claw-simpeople",
+          "scope": "local"
+        }
+      ],
+      "installation_scope": "own SimPeople marketplace/plugin; unrelated plugins unchanged"
+    }
+  ]
+}

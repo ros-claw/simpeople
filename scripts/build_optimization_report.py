@@ -17,7 +17,7 @@ def table(headers,rows):blocks.append(('table',headers,rows))
 def code(text):blocks.append(('code',text))
 def image(name,caption):blocks.append(('image',name,caption))
 MOTION=['opt1031-motion-A-native-02','opt1031-motion-B-segmented-01','opt1031-motion-C-corridor-01','opt1031-motion-CD-corridor-02','opt1031-motion-CD-lazy-03']
-SEAT='opt1031-seat-calibrated-v3-12-02';GAIT='opt1031-gait-corridor-12-02';HOST='opt1031-host-codex-02';LARGE='opt1031-regression50-seed17-01'
+SEAT='opt1031-seat-calibrated-v3-12-02';GAIT='opt1031-gait-corridor-12-02';HOST='opt1031-host-codex-02';LARGE='opt1031-regression50-seed17-02';LARGE_FIRST='opt1031-regression50-seed17-01'
 seat=run(SEAT,'seat_quality.json');gait=run(GAIT,'gait_pool_quality.json');host=run(HOST,'host_acceptance.json');claude=read('reports/optimization_1031_claude_status.json');large=run(LARGE,'metrics.json');largesummary=run(LARGE,'acceptance_summary.json');perf=read('reports/optimization_1031_performance.json') or []
 commit=subprocess.run(['git','rev-parse','HEAD'],cwd=ROOT,capture_output=True,text=True,check=True).stdout.strip();when=datetime.now(ZoneInfo('Asia/Shanghai')).isoformat(timespec='seconds')
 p('编制时间：'+when+'。本报告覆盖 1031 优化轮次；v0.1 原始实施报告、失败运行和已封存归档保持原样。')
@@ -40,6 +40,7 @@ table(['运行','移动原生任务数','支撑段漂移中位数 cm','p95 cm','
 p('修正版本将同一移动序列从 14 个原生移动任务减为 3 个。最后一组通行与动态障碍测试实测成功，记录到障碍刹车事件，未触发持续根重叠或根跳变。支撑段漂移是估计接触的测量，不能直接等同真实滑移量；转身、离地和触地过渡仍会影响尾部分布。')
 p('首个连续通行原型将 NavMesh 的大量密集采样点直接交给 move_along，导致慢跑变慢，因此未被当作最终修复。之后以 0.01 m 容差保留端点/转角并压缩采样；等待时缓存候选路径、错开重试，只在需要时验证局部 NavMesh 边。')
 p(source('runs/opt1031-motion-CD-lazy-03/motion_acceptance.json','连续通行、竞争人物及临时障碍原生结果')+'；'+source('runs/opt1031-motion-CD-lazy-03/gait_quality.json','足端代理统计及最差帧号')+'。')
+p(source('reports/optimization_1031_motion_comparison.mp4','相同仿真时间片段的分段/连续走路并排视频')+'。两侧各为连续真实渲染片段；编码播放速度不代表实际运行吞吐。')
 h('4. 足端测量与帧身份')
 p('用开始时的站立姿态和关节旋转校准后跟/前掌鞋底代理点。接触估计使用高度绝对值 ≤0.025 m、竖直速度绝对值 ≤0.15 m/s、至少 3 个样本及 0.06 s；根平面速度 >0.25 m/s 仅选择移动窗口。没有用脚的水平低速筛选接触，避免把真正滑动的样本排除。')
 p('记录实际 SDK 根/关节、原生任务、请求步态和速度、路段与预约状态、仿真时间、墙钟时间、样本与录像帧身份。数据来自实际运行；原生速度单位还用实际根位移核对，没有根据文档文字盲改百倍比例。')
@@ -56,7 +57,7 @@ p('第一次新匹配试验有 6 人出现坐姿保持失败：较宽的保持�
 if seat:
  table(['基础人物','精细采样数','头颈顶点最小间隙 mm','检测到进入靠背的帧'],[[a,str(x['fine_samples']),fmt(x['skinned_vertex_min_m']*1000,2),str(x['frames_with_penetrating_vertices'])] for a,x in seat['actors'].items()])
 p('轻量检查使用头颈球体和胸背胶囊；精细检查用资产蒙皮权重、逆绑定矩阵及实际原生关节姿态重建选定头颈顶点。十二资产绑定姿态的独立数学校验最大距离误差约 4.23×10⁻⁸ m。测试检查的是顶点与靠背的关系，不是逐三角形或全身接触证明。')
-p(source('runs/'+SEAT+'/seat_acceptance.json','完整周期和取消结果')+'；'+source('runs/'+SEAT+'/seat_quality.json','每个人物精细检查')+'；'+source('runs/'+SEAT+'/raw_video.mp4','该次未剪辑原始录像')+'；'+source('reports/optimization_1031_seat_comparison.mp4','前后静帧对照视频')+'。')
+p(source('runs/'+SEAT+'/seat_acceptance.json','完整周期和取消结果')+'；'+source('runs/'+SEAT+'/seat_quality.json','每个人物精细检查')+'；'+source('runs/'+SEAT+'/raw_video.mp4','该次未剪辑原始录像')+'；'+source('reports/optimization_1031_seat_comparison.mp4','前后静帧对照视频')+'；'+source('reports/optimization_1031_seat_lifecycle.mp4','十二人物完整坐姿与取消未剪辑录像')+'。')
 h('6. 可查询的能力与验证失效')
 p('质量目录已生成 24 项记录：12 个基础人物的走跑测量及 12 个人物与座椅模板的顶点审计。记录绑定资产目录内 USD 层、动作目录 USD、rig、Isaac/Behavior/Navigation 实际版本，以及座椅模板和实际表面/靠背/效应器几何指纹。资源或几何改变后，旧记录不再匹配。')
 p('相同几何的材质外观变体可匹配相同源资源记录；没有因此增加“基础人物”数量。坐姿功能 verified 与座椅几何 quality 分开返回。未登记的外部椅子、其他骨骼、其他动作速度范围仍需单独验证。')
@@ -80,19 +81,26 @@ for name in ['opt1031-final30-full-01','opt1031-final30-render-only-01','opt1031
  m=run(name,'metrics.json')
  if m:finalrows.append([name,fmt(m['rtf']),fmt(m['measured_updates_per_wall_second'],2),fmt(m['frame_time_p95_s']*1000,1)])
 table(['最终场景补测','RTF','实际更新/墙钟秒','p95 ms'],finalrows or [['尚未全部关闭','—','—','—']])
+optional=read('reports/optimization_1031_optional_performance.json') or []
+if optional:
+ table(['可选配置（完整1080p录制）','RTF','实际更新/墙钟秒','p95 ms'],[[x['run_id'],fmt(x['metrics']['rtf']),fmt(x['metrics']['measured_updates_per_wall_second'],2),fmt(x['metrics']['frame_time_p95_s']*1000,1)] for x in optional if x.get('metrics')])
+p('可选 CPU 线程和 Ampere retrace 对照均单列；默认仍为 8 线程及原画质。retrace=0.1 是 NVIDIA 提到的吞吐与光照准确性取舍，不能当作不改画质的纯性能收益。启动时的实际设置写入 runtime_settings.json。')
 p('运行模式已提供：interactive 默认 1280×720；generation 默认 1920×1080；audit 开启精细观测；experimental 明确实验用途。模式名称不是人数或实时性能证书；分辨率可显式指定。')
 h('8. 剖析范围与限制')
-trace=run('opt1031-final30-trace-01','profile_summary.json')
+trace=run('opt1031-final30-trace-02','profile_summary.json')
 if trace and trace.get('main_thread_phase_wall_fraction'):
  p(f'修正版 Tracy 对原生进程采集，并从缓冲数据中选择 {trace["window_s"]:.2f} s 的运行窗口；启动区间未混入以下主线程份额。')
  table(['主线程区间','选定窗口占比'],[[k,fmt(v*100,1)+'%'] for k,v in trace['main_thread_phase_wall_fraction'].items()])
 else:p('首个 Tracy 文件有效，但包含约 103 s 启动缓冲，且未记录预期自定义区间，未把其未筛选聚合耗时当作稳定帧瓶颈。已改为显式 Tracy 接口，修正版文件/窗口核对待该轮关闭后填入。')
+if trace and trace.get('groups'):
+ table(['原生剖析分组','选定窗口内的主要 CPU scope（跨线程聚合秒，不是墙钟百分比）'],[[group,'; '.join(x['name']+' '+fmt(x['aggregate_s'],2)+' s' for x in rows[:3])] for group,rows in trace['groups'].items()])
 p('跨线程原生区间会重叠，不能把其聚合时间相加当作墙钟百分比。CSV CPU scope 不等于 GPU 设备执行时间；原始 Tracy 文件保留以供 GPU lane/等待关系复查。剖析轮不用于最终吞吐比较。没有用四张显卡推定四倍加速，也没有未经核对就改时间步、减少人物动作或把低分辨率冒充原画质。')
 h('9. 两种宿主与真实自然语言验收')
 table(['宿主','包/连接','自然语言结果'],[['Codex CLI 0.166.0','可移植 manifest/MCP schema、安装、工具发现与 Skill 校验通过','3 项真实任务通过（按原生状态判定）' if host and host['passed'] else '待最终状态判定'],['Claude Code 2.1.305','隔离 Linux 入口可运行；plugin validate 通过；MCP Connected','未登录，未执行 3 项自然语言任务。']])
 if host:
  table(['Codex 项目','实际核对','完成 MCP 调用','含已恢复的工具错误'],[[str(x['task_number']),'; '.join(k for k,v in x['checks'].items() if v),str(x['completed_mcp_calls']),str(x['tool_errors_including_recovered'])] for x in host['results']])
 p('Codex 第一项曾先查询尚未创建的人物能力，收到 ACTOR_NOT_FOUND，之后创建并继续完成；该工具错误保留。批量测试核对前两人的控制版本与终态、第三人的原任务；取消恢复核对被取消的移动、之后成功的等待及其他人物任务未改。三次独立宿主调用使用同一稳定控制者身份，运行时持有任务。')
+p('两个宿主均已从公开 GitHub 仓库完成 marketplace/plugin 实际安装。插件提供不同的稳定控制者默认值，断线重连沿用同一逻辑身份；同一宿主的独立实例应配置不同 ID。'+source('reports/optimization_1031_plugin_installation.json','公开安装回执')+'。')
 p('初次宿主尝试也保留为失败：Codex 没有将父 shell 的自定义端点传给 MCP 子进程，实际连接被拒绝，0 人被创建。修正为显式 MCP env 之后重跑。另对授权验收使用仅针对本机 SimPeople server 的工具审批配置，宿主文件系统仍为只读，没有全局绕过沙箱。')
 p(source('runs/'+HOST+'/host_acceptance.json','Codex 终态核对')+'；'+source('runs/'+HOST+'/host_manifest.json','宿主版本与设置')+'；'+source('runs/'+HOST+'/host_prompts.json','实际输入')+'；'+source('reports/optimization_1031_claude_status.json','Claude 当前状态')+'；'+source('docs/plugins.md','宿主安装和环境转发说明')+'。')
 h('10. 人数容量与兼容边界')
@@ -100,17 +108,21 @@ p('v0.1 的 50 人三个种子各 600 仿真秒、每人至少 2 周期记录继
 if large:
  counts=large['task_status_counts'];p(f'本轮 {LARGE} 已关闭：仿真 {large["sim_elapsed_s"]:.2f} s，RTF {large["rtf"]:.3f}；成功 {counts["succeeded"]}、失败 {counts["failed"]}、清理取消 {counts["cancelled"]}。')
  if largesummary:p('逐人容量判定：`'+str(largesummary.get('functional_population_gate_passed'))+'`。详细参与/周期和几何结果以对应 summary 为准。')
- p('首轮新通行长测未通过：274.8 仿真秒时 person_025 连续失败后暂停。共有 8 次排队超时、1 次坐下步骤在接近途中超时、2 次清理 STOP_FAILED。50/50 人有严格位移参与，但最少周期为 0，不能冒充完整容量通过。')
- p('修复将 12 人以上的连续通行限制为已完整预约的 12 米步行/18 米慢跑区段，仍在每个区段末端原生刹停，不占住整条跨厂房路线。取消坐下接近时，只有实际站稳并远离所有离座点的包络才直接释放椅子；近椅、坐姿及离座途中继续正常清理。修复后的原生复测单独保存，不改写首轮结果。')
 else:p(f'本轮 `{LARGE}` 是新连续通行策略的 50 人 seed 17 /600 仿真秒回归，目前未关闭，尚不能提前计为通过。')
-p('这次长测与宿主控制验证曾同时运行于不同 GPU；它验证功能持续运行，不是独占负载的速度基准。首次受控吞吐对照没有并行启动本轮另一自有 Kit。外部已有 Isaac 应用始终未停止。')
-p(source('runs/'+LARGE+'/metrics.json','本轮 50 人指标（关闭后生成）')+'；'+source('runs/'+LARGE+'/native_controller_lease_check.json','实际双客户端读写控制权核对')+'。')
+p('首轮新通行长测未通过：274.8 仿真秒时 person_025 连续失败后暂停。共有 8 次排队超时、1 次坐下步骤在接近途中超时、2 次清理 STOP_FAILED。50/50 人有严格位移参与，但最少周期为 0，不能冒充完整容量通过。')
+p('修复将 12 人以上的连续通行限制为已完整预约的 12 米步行/18 米慢跑区段，仍在每个区段末端原生刹停，不占住整条跨厂房路线。取消坐下接近时，只有实际站稳并远离所有离座点的包络才直接释放椅子；近椅、坐姿及离座途中继续正常清理。修复后的原生复测单独保存，不改写首轮结果。')
+
+p('首轮长测与宿主控制验证曾同时运行于不同 GPU；它验证功能持续运行，不是独占负载的速度基准。首次受控吞吐对照没有并行启动本轮另一自有 Kit。外部已有 Isaac 应用始终未停止。')
+p(source('runs/'+LARGE+'/metrics.json','本轮 50 人指标（关闭后生成）')+'；'+source('runs/'+LARGE_FIRST+'/native_controller_lease_check.json','实际双客户端读写控制权核对')+'。')
+cleanup=run('opt1031-cleanup-corridor-13-02','cleanup_acceptance.json')
+if cleanup:
+ p('定点原生回归：远处坐下接近取消在 '+fmt(cleanup['distant_approach_cancel']['elapsed_sim_s'],2)+' 仿真秒内结算并释放座位，未返回椅子；13 人实例条件下的有限通道路线实际依次经过两个 via 与最终目标。此前减速未结束就选择 egress 的失败也保留在 cleanup-corridor-13-01。')
 h('11. 安装、维护与开放源码')
 code("python3 -m pip install -e '.[mcp,assets,video]'\nexport SIMPEOPLE_ISAAC_DIR=/path/to/isaac-sim\nexport SIMPEOPLE_CHARACTER_DIR=/path/to/Isaac/People/Characters\npython3 scripts/cache_assets.py\nsimpeople serve --scenario industrial_life --gpu 0 --duration 3600")
 p('发布采用单独允许列表导出和全新 Git 历史，不把本地原始想法文档、旧私有历史、NVIDIA 模型/动作/纹理、用户凭据或完整运行日志推上公网。代码为 MIT；NVIDIA 资产和第三方依赖遵从各自许可。插件包和共享源码分别验证。')
-p('目标仓库：[ros-claw/simpeople](https://github.com/ros-claw/simpeople)。是否已公开、公开提交及文件校验，以发布清单为准。编辑式源码安装是支持的启动方式；单独 wheel 不包含场景、配置与缓存准备脚本。')
+p('已公开仓库：[ros-claw/simpeople](https://github.com/ros-claw/simpeople)。是否已公开、公开提交及文件校验，以发布清单为准。编辑式源码安装是支持的启动方式；单独 wheel 不包含场景、配置与缓存准备脚本。')
 h('12. 验证、保留失败与剩余工作')
-p('当前代码单元测试覆盖协议、幂等、代际控制、取消资源、批量逐项结果、读分页、事件游标、空间筛选、局部导航边、远处坐下取消与有限通道预约。工作区已通过 72 项测试。该测试数不被当作人物动画验收；人物结论来自前述实际 Kit 运行。')
+p('当前代码单元测试覆盖协议、幂等、代际控制、取消资源、批量逐项结果、读分页、事件游标、空间筛选、局部导航边、远处坐下取消与有限通道预约。工作区已通过 73 项测试。该测试数不被当作人物动画验收；人物结论来自前述实际 Kit 运行。')
 table(['保留的尝试','问题与处理'],[['motion-A-native-01','没有及时提交人物活动，空场运行未作为有效动作基线。'],['motion-C-corridor-01','密集 NavMesh 点拖慢慢跑；后续保留转角简化重测。'],['gait-corridor-12-01','首次完整网格预计算引发未知结果超时；按需局部边与相同 request_id 重试后重跑。'],['seat-calibrated-v3-12-01','6 人过早开始保持后发生对齐丢失；进入效应器稳定判据修正，保持阈值不放宽。'],['host-codex-01','端点未转发导致连接拒绝，0 人创建；显式环境配置后新运行通过。'],['perf30-03 / perf30-06','无活动 RGB 图的原型下界、混入启动缓冲的剖析，均未冒充最终稳定成本。']])
 p('剩余边界：Claude 自然语言验收需要本机登录；实时 24 FPS/RTF 0.8 未达；没有精确全身三角形、受力平衡、足端接触力、机器人深度/LiDAR或任意骨骼/椅子自动适配保证。多人移动目标跟随维持原有受限状态。')
 p('原生 Behavior API、Tracy 与性能配置依据本机 SDK 绑定和 NVIDIA 官方资料核对：[Behavior API](https://docs.omniverse.nvidia.com/kit/docs/behavior-simulation/latest/behavior-simulation/api.html)、[Tracy 指南](https://docs.isaacsim.omniverse.nvidia.com/6.2.0/utilities/debugging/profiling_performance.html)、[性能手册](https://docs.isaacsim.omniverse.nvidia.com/6.2.0/reference_material/sim_performance_optimization_handbook.html)。宿主格式核对 [OpenAI 插件文档](https://developers.openai.com/plugins/build/plugins) 与 [Claude 插件参考](https://code.claude.com/docs/en/plugins-reference)。')

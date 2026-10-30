@@ -1,8 +1,8 @@
 # ROSClaw SimPeople 优化实施报告 · 2026-10-31
 
-编制时间：2026-10-31T07:18:46+08:00。本报告覆盖 1031 优化轮次；v0.1 原始实施报告、失败运行和已封存归档保持原样。
+编制时间：2026-10-31T07:44:50+08:00。本报告覆盖 1031 优化轮次；v0.1 原始实施报告、失败运行和已封存归档保持原样。
 
-源码工作区提交：`4121c1a3136903bf1665ab77d1fdbcbec7ae31cd`。各原生运行实际执行的输入以该运行 `source_snapshot/` 与 `manifest.json` 为准，不能仅用后来提交覆盖原始来源。
+源码工作区提交：`6203ed82ea25f4c8f9dc7c87c90e83743bdf2d6c`。各原生运行实际执行的输入以该运行 `source_snapshot/` 与 `manifest.json` 为准，不能仅用后来提交覆盖原始来源。
 
 ## 1. 结论与当前验收状态
 
@@ -13,7 +13,7 @@
 | 插件产品 | 共享 Runtime、Kit 扩展、MCP/CLI、Codex 和 Claude 薄插件已实现；20 个 MCP 工具。 |
 | 真实 Codex | 三项自然语言任务经原生事件和状态核对通过。 |
 | 真实 Claude | 安装校验和 MCP 连接已通过；未登录，三项自然语言任务未执行。 |
-| 50 人新通行回归 | 已关闭，需按逐人活动与几何门槛判定，见第 10 节。 |
+| 50 人新通行回归 | 仍在运行；不能提前计为新版本容量通过。 |
 
 “通过”严格区分动作完成、接触代理测量、顶点穿透检查、人数容量和实时性能。当前仍不宣称完全无滑步、精确全身碰撞、24 FPS 实时人群或任意人物/椅子自动兼容。
 
@@ -48,6 +48,8 @@ Agent 提交活动后由 Runtime 持续执行。MCP 断开不会删除活动；�
 
 `连续通行、竞争人物及临时障碍原生结果` (local reference evidence)；`足端代理统计及最差帧号` (local reference evidence)。
 
+[相同仿真时间片段的分段/连续走路并排视频](https://github.com/ros-claw/simpeople/releases/download/demos-20261031/optimization_1031_motion_comparison.mp4)。两侧各为连续真实渲染片段；编码播放速度不代表实际运行吞吐。
+
 ## 4. 足端测量与帧身份
 
 用开始时的站立姿态和关节旋转校准后跟/前掌鞋底代理点。接触估计使用高度绝对值 ≤0.025 m、竖直速度绝对值 ≤0.15 m/s、至少 3 个样本及 0.06 s；根平面速度 >0.25 m/s 仅选择移动窗口。没有用脚的水平低速筛选接触，避免把真正滑动的样本排除。
@@ -71,7 +73,7 @@ Agent 提交活动后由 Runtime 持续执行。MCP 断开不会删除活动；�
 
 12 个基础人物均完成 35 m 走、35 m 慢跑、转向和停止。上述统计证明完成与可观察的接触代理表现；没有宣称安装了足端力传感器，也没有为任意速度建立无滑步保证。
 
-`十二人物走跑终态` (local reference evidence)；`十二人物分项测量` (local reference evidence)；[实际走跑展示视频（仿真时间回放）](https://github.com/ros-claw/simpeople/releases/download/v0.2.0-preview/optimization_1031_gait_demo.mp4)。
+`十二人物走跑终态` (local reference evidence)；`十二人物分项测量` (local reference evidence)；[实际走跑展示视频（仿真时间回放）](https://github.com/ros-claw/simpeople/releases/download/demos-20261031/optimization_1031_gait_demo.mp4)。
 
 ## 5. 座椅几何、坐姿进入与取消
 
@@ -102,7 +104,7 @@ Agent 提交活动后由 Runtime 持续执行。MCP 断开不会删除活动；�
 
 轻量检查使用头颈球体和胸背胶囊；精细检查用资产蒙皮权重、逆绑定矩阵及实际原生关节姿态重建选定头颈顶点。十二资产绑定姿态的独立数学校验最大距离误差约 4.23×10⁻⁸ m。测试检查的是顶点与靠背的关系，不是逐三角形或全身接触证明。
 
-`完整周期和取消结果` (local reference evidence)；`每个人物精细检查` (local reference evidence)；`该次未剪辑原始录像` (local reference evidence)；[前后静帧对照视频](https://github.com/ros-claw/simpeople/releases/download/v0.2.0-preview/optimization_1031_seat_comparison.mp4)。
+`完整周期和取消结果` (local reference evidence)；`每个人物精细检查` (local reference evidence)；`该次未剪辑原始录像` (local reference evidence)；[前后静帧对照视频](https://github.com/ros-claw/simpeople/releases/download/demos-20261031/optimization_1031_seat_comparison.mp4)；[十二人物完整坐姿与取消未剪辑录像](https://github.com/ros-claw/simpeople/releases/download/demos-20261031/optimization_1031_seat_lifecycle.mp4)。
 
 ## 6. 可查询的能力与验证失效
 
@@ -132,7 +134,11 @@ Agent 提交活动后由 Runtime 持续执行。MCP 断开不会删除活动；�
 
 | 最终场景补测 | RTF | 实际更新/墙钟秒 | p95 ms |
 | --- | --- | --- | --- |
-| 尚未全部关闭 | — | — | — |
+| opt1031-final30-full-01 | 0.181 | 5.44 | 339.2 |
+| opt1031-final30-render-only-01 | 0.213 | 6.41 | 325.9 |
+| opt1031-final30-no-encode-01 | 0.186 | 5.58 | 336.5 |
+
+可选 CPU 线程和 Ampere retrace 对照均单列；默认仍为 8 线程及原画质。retrace=0.1 是 NVIDIA 提到的吞吐与光照准确性取舍，不能当作不改画质的纯性能收益。启动时的实际设置写入 runtime_settings.json。
 
 运行模式已提供：interactive 默认 1280×720；generation 默认 1920×1080；audit 开启精细观测；experimental 明确实验用途。模式名称不是人数或实时性能证书；分辨率可显式指定。
 
@@ -157,6 +163,8 @@ Agent 提交活动后由 Runtime 持续执行。MCP 断开不会删除活动；�
 
 Codex 第一项曾先查询尚未创建的人物能力，收到 ACTOR_NOT_FOUND，之后创建并继续完成；该工具错误保留。批量测试核对前两人的控制版本与终态、第三人的原任务；取消恢复核对被取消的移动、之后成功的等待及其他人物任务未改。三次独立宿主调用使用同一稳定控制者身份，运行时持有任务。
 
+两个宿主均已从公开 GitHub 仓库完成 marketplace/plugin 实际安装。插件提供不同的稳定控制者默认值，断线重连沿用同一逻辑身份；同一宿主的独立实例应配置不同 ID。[公开安装回执](../reports/optimization_1031_plugin_installation.json)。
+
 初次宿主尝试也保留为失败：Codex 没有将父 shell 的自定义端点传给 MCP 子进程，实际连接被拒绝，0 人被创建。修正为显式 MCP env 之后重跑。另对授权验收使用仅针对本机 SimPeople server 的工具审批配置，宿主文件系统仍为只读，没有全局绕过沙箱。
 
 `Codex 终态核对` (local reference evidence)；`宿主版本与设置` (local reference evidence)；`实际输入` (local reference evidence)；[Claude 当前状态](../reports/optimization_1031_claude_status.json)；[宿主安装和环境转发说明](../docs/plugins.md)。
@@ -165,17 +173,17 @@ Codex 第一项曾先查询尚未创建的人物能力，收到 ACTOR_NOT_FOUND�
 
 v0.1 的 50 人三个种子各 600 仿真秒、每人至少 2 周期记录继续保留；队列超时也保持原记录。该证据不被改写成新版本所有动作质量均通过，更不等于 50 人实时。100 人仍仅为探索，原严格位移参与为 89/100。
 
-本轮 opt1031-regression50-seed17-01 已关闭：仿真 274.80 s，RTF 0.154；成功 54、失败 11、清理取消 48。
-
-逐人容量判定：`False`。详细参与/周期和几何结果以对应 summary 为准。
+本轮 `opt1031-regression50-seed17-02` 是新连续通行策略的 50 人 seed 17 /600 仿真秒回归，目前未关闭，尚不能提前计为通过。
 
 首轮新通行长测未通过：274.8 仿真秒时 person_025 连续失败后暂停。共有 8 次排队超时、1 次坐下步骤在接近途中超时、2 次清理 STOP_FAILED。50/50 人有严格位移参与，但最少周期为 0，不能冒充完整容量通过。
 
 修复将 12 人以上的连续通行限制为已完整预约的 12 米步行/18 米慢跑区段，仍在每个区段末端原生刹停，不占住整条跨厂房路线。取消坐下接近时，只有实际站稳并远离所有离座点的包络才直接释放椅子；近椅、坐姿及离座途中继续正常清理。修复后的原生复测单独保存，不改写首轮结果。
 
-这次长测与宿主控制验证曾同时运行于不同 GPU；它验证功能持续运行，不是独占负载的速度基准。首次受控吞吐对照没有并行启动本轮另一自有 Kit。外部已有 Isaac 应用始终未停止。
+首轮长测与宿主控制验证曾同时运行于不同 GPU；它验证功能持续运行，不是独占负载的速度基准。首次受控吞吐对照没有并行启动本轮另一自有 Kit。外部已有 Isaac 应用始终未停止。
 
 `本轮 50 人指标（关闭后生成）` (local reference evidence)；`实际双客户端读写控制权核对` (local reference evidence)。
+
+定点原生回归：远处坐下接近取消在 0.70 仿真秒内结算并释放座位，未返回椅子；13 人实例条件下的有限通道路线实际依次经过两个 via 与最终目标。此前减速未结束就选择 egress 的失败也保留在 cleanup-corridor-13-01。
 
 ## 11. 安装、维护与开放源码
 
@@ -189,11 +197,11 @@ simpeople serve --scenario industrial_life --gpu 0 --duration 3600
 
 发布采用单独允许列表导出和全新 Git 历史，不把本地原始想法文档、旧私有历史、NVIDIA 模型/动作/纹理、用户凭据或完整运行日志推上公网。代码为 MIT；NVIDIA 资产和第三方依赖遵从各自许可。插件包和共享源码分别验证。
 
-目标仓库：[ros-claw/simpeople](https://github.com/ros-claw/simpeople)。是否已公开、公开提交及文件校验，以发布清单为准。编辑式源码安装是支持的启动方式；单独 wheel 不包含场景、配置与缓存准备脚本。
+已公开仓库：[ros-claw/simpeople](https://github.com/ros-claw/simpeople)。是否已公开、公开提交及文件校验，以发布清单为准。编辑式源码安装是支持的启动方式；单独 wheel 不包含场景、配置与缓存准备脚本。
 
 ## 12. 验证、保留失败与剩余工作
 
-当前代码单元测试覆盖协议、幂等、代际控制、取消资源、批量逐项结果、读分页、事件游标、空间筛选、局部导航边、远处坐下取消与有限通道预约。工作区已通过 72 项测试。该测试数不被当作人物动画验收；人物结论来自前述实际 Kit 运行。
+当前代码单元测试覆盖协议、幂等、代际控制、取消资源、批量逐项结果、读分页、事件游标、空间筛选、局部导航边、远处坐下取消与有限通道预约。工作区已通过 73 项测试。该测试数不被当作人物动画验收；人物结论来自前述实际 Kit 运行。
 
 | 保留的尝试 | 问题与处理 |
 | --- | --- |

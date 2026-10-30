@@ -43,6 +43,8 @@ def main():
         r.add_argument('--performance-profile',choices=['baseline','optimized'],default='optimized')
         r.add_argument('--tracy',action='store_true')
         r.add_argument('--encoder-threads',type=int,choices=range(0,33))
+        r.add_argument('--cpu-threads',type=int,choices=range(1,65),default=8)
+        r.add_argument('--renderer-profile',choices=['default','ampere_retrace'],default='default')
     i=sub.add_parser('inspect');i.add_argument('--run-id',required=True)
     sub.add_parser('mcp')
     args=parser.parse_args()
@@ -66,7 +68,7 @@ def main():
             if args.command=='serve':command.append('--serve')
             for name in ['no_video','allow_unverified','realtime','visible','quality_audit','tracy']:
                 if getattr(args,name):command.append('--'+name.replace('_','-'))
-            for name in ['duration','run_id','traffic_profile','capture_profile','warmup_wall_s','measure_wall_s','performance_profile','encoder_threads','mode']:
+            for name in ['duration','run_id','traffic_profile','capture_profile','warmup_wall_s','measure_wall_s','performance_profile','encoder_threads','mode','cpu_threads','renderer_profile']:
                 if getattr(args,name) is not None:command.extend(['--'+name.replace('_','-'),str(getattr(args,name))])
             from .launch import run_logged
             raise SystemExit(run_logged(command,ROOT,args.run_id))

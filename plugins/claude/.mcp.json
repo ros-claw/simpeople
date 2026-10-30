@@ -5,7 +5,10 @@
       "command": "simpeople",
       "args": [
         "mcp"
-      ]
+      ],
+      "env": {
+        "SIMPEOPLE_CONTROLLER_ID": "simpeople-claude"
+      }
     }
   }
 }

@@ -29,6 +29,8 @@ parser.add_argument('--measure-wall-s',type=float)
 parser.add_argument('--performance-profile',choices=['baseline','optimized'],default='optimized')
 parser.add_argument('--tracy',action='store_true')
 parser.add_argument('--encoder-threads',type=int)
+parser.add_argument('--cpu-threads',type=int,choices=range(1,65),default=8)
+parser.add_argument('--renderer-profile',choices=['default','ampere_retrace'],default='default')
 for name in ['serve','no-video','allow-unverified','realtime','visible']:parser.add_argument('--'+name,action='store_true')
 args=parser.parse_args()
 from simpeople.core.modes import resolve_mode
@@ -57,7 +59,7 @@ sys.argv=[sys.argv[0]]
 from isaacsim import SimulationApp
 app=SimulationApp({'headless':not args.visible,'active_gpu':args.gpu,'multi_gpu':False,
                    'profiler_backend':['tracy'] if args.tracy else [],
-                   'width':args.width,'height':args.height,'limit_cpu_threads':8,
+                   'width':args.width,'height':args.height,'limit_cpu_threads':args.cpu_threads,
                    'disable_viewport_updates':not args.visible})
 engine=journal=bridge=recorder=monitor=frame_file=app_subscription=None
 keep_running=True
@@ -82,13 +84,17 @@ try:
         trace_api.ensure_thread()
         trace_api.set_capture_mask(1)
         journal_trace_metadata={'run_id':run_id,'pid':__import__('os').getpid(),'interface':'carb.profiler-tracy.plugin',
-                              'python_profiler_active':carb.profiler.is_profiler_active(),'capture_mask':trace_api.get_capture_mask()}
+                              'python_profiler_active':carb.profiler.is_profiler_active(),'capture_mask':trace_api.get_capture_mask(),
+                              'manual_zone_api':'carb.profiler.begin_with_location'}
         (directory/'trace_metadata.json').write_text(json.dumps(journal_trace_metadata,indent=2))
+    def trace_begin(name):
+        carb.profiler.begin_with_location(1,name,name,__file__,1)
     for ext in ['omni.anim.behavior.core','omni.anim.navigation.core']:
         if not manager.set_extension_enabled_immediate(ext,True):raise RuntimeError('cannot load '+ext)
     # The SDK defaults throttle the crowd solver to 0.3–0.4 seconds. Keep
     # navigation response at the same 30 Hz as the animation/simulation clock.
     settings=carb.settings.get_settings()
+    if args.renderer_profile=='ampere_retrace':settings.set('/rtx/pathtracing/cached/retrace',.1)
     settings.set('/exts/omni.anim.behavior.core/agentResponseTime',1/30)
     settings.set('/exts/omni.anim.behavior.core/agentResponseTimeMaxRandomOffset',0.0)
     settings.set('/exts/omni.anim.behavior.core/navBlockedTimeout',3.0)
@@ -115,7 +121,8 @@ try:
     backend=backend_type(ROOT,semantics,args.allow_unverified,config_dir=SNAPSHOT/'configs',
                           capability_file=SNAPSHOT/'reports/capability_matrix.json')
     backend.quality_sampling=args.quality_audit
-    backend.run_mode=args.mode;backend.render_profile={'width':args.width,'height':args.height,'capture_profile':args.capture_profile}
+    backend.run_mode=args.mode;backend.render_profile={'width':args.width,'height':args.height,'capture_profile':args.capture_profile,
+        'renderer_profile':args.renderer_profile,'rt2_retrace':settings.get('/rtx/pathtracing/cached/retrace')}
     backend.scene_id=args.scenario
     backend.scene_revision=hashlib.sha256(json.dumps({'semantics':semantics,'scene_source':sources.get('src/simpeople/backends/native/scene.py'),
         'environment_source':sources.get('src/simpeople/backends/native/environments.py')},sort_keys=True).encode()).hexdigest()
@@ -131,6 +138,7 @@ try:
     journal.write('environment.json',{'isaac_version':(Path(__import__('os').environ['ISAAC_PATH'])/'VERSION').read_text().strip(),
         'default_viewport_updates':args.visible,'rgb_camera_count':0 if args.capture_profile=='none' else 1,
         'capture_profile':args.capture_profile,'traffic_profile':args.traffic_profile,'quality_sampling':args.quality_audit,
+        'cpu_threads':args.cpu_threads,'renderer_profile':args.renderer_profile,'rt2_retrace':settings.get('/rtx/pathtracing/cached/retrace'),
         'capture_api':'rep.orchestrator.step(delta_time=1/30,wait_for_render=True)',
         'crowd_response_time_s':settings.get('/exts/omni.anim.behavior.core/agentResponseTime'),
         'crowd_response_random_offset_s':settings.get('/exts/omni.anim.behavior.core/agentResponseTimeMaxRandomOffset'),
@@ -213,6 +221,10 @@ try:
     ready={'run_id':run_id,'pid':__import__('os').getpid(),'endpoint':f'http://127.0.0.1:{args.port}',
            'status':'ready','allow_unverified':args.allow_unverified}
     journal.write('ready.json',ready);print('SIMPEOPLE_READY '+json.dumps(ready),flush=True)
+    journal.write('runtime_settings.json',{'requested_cpu_threads':args.cpu_threads,'renderer_profile':args.renderer_profile,
+        'renderer_mode':settings.get('/rtx/rendermode'),'rt2_retrace':settings.get('/rtx/pathtracing/cached/retrace'),
+        'cpu_worker_settings':{key:settings.get(key) for key in ['/plugins/carb.tasking.plugin/threadCount',
+            '/persistent/physics/numThreads','/plugins/omni.tbb.globalcontrol/maxThreadCount']}})
     omni.usd.get_context().get_stage().GetRootLayer().Export(str(directory/'stage.usda'))
     start_sim=timeline.get_current_time();start_wall=time.monotonic()
     journal.start_wall=journal.last_wall=start_wall
@@ -233,11 +245,16 @@ try:
         if args.tracy and trace_process is None and time.monotonic()-journal.start_wall>=args.warmup_wall_s:
             import subprocess
             extension=Path(manager.get_extension_path_by_module('omni.kit.profiler.tracy'))
+            import psutil
+            listeners=[connection for connection in psutil.Process().net_connections(kind='tcp') if connection.status==psutil.CONN_LISTEN and connection.laddr.port==8086]
+            if not listeners:raise RuntimeError('Tracy listener 8086 is not owned by this Kit process; refusing an unverified capture')
+            journal_trace_metadata.update(listener_verified_pid=__import__('os').getpid(),listener_port=8086)
+            journal.write('trace_metadata.json',journal_trace_metadata)
             trace_log=(directory/'tracy_capture.log').open('w')
-            trace_process=subprocess.Popen([str(extension/'bin/capture'),'-a','127.0.0.1','-o',str(directory/'profile.tracy'),'-s','10','-f'],stdout=trace_log,stderr=subprocess.STDOUT)
-        if args.tracy:trace_api.begin(1,'SimPeople::commands')
+            trace_process=subprocess.Popen([str(extension/'bin/capture'),'-a','127.0.0.1','-p','8086','-o',str(directory/'profile.tracy'),'-s','10','-f'],stdout=trace_log,stderr=subprocess.STDOUT)
+        if args.tracy:trace_begin('SimPeople::commands')
         wall=time.monotonic();bridge.drain()
-        if args.tracy:trace_api.end(1);trace_api.begin(1,'SimPeople::KitRender')
+        if args.tracy:carb.profiler.end(1);trace_begin('SimPeople::KitRender')
         after_commands=time.monotonic()
         if recorder and recorder.camera_mode!='overview' and engine.actors:
             focus=engine.actors.get(recorder.focus_actor_id) or next(iter(engine.actors.values()))
@@ -250,25 +267,25 @@ try:
             if timeline.is_playing():timeline.forward_one_frame()
             app.update()
         after_render=time.monotonic()
-        if args.tracy:trace_api.end(1);trace_api.begin(1,'SimPeople::supervisor')
+        if args.tracy:carb.profiler.end(1);trace_begin('SimPeople::supervisor')
         now_sim=timeline.get_current_time()
         if args.quality_audit:backend.observation_frame_id=journal.frames
         engine.tick(now_sim,not timeline.is_playing())
         quality.tick(now_sim,{aid:backend.observe(a['handle']) for aid,a in engine.actors.items()},
                      {a['asset_id']:a.get('runtime_radius_m',.25) for a in backend.assets},engine.episode_id)
         after_supervisor=time.monotonic()
-        if args.tracy:trace_api.end(1);trace_api.begin(1,'SimPeople::journal')
+        if args.tracy:carb.profiler.end(1);trace_begin('SimPeople::journal')
         identity={'sample':journal.frames,'video_frame':recorder.frames if recorder and recorder.pipe and timeline.is_playing() else None,
                   'video_file':getattr(recorder,'name',None),'recording_id':getattr(recorder,'recording_id',None),
                   'sim_time':now_sim,'timeline_before_step':start_sim if journal.frames==0 else journal.last_sim,
                   'app_updates':frame_events['count'],'app_dt_sum_s':frame_events['dt_sum_s'],'last_app_dt_s':frame_events['last_dt_s']}
-        if args.tracy:trace_api.end(1);trace_api.begin(1,'SimPeople::RGBencode')
+        if args.tracy:carb.profiler.end(1);trace_begin('SimPeople::RGBencode')
         if recorder and timeline.is_playing():identity['video_frame']=recorder.capture(now_sim,identity)
         after_capture=time.monotonic()
-        if args.tracy:trace_api.end(1);trace_api.begin(1,'SimPeople::journal')
+        if args.tracy:carb.profiler.end(1);trace_begin('SimPeople::journal')
         journal.sample(engine,identity)
         after_journal=time.monotonic()
-        if args.tracy:trace_api.end(1)
+        if args.tracy:carb.profiler.end(1)
         frame_file.write(json.dumps(identity)+'\n')
         journal.sample_timings({'commands_s':after_commands-wall,'kit_and_render_s':after_render-after_commands,
             'supervisor_s':after_supervisor-after_render,'journal_s':after_journal-after_capture,
@@ -336,6 +353,6 @@ finally:
             camera_resolution=[args.width,args.height] if recorder else None,
             recorded_frames=recorder.frames if recorder and args.capture_profile=='full' else 0,
             rgb_readback_frames=recorder.frames if recorder and args.capture_profile in {'full','no_encode'} else 0,
-            performance_profile=args.capture_profile)
+            capture_profile=args.capture_profile,performance_profile=args.performance_profile)
     app.close()
 raise SystemExit(exit_code)

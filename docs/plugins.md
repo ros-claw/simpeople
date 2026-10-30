@@ -49,7 +49,7 @@ The repository also contains a marketplace manifest. After the repository is pub
 
 ## Control and monitoring
 
-`people_session(info/preflight)` is read-only. Acquire ownership before writing. Another host may observe, but explicit takeover must include the current generation and user intent. Set a stable, distinct `SIMPEOPLE_CONTROLLER_ID` for each host to keep its identity across MCP reconnects. IDs coordinate trusted local clients and are not an authentication boundary.
+`people_session(info/preflight)` is read-only. Acquire ownership before writing. Another host may observe, but explicit takeover must include the current generation and user intent. The packages set stable `SIMPEOPLE_CONTROLLER_ID` defaults (`simpeople-codex` and `simpeople-claude`) so each host retains its logical identity across MCP reconnects. Override these defaults with distinct IDs when running independent instances of the same host. IDs coordinate trusted local clients and are not an authentication boundary.
 
 `people_crowd(state)` returns counts and a bounded page. Use selectors (`actor_ids`, `role`, `group`, `region_m`) for activity/cancel batches. Batch acceptance is per item and is not atomic. Use task IDs to confirm terminal results. `people_crowd(events)` exposes an incremental bounded cursor; refresh state when history rolls over. Full durable events remain in the run journal.
 

@@ -1,0 +1,47 @@
+{
+  "motion_panels": [
+    {
+      "run_id": "opt1031-motion-B-segmented-01",
+      "source_sha256": "d71d28dadf0247ba22657e09f16ca2d25f42942b42fafb181c9828428838ac26",
+      "start_frame": 89,
+      "end_frame_exclusive": 688,
+      "start_sim_time": 3.0333333333333323,
+      "each_panel_continuous": true
+    },
+    {
+      "run_id": "opt1031-motion-CD-lazy-03",
+      "source_sha256": "46a627adbee07f7fbf66dde78ca0355ee7828e4e271f771e01647d360df76663",
+      "start_frame": 89,
+      "end_frame_exclusive": 688,
+      "start_sim_time": 3.0333333333333323,
+      "each_panel_continuous": true
+    }
+  ],
+  "seat_lifecycle": {
+    "source": "runs/opt1031-seat-calibrated-v3-12-02/raw_video.mp4",
+    "unmodified_copy": true
+  },
+  "limits": "simulation-time playback; static seat comparison uses stills; encoding FPS does not establish native runtime FPS",
+  "files": [
+    {
+      "path": "reports/optimization_1031_motion_comparison.mp4",
+      "bytes": 3263051,
+      "sha256": "b4dde307c5fa3a4f661a39ee088fa9855044df9450f61dd8365675bf4c9709d4"
+    },
+    {
+      "path": "reports/optimization_1031_seat_lifecycle.mp4",
+      "bytes": 4994202,
+      "sha256": "a9892a917859cf70544ce9401191387b79aac354ddfdf8de9b958bec7fb5f7c2"
+    },
+    {
+      "path": "reports/optimization_1031_gait_demo.mp4",
+      "bytes": 11665854,
+      "sha256": "b2a89ce6499bee786c9f7d05d261b046c13a27933be22abcbb26329b493aa8d9"
+    },
+    {
+      "path": "reports/optimization_1031_seat_comparison.mp4",
+      "bytes": 43429,
+      "sha256": "88bd9853fca38777c9842dcbae5929f807ac8016c9cab89866e734a12eecddbd"
+    }
+  ]
+}

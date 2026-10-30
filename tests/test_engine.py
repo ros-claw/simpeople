@@ -287,3 +287,17 @@ def test_near_chair_cleanup_still_requires_native_egress(engine):
     engine.tick(0);engine.tick(.7)
     assert actor['seat']=='chair' and engine.resources.owners=={'chair':'a'}
     assert engine.backend.started==['move_to']
+
+def test_chair_cleanup_waits_for_braking_before_choosing_whether_to_egress(engine):
+    actor=engine.actors['a'];actor.update(seat='chair',release_seat_when_standing=True)
+    engine.resources.acquire('chair','a')
+    observation={'ready':True,'position_m':[20,0,0],'speed_mps':.4}
+    engine.backend.observe=lambda _:observation
+    engine.backend.can_release_seat_here=lambda *_:observation['speed_mps']<.15
+    engine.backend.seat_egress=lambda *_:[0,0,0]
+    engine.tick(0)
+    assert not engine.backend.started and 'cleanup_target' not in actor
+    assert engine.resources.owners=={'chair':'a'}
+    observation['speed_mps']=0
+    engine.tick(.5)
+    assert actor['seat'] is None and not engine.backend.started and not engine.resources.owners

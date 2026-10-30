@@ -411,7 +411,7 @@ class Engine(Management):
         try:
             obs=self.backend.observe(a['handle'])
             if not obs.get('ready'):return
-            if not a.get('cleanup_task') and not self.backend.is_standing(a['handle'],obs):return
+            if not a.get('cleanup_task') and (not self.backend.is_standing(a['handle'],obs) or obs['speed_mps']>=.15):return
             if self.sim_time<a.get('cleanup_retry_at',0):return
             if 'cleanup_target' not in a:
                 clear_here=getattr(self.backend,'can_release_seat_here',lambda *_:False)(a['handle'],a['seat'],obs)

@@ -4,7 +4,7 @@ The product is a shared native Isaac runtime, a scene-attaching Kit extension, o
 
 ## Motion
 
-`--traffic-profile native` is a diagnostic direct-native baseline. `segmented` retains the conservative short-corridor behavior. Opt-in `corridor` reserves an entire safe NavMesh polyline atomically, then submits continuous native movement with final braking enabled. If the full corridor is unavailable, the conservative grid planner remains the fallback. Dynamic obstacle intersection still triggers native stop, settled braking and replan; cancellation still uses the native stop path. No root or joint transform is corrected manually.
+`--traffic-profile native` is a diagnostic direct-native baseline. `segmented` retains the conservative short-corridor behavior. Opt-in `corridor` atomically reserves a safe NavMesh polyline (full paths for small comparisons, bounded prefixes for large crowds), then submits continuous native movement with final braking enabled. If that corridor is unavailable, the conservative grid planner remains the fallback. Dynamic obstacle intersection still triggers native stop, settled braking and replan; cancellation still uses the native stop path. No root or joint transform is corrected manually.
 
 Dense NavMesh samples are simplified within 0.01 m before submission; endpoints and genuine turns remain. Without this step, passing hundreds of tiny points to native `move_along` caused avoidable slowing in the first prototype. That failed quality comparison is retained separately.
 
@@ -35,3 +35,10 @@ Seated entry and holding use different checks. A broad holding tolerance could t
 The corridor profile builds local NavMesh edges on demand and caches only verified connections. It does not precompute every long path from the initial actor to every grid node; the open-floor twelve-rig test exposed that startup stall. The segmented comparison retains its prior eager graph.
 
 The first render-only experiment retained a render product without an active RGB graph, changing app-update scheduling. It is retained as a diagnostic lower bound rather than an isolated CPU-copy measurement. The corrected profile attaches a GPU RGB annotator while avoiding any readback, and requires a separate native check. The initial Tracy capture also contained buffered startup and lacked the intended custom ranges; its unfiltered totals are not steady-state attribution. Corrected tracing uses an explicitly acquired Tracy interface.
+
+
+The first 50-person continuous profile failed its functional gate at 274.8 simulated seconds. Full-journey claims caused avoidable contention; a timed-out distant seat approach then unnecessarily tried to return to the chair's egress and failed cleanup. The retained failure has 50 moving participants but zero minimum completed cycles and one suspended actor. Large-crowd corridors now reserve bounded 12 m walk / 18 m jog prefixes with native braking and preserve unvisited via goals. A stopped standing actor outside the entire configured egress envelope plus the existing arrival tolerance can release a cancelled approach in place. Near-chair transitions still use native egress. Both changes require new native acceptance; the original run remains failed.
+
+The distant-seat cleanup also waits for actual native speed below the existing 0.15 m/s stop criterion before choosing an egress target. Idle action identity alone can precede physical deceleration. A dedicated native failure exposed this ordering error; the corrected near/far cleanup decisions are tested independently.
+
+`--cpu-threads` defaults to the original eight workers. `--renderer-profile ampere_retrace` is an explicit, optional RT2 retrace setting of 0.1, with the image-accuracy tradeoff described by NVIDIA. Neither changes by default; throughput and actual runtime settings are recorded for their separate controlled trials.

@@ -39,6 +39,8 @@ try:
  actors=call('get_state',{'actor_id':'cleanup_actor'})['actors'];actor=actors[0]
  result['distant_approach_cancel']={'task_id':tid,'terminal':terminal['status'],'elapsed_sim_s':call('inspect_scene')['sim_time']-cancel_time,
   'before_position_m':before['position_m'],'after_position_m':terminal['observation']['position_m'],'seat_released':actor['seat'] is None,'cleanup_pending':actor['seat_cleanup_pending']}
+ if terminal['status']!='cancelled' or actor['seat'] is not None or actor['seat_cleanup_pending']:
+  raise AssertionError('distant approach cancellation must settle and release before via travel')
  steps=[{'action':'wait','duration_s':2},{'action':'move_to','via':[[-12.5,-5,0],[12.5,-5,0]],'target':[18.75,-5,0],'timeout_s':160},{'action':'wait','duration_s':1}]
  tid=call('run_activity',{'actor_id':'cleanup_actor','steps':steps})['task_id'];terminal=done(tid)
  result['bounded_via_route']={'task_id':tid,'terminal':terminal['status'],'steps':steps,'error':terminal.get('error')}

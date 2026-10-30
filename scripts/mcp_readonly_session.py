@@ -25,9 +25,9 @@ async def main():
                 value=response.structuredContent or json.loads(response.content[0].text)
                 calls.append({'tool':name,'result':value})
     state=calls[-1]['result']
-    result={'passed':len(listing.tools)==18 and bool(state['actors']),
+    result={'passed':len(listing.tools)==20 and bool(state['actors']),
             'python':sys.version,'executable':sys.executable,'endpoint':a.endpoint,
-            'tool_count':len(listing.tools),'actual_actors':len(state['actors']),
+            'tool_count':len(listing.tools),'actual_actors':state.get('total',len(state['actors'])),'returned_actor_page':len(state['actors']),
             'episode_id':state['episode_id'],'sim_time':state['sim_time'],
             'writes_performed':False,
             'versions':{name:importlib.metadata.version(name) for name in ['mcp','pytest','jsonschema','usd-core','rosclaw-simpeople']},
