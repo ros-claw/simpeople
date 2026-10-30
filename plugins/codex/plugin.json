@@ -1,0 +1,11 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "simpeople",
+  "version": "0.2.0",
+  "description": "Agent control of animated people and activities in Isaac Sim.",
+  "author": {
+    "name": "ROSClaw"
+  },
+  "repository": "https://github.com/ros-claw/simpeople",
+  "license": "MIT"
+}

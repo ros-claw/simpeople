@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "simpeople.scene-handoff.v1",
+  "type": "object",
+  "required": ["schema_version", "scene_id", "revision", "frame", "navmesh", "locations", "managed_namespace"],
+  "properties": {
+    "schema_version": {"const": "simpeople.scene-handoff.v1"},
+    "scene_id": {"type": "string", "minLength": 1},
+    "revision": {"type": "string", "minLength": 1},
+    "frame": {"type": "object", "required": ["meters_per_unit", "up_axis"], "properties": {"meters_per_unit": {"type": "number", "exclusiveMinimum": 0}, "up_axis": {"enum": ["Y", "Z"]}}},
+    "navmesh": {"type": "object", "required": ["available"], "properties": {"available": {"type": "boolean"}}},
+    "locations": {"type": "object", "additionalProperties": {"type": "object", "required": ["kind", "prim_path"], "properties": {"kind": {"enum": ["location", "seat", "queue", "obstacle", "region"]}, "prim_path": {"type": "string", "pattern": "^/"}, "seat_profile": {"type": "object"}}}},
+    "managed_namespace": {"type": "string", "pattern": "^/"}
+  },
+  "additionalProperties": false
+}

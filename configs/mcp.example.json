@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "simpeople": {
+      "command": "/data/rosclaw/sim_anim/.venv-controller/bin/python",
+      "args": ["-m", "simpeople.tools.mcp_server"],
+      "env": {"SIMPEOPLE_ENDPOINT": "http://127.0.0.1:8768"}
+    }
+  }
+}

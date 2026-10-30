@@ -1,0 +1,13 @@
+{
+  "host": "Claude Code",
+  "version": "2.1.305",
+  "plugin_manifest_validated": true,
+  "mcp_healthcheck": [
+    "plugin:simpeople:simpeople: simpeople mcp - ✔ Connected"
+  ],
+  "authentication": {
+    "loggedIn": false,
+    "authMethod": "none"
+  },
+  "natural_language_acceptance": "not run: local login is required"
+}

@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "simpeople": {
+      "type": "stdio",
+      "command": "simpeople",
+      "args": [
+        "mcp"
+      ]
+    }
+  }
+}

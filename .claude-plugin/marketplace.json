@@ -1,0 +1,5 @@
+{
+  "name": "ros-claw-simpeople",
+  "owner": {"name": "ROSClaw"},
+  "plugins": [{"name": "simpeople", "source": "./plugins/claude", "description": "Control animated people and crowds in Isaac Sim through a shared local runtime.", "version": "0.2.0"}]
+}

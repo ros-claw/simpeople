@@ -1,0 +1,84 @@
+{
+  "scope": "1031 quality/product iteration; historical v0.1 population gates are separate",
+  "source_commit": "4121c1a3136903bf1665ab77d1fdbcbec7ae31cd",
+  "gates": {
+    "motion": {
+      "passed": true,
+      "evidence": "runs/opt1031-motion-CD-lazy-03/motion_acceptance.json"
+    },
+    "gait": {
+      "passed": true,
+      "evidence": "runs/opt1031-gait-corridor-12-02/gait_pool_acceptance.json"
+    },
+    "seat": {
+      "passed": true,
+      "evidence": "runs/opt1031-seat-calibrated-v3-12-02/seat_acceptance.json"
+    },
+    "codex": {
+      "passed": true,
+      "evidence": "runs/opt1031-host-codex-02/host_acceptance.json"
+    },
+    "seat_vertices": {
+      "passed": true,
+      "evidence": "runs/opt1031-seat-calibrated-v3-12-02/seat_quality.json"
+    },
+    "claude_package_and_mcp": {
+      "passed": true,
+      "evidence": "reports/optimization_1031_claude_status.json"
+    },
+    "claude_natural_language": {
+      "passed": null,
+      "status": "requires local host login; not executed",
+      "evidence": "reports/optimization_1031_claude_status.json"
+    },
+    "population50": {
+      "passed": false,
+      "status": "closed",
+      "evidence": "runs/opt1031-regression50-seed17-01/acceptance_summary.json"
+    }
+  },
+  "input_hashes": [
+    {
+      "path": "runs/opt1031-motion-CD-lazy-03/motion_acceptance.json",
+      "sha256": "047717a08e45a786a0ce0a6e10cf7457f202ced428503cb3a654883d87b6a7e5"
+    },
+    {
+      "path": "runs/opt1031-gait-corridor-12-02/gait_pool_acceptance.json",
+      "sha256": "1204f913baadd1167dc596e0b1be9cdb70b376892a475639ea56c3b6ac179634"
+    },
+    {
+      "path": "runs/opt1031-seat-calibrated-v3-12-02/seat_acceptance.json",
+      "sha256": "9a8435e8e9e4366a18038cb288c76770b9ef8da526596d648e66549f396a1a6b"
+    },
+    {
+      "path": "runs/opt1031-host-codex-02/host_acceptance.json",
+      "sha256": "e7027691e5795ebda493800a95b7b793b6f828d30c27c857756b746e94c4aac6"
+    },
+    {
+      "path": "runs/opt1031-seat-calibrated-v3-12-02/seat_quality.json",
+      "sha256": "39e54204cf4448e682a7cae92627dc363d1af7a9ee65c084ad18ad2cc6f21234"
+    },
+    {
+      "path": "reports/optimization_1031_claude_status.json",
+      "sha256": "5c42b077709d6f7a7a0cbd7e6e97db06d7f376a095c766704cab638214f11847"
+    },
+    {
+      "path": "runs/opt1031-regression50-seed17-01/acceptance_summary.json",
+      "sha256": "5738a2987fd5e23662662213fef585749aa84e24eaabb659dac92c3c9d90b739"
+    },
+    {
+      "path": "configs/quality_catalog.json",
+      "sha256": "d89fc3d98b575dfffba6e4fbaada8c462f4673dd05d844cf5f242eaa73020638"
+    },
+    {
+      "path": "reports/optimization_1031_performance.json",
+      "sha256": "402e2d75eff87e9ef81ad7c9b14796e8cd1fcfc39c42da49c04e654408a639f0"
+    }
+  ],
+  "all_requested_targets_met": false,
+  "limits": [
+    "Claude natural-language trials need login",
+    "24 actual wall-clock updates/s and RTF 0.8 not achieved",
+    "no exact whole-body contact or arbitrary-rig certification"
+  ]
+}

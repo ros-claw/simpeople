@@ -1,0 +1,5 @@
+{
+  "name": "ros-claw-simpeople",
+  "interface": {"displayName": "ROSClaw SimPeople"},
+  "plugins": [{"name": "simpeople", "source": {"source": "local", "path": "./plugins/codex"}, "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"}, "category": "Developer Tools"}]
+}

@@ -1,0 +1,19 @@
+[package]
+version = "0.2.0"
+title = "ROSClaw SimPeople"
+description = "Agent tools and observable native human activities"
+category = "Simulation"
+
+[dependencies]
+"omni.anim.behavior.core" = {}
+"omni.anim.navigation.core" = {}
+"omni.usd" = {}
+"omni.timeline" = {}
+
+[[python.module]]
+name = "rosclaw.simpeople"
+
+[settings]
+exts."rosclaw.simpeople".port = 8768
+exts."rosclaw.simpeople".allow_unverified = false
+exts."rosclaw.simpeople".semantics_file = ""

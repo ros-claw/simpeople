@@ -1,0 +1,17 @@
+{
+  "prohibited_files_or_secrets": [],
+  "unresolved_markdown_references": [
+    [
+      "reports/OPTIMIZATION_20261031.md",
+      "../reports/optimization_1031_gait_demo.mp4"
+    ],
+    [
+      "reports/OPTIMIZATION_20261031.md",
+      "../reports/optimization_1031_seat_comparison.mp4"
+    ],
+    [
+      "reports/OPTIMIZATION_20261031.md",
+      "../reports/optimization_1031_claude_status.json"
+    ]
+  ]
+}

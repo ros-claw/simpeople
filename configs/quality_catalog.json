@@ -1,0 +1,439 @@
+{
+  "schema_version": "simpeople.quality-catalog.v1",
+  "records": [
+    {
+      "asset_revision_sha256": "68d5587fa61e8f4f65bac6a23f6b76fbb6fa6f58d4c9bd24285adec95d0141b4",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "seat",
+      "seat_template_sha256": "9dde4d285917a5894e6dee7ca47f930036dde1bac9a45c80ba68c7d6bd447923",
+      "seat_geometry_sha256": "d4b842a703169699eea1311fc97e6465b9453161ad74f466eecb2a1d3eedf8f6",
+      "status": "verified_vertex_audit",
+      "asset_id_at_audit": "default",
+      "evidence_run": "opt1031-seat-calibrated-v3-12-02",
+      "minimum_vertex_clearance_m": 0.07462710612843178,
+      "scope": "full seat cycle and cancellation windows; selected actual head/neck skinned vertices; surrounding scene and every triangle are not certified"
+    },
+    {
+      "asset_revision_sha256": "68d5587fa61e8f4f65bac6a23f6b76fbb6fa6f58d4c9bd24285adec95d0141b4",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "locomotion",
+      "status": "measured_contact_proxy",
+      "asset_id_at_audit": "default",
+      "evidence_run": "opt1031-gait-corridor-12-02",
+      "traffic_profile": "corridor",
+      "walk_speed_mps": 1.2,
+      "run_speed_mps": 2.8,
+      "scope": "native walk/jog completion plus calibrated contact-proxy measurements; not a no-slip certificate"
+    },
+    {
+      "asset_revision_sha256": "b822677b325040b22297a477ad4ed8f5e96d160d06286f2df9b6d80a252f1563",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "seat",
+      "seat_template_sha256": "9dde4d285917a5894e6dee7ca47f930036dde1bac9a45c80ba68c7d6bd447923",
+      "seat_geometry_sha256": "d4b842a703169699eea1311fc97e6465b9453161ad74f466eecb2a1d3eedf8f6",
+      "status": "verified_vertex_audit",
+      "asset_id_at_audit": "female_adult_business_02",
+      "evidence_run": "opt1031-seat-calibrated-v3-12-02",
+      "minimum_vertex_clearance_m": 0.0694173803130647,
+      "scope": "full seat cycle and cancellation windows; selected actual head/neck skinned vertices; surrounding scene and every triangle are not certified"
+    },
+    {
+      "asset_revision_sha256": "b822677b325040b22297a477ad4ed8f5e96d160d06286f2df9b6d80a252f1563",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "locomotion",
+      "status": "measured_contact_proxy",
+      "asset_id_at_audit": "female_adult_business_02",
+      "evidence_run": "opt1031-gait-corridor-12-02",
+      "traffic_profile": "corridor",
+      "walk_speed_mps": 1.2,
+      "run_speed_mps": 2.8,
+      "scope": "native walk/jog completion plus calibrated contact-proxy measurements; not a no-slip certificate"
+    },
+    {
+      "asset_revision_sha256": "7c42fc7975fa681fa52283a24156315386e594195432fac790aae2b3e4a4c65f",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "seat",
+      "seat_template_sha256": "9dde4d285917a5894e6dee7ca47f930036dde1bac9a45c80ba68c7d6bd447923",
+      "seat_geometry_sha256": "d4b842a703169699eea1311fc97e6465b9453161ad74f466eecb2a1d3eedf8f6",
+      "status": "verified_vertex_audit",
+      "asset_id_at_audit": "female_adult_medical_01",
+      "evidence_run": "opt1031-seat-calibrated-v3-12-02",
+      "minimum_vertex_clearance_m": 0.005165595182608895,
+      "scope": "full seat cycle and cancellation windows; selected actual head/neck skinned vertices; surrounding scene and every triangle are not certified"
+    },
+    {
+      "asset_revision_sha256": "7c42fc7975fa681fa52283a24156315386e594195432fac790aae2b3e4a4c65f",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "locomotion",
+      "status": "measured_contact_proxy",
+      "asset_id_at_audit": "female_adult_medical_01",
+      "evidence_run": "opt1031-gait-corridor-12-02",
+      "traffic_profile": "corridor",
+      "walk_speed_mps": 1.2,
+      "run_speed_mps": 2.8,
+      "scope": "native walk/jog completion plus calibrated contact-proxy measurements; not a no-slip certificate"
+    },
+    {
+      "asset_revision_sha256": "07e0349b24bc4a7d735af9eb053073f44c693ff0a72af8faa6cf994876f4c7a2",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "seat",
+      "seat_template_sha256": "9dde4d285917a5894e6dee7ca47f930036dde1bac9a45c80ba68c7d6bd447923",
+      "seat_geometry_sha256": "d4b842a703169699eea1311fc97e6465b9453161ad74f466eecb2a1d3eedf8f6",
+      "status": "verified_vertex_audit",
+      "asset_id_at_audit": "female_adult_police_01",
+      "evidence_run": "opt1031-seat-calibrated-v3-12-02",
+      "minimum_vertex_clearance_m": 0.050221674482137366,
+      "scope": "full seat cycle and cancellation windows; selected actual head/neck skinned vertices; surrounding scene and every triangle are not certified"
+    },
+    {
+      "asset_revision_sha256": "07e0349b24bc4a7d735af9eb053073f44c693ff0a72af8faa6cf994876f4c7a2",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "locomotion",
+      "status": "measured_contact_proxy",
+      "asset_id_at_audit": "female_adult_police_01",
+      "evidence_run": "opt1031-gait-corridor-12-02",
+      "traffic_profile": "corridor",
+      "walk_speed_mps": 1.2,
+      "run_speed_mps": 2.8,
+      "scope": "native walk/jog completion plus calibrated contact-proxy measurements; not a no-slip certificate"
+    },
+    {
+      "asset_revision_sha256": "f0d21d48cbdc37c8654cee2589d4b9e349c521e0ebdb185ea7386552761ff6f0",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "seat",
+      "seat_template_sha256": "9dde4d285917a5894e6dee7ca47f930036dde1bac9a45c80ba68c7d6bd447923",
+      "seat_geometry_sha256": "d4b842a703169699eea1311fc97e6465b9453161ad74f466eecb2a1d3eedf8f6",
+      "status": "verified_vertex_audit",
+      "asset_id_at_audit": "female_adult_police_02",
+      "evidence_run": "opt1031-seat-calibrated-v3-12-02",
+      "minimum_vertex_clearance_m": 0.04645554204877668,
+      "scope": "full seat cycle and cancellation windows; selected actual head/neck skinned vertices; surrounding scene and every triangle are not certified"
+    },
+    {
+      "asset_revision_sha256": "f0d21d48cbdc37c8654cee2589d4b9e349c521e0ebdb185ea7386552761ff6f0",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "locomotion",
+      "status": "measured_contact_proxy",
+      "asset_id_at_audit": "female_adult_police_02",
+      "evidence_run": "opt1031-gait-corridor-12-02",
+      "traffic_profile": "corridor",
+      "walk_speed_mps": 1.2,
+      "run_speed_mps": 2.8,
+      "scope": "native walk/jog completion plus calibrated contact-proxy measurements; not a no-slip certificate"
+    },
+    {
+      "asset_revision_sha256": "0d9e81f85076a25c8cbc43ea426690238685dc9d726f8ad6772acccd1269b05c",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "seat",
+      "seat_template_sha256": "9dde4d285917a5894e6dee7ca47f930036dde1bac9a45c80ba68c7d6bd447923",
+      "seat_geometry_sha256": "d4b842a703169699eea1311fc97e6465b9453161ad74f466eecb2a1d3eedf8f6",
+      "status": "verified_vertex_audit",
+      "asset_id_at_audit": "female_adult_police_03",
+      "evidence_run": "opt1031-seat-calibrated-v3-12-02",
+      "minimum_vertex_clearance_m": 0.04569048672429736,
+      "scope": "full seat cycle and cancellation windows; selected actual head/neck skinned vertices; surrounding scene and every triangle are not certified"
+    },
+    {
+      "asset_revision_sha256": "0d9e81f85076a25c8cbc43ea426690238685dc9d726f8ad6772acccd1269b05c",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "locomotion",
+      "status": "measured_contact_proxy",
+      "asset_id_at_audit": "female_adult_police_03",
+      "evidence_run": "opt1031-gait-corridor-12-02",
+      "traffic_profile": "corridor",
+      "walk_speed_mps": 1.2,
+      "run_speed_mps": 2.8,
+      "scope": "native walk/jog completion plus calibrated contact-proxy measurements; not a no-slip certificate"
+    },
+    {
+      "asset_revision_sha256": "ebf2fba2faba7a2edcfc2b42c19196c5ef830f9166772e065f98d445a0498431",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "seat",
+      "seat_template_sha256": "9dde4d285917a5894e6dee7ca47f930036dde1bac9a45c80ba68c7d6bd447923",
+      "seat_geometry_sha256": "d4b842a703169699eea1311fc97e6465b9453161ad74f466eecb2a1d3eedf8f6",
+      "status": "verified_vertex_audit",
+      "asset_id_at_audit": "male_adult_construction_01",
+      "evidence_run": "opt1031-seat-calibrated-v3-12-02",
+      "minimum_vertex_clearance_m": 0.0585599637326871,
+      "scope": "full seat cycle and cancellation windows; selected actual head/neck skinned vertices; surrounding scene and every triangle are not certified"
+    },
+    {
+      "asset_revision_sha256": "ebf2fba2faba7a2edcfc2b42c19196c5ef830f9166772e065f98d445a0498431",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "locomotion",
+      "status": "measured_contact_proxy",
+      "asset_id_at_audit": "male_adult_construction_01",
+      "evidence_run": "opt1031-gait-corridor-12-02",
+      "traffic_profile": "corridor",
+      "walk_speed_mps": 1.2,
+      "run_speed_mps": 2.8,
+      "scope": "native walk/jog completion plus calibrated contact-proxy measurements; not a no-slip certificate"
+    },
+    {
+      "asset_revision_sha256": "98375b6ee8511f42c49630623d816bfc21ae1678aa362c5df39d56ea86ddc1e6",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "seat",
+      "seat_template_sha256": "9dde4d285917a5894e6dee7ca47f930036dde1bac9a45c80ba68c7d6bd447923",
+      "seat_geometry_sha256": "d4b842a703169699eea1311fc97e6465b9453161ad74f466eecb2a1d3eedf8f6",
+      "status": "verified_vertex_audit",
+      "asset_id_at_audit": "male_adult_construction_02",
+      "evidence_run": "opt1031-seat-calibrated-v3-12-02",
+      "minimum_vertex_clearance_m": 0.057684831360071534,
+      "scope": "full seat cycle and cancellation windows; selected actual head/neck skinned vertices; surrounding scene and every triangle are not certified"
+    },
+    {
+      "asset_revision_sha256": "98375b6ee8511f42c49630623d816bfc21ae1678aa362c5df39d56ea86ddc1e6",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "locomotion",
+      "status": "measured_contact_proxy",
+      "asset_id_at_audit": "male_adult_construction_02",
+      "evidence_run": "opt1031-gait-corridor-12-02",
+      "traffic_profile": "corridor",
+      "walk_speed_mps": 1.2,
+      "run_speed_mps": 2.8,
+      "scope": "native walk/jog completion plus calibrated contact-proxy measurements; not a no-slip certificate"
+    },
+    {
+      "asset_revision_sha256": "bf6d0426a25539a8e74990b4cff19f3945e4fbb4cb6350ee8da1623136b61489",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "seat",
+      "seat_template_sha256": "9dde4d285917a5894e6dee7ca47f930036dde1bac9a45c80ba68c7d6bd447923",
+      "seat_geometry_sha256": "d4b842a703169699eea1311fc97e6465b9453161ad74f466eecb2a1d3eedf8f6",
+      "status": "verified_vertex_audit",
+      "asset_id_at_audit": "male_adult_construction_03",
+      "evidence_run": "opt1031-seat-calibrated-v3-12-02",
+      "minimum_vertex_clearance_m": 0.03452106136409108,
+      "scope": "full seat cycle and cancellation windows; selected actual head/neck skinned vertices; surrounding scene and every triangle are not certified"
+    },
+    {
+      "asset_revision_sha256": "bf6d0426a25539a8e74990b4cff19f3945e4fbb4cb6350ee8da1623136b61489",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "locomotion",
+      "status": "measured_contact_proxy",
+      "asset_id_at_audit": "male_adult_construction_03",
+      "evidence_run": "opt1031-gait-corridor-12-02",
+      "traffic_profile": "corridor",
+      "walk_speed_mps": 1.2,
+      "run_speed_mps": 2.8,
+      "scope": "native walk/jog completion plus calibrated contact-proxy measurements; not a no-slip certificate"
+    },
+    {
+      "asset_revision_sha256": "0a7158af8322df5ac69faf8ed77c5f7e8d67cfc895a571e44653f552d1d58420",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "seat",
+      "seat_template_sha256": "9dde4d285917a5894e6dee7ca47f930036dde1bac9a45c80ba68c7d6bd447923",
+      "seat_geometry_sha256": "d4b842a703169699eea1311fc97e6465b9453161ad74f466eecb2a1d3eedf8f6",
+      "status": "verified_vertex_audit",
+      "asset_id_at_audit": "male_adult_construction_05",
+      "evidence_run": "opt1031-seat-calibrated-v3-12-02",
+      "minimum_vertex_clearance_m": 0.0522529741821164,
+      "scope": "full seat cycle and cancellation windows; selected actual head/neck skinned vertices; surrounding scene and every triangle are not certified"
+    },
+    {
+      "asset_revision_sha256": "0a7158af8322df5ac69faf8ed77c5f7e8d67cfc895a571e44653f552d1d58420",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "locomotion",
+      "status": "measured_contact_proxy",
+      "asset_id_at_audit": "male_adult_construction_05",
+      "evidence_run": "opt1031-gait-corridor-12-02",
+      "traffic_profile": "corridor",
+      "walk_speed_mps": 1.2,
+      "run_speed_mps": 2.8,
+      "scope": "native walk/jog completion plus calibrated contact-proxy measurements; not a no-slip certificate"
+    },
+    {
+      "asset_revision_sha256": "7b9aa8a1d5bb9ce07dd7ac5d9709107f94340375a403b27c50923b6a49e6b72a",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "seat",
+      "seat_template_sha256": "9dde4d285917a5894e6dee7ca47f930036dde1bac9a45c80ba68c7d6bd447923",
+      "seat_geometry_sha256": "d4b842a703169699eea1311fc97e6465b9453161ad74f466eecb2a1d3eedf8f6",
+      "status": "verified_vertex_audit",
+      "asset_id_at_audit": "male_adult_police_04",
+      "evidence_run": "opt1031-seat-calibrated-v3-12-02",
+      "minimum_vertex_clearance_m": 0.028737601531622928,
+      "scope": "full seat cycle and cancellation windows; selected actual head/neck skinned vertices; surrounding scene and every triangle are not certified"
+    },
+    {
+      "asset_revision_sha256": "7b9aa8a1d5bb9ce07dd7ac5d9709107f94340375a403b27c50923b6a49e6b72a",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "locomotion",
+      "status": "measured_contact_proxy",
+      "asset_id_at_audit": "male_adult_police_04",
+      "evidence_run": "opt1031-gait-corridor-12-02",
+      "traffic_profile": "corridor",
+      "walk_speed_mps": 1.2,
+      "run_speed_mps": 2.8,
+      "scope": "native walk/jog completion plus calibrated contact-proxy measurements; not a no-slip certificate"
+    },
+    {
+      "asset_revision_sha256": "f212892e0de03034613b03026df74532d6ac69691e567c341b2aab0cd8326e66",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "seat",
+      "seat_template_sha256": "9dde4d285917a5894e6dee7ca47f930036dde1bac9a45c80ba68c7d6bd447923",
+      "seat_geometry_sha256": "d4b842a703169699eea1311fc97e6465b9453161ad74f466eecb2a1d3eedf8f6",
+      "status": "verified_vertex_audit",
+      "asset_id_at_audit": "male_adult_medical_01",
+      "evidence_run": "opt1031-seat-calibrated-v3-12-02",
+      "minimum_vertex_clearance_m": 0.045055215069683366,
+      "scope": "full seat cycle and cancellation windows; selected actual head/neck skinned vertices; surrounding scene and every triangle are not certified"
+    },
+    {
+      "asset_revision_sha256": "f212892e0de03034613b03026df74532d6ac69691e567c341b2aab0cd8326e66",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "kind": "locomotion",
+      "status": "measured_contact_proxy",
+      "asset_id_at_audit": "male_adult_medical_01",
+      "evidence_run": "opt1031-gait-corridor-12-02",
+      "traffic_profile": "corridor",
+      "walk_speed_mps": 1.2,
+      "run_speed_mps": 2.8,
+      "scope": "native walk/jog completion plus calibrated contact-proxy measurements; not a no-slip certificate"
+    }
+  ],
+  "resource_hash_scope": "all USD layers under each local asset and motion directory; texture edits do not invalidate geometric fit",
+  "placement_scope": "seat-local geometry; scene obstacles and arbitrary external chairs require separate checks"
+}

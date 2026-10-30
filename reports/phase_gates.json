@@ -1,0 +1,95 @@
+{
+  "P0": {
+    "passed": true,
+    "evidence": "reports/p0-native2/result.json"
+  },
+  "P1": {
+    "passed": true,
+    "runs": [
+      "p1-walk-run-01",
+      "capture-pipeline-01",
+      "capture-multigpu-02"
+    ],
+    "limitations": "Native Jog, not sprint; RTF target not met in RGB capture profile."
+  },
+  "P2": {
+    "passed": true,
+    "runs": [
+      "p2-life-02",
+      "p2-life-03",
+      "p2-life-04"
+    ],
+    "seat_cleanup_evidence": "runs/p3-agent-control-05/agent_cli_acceptance.json"
+  },
+  "P3": {
+    "passed": true,
+    "run_id": "p3-agent-control-05",
+    "cli": "runs/p3-agent-control-05/agent_cli_acceptance.json",
+    "mcp": "runs/p3-agent-control-05/agent_mcp_acceptance.json",
+    "additional_event_and_mcp_evidence": "runs/event-control-01"
+  },
+  "P4": {
+    "passed": true,
+    "run_id": "p4-industrial-10-07",
+    "scope": "10 people, 600.0000000001116 sim seconds; every actor completed >=1 role cycle",
+    "summary": "runs/p4-industrial-10-07/acceptance_summary.json",
+    "framing": "runs/p4-industrial-10-07/framing_audit.json",
+    "performance_target_met": false,
+    "rtf": 0.2888914063312965
+  },
+  "P5": {
+    "passed": true,
+    "run_id": "p5-industrial-30-06",
+    "scope": "30 people, 900.0333333331721 sim seconds; every actor completed >=1 role cycle",
+    "summary": "runs/p5-industrial-30-06/acceptance_summary.json",
+    "framing": "runs/p5-industrial-30-06/framing_audit.json",
+    "performance_target_met": false,
+    "rtf": 0.18283975570569536
+  },
+  "P6": {
+    "passed": true,
+    "run_id": "p6-industrial-50-03",
+    "scope": "50 people, 600.0000000001116 sim seconds; every actor completed >=1 role cycle",
+    "summary": "runs/p6-industrial-50-03/acceptance_summary.json",
+    "framing": "runs/p6-industrial-50-03/framing_audit.json",
+    "performance_target_met": null,
+    "rtf": 0.2003812176494472,
+    "additional_seed_runs": [
+      "seed50-17-03",
+      "seed50-99-03"
+    ],
+    "additional_seed_validations_passed": true,
+    "seed_comparison": "reports/population_seed_comparison.json",
+    "runtime_source_commit": "8c2baca7f6a3fbf1340101e84082c4f828a34c5f"
+  },
+  "P6_pressure": {
+    "completed": true,
+    "run_id": "p6-pressure-100-03",
+    "scope": "100-person capacity exploration only; not a full daily-activity support tier",
+    "sim_seconds": 120.03333333332908,
+    "moving_participants": 89,
+    "moving_participant_definition": "Actual ready runtime root displaced >1m from its first ready position within an episode. Cumulative idle sway and episode reset relocation cannot establish participation.",
+    "minimum_role_cycles": 0,
+    "task_status_counts": {
+      "cancelled": 100,
+      "succeeded": 3
+    },
+    "sustained_root_overlaps": 0,
+    "root_discontinuities": 0,
+    "critical_geometry_flags": 0,
+    "rtf": 0.11872709757103626,
+    "summary": "runs/p6-pressure-100-03/acceptance_summary.json",
+    "full_daily_activity_support": false
+  },
+  "P7": {
+    "passed": true,
+    "scope": "Reproducible source and evidence archives, native clean-start reproduction, continuous single-person and 121.9s multi-person demo.",
+    "delivery_manifest": "dist/delivery_manifest.json",
+    "archive_verification": "dist/archive_verification.json",
+    "verified_evidence_files": 3800,
+    "native_reproduction": "runs/seed50-17-03/reproduction_acceptance.json",
+    "single_demo": "runs/final-control-01/single_continuous_demo.mp4",
+    "multi_demo": "runs/demo-population-30-02/demo.mp4",
+    "original_models_and_caches_excluded": true
+  }
+}

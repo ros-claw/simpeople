@@ -1,0 +1,13 @@
+{
+  "schema_version": "simpeople.task.v1",
+  "request_id": "walk-run-stop",
+  "actor_id": "person_001",
+  "steps": [
+    {"action": "move_to", "target": "point_a", "gait": "walk"},
+    {"action": "wait", "duration_s": 1},
+    {"action": "move_to", "target": "point_b", "gait": "run"},
+    {"action": "wait", "duration_s": 1},
+    {"action": "move_to", "target": "point_c", "gait": "walk"},
+    {"action": "wait", "duration_s": 1}
+  ]
+}

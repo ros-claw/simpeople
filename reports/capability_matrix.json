@@ -1,0 +1,71 @@
+{
+  "schema_version": "simpeople.capabilities.v1",
+  "sim_version": "6.2.0-rc.14",
+  "backend": "native",
+  "actor_asset_id": "default",
+  "actions": {
+    "walk": {
+      "status": "verified",
+      "evidence": [
+        "runs/p2-life-02/validation_measurements.json",
+        "runs/p2-life-02/raw_video.mp4"
+      ],
+      "scope": "Default Behavior Human rig; Z-up metre scene; single-person runtime validation"
+    },
+    "run": {
+      "status": "verified",
+      "evidence": [
+        "runs/p2-life-02/validation_measurements.json",
+        "runs/p2-life-02/raw_video.mp4"
+      ],
+      "scope": "Default Behavior Human rig; Z-up metre scene; single-person runtime validation",
+      "implementation": "Native set_speed(2.8 m/s) + move_to; MoveJog motion matching. Not a sprint asset."
+    },
+    "wait": {
+      "status": "verified",
+      "evidence": [
+        "runs/p2-life-02/validation_measurements.json",
+        "runs/p2-life-02/raw_video.mp4"
+      ],
+      "scope": "Default Behavior Human rig; Z-up metre scene; single-person runtime validation"
+    },
+    "look_at": {
+      "status": "verified",
+      "evidence": [
+        "runs/p2-life-02/validation_measurements.json",
+        "runs/p2-life-02/raw_video.mp4"
+      ],
+      "scope": "Default Behavior Human rig; Z-up metre scene; single-person runtime validation"
+    },
+    "sit": {
+      "status": "verified",
+      "evidence": [
+        "runs/p2-life-02/validation_measurements.json",
+        "runs/p2-life-02/raw_video.mp4"
+      ],
+      "scope": "Default Behavior Human rig; Z-up metre scene; single-person runtime validation"
+    },
+    "leave_seat": {
+      "status": "verified",
+      "evidence": [
+        "runs/p2-life-02/validation_measurements.json",
+        "runs/p2-life-02/raw_video.mp4"
+      ],
+      "scope": "Default Behavior Human rig; Z-up metre scene; single-person runtime validation"
+    },
+    "follow": {
+      "status": "verified",
+      "evidence": [
+        "runs/interaction-02/interaction_acceptance.json",
+        "runs/interaction-02/interaction_calls.jsonl",
+        "runs/interaction-02/raw_video.mp4"
+      ],
+      "scope": "Default Human follows registered moving kinematic object for 12 sim s; finite duration and stop settlement checked."
+    },
+    "custom_action": {
+      "status": "unsupported",
+      "reason": "No custom action registered"
+    }
+  },
+  "actor_asset_sha256": "70c034e82b019855af09c88b3f4ff65132ae07c61f14feb3b0d0387459478022"
+}

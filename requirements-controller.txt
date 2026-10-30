@@ -1,0 +1,4 @@
+mcp==1.27.1
+pytest==9.0.3
+jsonschema==4.26.0
+usd-core==26.5
