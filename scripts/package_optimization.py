@@ -2,13 +2,13 @@
 import argparse,hashlib,json,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-REPORTS=['reports/OPTIMIZATION_20261031.md','reports/optimization_1031_gates.json','reports/optimization_1031_results.json','reports/optimization_1031_claude_status.json','configs/quality_catalog.json','reports/optimization_1031_plugin_installation.json','reports/optimization_1031_assets/media_manifest.json']
+REPORTS=['reports/OPTIMIZATION_20261031.md','reports/optimization_1031_gates.json','reports/optimization_1031_results.json','reports/optimization_1031_claude_status.json','configs/quality_catalog.json','reports/optimization_1031_plugin_installation.json','reports/optimization_1031_assets/media_manifest.json','reports/optimization_1031_launcher_validation.json','reports/optimization_1031_final_performance.json']
 RUNS=['opt1031-motion-A-native-02','opt1031-motion-B-segmented-01','opt1031-motion-C-corridor-01','opt1031-motion-CD-corridor-02','opt1031-motion-CD-lazy-03',
       'opt1031-seat-baseline-12-01','opt1031-seat-calibrated-12-01','opt1031-seat-calibrated-v3-12-01','opt1031-seat-calibrated-v3-12-02',
       'opt1031-gait-corridor-12-01','opt1031-gait-corridor-12-02','opt1031-host-codex-01','opt1031-host-codex-02',
       'opt1031-regression50-seed17-01','opt1031-regression50-seed17-02','opt1031-cleanup-corridor-13-01','opt1031-cleanup-corridor-13-02','opt1031-final30-cpu16-01','opt1031-final30-retrace01-01',
-      'opt1031-final30-full-01','opt1031-final30-no-encode-01','opt1031-final30-render-only-01','opt1031-final30-trace-01','opt1031-final30-trace-02']
-NAMES=['runtime_settings.json','mcp_ownership_acceptance.json','config.json','completion.json','metrics.json','acceptance_summary.json','gait_quality.json','motion_acceptance.json','seat_quality.json','seat_acceptance.json',
+      'opt1031-final30-full-01','opt1031-final30-no-encode-01','opt1031-final30-render-only-01','opt1031-final30-trace-01','opt1031-final30-trace-02','opt1031-final30-trace-03','opt1031-final30-trace-04','opt1031-final30-retrace01-02','opt1031-final30-retrace01-03','opt1031-final30-full-02']
+NAMES=['runtime_settings.json','runtime_settings_end.json','mcp_ownership_acceptance.json','config.json','completion.json','metrics.json','acceptance_summary.json','gait_quality.json','motion_acceptance.json','seat_quality.json','seat_acceptance.json',
        'gait_pool_acceptance.json','gait_pool_quality.json','host_acceptance.json','cleanup_acceptance.json','recording_metrics.json','observation_counters.json','profile_summary.json','trace_metadata.json','native_controller_lease_check.json','quality_audit.json']
 def write_zip(path,files):
  if path.exists():raise ValueError('preserve existing package; choose a new label')

@@ -21,12 +21,18 @@ performance_final=[]
 for capture in ['full','no_encode','render_only','trace']:
  name='opt1031-final30-'+capture.replace('_','-')+'-01';metrics=read('runs/'+name+'/metrics.json')
  if metrics:performance_final.append({'run_id':name,'capture_profile':capture,'config':read('runs/'+name+'/config.json'),'metrics':metrics,'recording':read('runs/'+name+'/recording_metrics.json')})
-full=read('runs/opt1031-final30-full-01/metrics.json')
-gates['performance30_realtime']={'passed':bool(full['rtf']>=.8 and full['measured_updates_per_wall_second']>=24) if full else None,'evidence':'runs/opt1031-final30-full-01/metrics.json'}
-trace=read('runs/opt1031-final30-trace-02/profile_summary.json')
-gates['tracy_steady_window']={'passed':bool(trace.get('main_thread_phase_wall_fraction')) if trace else None,'evidence':'runs/opt1031-final30-trace-02/profile_summary.json'}
+full_path='runs/opt1031-final30-full-02/metrics.json' if read('runs/opt1031-final30-full-02/metrics.json') else 'runs/opt1031-final30-full-01/metrics.json'
+full=read(full_path)
+gates['performance30_realtime']={'passed':bool(full['rtf']>=.8 and full['measured_updates_per_wall_second']>=24) if full else None,'evidence':full_path}
+trace=read('runs/opt1031-final30-trace-04/profile_summary.json')
+gates['tracy_steady_window']={'passed':bool(trace.get('main_thread_phase_wall_fraction')) if trace else None,'evidence':'runs/opt1031-final30-trace-04/profile_summary.json'}
+for key,path in [('mcp_reconnect_ownership','runs/'+cases['population50']+'/mcp_ownership_acceptance.json'),
+                 ('launcher_native_exit_status','reports/optimization_1031_launcher_validation.json')]:
+ data=read(path);gates[key]={'passed':data.get('passed') if data else None,'evidence':path}
 paths=[g['evidence'] for g in gates.values()];paths+=['configs/quality_catalog.json','reports/optimization_1031_performance.json']
 inputs=[{'path':p,'sha256':hashlib.sha256((ROOT/p).read_bytes()).hexdigest()} for p in dict.fromkeys(paths) if (ROOT/p).is_file()]
 result={'scope':'1031 quality/product iteration; historical v0.1 population gates are separate','source_commit':subprocess.run(['git','rev-parse','HEAD'],cwd=ROOT,capture_output=True,text=True,check=True).stdout.strip(),'gates':gates,'input_hashes':inputs,'all_requested_targets_met':False,'limits':['Claude natural-language trials need login','24 actual wall-clock updates/s and RTF 0.8 not achieved','no exact whole-body contact or arbitrary-rig certification']}
 (ROOT/'reports/optimization_1031_gates.json').write_text(json.dumps(result,ensure_ascii=False,indent=2))
-(ROOT/'reports/optimization_1031_results.json').write_text(json.dumps({'cases':cases,'gates':gates,'performance':read('reports/optimization_1031_performance.json'),'performance_final':performance_final,'claude':claude},ensure_ascii=False,indent=2));print(json.dumps(gates,ensure_ascii=False,indent=2))
+(ROOT/'reports/optimization_1031_results.json').write_text(json.dumps({'cases':cases,'gates':gates,'performance':read('reports/optimization_1031_performance.json'),'performance_final':performance_final,
+ 'optional_performance':read('reports/optimization_1031_optional_performance.json'),
+ 'controlled_profile_followup':read('reports/optimization_1031_final_performance.json'),'claude':claude},ensure_ascii=False,indent=2));print(json.dumps(gates,ensure_ascii=False,indent=2))

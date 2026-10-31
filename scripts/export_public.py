@@ -4,7 +4,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 DIRS={'src','scripts','configs','extensions','schemas','skills','plugins','docs','tests','.agents','.claude-plugin'}
 FILES={'LICENSE','THIRD_PARTY.md','pyproject.toml','requirements-controller.txt','.gitignore'}
-REPORTS={'reports/capability_matrix.json','reports/phase_gates.json','reports/REFERENCE_ACCEPTANCE.md','reports/OPTIMIZATION_20261031.md','reports/optimization_1031_gates.json','reports/optimization_1031_results.json','reports/optimization_1031_claude_status.json','reports/optimization_1031_plugin_installation.json'}
+REPORTS={'reports/capability_matrix.json','reports/phase_gates.json','reports/REFERENCE_ACCEPTANCE.md','reports/OPTIMIZATION_20261031.md','reports/optimization_1031_gates.json','reports/optimization_1031_results.json','reports/optimization_1031_claude_status.json','reports/optimization_1031_plugin_installation.json','reports/optimization_1031_launcher_validation.json','reports/optimization_1031_final_performance.json'}
 ASSETS={'reports/optimization_1031_assets/seat_before.png','reports/optimization_1031_assets/seat_after.png','reports/optimization_1031_assets/media_manifest.json'}
 p=argparse.ArgumentParser();p.add_argument('--destination',required=True);a=p.parse_args();destination=Path(a.destination).resolve()
 if subprocess.run(['git','diff','--quiet','HEAD','--'],cwd=ROOT).returncode:

@@ -8,7 +8,7 @@ The project combines a native Behavior/Navigation adapter, a task supervisor, a 
 
 ## Install
 
-Use Python 3.10+ for the controller and a separate Isaac installation for simulation. The reference environment is Isaac Sim 6.2.0 RC with Behavior/Navigation 110.4.0. Other versions and arbitrary skeletons are not automatically validated.
+Use Python 3.10+ for the controller and a separate Isaac installation for simulation. The Linux reference environment is Isaac Sim 6.2.0 RC with Behavior/Navigation 110.4.0. Other versions and arbitrary skeletons are not automatically validated.
 
 ```bash
 git clone https://github.com/ros-claw/simpeople.git

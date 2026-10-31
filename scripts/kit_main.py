@@ -94,7 +94,6 @@ try:
     # The SDK defaults throttle the crowd solver to 0.3–0.4 seconds. Keep
     # navigation response at the same 30 Hz as the animation/simulation clock.
     settings=carb.settings.get_settings()
-    if args.renderer_profile=='ampere_retrace':settings.set('/rtx/pathtracing/cached/retrace',.1)
     settings.set('/exts/omni.anim.behavior.core/agentResponseTime',1/30)
     settings.set('/exts/omni.anim.behavior.core/agentResponseTimeMaxRandomOffset',0.0)
     settings.set('/exts/omni.anim.behavior.core/navBlockedTimeout',3.0)
@@ -191,6 +190,14 @@ try:
         recorder.step(0.0)
         print('SIMPEOPLE_PHASE recorder_ready',flush=True)
         recorder.control({'mode':'start'})
+    # Opening a stage initializes render defaults and can overwrite an earlier
+    # setting. Apply this explicit quality tradeoff after the first render.
+    if args.renderer_profile=='ampere_retrace':settings.set('/rtx/pathtracing/cached/retrace',.1)
+    backend.render_profile['rt2_retrace']=settings.get('/rtx/pathtracing/cached/retrace')
+    environment=json.loads((directory/'environment.json').read_text())
+    environment['rt2_retrace_before_profile']=environment.get('rt2_retrace')
+    environment['rt2_retrace']=backend.render_profile['rt2_retrace']
+    journal.write('environment.json',environment)
     bridge=Bridge(engine,args.port)
     engine.tick(timeline.get_current_time(),False)
     initial_task=None;initial_tasks=[]
@@ -246,9 +253,13 @@ try:
             import subprocess
             extension=Path(manager.get_extension_path_by_module('omni.kit.profiler.tracy'))
             import psutil
-            listeners=[connection for connection in psutil.Process().net_connections(kind='tcp') if connection.status==psutil.CONN_LISTEN and connection.laddr.port==8086]
+            trace_process_info=psutil.Process()
+            connections=getattr(trace_process_info,'net_connections',None) or trace_process_info.connections
+            listeners=[connection for connection in connections(kind='tcp') if connection.status==psutil.CONN_LISTEN and connection.laddr.port==8086]
             if not listeners:raise RuntimeError('Tracy listener 8086 is not owned by this Kit process; refusing an unverified capture')
-            journal_trace_metadata.update(listener_verified_pid=__import__('os').getpid(),listener_port=8086)
+            journal_trace_metadata.update(listener_verified_pid=__import__('os').getpid(),listener_port=8086,
+                capture_start_wall_time=time.time(),capture_start_sim_time=timeline.get_current_time(),
+                capture_start_mainloop_wall_s=time.monotonic()-journal.start_wall)
             journal.write('trace_metadata.json',journal_trace_metadata)
             trace_log=(directory/'tracy_capture.log').open('w')
             trace_process=subprocess.Popen([str(extension/'bin/capture'),'-a','127.0.0.1','-p','8086','-o',str(directory/'profile.tracy'),'-s','10','-f'],stdout=trace_log,stderr=subprocess.STDOUT)
@@ -302,6 +313,10 @@ try:
         if args.realtime or args.serve:
             time.sleep(max(0,1/30-(time.monotonic()-wall)))
     journal.measurement_end_wall=time.monotonic()
+    journal.write('runtime_settings_end.json',{'renderer_profile':args.renderer_profile,
+        'rt2_retrace':settings.get('/rtx/pathtracing/cached/retrace')})
+    if args.renderer_profile=='ampere_retrace' and abs(settings.get('/rtx/pathtracing/cached/retrace')-.1)>1e-6:
+        raise RuntimeError('requested retrace profile did not remain applied; reject this comparison')
     if trace_process:
         trace_process.wait(timeout=30);trace_log.close()
     frame_file.close();app_subscription=None

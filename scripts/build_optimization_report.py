@@ -77,17 +77,21 @@ if len(perf)>=5 and perf[0].get('metrics') and perf[4].get('metrics'):
 p('优化包括早期共享姿态缓存、关节索引缓存、保持原判据的根重叠空间筛选、动态障碍边界不变时复用分类，以及将编码线程约束为 4。编码使用 16 帧有界队列，记录提交等待、队列深度、帧身份和关闭时帧数核对；没有静默丢帧。以上是组合优化，不能将全部收益归于一个参数。')
 p('第一轮 render_only 只保留 render product 而没有活动 RGB 图，app update 数从 4 变为 1；它作为管线下界保留，不用来声称纯 CPU 回读成本。修正版附加 GPU RGB 图但不读取数据；最终场景复测结果如下。所有已核对条件的仿真步长仍为 1/30 s。')
 finalrows=[]
-for name in ['opt1031-final30-full-01','opt1031-final30-render-only-01','opt1031-final30-no-encode-01','opt1031-interactive10-01']:
+for name in ['opt1031-final30-full-01','opt1031-final30-full-02','opt1031-final30-render-only-01','opt1031-final30-no-encode-01','opt1031-interactive10-01']:
  m=run(name,'metrics.json')
  if m:finalrows.append([name,fmt(m['rtf']),fmt(m['measured_updates_per_wall_second'],2),fmt(m['frame_time_p95_s']*1000,1)])
 table(['最终场景补测','RTF','实际更新/墙钟秒','p95 ms'],finalrows or [['尚未全部关闭','—','—','—']])
 optional=read('reports/optimization_1031_optional_performance.json') or []
 if optional:
- table(['可选配置（完整1080p录制）','RTF','实际更新/墙钟秒','p95 ms'],[[x['run_id'],fmt(x['metrics']['rtf']),fmt(x['metrics']['measured_updates_per_wall_second'],2),fmt(x['metrics']['frame_time_p95_s']*1000,1)] for x in optional if x.get('metrics')])
+ table(['可选配置（完整1080p录制）','RTF','实际更新/墙钟秒','p95 ms','有效性'],[[x['run_id'],fmt(x['metrics']['rtf']),fmt(x['metrics']['measured_updates_per_wall_second'],2),fmt(x['metrics']['frame_time_p95_s']*1000,1),'有效对照' if x.get('comparison_valid') else x.get('invalid_reason','待最终设置核对')] for x in optional if x.get('metrics')])
 p('可选 CPU 线程和 Ampere retrace 对照均单列；默认仍为 8 线程及原画质。retrace=0.1 是 NVIDIA 提到的吞吐与光照准确性取舍，不能当作不改画质的纯性能收益。启动时的实际设置写入 runtime_settings.json。')
+followup=read('reports/optimization_1031_final_performance.json') or []
+if followup:
+ table(['最终连续顺序对照','RTF','实际更新/墙钟秒','p95 ms','实际 retrace'],[[x['run_id'],fmt(x['metrics']['rtf']),fmt(x['metrics']['measured_updates_per_wall_second'],2),fmt(x['metrics']['frame_time_p95_s']*1000,1),str(x['runtime_settings'].get('rt2_retrace'))] for x in followup if x.get('metrics') and not x.get('tracy')])
+ p('这组补测在 50 人运行关闭且进程退出后进行，每次启动前核对没有其他本项目 Kit。默认画质基线紧接可选 retrace 配置测试；此前未生效与重叠的尝试仍列为无效对照。')
 p('运行模式已提供：interactive 默认 1280×720；generation 默认 1920×1080；audit 开启精细观测；experimental 明确实验用途。模式名称不是人数或实时性能证书；分辨率可显式指定。')
 h('8. 剖析范围与限制')
-trace=run('opt1031-final30-trace-02','profile_summary.json')
+trace=run('opt1031-final30-trace-04','profile_summary.json')
 if trace and trace.get('main_thread_phase_wall_fraction'):
  p(f'修正版 Tracy 对原生进程采集，并从缓冲数据中选择 {trace["window_s"]:.2f} s 的运行窗口；启动区间未混入以下主线程份额。')
  table(['主线程区间','选定窗口占比'],[[k,fmt(v*100,1)+'%'] for k,v in trace['main_thread_phase_wall_fraction'].items()])
@@ -95,6 +99,7 @@ else:p('首个 Tracy 文件有效，但包含约 103 s 启动缓冲，且未记�
 if trace and trace.get('groups'):
  table(['原生剖析分组','选定窗口内的主要 CPU scope（跨线程聚合秒，不是墙钟百分比）'],[[group,'; '.join(x['name']+' '+fmt(x['aggregate_s'],2)+' s' for x in rows[:3])] for group,rows in trace['groups'].items()])
 p('跨线程原生区间会重叠，不能把其聚合时间相加当作墙钟百分比。CSV CPU scope 不等于 GPU 设备执行时间；原始 Tracy 文件保留以供 GPU lane/等待关系复查。剖析轮不用于最终吞吐比较。没有用四张显卡推定四倍加速，也没有未经核对就改时间步、减少人物动作或把低分辨率冒充原画质。')
+p('启动器也补了可靠性修正：SDK 有时将脚本内部异常吞为 shell 退出码 0；现在 CLI 会核对最终 metrics/completion 与异常文件，缺失完整输出也按失败返回。旧 trace-03 的原始 shell 0 与原生失败 1 均保留，修正后的退出状态核对为 1。受该缺陷导致重叠的试验不作为受控吞吐证据。')
 h('9. 两种宿主与真实自然语言验收')
 table(['宿主','包/连接','自然语言结果'],[['Codex CLI 0.166.0','可移植 manifest/MCP schema、安装、工具发现与 Skill 校验通过','3 项真实任务通过（按原生状态判定）' if host and host['passed'] else '待最终状态判定'],['Claude Code 2.1.305','隔离 Linux 入口可运行；plugin validate 通过；MCP Connected','未登录，未执行 3 项自然语言任务。']])
 if host:
@@ -114,6 +119,9 @@ p('修复将 12 人以上的连续通行限制为已完整预约的 12 米步行
 
 p('首轮长测与宿主控制验证曾同时运行于不同 GPU；它验证功能持续运行，不是独占负载的速度基准。首次受控吞吐对照没有并行启动本轮另一自有 Kit。外部已有 Isaac 应用始终未停止。')
 p(source('runs/'+LARGE+'/metrics.json','本轮 50 人指标（关闭后生成）')+'；'+source('runs/'+LARGE_FIRST+'/native_controller_lease_check.json','实际双客户端读写控制权核对')+'。')
+ownership=run(LARGE,'mcp_ownership_acceptance.json')
+if ownership and ownership.get('passed'):
+ p('本轮还通过三个独立 stdio 会话核对插件默认身份：Codex 获得控制后断开，Claude 可读取但获得 CONTROLLER_BUSY，Codex 重连保持同一代际并释放，控制者恢复为空；未请求修改人物活动。该检查验证传输和协调，不冒充 Claude 自然语言验收。')
 cleanup=run('opt1031-cleanup-corridor-13-02','cleanup_acceptance.json')
 if cleanup:
  p('定点原生回归：远处坐下接近取消在 '+fmt(cleanup['distant_approach_cancel']['elapsed_sim_s'],2)+' 仿真秒内结算并释放座位，未返回椅子；13 人实例条件下的有限通道路线实际依次经过两个 via 与最终目标。此前减速未结束就选择 egress 的失败也保留在 cleanup-corridor-13-01。')
@@ -122,7 +130,7 @@ code("python3 -m pip install -e '.[mcp,assets,video]'\nexport SIMPEOPLE_ISAAC_DI
 p('发布采用单独允许列表导出和全新 Git 历史，不把本地原始想法文档、旧私有历史、NVIDIA 模型/动作/纹理、用户凭据或完整运行日志推上公网。代码为 MIT；NVIDIA 资产和第三方依赖遵从各自许可。插件包和共享源码分别验证。')
 p('已公开仓库：[ros-claw/simpeople](https://github.com/ros-claw/simpeople)。是否已公开、公开提交及文件校验，以发布清单为准。编辑式源码安装是支持的启动方式；单独 wheel 不包含场景、配置与缓存准备脚本。')
 h('12. 验证、保留失败与剩余工作')
-p('当前代码单元测试覆盖协议、幂等、代际控制、取消资源、批量逐项结果、读分页、事件游标、空间筛选、局部导航边、远处坐下取消与有限通道预约。工作区已通过 73 项测试。该测试数不被当作人物动画验收；人物结论来自前述实际 Kit 运行。')
+p('当前代码单元测试覆盖协议、幂等、代际控制、取消资源、批量逐项结果、读分页、事件游标、空间筛选、局部导航边、远处坐下取消与有限通道预约。工作区已通过 80 项测试。该测试数不被当作人物动画验收；人物结论来自前述实际 Kit 运行。')
 table(['保留的尝试','问题与处理'],[['motion-A-native-01','没有及时提交人物活动，空场运行未作为有效动作基线。'],['motion-C-corridor-01','密集 NavMesh 点拖慢慢跑；后续保留转角简化重测。'],['gait-corridor-12-01','首次完整网格预计算引发未知结果超时；按需局部边与相同 request_id 重试后重跑。'],['seat-calibrated-v3-12-01','6 人过早开始保持后发生对齐丢失；进入效应器稳定判据修正，保持阈值不放宽。'],['host-codex-01','端点未转发导致连接拒绝，0 人创建；显式环境配置后新运行通过。'],['perf30-03 / perf30-06','无活动 RGB 图的原型下界、混入启动缓冲的剖析，均未冒充最终稳定成本。']])
 p('剩余边界：Claude 自然语言验收需要本机登录；实时 24 FPS/RTF 0.8 未达；没有精确全身三角形、受力平衡、足端接触力、机器人深度/LiDAR或任意骨骼/椅子自动适配保证。多人移动目标跟随维持原有受限状态。')
 p('原生 Behavior API、Tracy 与性能配置依据本机 SDK 绑定和 NVIDIA 官方资料核对：[Behavior API](https://docs.omniverse.nvidia.com/kit/docs/behavior-simulation/latest/behavior-simulation/api.html)、[Tracy 指南](https://docs.isaacsim.omniverse.nvidia.com/6.2.0/utilities/debugging/profiling_performance.html)、[性能手册](https://docs.isaacsim.omniverse.nvidia.com/6.2.0/reference_material/sim_performance_optimization_handbook.html)。宿主格式核对 [OpenAI 插件文档](https://developers.openai.com/plugins/build/plugins) 与 [Claude 插件参考](https://code.claude.com/docs/en/plugins-reference)。')

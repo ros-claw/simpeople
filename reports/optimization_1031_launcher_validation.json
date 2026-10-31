@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "real_closed_run": "opt1031-final30-trace-03",
+  "recorded_launcher_exit_code": 0,
+  "native_metrics_exit_code": 1,
+  "resolved_cli_exit_code": 1,
+  "error_file_retained": true,
+  "unit_tests_passed": 80
+}

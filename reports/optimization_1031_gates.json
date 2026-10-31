@@ -1,6 +1,6 @@
 {
   "scope": "1031 quality/product iteration; historical v0.1 population gates are separate",
-  "source_commit": "6203ed82ea25f4c8f9dc7c87c90e83743bdf2d6c",
+  "source_commit": "2b177467a8554676dc1ca68646f6cc5b5be69444",
   "gates": {
     "motion": {
       "passed": true,
@@ -51,7 +51,15 @@
     },
     "tracy_steady_window": {
       "passed": null,
-      "evidence": "runs/opt1031-final30-trace-02/profile_summary.json"
+      "evidence": "runs/opt1031-final30-trace-04/profile_summary.json"
+    },
+    "mcp_reconnect_ownership": {
+      "passed": true,
+      "evidence": "runs/opt1031-regression50-seed17-02/mcp_ownership_acceptance.json"
+    },
+    "launcher_native_exit_status": {
+      "passed": true,
+      "evidence": "reports/optimization_1031_launcher_validation.json"
     }
   },
   "input_hashes": [
@@ -90,6 +98,14 @@
     {
       "path": "runs/opt1031-final30-full-01/metrics.json",
       "sha256": "a13c7e717e6c6133fefddf58f19fc2e94f5e853d3f6eb712948f5bf7b3ecd7b9"
+    },
+    {
+      "path": "runs/opt1031-regression50-seed17-02/mcp_ownership_acceptance.json",
+      "sha256": "794cfe2624135ba77e7da9f9bfc3a51f2611c1549f1775a7fb60c799c1677083"
+    },
+    {
+      "path": "reports/optimization_1031_launcher_validation.json",
+      "sha256": "99fdf7d8d32fc1ea0a30048394beea93f931aec953215369052c83c8e8ed3ad3"
     },
     {
       "path": "configs/quality_catalog.json",

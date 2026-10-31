@@ -22,7 +22,11 @@ with file.open() as f:
   key=(r['name'],r['src_file']);entry=zones[key];entry['total_ns']+=clipped;entry['counts']+=1;entry['threads'].add(r['thread'])
   if r['name'].startswith('SimPeople::'):phases[r['name']]+=clipped
 rows=[{'name':k[0],'source_file':k[1],'aggregate_s':v['total_ns']/1e9,'counts':v['counts'],'threads':sorted(v['threads'])} for k,v in zones.items()];rows.sort(key=lambda v:v['aggregate_s'],reverse=True)
+coverage=sum(phases.values())/window
+if not .8<=coverage<=1.05:
+ raise ValueError('manual phase scopes do not cover one disjoint main-thread window: '+str(coverage))
 report={'window_start_ns':start,'window_end_ns':end,'window_s':window/1e9,'method':'last steady 8 seconds within SimPeople trace ranges; events clipped to window to exclude buffered startup',
+ 'main_thread_phase_coverage':coverage,
  'main_thread_phase_wall_fraction':{k:v/window for k,v in phases.items()},'top_zones':rows[:30],'groups':{},
  'limitations':['native aggregate time overlaps across zones/threads and is not a wall-time percentage','CSV contains CPU scopes; device execution time requires reviewing GPU lanes in the retained Tracy file','profiling run is excluded from throughput comparisons']}
 for group,pattern in [('behavior','behavior|crowd|navigation'),('pose_skin','poseUpdate|animation|animgraph|blend|retarget|skinning|skeleton|skinmesh'),('fabric_usd','fabric|usd|hydra'),('wait','wait|synchron|fence')]:
