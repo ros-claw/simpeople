@@ -28,6 +28,7 @@ class NativeBackend:
         layer=self.stage.GetRootLayer();meta=layer.customLayerData
         self.scene_id=meta.get('simpeople_scene_id',layer.identifier)
         self.scene_revision=meta.get('simpeople_scene_revision')
+        self.config_dir=Path(config_dir) if config_dir else self.root/'configs'
         self.allow_unverified=allow_unverified;self.instances={};self.recorder=None;self.observations={};self.deferred_stops=set()
         behavior_file=getattr(bh,'__file__',None)
         actual_install=next((p for p in Path(behavior_file).parents if (p/'VERSION').is_file() and (p/'python.sh').is_file()),None) if behavior_file else None
@@ -191,8 +192,9 @@ class NativeBackend:
                 asset.get('quality_revision_sha256'),asset.get('motion_revision_sha256'),asset['rig_id'],'seat',
                 template_hash(seat['seat_profile']),seat_geometry_hash(self.stage,seat),runtime_revision=self.runtime_revision)
                 for name,seat in self.semantics.items() if seat.get('kind')=='seat' and seat.get('seat_profile')}}
+        from .custom_actions import describe
         return {**actions,'queue':{'status':actions['walk']['status'],'implementation':'FIFO supervisor + verified walk'},
-                'custom_action':{'status':'unsupported','reason':'No custom clips registered'}}
+                'custom_action':describe(self,handle)}
 
     def inspect_scene(self):
         return {'backend':'native','meters_per_unit':self.mpu,'stage_up_axis':self.up,
@@ -276,8 +278,11 @@ class NativeBackend:
     def validate(self,handle,step):
         action=step['action'];cap=step.get('gait','walk') if action=='move_to' else ('walk' if action=='queue' else action)
         state=self.list_actions(handle,include_quality=False).get(cap,{'status':'unsupported'})
+        if action=='custom_action':
+            state=state.get('clips',{}).get(step['target'],{'status':'unsupported'}) if isinstance(step['target'],str) else {'status':'unsupported'}
         if state['status']=='unsupported' or (state['status']!='verified' and not self.allow_unverified):
             raise SimPeopleError('ACTION_UNSUPPORTED','action is not verified for this backend',action=cap,capability=state)
+        if action=='custom_action':return
         if 'target' in step:
             self.resolve_target(step['target'])
             for point in step.get('via',[]):self.resolve_target(point)
@@ -325,6 +330,10 @@ class NativeBackend:
         elif action=='follow':
             a.set_speed(1.2/self.mpu)
             tid=a.follow(target=self.resolve_path(step['target']),distance=step.get('distance_m',2.0)/self.mpu)
+        elif action=='custom_action':
+            if step['target'] not in list(a.get_custom_action_names()):
+                raise SimPeopleError('ACTION_UNSUPPORTED','clip absent from native agent',clip=step['target'])
+            tid=a.custom_action(step['target'],duration=step['duration_s'])
         else:raise SimPeopleError('ACTION_UNSUPPORTED',action)
         if tid==bh.BEHAVIOR_TASK_ID_INVALID:
             raise SimPeopleError('BACKEND_TASK_FAILED','native task rejected',action=action,target=step.get('target'),

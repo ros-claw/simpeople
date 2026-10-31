@@ -165,6 +165,22 @@
               "duration_s"
             ]
           }
+        },
+        {
+          "if": {
+            "properties": {
+              "action": {
+                "const": "custom_action"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "target": {
+                "$ref": "#/$defs/id"
+              }
+            }
+          }
         }
       ]
     }

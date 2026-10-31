@@ -77,6 +77,8 @@ To use the motion-quality profile in the supplied standalone factory, start `sim
 
 Seat fit uses versioned profiles and actual native head/neck skinning audits. A queryable quality catalog binds evidence to asset, motion and chair geometry revisions. Functional action support, estimated foot contact quality and geometric interaction quality are separate claims.
 
+Optional [native custom actions](docs/custom_actions.md) add eight locally tested clip/appearance combinations: breakdance, rumba, crouched motion, kneeling, floor stretches, martial kicks, bending and groove. Set `SIMPEOPLE_ANIMATION_DIR` to the installed Rivermark Reallusion directory and launch with `--custom-actions`. Each accepted combination completed a 25-second native audition and returned to walking. Other combinations remain discovered and are rejected in normal mode; this does not establish arbitrary-rig or general parkour support. Animation sources are not bundled.
+
 ## Evidence and limits
 
 Read the [optimization acceptance report](reports/OPTIMIZATION_20261031.md) and [reference environment results](reports/REFERENCE_ACCEPTANCE.md). Each native run freezes its source inputs and retains events, actual root/joint trajectories, task outcomes and frame identities.
@@ -94,6 +96,8 @@ Foot support is estimated from calibrated shoe proxies; it is not measured conta
 ## Development
 
 The [Shift Change film workflow](docs/shift_change_production.md) provides a frame-driven cinematic director, native actor blocking, an actual Codex batch-retarget take, source-frame tracing and decoded-PTS checks. It uses simulation-time capture and preserves real host latency separately.
+
+The lively production recorded 32 actors and 2,700 native 1080p frames without dropped frames. Eight custom-action performers each completed at least four cycles; an actual Codex batch changed only the two selected patrols. Both reached their distinct B-area targets, while the witness retained its task. See the [revision-specific production receipt](reports/SHIFT_CHANGE_20261101.json) for all 20 native gates, retained failed takes, connection-retry timing and the measurement scope. Films from this round are delivered locally.
 
 ```bash
 PYTHONPATH=src python3 -m pytest -q tests

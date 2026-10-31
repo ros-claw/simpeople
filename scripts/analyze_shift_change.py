@@ -20,7 +20,7 @@ def analyze(directory):
         heroes=('patrol_orange','patrol_blue');start=44*30 if mode=='master' else 8*30;end=68*30 if mode=='master' else 24*30
         core=[r for r in frames if start<=r['frame']<end]
         gates['core_uncut']=bool(core and all(not x['camera_cut'] for x in core[1:]) and len({tuple(r['eye_m']) for r in core})==1 and len({tuple(r['look_at_m']) for r in core})==1)
-        gates['unchanged_at_agent_batch']=len(applied['untouched_at_batch'])==22 and all(applied['untouched_at_batch'].values())
+        gates['unchanged_at_agent_batch']=len(applied['untouched_at_batch'])==len(frames[0]['actors'])-2 and all(applied['untouched_at_batch'].values())
         gates['waiter_original_task']=len({r['actors']['bench_waiter']['task_id'] for r in frames})==1
         gates['real_agent_tasks']=all(tasks[applied['tasks'][aid]]['source']=='agent' for aid in heroes)
         gates['only_targeted_agent_actors']={t['actor_id'] for t in tasks.values() if t['source']=='agent'}==set(heroes)
@@ -31,15 +31,36 @@ def analyze(directory):
             item=r.get('item',{})
             if r.get('type')=='item.completed' and item.get('type')=='mcp_tool_call':calls.append(item)
         gates['actual_host_tool_calls']=any(x.get('server')=='simpeople' and x.get('tool')=='people_crowd' for x in calls)
-        before=frames[max(0,start-60)];after=core[-1]
-        changes={aid:{'before_dx_m':frames[start-1]['actors'][aid]['position_m'][0]-before['actors'][aid]['position_m'][0],
-                      'after_dx_m':after['actors'][aid]['position_m'][0]-frames[start]['actors'][aid]['position_m'][0]} for aid in heroes}
+        command_frame=applied['frame']
+        gates['command_inside_continuous_core']=start<=command_frame<end-150
+        before=frames[max(0,command_frame-60)];after=core[-1]
+        changes={aid:{'before_dx_m':frames[command_frame-1]['actors'][aid]['position_m'][0]-before['actors'][aid]['position_m'][0],
+                      'after_dx_m':after['actors'][aid]['position_m'][0]-frames[command_frame]['actors'][aid]['position_m'][0]} for aid in heroes}
         gates['both_actual_direction_changes']=all(x['before_dx_m']<-.3 and x['after_dx_m']>.7 for x in changes.values())
         queue_motion={aid:max(math.dist(r['actors'][aid]['position_m'][:2],core[0]['actors'][aid]['position_m'][:2]) for r in core) for aid in ['queue_00','queue_01','queue_02']}
         gates['background_queue_moves']=max(queue_motion.values())>.5
         arrivals={aid:next((r['film_time_s'] for r in frames if r['actors'][aid]['task_id']==applied['tasks'][aid] and r['actors'][aid]['status']=='succeeded'),None) for aid in heroes}
         if mode=='master':gates['both_native_arrivals_before_80s']=all(t is not None and t<80 for t in arrivals.values())
         result.update(real_host_mcp_calls=len(calls),applied=applied,direction_changes=changes,queue_motion_m=queue_motion,native_arrival_film_s=arrivals)
+        if cfg.get('activity_profile')=='lively':
+            from collections import Counter
+            clips=Counter();idle=Counter();total=Counter()
+            for line in (d/'trajectories.jsonl').open():
+                row=json.loads(line)
+                if row.get('frame_identity',{}).get('video_frame') is None:continue
+                aid=row['actor_id'];total[aid]+=1
+                if aid.startswith('action_') and row.get('action')==aid.removeprefix('action_'):clips[aid]+=1
+                if row.get('action')=='Idle' and row.get('planar_speed_mps',0)<.15:idle[aid]+=1
+            extra={aid for aid in frames[0]['actors'] if aid.startswith('action_')}
+            failures=[t for t in tasks.values() if t['actor_id'] in extra and t['status']=='failed']
+            cycles=Counter(t['actor_id'] for t in tasks.values() if t['actor_id'] in extra and t['status']=='succeeded')
+            gates['all_eight_custom_clips_play']=len(extra)==8 and all(clips[aid]>=300 for aid in extra)
+            gates['custom_cycles_complete']=all(cycles[aid]>=1 for aid in extra)
+            gates['no_failed_custom_activity']=not failures
+            result['custom_activities']={'captured_clip_frames':dict(clips),'completed_cycles':dict(cycles),'failed_tasks':len(failures)}
+            eligible=set(total)-{'patrol_orange','patrol_blue','bench_waiter'}
+            result['standing_idle_proxy']={'definition':'native Idle and root planar speed <0.15 m/s; excludes two story heroes and the intentional witness; includes legitimate queue/traffic waits',
+                'eligible_actors':len(eligible),'fraction':sum(idle[x] for x in eligible)/sum(total[x] for x in eligible)}
         if mode=='master':
             seated=[];fine=[]
             for line in (d/'trajectories.jsonl').open():

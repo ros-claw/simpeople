@@ -32,6 +32,7 @@ parser.add_argument('--encoder-threads',type=int)
 parser.add_argument('--cpu-threads',type=int,choices=range(1,65),default=8)
 parser.add_argument('--renderer-profile',choices=['default','ampere_retrace'],default='default')
 parser.add_argument('--cinematic-config')
+parser.add_argument('--custom-actions',action='store_true',help='Import configured local clips through the native Behavior pipeline')
 for name in ['serve','no-video','allow-unverified','realtime','visible']:parser.add_argument('--'+name,action='store_true')
 args=parser.parse_args()
 production_config=json.loads(Path(args.cinematic_config).read_text()) if args.cinematic_config else None
@@ -121,7 +122,7 @@ try:
     elif args.scenario=='industrial_life':
         if production_config:
             from simpeople.backends.native.production_art import shift_change_scene
-            semantics=shift_change_scene(directory)
+            semantics=shift_change_scene(directory,training=production_config.get('activity_profile')=='lively',audition=production_config['mode']=='audition')
         else:semantics=industrial_scene()
     elif args.scenario=='gait_quality_validation':semantics=gait_quality_scene()
     else:semantics=build_scene(False)
@@ -135,6 +136,9 @@ try:
     backend.scene_revision=hashlib.sha256(json.dumps({'semantics':semantics,'scene_source':sources.get('src/simpeople/backends/native/scene.py'),
         'environment_source':sources.get('src/simpeople/backends/native/environments.py')},sort_keys=True).encode()).hexdigest()
     backend.performance_optimized=args.performance_profile=='optimized'
+    if args.custom_actions:
+        from simpeople.backends.native.custom_actions import register
+        register(backend,directory/'custom_actions')
     if args.traffic_profile=='corridor':
         if not hasattr(backend,'enable_corridor_profile'):raise RuntimeError('corridor profile is not implemented in this source revision')
         backend.enable_corridor_profile()

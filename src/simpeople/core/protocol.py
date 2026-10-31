@@ -42,6 +42,7 @@ def activity(params):
         if 'resource_id' in s:identifier(s['resource_id'],'resource_id')
         if 'via' in s and action!='move_to':fail('via is only valid for move_to')
         if action in {'move_to','look_at','sit','follow','custom_action','queue'}: s['target']=target(s.get('target'))
+        if action=='custom_action':s['target']=identifier(s['target'],'custom action name')
         if action in {'wait','sit','follow','custom_action','queue'}: s['duration_s']=number(s.get('duration_s'),'duration_s',0.01)
         if 'timeout_s' in s: s['timeout_s']=number(s['timeout_s'],'timeout_s',0.1)
         if 'distance_m' in s:s['distance_m']=number(s['distance_m'],'distance_m',0.3,20)

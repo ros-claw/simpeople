@@ -19,7 +19,7 @@ class ReservationNativeBackend(NativeBackend):
         super().__init__(*args,**kwargs);self.grid=None;self.routes={};self.owner_routes={};self.positions={};self.now=0
         self.static_bounds=[];self.dynamic_prims=[]
         self.corridor_profile=False;self.dynamic_bounds={}
-        self.navigation_queries=0
+        self.navigation_queries=0;self.action_spaces={}
     def enable_corridor_profile(self):
         self.corridor_profile=True
     def emit(self,kind,**payload):
@@ -95,8 +95,30 @@ class ReservationNativeBackend(NativeBackend):
         self.emit('traffic_grid_ready',nodes=len(nodes),cell_m=cell,footprint_margin_m=self.grid.margin,
                   static_obstacle_bounds_m=self.static_bounds,nav_profile_radius_m=.45)
     def start(self,handle,step):
+        if step['action']=='custom_action':
+            from simpeople.core.action_space import action_cells
+            self.cancel_route(handle)
+            center=self.observe(handle)['position_m'];radius=self.custom_actions[step['target']]['clearance_radius_m']
+            cells=action_cells(self.grid,center,radius)
+            bounds=[*self.static_bounds,*self.dynamic_bounds.values()]
+            if any(math.hypot(max(b[0]-center[0],0,center[0]-b[2]),max(b[1]-center[1],0,center[1]-b[3]))<radius for b in bounds):
+                raise SimPeopleError('TARGET_INVALID','activity area overlaps an obstacle',clip=step['target'],radius_m=radius)
+            if cells & self.grid.claimed(handle) or any(math.dist(center[:2],p[:2])<radius+.5 for h,p in self.positions.items() if h!=handle):
+                raise SimPeopleError('RESOURCE_BUSY','full-body clip needs a clear activity area',clip=step['target'],radius_m=radius)
+            tid=super().start(handle,step)
+            self.grid.claims[handle]=cells
+            bay=next((key for key,value in self.semantics.items() if value.get('kind')=='activity_bay'
+                      and value.get('clip')==step['target'] and math.dist(self.resolve_target(key),center)<.3),None)
+            self.action_spaces[handle]={'task_id':tid,'center':center,'radius_m':radius,'stopped_at':None,'activity_bay':bay}
+            self.emit('custom_action_space_reserved',agent=handle,clip=step['target'],center_m=center,radius_m=radius,native_task_id=tid)
+            return tid
         if step['action'] not in {'move_to','sit'}:
+            if handle in self.action_spaces:
+                self.action_spaces[handle]['stopped_at']=self.now
+                return super().start(handle,step)
             self.cancel_route(handle);return super().start(handle,step)
+        if handle in self.action_spaces:
+            self.action_spaces.pop(handle);self.grid.release(handle)
         obs=self.observe(handle)
         if not obs.get('ready'):raise SimPeopleError('SIM_NOT_READY','native agent absent')
         if step['action']=='sit':
@@ -115,8 +137,12 @@ class ReservationNativeBackend(NativeBackend):
         if rid and self.routes[rid]['status'] not in {'succeeded','failed','cancelled'}:
             self.routes[rid]['status']='cancelled';self.emit('traffic_route_cancelled',route_id=rid,agent=handle)
         if self.grid:self.grid.release(handle)
-    def stop(self,handle):self.cancel_route(handle);super().stop(handle)
-    def despawn(self,handle):self.cancel_route(handle);super().despawn(handle)
+    def stop(self,handle):
+        if handle in self.action_spaces:self.action_spaces[handle]['stopped_at']=self.now
+        else:self.cancel_route(handle)
+        super().stop(handle)
+    def despawn(self,handle):
+        self.action_spaces.pop(handle,None);self.cancel_route(handle);super().despawn(handle)
     def task_state(self,handle,tid):
         if isinstance(tid,str) and tid.startswith('route-'):
             state=self.routes[tid]['status'];return 'running' if state=='blocked' else 'failed' if state=='cancelled' else state
@@ -142,6 +168,11 @@ class ReservationNativeBackend(NativeBackend):
         self.positions={h:(o['position_m'] if o.get('ready') else self.instances[h]['spawn_position_m']) for h,o in observations.items()}
         if not self.positions:return
         if self.grid is None:self.make_grid(next(iter(self.positions.values())))
+        for handle,space in list(self.action_spaces.items()):
+            if space['stopped_at'] is None and super().task_state(handle,space['task_id'])!='running':space['stopped_at']=self.now
+            if not space.get('activity_bay') and space['stopped_at'] is not None and self.now-space['stopped_at']>=1 and self.is_standing(handle,observations[handle]):
+                self.grid.release(handle);self.action_spaces.pop(handle)
+                self.emit('custom_action_space_released',agent=handle)
         for prim in self.dynamic_prims:
             bounds=self.bounds(prim)
             key='obstacle:'+str(prim.GetPath())

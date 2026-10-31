@@ -46,6 +46,7 @@ def main():
         r.add_argument('--cpu-threads',type=int,choices=range(1,65),default=8)
         r.add_argument('--renderer-profile',choices=['default','ampere_retrace'],default='default')
         r.add_argument('--cinematic-config',help='local frame-driven production configuration')
+        r.add_argument('--custom-actions',action='store_true',help='opt in to local native custom clip registry')
     i=sub.add_parser('inspect');i.add_argument('--run-id',required=True)
     sub.add_parser('mcp')
     args=parser.parse_args()
@@ -67,7 +68,7 @@ def main():
                 '--gpu',str(args.gpu),'--port',str(args.port),'--width',str(args.width),'--height',str(args.height),
                 '--camera',args.camera,'--asset-id',args.asset_id]
             if args.command=='serve':command.append('--serve')
-            for name in ['no_video','allow_unverified','realtime','visible','quality_audit','tracy']:
+            for name in ['no_video','allow_unverified','realtime','visible','quality_audit','tracy','custom_actions']:
                 if getattr(args,name):command.append('--'+name.replace('_','-'))
             for name in ['duration','run_id','traffic_profile','capture_profile','warmup_wall_s','measure_wall_s','performance_profile','encoder_threads','mode','cpu_threads','renderer_profile','cinematic_config']:
                 if getattr(args,name) is not None:command.extend(['--'+name.replace('_','-'),str(getattr(args,name))])

@@ -6,6 +6,7 @@ DIRS={'src','scripts','configs','extensions','schemas','skills','plugins','docs'
 FILES={'LICENSE','THIRD_PARTY.md','pyproject.toml','requirements-controller.txt','.gitignore'}
 REPORTS={'reports/capability_matrix.json','reports/phase_gates.json','reports/REFERENCE_ACCEPTANCE.md','reports/OPTIMIZATION_20261031.md','reports/optimization_1031_gates.json','reports/optimization_1031_results.json','reports/optimization_1031_claude_status.json','reports/optimization_1031_plugin_installation.json','reports/optimization_1031_launcher_validation.json','reports/optimization_1031_final_performance.json'}
 REPORTS|={'reports/optimization_1031_performance.json','reports/optimization_1031_optional_performance.json','reports/optimization_1031_interactive_performance.json'}
+REPORTS|={'reports/SHIFT_CHANGE_20261101.json'}
 ASSETS={'reports/optimization_1031_assets/seat_before.png','reports/optimization_1031_assets/seat_after.png','reports/optimization_1031_assets/media_manifest.json'}
 ASSETS|={'reports/optimization_1031_assets/crowd50_media_manifest.json'}
 p=argparse.ArgumentParser();p.add_argument('--destination',required=True);a=p.parse_args();destination=Path(a.destination).resolve()

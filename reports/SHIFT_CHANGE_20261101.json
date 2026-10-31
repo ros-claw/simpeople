@@ -1,0 +1,334 @@
+{
+  "scope": "32-person cinematic production; simulation-time 1080p30; capacity tiers remain tied to existing long-duration benchmarks",
+  "run_id": "shift-lively-master-04",
+  "runtime_source_commit": "cb66651",
+  "native_audition": "shift-actions-audition-06",
+  "native_director_rehearsal": "shift-lively-director-02",
+  "cast": {
+    "instances": 32,
+    "base_identities": 11,
+    "appearance_assets": 20,
+    "life_roles": 7,
+    "custom_action_performers": 8
+  },
+  "gates": {
+    "frame_count": true,
+    "video_indices": true,
+    "consecutive_simulation_ticks": true,
+    "simulation_intervals": true,
+    "recording_closed": true,
+    "core_uncut": true,
+    "unchanged_at_agent_batch": true,
+    "waiter_original_task": true,
+    "real_agent_tasks": true,
+    "only_targeted_agent_actors": true,
+    "actual_host_tool_calls": true,
+    "command_inside_continuous_core": true,
+    "both_actual_direction_changes": true,
+    "background_queue_moves": true,
+    "both_native_arrivals_before_80s": true,
+    "all_eight_custom_clips_play": true,
+    "custom_cycles_complete": true,
+    "no_failed_custom_activity": true,
+    "visible_window_seated_hold": true,
+    "seat_headneck_vertices": true
+  },
+  "passed": true,
+  "recording": {
+    "queue_capacity": 16,
+    "max_queue_depth": 1,
+    "encoder_threads": 4,
+    "submit_wait_p95_s": 0.000884967390447855,
+    "empty_rgb_frames": 0,
+    "frames_written": 2700,
+    "dropped_frames": 0,
+    "policy": "bounded blocking queue; fail if encoder stalls >5 wall seconds"
+  },
+  "actual_host_mcp_calls": 10,
+  "agent_control": {
+    "command_frame": 1320,
+    "unchanged_actors_at_batch": 30,
+    "arrivals_film_s": {
+      "patrol_orange": 51.0,
+      "patrol_blue": 67.8
+    },
+    "pause_wall_s": 509.7108244895935,
+    "pause_context": "Includes first-host MCP mounting failure, diagnostics and a successful real Codex retry. Failed logs are retained. Pause duration is not an ordinary model-latency benchmark."
+  },
+  "native_direction_changes": {
+    "patrol_orange": {
+      "before_dx_m": -2.4548754692077637,
+      "after_dx_m": 5.484018325805664
+    },
+    "patrol_blue": {
+      "before_dx_m": -2.276362419128418,
+      "after_dx_m": 9.941730499267578
+    }
+  },
+  "native_queue_motion_m": {
+    "queue_00": 3.3763214538379334,
+    "queue_01": 6.27600281729169,
+    "queue_02": 1.967891780948752
+  },
+  "custom_activities": {
+    "captured_clip_frames": {
+      "action_breakdance": 2530,
+      "action_rumba": 2530,
+      "action_crouch": 2530,
+      "action_kneel": 2530,
+      "action_floor_stretch": 2530,
+      "action_martial_kick": 2461,
+      "action_inspect_low": 2530,
+      "action_groove": 2530
+    },
+    "completed_cycles": {
+      "action_breakdance": 4,
+      "action_rumba": 4,
+      "action_crouch": 4,
+      "action_kneel": 4,
+      "action_floor_stretch": 4,
+      "action_martial_kick": 6,
+      "action_inspect_low": 4,
+      "action_groove": 4
+    },
+    "failed_tasks": 0
+  },
+  "audition_actions": {
+    "breakdance": {
+      "actor_id": "breakdance",
+      "asset_id": "male_adult_construction_05_accent",
+      "gates": {
+        "actual_clip_frames": true,
+        "native_activity_completed": true,
+        "returned_to_locomotion": true,
+        "foot_joint_floor_proxy": true,
+        "recorded_joints_within_activity_radius": true
+      },
+      "passed": true,
+      "clip_frames": 723,
+      "min_foot_joint_z_m": 0.05686311423778534,
+      "both_feet_above_22cm_frames": 216,
+      "recorded_joint_radius_m": 0.9566295742390055,
+      "return_displacement_m": 3.7346933662584663
+    },
+    "rumba": {
+      "actor_id": "rumba",
+      "asset_id": "female_adult_police_02_accent",
+      "gates": {
+        "actual_clip_frames": true,
+        "native_activity_completed": true,
+        "returned_to_locomotion": true,
+        "foot_joint_floor_proxy": true,
+        "recorded_joints_within_activity_radius": true
+      },
+      "passed": true,
+      "clip_frames": 723,
+      "min_foot_joint_z_m": 0.049483105540275574,
+      "both_feet_above_22cm_frames": 0,
+      "recorded_joint_radius_m": 0.4785485375294547,
+      "return_displacement_m": 3.738533555850704
+    },
+    "crouch": {
+      "actor_id": "crouch",
+      "asset_id": "male_adult_police_04",
+      "gates": {
+        "actual_clip_frames": true,
+        "native_activity_completed": true,
+        "returned_to_locomotion": true,
+        "foot_joint_floor_proxy": true,
+        "recorded_joints_within_activity_radius": true
+      },
+      "passed": true,
+      "clip_frames": 723,
+      "min_foot_joint_z_m": 0.043332330882549286,
+      "both_feet_above_22cm_frames": 0,
+      "recorded_joint_radius_m": 0.686735322197711,
+      "return_displacement_m": 3.770395685118152
+    },
+    "kneel": {
+      "actor_id": "kneel",
+      "asset_id": "female_adult_medical_01",
+      "gates": {
+        "actual_clip_frames": true,
+        "native_activity_completed": true,
+        "returned_to_locomotion": true,
+        "foot_joint_floor_proxy": true,
+        "recorded_joints_within_activity_radius": true
+      },
+      "passed": true,
+      "clip_frames": 723,
+      "min_foot_joint_z_m": 0.04454740136861801,
+      "both_feet_above_22cm_frames": 243,
+      "recorded_joint_radius_m": 0.6535669850895929,
+      "return_displacement_m": 3.7345841537956366
+    },
+    "floor_stretch": {
+      "actor_id": "floor_stretch",
+      "asset_id": "male_adult_medical_01",
+      "gates": {
+        "actual_clip_frames": true,
+        "native_activity_completed": true,
+        "returned_to_locomotion": true,
+        "foot_joint_floor_proxy": true,
+        "recorded_joints_within_activity_radius": true
+      },
+      "passed": true,
+      "clip_frames": 723,
+      "min_foot_joint_z_m": 0.052157655358314514,
+      "both_feet_above_22cm_frames": 0,
+      "recorded_joint_radius_m": 0.9444246111120478,
+      "return_displacement_m": 1.2584149902828494
+    },
+    "martial_kick": {
+      "actor_id": "martial_kick",
+      "asset_id": "female_adult_police_03",
+      "gates": {
+        "actual_clip_frames": true,
+        "native_activity_completed": true,
+        "returned_to_locomotion": true,
+        "foot_joint_floor_proxy": true,
+        "recorded_joints_within_activity_radius": true
+      },
+      "passed": true,
+      "clip_frames": 723,
+      "min_foot_joint_z_m": 0.02931409329175949,
+      "both_feet_above_22cm_frames": 0,
+      "recorded_joint_radius_m": 1.035080865413823,
+      "return_displacement_m": 1.221810475988322
+    },
+    "inspect_low": {
+      "actor_id": "inspect_low",
+      "asset_id": "male_adult_construction_05",
+      "gates": {
+        "actual_clip_frames": true,
+        "native_activity_completed": true,
+        "returned_to_locomotion": true,
+        "foot_joint_floor_proxy": true,
+        "recorded_joints_within_activity_radius": true
+      },
+      "passed": true,
+      "clip_frames": 723,
+      "min_foot_joint_z_m": 0.0676763504743576,
+      "both_feet_above_22cm_frames": 0,
+      "recorded_joint_radius_m": 0.5951566844513614,
+      "return_displacement_m": 1.3985309614581125
+    },
+    "groove": {
+      "actor_id": "groove",
+      "asset_id": "female_adult_business_02",
+      "gates": {
+        "actual_clip_frames": true,
+        "native_activity_completed": true,
+        "returned_to_locomotion": true,
+        "foot_joint_floor_proxy": true,
+        "recorded_joints_within_activity_radius": true
+      },
+      "passed": true,
+      "clip_frames": 723,
+      "min_foot_joint_z_m": 0.06951139867305756,
+      "both_feet_above_22cm_frames": 0,
+      "recorded_joint_radius_m": 0.211608674431896,
+      "return_displacement_m": 1.2145289621357274
+    }
+  },
+  "seat_window": {
+    "holding_frames": 210,
+    "fine_samples": 330,
+    "min_vertex_clearance_m": 0.00516565920813393
+  },
+  "standing_idle_proxy": {
+    "before": 0.3422222222222222,
+    "after": 0.23500638569604088,
+    "percentage_point_change": -10.721583652618133,
+    "definition": "Native Idle and planar root speed <0.15 m/s. Excludes two story heroes and the intentional witness in both runs. Includes legitimate queue and traffic waits; not a diagnosis of boredom or foot slipping."
+  },
+  "video_checks": [
+    {
+      "path": "SimPeople_ShiftChange_90s_1080p30.mp4",
+      "passed": true,
+      "errors": [],
+      "decoded_frames": 2700,
+      "stream": {
+        "width": 1920,
+        "height": 1080,
+        "avg_frame_rate": "30/1",
+        "start_time": "0.000000",
+        "duration": "90.000000"
+      }
+    },
+    {
+      "path": "SimPeople_ShiftChange_90s_Clean_1080p30.mp4",
+      "passed": true,
+      "errors": [],
+      "decoded_frames": 2700,
+      "stream": {
+        "width": 1920,
+        "height": 1080,
+        "avg_frame_rate": "30/1",
+        "start_time": "0.000000",
+        "duration": "90.000000"
+      }
+    },
+    {
+      "path": "SimPeople_ShiftChange_Continuous_Agent_Take_24s.mp4",
+      "passed": true,
+      "errors": [],
+      "decoded_frames": 720,
+      "stream": {
+        "width": 1920,
+        "height": 1080,
+        "avg_frame_rate": "30/1",
+        "start_time": "0.000000",
+        "duration": "24.000000"
+      }
+    },
+    {
+      "path": "SimPeople_ShiftChange_Trailer_30s_1080p30.mp4",
+      "passed": true,
+      "errors": [],
+      "decoded_frames": 900,
+      "stream": {
+        "width": 1920,
+        "height": 1080,
+        "avg_frame_rate": "30/1",
+        "start_time": "0.000000",
+        "duration": "30.000000"
+      }
+    }
+  ],
+  "adjacent_duplicate_decoded_source_frames": 0,
+  "kit_checks": {
+    "SimPeople_ShiftChange_90s_1080p30.mp4.kit_check.json": true,
+    "SimPeople_ShiftChange_90s_Clean_1080p30.mp4.kit_check.json": true,
+    "SimPeople_ShiftChange_Continuous_Agent_Take_24s.mp4.kit_check.json": true,
+    "SimPeople_ShiftChange_Trailer_30s_1080p30.mp4.kit_check.json": true
+  },
+  "action_showcase_kit_check": true,
+  "color_roundtrip": {
+    "reference": "actual native RGB keyframe 20",
+    "output_frame": 20,
+    "comparison": "decode mastered Rec.709 and inverse-transform to sRGB/BT.601 before RGB comparison; excludes subtitle area",
+    "mean_abs_error_8bit": 1.5474099587203303,
+    "median_abs_error_8bit": 1.0,
+    "p95_abs_error_8bit": 4.0,
+    "passed": true,
+    "limit": "lossy H.264/chroma subsampling; no display calibration claim"
+  },
+  "publication": "source only; this round of films remains locally delivered",
+  "limits": [
+    "Exact clip/appearance/runtime combinations only",
+    "Foot and recorded-joint envelope proxies, selected seat head/neck vertices; no whole-mesh/contact-force certification",
+    "No general parkour or obstacle-vaulting acceptance"
+  ],
+  "rejected_takes_retained": [
+    "shift-actions-audition-01",
+    "shift-actions-audition-02",
+    "shift-actions-audition-03",
+    "shift-actions-audition-04",
+    "shift-actions-audition-05",
+    "shift-lively-director-01",
+    "shift-lively-master-01",
+    "shift-lively-master-02",
+    "shift-lively-master-03"
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "breakdance": {
+    "male_adult_construction_05_accent": {
+      "source_sha256": {
+        "skeleton": "2da395b8058ecbb049ba93dd0fde8a16a95155a35f56884419018b4eb8eeeedc",
+        "clip": "0c9192d8c4da054f85644439f8191a26087faac0f22006b1c5a31edc4c45d69a",
+        "registration": "ef7a6c216a7b17835d23aa1000c88dc01409d19c99dc07ae452b5d40ec8bc2ce"
+      },
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "asset_sha256": "18893a98258904620fb30b0f36d7d91b8349704e68788c24f7cd65a22af87e49",
+      "evidence": "runs/shift-actions-audition-06/custom_action_audit.json",
+      "scope": "this clip, this asset, this runtime; native task, recorded joints and footage; no whole-mesh/contact-force certification"
+    }
+  },
+  "rumba": {
+    "female_adult_police_02_accent": {
+      "source_sha256": {
+        "skeleton": "2da395b8058ecbb049ba93dd0fde8a16a95155a35f56884419018b4eb8eeeedc",
+        "clip": "0d12e62e8b3607422ba5a8e1c15b6b1cf584e9cc29aa4948d84b9f9592893cf0",
+        "registration": "e4e0793d6c4cfe7615b92a8792ab254fecf7f6a3a125548236649b40cb71143c"
+      },
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "asset_sha256": "8834f1b205fe4b6bb3076868fbe95c51b3eb059a1337480f0f6b5a8fe76dc2ff",
+      "evidence": "runs/shift-actions-audition-06/custom_action_audit.json",
+      "scope": "this clip, this asset, this runtime; native task, recorded joints and footage; no whole-mesh/contact-force certification"
+    }
+  },
+  "crouch": {
+    "male_adult_police_04": {
+      "source_sha256": {
+        "skeleton": "2da395b8058ecbb049ba93dd0fde8a16a95155a35f56884419018b4eb8eeeedc",
+        "clip": "820dac1c7a40dd0889641dbc5a6ad434133a011d994f493a39dd8be306cbd165",
+        "registration": "71862fdd8d2e1ed10b977efe43b4bf26e3da2732f361e10e131a63be62696570"
+      },
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "asset_sha256": "f715f9dcce9f18132e7cc2ce213f440341ae836cffd458c8d3428080124953f7",
+      "evidence": "runs/shift-actions-audition-06/custom_action_audit.json",
+      "scope": "this clip, this asset, this runtime; native task, recorded joints and footage; no whole-mesh/contact-force certification"
+    }
+  },
+  "kneel": {
+    "female_adult_medical_01": {
+      "source_sha256": {
+        "skeleton": "2da395b8058ecbb049ba93dd0fde8a16a95155a35f56884419018b4eb8eeeedc",
+        "clip": "98409b720f315e3f17a6029a791de0882245ae0a9ff48b48bbe935e090a0bdf9",
+        "registration": "d5c73409cda246e1d3887bfbbf38472a81a7da29731da8b28693be117260707f"
+      },
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "asset_sha256": "35f1ca2642f276be3dab7c827f13a15e85228df7560a101b0c978cfbcbb7d363",
+      "evidence": "runs/shift-actions-audition-06/custom_action_audit.json",
+      "scope": "this clip, this asset, this runtime; native task, recorded joints and footage; no whole-mesh/contact-force certification"
+    }
+  },
+  "floor_stretch": {
+    "male_adult_medical_01": {
+      "source_sha256": {
+        "skeleton": "2da395b8058ecbb049ba93dd0fde8a16a95155a35f56884419018b4eb8eeeedc",
+        "clip": "dd2a50cda301ab8fab12f38f11b5804ad07b40ca23d1dbce61d795681fd9a193",
+        "registration": "06279e894c7b3d9e53be6f9d84de6edfddb928306a0462d42c295055b972f65a"
+      },
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "asset_sha256": "2c65e15587a311c5d14cdbd6a1408e0c3d8f3bec69f483150f04ca4c8f4e3ccc",
+      "evidence": "runs/shift-actions-audition-06/custom_action_audit.json",
+      "scope": "this clip, this asset, this runtime; native task, recorded joints and footage; no whole-mesh/contact-force certification"
+    }
+  },
+  "martial_kick": {
+    "female_adult_police_03": {
+      "source_sha256": {
+        "skeleton": "2da395b8058ecbb049ba93dd0fde8a16a95155a35f56884419018b4eb8eeeedc",
+        "clip": "269da702fc761e891a41befb8714a95e769b508b2cdcce370c84c3fc4afd6008",
+        "registration": "b7e29da56190f1e413b66bf0166f1e45d7f35a21dd30738dc61e9de9ec3cdd1c"
+      },
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "asset_sha256": "c29421d1d1ff76474e7796a78ca7940326f91354d0051d36380c5eb14065bde1",
+      "evidence": "runs/shift-actions-audition-06/custom_action_audit.json",
+      "scope": "this clip, this asset, this runtime; native task, recorded joints and footage; no whole-mesh/contact-force certification"
+    }
+  },
+  "inspect_low": {
+    "male_adult_construction_05": {
+      "source_sha256": {
+        "skeleton": "2da395b8058ecbb049ba93dd0fde8a16a95155a35f56884419018b4eb8eeeedc",
+        "clip": "0fedaf77f4aa0f9c3aaa96a16d48ea82c0ac1033619116e3cb073f7ee9848c1e",
+        "registration": "b778db6c9913a1af53f15644972ca91644f439472f4e1da71d60af9d4e085070"
+      },
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "asset_sha256": "18893a98258904620fb30b0f36d7d91b8349704e68788c24f7cd65a22af87e49",
+      "evidence": "runs/shift-actions-audition-06/custom_action_audit.json",
+      "scope": "this clip, this asset, this runtime; native task, recorded joints and footage; no whole-mesh/contact-force certification"
+    }
+  },
+  "groove": {
+    "female_adult_business_02": {
+      "source_sha256": {
+        "skeleton": "9a6f8b5df9426d609f29c48feace8933d636f8c7a9b15711b88313550bb49b8d",
+        "clip": "a5e5902c6d91fa781930a85931679ef587a43cb06c43ab8bf5b4388a59708a38",
+        "registration": "fe163c4140769710377b9f64b1962311e81e858ebd946b885f865376247b2689"
+      },
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "asset_sha256": "460bd449050124a61394d1c7e1a5df77d6ebded6cd97cad1e5d53a610a24b418",
+      "evidence": "runs/shift-actions-audition-06/custom_action_audit.json",
+      "scope": "this clip, this asset, this runtime; native task, recorded joints and footage; no whole-mesh/contact-force certification"
+    }
+  }
+}

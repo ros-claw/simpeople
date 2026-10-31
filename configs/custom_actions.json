@@ -1,0 +1,59 @@
+{
+  "schema_version": "simpeople.custom_actions.v1",
+  "license_note": "Reference locally installed NVIDIA assets only; do not redistribute source animation files.",
+  "actions": {
+    "breakdance": {
+      "label": "街舞翻身",
+      "skeleton": "animation://AnimationRig_DS/ReallusionRig.usda",
+      "clip": "animation://DanceCard_DS/mixamo_break_dance_1.usda",
+      "clearance_radius_m": 2.5,
+      "in_place": true
+    },
+    "rumba": {
+      "label": "伦巴",
+      "skeleton": "animation://AnimationRig_DS/ReallusionRig.usda",
+      "clip": "animation://DanceCard_DS/mixamo_dance_rumba.usda",
+      "clearance_radius_m": 2.0
+    },
+    "crouch": {
+      "label": "蹲姿活动",
+      "skeleton": "animation://AnimationRig_DS/ReallusionRig.usda",
+      "clip": "animation://DanceCard_DS/nv_mocap_sneaking_crouch.usda",
+      "clearance_radius_m": 3.5,
+      "in_place": true
+    },
+    "kneel": {
+      "label": "交替跪姿",
+      "skeleton": "animation://AnimationRig_DS/ReallusionRig.usda",
+      "clip": "animation://DanceCard_DS/nv_mocap_kneel_right_kneel_left.usda",
+      "clearance_radius_m": 2.0,
+      "pelvis_lift_m": 0.1
+    },
+    "floor_stretch": {
+      "label": "地面拉伸",
+      "skeleton": "animation://AnimationRig_DS/ReallusionRig.usda",
+      "clip": "animation://DanceCard_DS/nv_mocap_sit_up_stretches.usda",
+      "clearance_radius_m": 2.5,
+      "pelvis_lift_m": 0.16
+    },
+    "inspect_low": {
+      "label": "俯身检查",
+      "skeleton": "animation://AnimationRig_DS/ReallusionRig.usda",
+      "clip": "animation://DanceCard_DS/action_tie_shoes_standing_01.usda",
+      "clearance_radius_m": 2.0
+    },
+    "groove": {
+      "label": "站姿律动",
+      "skeleton": "cache://behavior/MotionLibrary/Human/HumanMotionLibrary.usd",
+      "clip": "cache://behavior/MotionLibrary/Human/BuiltinActions/Idle/IdleGroove.usd",
+      "clearance_radius_m": 1.5
+    },
+    "martial_kick": {
+      "label": "武术踢腿",
+      "skeleton": "animation://AnimationRig_DS/ReallusionRig.usda",
+      "clip": "animation://DanceCard_DS/mixamo_mma_kick.usda",
+      "clearance_radius_m": 2.0,
+      "in_place": true
+    }
+  }
+}

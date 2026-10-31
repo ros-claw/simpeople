@@ -10,3 +10,6 @@ def test_portable_registry_and_external_root(monkeypatch,tmp_path):
     assert resolve_asset_path('cache://behavior/lib.usd',tmp_path)==str(tmp_path/'assets/cache/behavior/lib.usd')
     with pytest.raises(ValueError):resolve_asset_path('characters://../secret',tmp_path)
     with pytest.raises(ValueError):resolve_asset_path('cache:///etc/passwd',tmp_path)
+    monkeypatch.setenv('SIMPEOPLE_ANIMATION_DIR','/shared/animations')
+    assert resolve_asset_path('animation://Dance/a.usda',tmp_path)=='/shared/animations/Dance/a.usda'
+    with pytest.raises(ValueError):resolve_asset_path('animation://../private.usda',tmp_path)

@@ -7,7 +7,7 @@ from .scene import mesh_box
 from .environments import industrial_scene, anchor
 
 
-def shift_change_scene(directory):
+def shift_change_scene(directory, training=False, audition=False):
     semantics = industrial_scene()
     stage = omni.usd.get_context().get_stage()
     directory = Path(directory) / 'production_art'
@@ -173,6 +173,29 @@ def shift_change_scene(directory):
     dome.CreateColorAttr(Gf.Vec3f(.76,.85,1))
     sun=UsdLux.DistantLight(stage.GetPrimAtPath('/World/Sun'));sun.GetIntensityAttr().Set(1900)
     sun.CreateColorAttr(Gf.Vec3f(1,.84,.66))
-    semantics['_production']={'kind':'metadata','art':'shift-change-v1','chair_geometry':'unchanged generated-chair-v3',
+    if training:
+        from .production import ACTION_CAST
+        for name,asset,center in ACTION_CAST:
+            anchor(stage,semantics,'activity_'+name,center,kind='activity_bay')
+            semantics['activity_'+name].update(allowed_actions=['custom_action'],clip=name,capacity=1)
+            radius=1.8 if name not in {'breakdance','martial_kick'} else 2.3
+            for side in [-1,1]:
+                box(f'Training/{name}/X{side}',(center[0]+side*radius,center[1],.007),(.035,2*radius,.004),blue)
+                box(f'Training/{name}/Y{side}',(center[0],center[1]+side*radius,.007),(2*radius,.035,.004),blue)
+        sign('Training','WARM UP',(-17,-1.5,3),2.4,.6,(31,73,75))
+    semantics['_production']={'kind':'metadata','art':'shift-change-v2' if training else 'shift-change-v1','chair_geometry':'unchanged generated-chair-v3',
                               'navigation':'rebake and validate cast routes before capture'}
+    if audition:
+        # A separate, empty rehearsal copy. The production factory and its
+        # calibrated seats are preserved in every master/director take.
+        for path in ['/World/WallA','/World/WallB','/World/DoorPost','/World/Workbench','/World/MovableBox',
+                     '/World/Chair','/World/Seats','/World/Workstations','/World/Counters','/World/NarrowDoor',
+                     '/World/Production/Equipment','/World/Production/Service','/World/Production/Racks',
+                     '/World/Production/Signs','/World/Production/Route','/World/Production/B1','/World/Production/B2',
+                     '/World/Production/StoryService']:
+            stage.RemovePrim(path)
+        # B consoles and check-in furniture are locally authored under this
+        # art namespace; remove only those objects in the audition copy.
+        for path in list(stage.GetPrimAtPath('/World/Production').GetChildren()):
+            if any(k in path.GetName().lower() for k in ['console','counter','sign']):stage.RemovePrim(path.GetPath())
     return semantics

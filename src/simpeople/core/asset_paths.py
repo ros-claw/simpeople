@@ -4,7 +4,8 @@ from pathlib import Path
 
 def resolve_asset_path(value,root):
     root=Path(root)
-    for prefix,base in [('characters://',Path(os.environ.get('SIMPEOPLE_CHARACTER_DIR',root/'assets/characters'))),('cache://',root/'assets/cache')]:
+    for prefix,base in [('characters://',Path(os.environ.get('SIMPEOPLE_CHARACTER_DIR',root/'assets/characters'))),
+                        ('animation://',Path(os.environ.get('SIMPEOPLE_ANIMATION_DIR',root/'assets/animations'))),('cache://',root/'assets/cache')]:
         if value.startswith(prefix):
             relative=Path(value[len(prefix):])
             if relative.is_absolute() or '..' in relative.parts:raise ValueError('asset URI must stay inside its configured root')
