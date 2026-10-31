@@ -6,5 +6,6 @@ __pycache__/
 runs/
 assets/cache/
 .runtime/
+productions/
 dist/
 assets/characters

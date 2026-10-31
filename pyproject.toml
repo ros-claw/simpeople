@@ -14,7 +14,7 @@ dependencies = []
 mcp = ["mcp>=1.0,<2"]
 test = ["pytest>=8", "jsonschema>=4"]
 assets = ["usd-core>=25.11"]
-video = ["av>=16,<17"]
+video = ["av>=16,<17", "numpy>=1.24,<3"]
 
 [project.scripts]
 simpeople = "simpeople.tools.cli:main"

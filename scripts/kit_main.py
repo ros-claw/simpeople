@@ -31,8 +31,12 @@ parser.add_argument('--tracy',action='store_true')
 parser.add_argument('--encoder-threads',type=int)
 parser.add_argument('--cpu-threads',type=int,choices=range(1,65),default=8)
 parser.add_argument('--renderer-profile',choices=['default','ampere_retrace'],default='default')
+parser.add_argument('--cinematic-config')
 for name in ['serve','no-video','allow-unverified','realtime','visible']:parser.add_argument('--'+name,action='store_true')
 args=parser.parse_args()
+production_config=json.loads(Path(args.cinematic_config).read_text()) if args.cinematic_config else None
+if production_config and (args.scenario!='industrial_life' or args.capture_profile!='full' or args.serve):
+    parser.error('cinematic production uses standalone industrial_life and full capture')
 from simpeople.core.modes import resolve_mode
 for key,value in resolve_mode(args.mode,args.width,args.height,args.quality_audit).items():setattr(args,key,value)
 if args.no_video:args.capture_profile='none'
@@ -55,13 +59,14 @@ sys.path.insert(0,str(SNAPSHOT/'src'))
 (directory/'manifest.json').write_text(json.dumps({'source_sha256':sources,
     'asset_cache_manifest':'../../reports/asset_cache_manifest.json','scenario':args.scenario,'seed':args.seed},indent=2))
 (directory/'bootstrap.json').write_text(json.dumps({'pid':__import__('os').getpid(),'run_id':run_id}))
+if production_config:(directory/'production_config.json').write_text(json.dumps(production_config,ensure_ascii=False,indent=2))
 sys.argv=[sys.argv[0]]
 from isaacsim import SimulationApp
 app=SimulationApp({'headless':not args.visible,'active_gpu':args.gpu,'multi_gpu':False,
                    'profiler_backend':['tracy'] if args.tracy else [],
                    'width':args.width,'height':args.height,'limit_cpu_threads':args.cpu_threads,
                    'disable_viewport_updates':not args.visible})
-engine=journal=bridge=recorder=monitor=frame_file=app_subscription=None
+engine=journal=bridge=recorder=monitor=frame_file=app_subscription=director=None
 keep_running=True
 def stop(*_):
     global keep_running
@@ -113,7 +118,11 @@ try:
     if args.scenario in {'asset_pool_validation','appearance_contact_sheet'}:
         asset_pool=asset_pool[:args.people]
         semantics,slots=asset_validation_scene(len(asset_pool),args.scenario=='appearance_contact_sheet')
-    elif args.scenario=='industrial_life':semantics=industrial_scene()
+    elif args.scenario=='industrial_life':
+        if production_config:
+            from simpeople.backends.native.production_art import shift_change_scene
+            semantics=shift_change_scene(directory)
+        else:semantics=industrial_scene()
     elif args.scenario=='gait_quality_validation':semantics=gait_quality_scene()
     else:semantics=build_scene(False)
     backend_type=ReservationNativeBackend if args.scenario in {'industrial_life','native_avoidance','gait_quality_validation'} and args.traffic_profile!='native' else NativeBackend
@@ -133,6 +142,9 @@ try:
     journal=Journal(directory,vars(args))
     monitor=ResourceMonitor(directory,args.gpu)
     engine=Engine(backend,journal)
+    if production_config:
+        from simpeople.backends.native.production import ShiftChangeDirector
+        director=ShiftChangeDirector(engine,production_config,directory)
     quality=QualityAudit(engine.event,broad_phase=backend.performance_optimized)
     journal.write('environment.json',{'isaac_version':(Path(__import__('os').environ['ISAAC_PATH'])/'VERSION').read_text().strip(),
         'default_viewport_updates':args.visible,'rgb_camera_count':0 if args.capture_profile=='none' else 1,
@@ -148,7 +160,7 @@ try:
         'extensions':[e for e in manager.get_extensions() if any(k in e['id'] for k in ['omni.anim.','replicator.agent','behavior.tree'])]})
     journal.write('asset_manifest.json',backend.assets)
     journal.write('scene_semantics.json',semantics)
-    if not args.serve:
+    if not args.serve and not director:
         if args.scenario=='native_avoidance':
             crossing=[([-8,0,0],[0,0,0]),([0,0,0],[-8,0,0]),([-4,-4,0],[-4,4,0]),([-4,4,0],[-4,-4,0])]
             for i,(position,_) in enumerate(crossing):
@@ -172,6 +184,7 @@ try:
     for _ in range(5):app.update()
     print('SIMPEOPLE_PHASE navmesh_bake',flush=True)
     if not backend.nav.start_navmesh_baking_and_wait():raise RuntimeError('NavMesh bake failed')
+    if director:director.nav_check()
     timeline=backend.timeline;timeline.set_end_time(100000);timeline.set_time_codes_per_second(30)
     timeline.set_auto_update(False)
     carb.settings.get_settings().set('/app/player/useFixedTimeStepping',True)
@@ -189,6 +202,12 @@ try:
         for _ in range(10):app.update()
         recorder.step(0.0)
         print('SIMPEOPLE_PHASE recorder_ready',flush=True)
+        if director:
+            # Native pre-roll uses the same synchronized capture step, with
+            # recording still off. The opening frame already has moving people.
+            for _ in range(30):
+                engine.tick(timeline.get_current_time(),False)
+                recorder.step(1/30)
         recorder.control({'mode':'start'})
     # Opening a stage initializes render defaults and can overwrite an earlier
     # setting. Apply this explicit quality tradeoff after the first render.
@@ -201,7 +220,7 @@ try:
     bridge=Bridge(engine,args.port)
     engine.tick(timeline.get_current_time(),False)
     initial_task=None;initial_tasks=[]
-    if not args.serve:
+    if not args.serve and not director:
         if args.scenario=='native_avoidance':
             for i,(_,target) in enumerate(crossing):
                 initial_tasks.append(engine.call('people.move_to',{'request_id':f'cross-move-{i}',
@@ -267,7 +286,25 @@ try:
         wall=time.monotonic();bridge.drain()
         if args.tracy:carb.profiler.end(1);trace_begin('SimPeople::KitRender')
         after_commands=time.monotonic()
-        if recorder and recorder.camera_mode!='overview' and engine.actors:
+        if director:
+            director.before_step(recorder.frames)
+            if director.needs_warmup and timeline.is_playing():
+                before_warm=timeline.get_current_time()
+                timeline.pause();timeline.commit();app.update()
+                warm_agents={handle:backend.api.get_agent(handle) for handle in backend.instances}
+                before_roots={handle:agent.get_world_translation() for handle,agent in warm_agents.items() if agent}
+                for _ in range(2):recorder.step(0.)
+                if abs(timeline.get_current_time()-before_warm)>1e-6:raise RuntimeError('camera warmup advanced simulation')
+                motion=[]
+                for handle,p in before_roots.items():
+                    q=warm_agents[handle].get_world_translation()
+                    motion.append(((p.x-q.x)**2+(p.y-q.y)**2+(p.z-q.z)**2)**.5)
+                max_motion=max(motion,default=0)
+                with (directory/'cinematic_warmups.jsonl').open('a') as warm_log:
+                    warm_log.write(json.dumps({'frame':recorder.frames,'sim_time':before_warm,'max_native_root_motion_m':max_motion})+'\n')
+                if max_motion>.001:raise RuntimeError('native root changed during frozen camera warmup')
+                timeline.play();timeline.commit()
+        elif recorder and recorder.camera_mode!='overview' and engine.actors:
             focus=engine.actors.get(recorder.focus_actor_id) or next(iter(engine.actors.values()))
             obs=backend.observe(focus['handle'])
             if obs['ready']:recorder.follow(obs['position_m'])
@@ -292,6 +329,7 @@ try:
                   'app_updates':frame_events['count'],'app_dt_sum_s':frame_events['dt_sum_s'],'last_app_dt_s':frame_events['last_dt_s']}
         if args.tracy:carb.profiler.end(1);trace_begin('SimPeople::RGBencode')
         if recorder and timeline.is_playing():identity['video_frame']=recorder.capture(now_sim,identity)
+        if director:director.record(identity)
         after_capture=time.monotonic()
         if args.tracy:carb.profiler.end(1);trace_begin('SimPeople::journal')
         journal.sample(engine,identity)
@@ -309,6 +347,7 @@ try:
             if any(engine.tasks[tid]['status']!='succeeded' for tid in initial_tasks):exit_code=2
             break
         if now_sim-start_sim>=limit:break
+        if director and recorder.frames>=director.frames:break
         if args.measure_wall_s is not None and time.monotonic()-journal.start_wall>=args.warmup_wall_s+args.measure_wall_s:break
         if args.realtime or args.serve:
             time.sleep(max(0,1/30-(time.monotonic()-wall)))
@@ -320,6 +359,7 @@ try:
     if trace_process:
         trace_process.wait(timeout=30);trace_log.close()
     frame_file.close();app_subscription=None
+    if director:director.close();director=None
     journal.write('observation_counters.json',backend.observation_counters)
     journal.write('quality_audit.json',quality.report())
     journal.write('measurement_end_state.json',engine.cmd_get_state({}))

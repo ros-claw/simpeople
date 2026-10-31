@@ -93,6 +93,8 @@ Foot support is estimated from calibrated shoe proxies; it is not measured conta
 
 ## Development
 
+The [Shift Change film workflow](docs/shift_change_production.md) provides a frame-driven cinematic director, native actor blocking, an actual Codex batch-retarget take, source-frame tracing and decoded-PTS checks. It uses simulation-time capture and preserves real host latency separately.
+
 ```bash
 PYTHONPATH=src python3 -m pytest -q tests
 python scripts/build_plugins.py
