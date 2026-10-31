@@ -59,6 +59,8 @@ The agent inspects scene identity and capabilities, acquires write ownership, va
 
 [Segmented/continuous motion comparison](https://github.com/ros-claw/simpeople/releases/download/demos-20261031/optimization_1031_motion_comparison.mp4) · [Actual walk/jog tour of twelve rigs](https://github.com/ros-claw/simpeople/releases/download/demos-20261031/optimization_1031_gait_demo.mp4) · [Seat fit comparison](https://github.com/ros-claw/simpeople/releases/download/demos-20261031/optimization_1031_seat_comparison.mp4). [Uncut native seat cycles and cancellation](https://github.com/ros-claw/simpeople/releases/download/demos-20261031/optimization_1031_seat_lifecycle.mp4). These are simulation renders; the six-second seat fit comparison uses stills, and playback encoding rate is separate from measured runtime throughput.
 
+[Continuous 50-person factory excerpt](https://github.com/ros-claw/simpeople/releases/download/v0.2.0-preview/optimization_1031_crowd50_demo.mp4) shows 25 seconds from the accepted 600-sim-second run. It is simulation-time playback with a title overlay.
+
 ## API and quality
 
 Twenty MCP tools cover single actors plus two compact management tools:
@@ -71,6 +73,8 @@ Selectors support actor IDs, roles, groups and planar regions. One controller ow
 
 Native motion keeps final braking and cancellation settlement. The continuous corridor profile atomically reserves safe travel and falls back to conservative planning when needed. The segmented profile is the default. Continuous travel is opt-in: its large-crowd regression and real-time capacity are assessed separately.
 
+To use the motion-quality profile in the supplied standalone factory, start `simpeople serve --scenario industrial_life --traffic-profile corridor --gpu 0 --duration 3600`. The scene-attaching extension uses direct native navigation; the factory reservation scheduler and its population evidence do not automatically transfer to arbitrary attached scenes.
+
 Seat fit uses versioned profiles and actual native head/neck skinning audits. A queryable quality catalog binds evidence to asset, motion and chair geometry revisions. Functional action support, estimated foot contact quality and geometric interaction quality are separate claims.
 
 ## Evidence and limits
@@ -78,6 +82,12 @@ Seat fit uses versioned profiles and actual native head/neck skinning audits. A 
 Read the [optimization acceptance report](reports/OPTIMIZATION_20261031.md) and [reference environment results](reports/REFERENCE_ACCEPTANCE.md). Each native run freezes its source inputs and retains events, actual root/joint trajectories, task outcomes and frame identities.
 
 The reference v0.1 functional capacity was 50 people across three 600-sim-second seeds, with finite queue timeouts retained. That result does not establish 50-person real-time operation or certify every later motion-quality change. Current revision-specific quality, performance and host results are listed in the optimization report.
+
+The 1031 preview adds twelve-rig walk/jog measurements and calibrated seat cycles, including cancellation. Its updated continuous profile passed a separate seed-17, 50-person, 600-sim-second run: every actor completed at least two role cycles, with no sustained root-overlap proxy or root jumps. The 160 successful activities, nine queue timeouts, one sit-step timeout and 48 shutdown cancellations are retained. This does not certify exact mesh contact or improved queue reliability.
+
+Actual Codex natural-language acceptance passed three tasks. Claude installation and MCP connection passed; its natural-language tasks remain unexecuted because the reference host is not signed in. Full 30-person 1080p recording still runs below real time (the final default-renderer reference RTF was 0.220); no 24-update/second interactive population capacity is certified.
+
+A separate 10-person 720p interactive-mode sample, with full RGB/encoding, measured RTF 0.345 and 10.34 actual updates per wall-clock second (153 ms p95 interval). It is a short throughput sample, not the 600-sim-second functional population gate.
 
 Foot support is estimated from calibrated shoe proxies; it is not measured contact force or a universal no-slip guarantee. Head/neck skinned-vertex tests do not certify every triangle or whole-body collision. Arbitrary rigs/chairs, crowd moving-target follow, robot depth/LiDAR and force balance remain outside the accepted scope. Encoding FPS is not actual runtime FPS.
 

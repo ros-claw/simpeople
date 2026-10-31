@@ -1,6 +1,7 @@
 """Generate a local, source-backed optimization report from actual native evidence."""
 from datetime import datetime
 from zoneinfo import ZoneInfo
+from collections import Counter
 import hashlib,html,json,re,subprocess
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'reports';ASSETS=OUT/'optimization_1031_assets';ASSETS.mkdir(exist_ok=True)
@@ -17,19 +18,21 @@ def table(headers,rows):blocks.append(('table',headers,rows))
 def code(text):blocks.append(('code',text))
 def image(name,caption):blocks.append(('image',name,caption))
 MOTION=['opt1031-motion-A-native-02','opt1031-motion-B-segmented-01','opt1031-motion-C-corridor-01','opt1031-motion-CD-corridor-02','opt1031-motion-CD-lazy-03']
-SEAT='opt1031-seat-calibrated-v3-12-02';GAIT='opt1031-gait-corridor-12-02';HOST='opt1031-host-codex-02';LARGE='opt1031-regression50-seed17-02';LARGE_FIRST='opt1031-regression50-seed17-01'
+SEAT='opt1031-seat-calibrated-v3-12-02';GAIT='opt1031-gait-corridor-12-02';HOST='opt1031-host-codex-02';LARGE='opt1031-regression50-seed17-03';LARGE_FIRST='opt1031-regression50-seed17-01'
 seat=run(SEAT,'seat_quality.json');gait=run(GAIT,'gait_pool_quality.json');host=run(HOST,'host_acceptance.json');claude=read('reports/optimization_1031_claude_status.json');large=run(LARGE,'metrics.json');largesummary=run(LARGE,'acceptance_summary.json');perf=read('reports/optimization_1031_performance.json') or []
-commit=subprocess.run(['git','rev-parse','HEAD'],cwd=ROOT,capture_output=True,text=True,check=True).stdout.strip();when=datetime.now(ZoneInfo('Asia/Shanghai')).isoformat(timespec='seconds')
+commit=subprocess.run(['git','rev-parse','HEAD'],cwd=ROOT,capture_output=True,text=True,check=True).stdout.strip();source_dirty=bool(subprocess.run(['git','status','--porcelain','--untracked-files=normal','--','src','scripts','configs','extensions','schemas','skills','plugins','pyproject.toml'],cwd=ROOT,capture_output=True,text=True,check=True).stdout.strip());when=datetime.now(ZoneInfo('Asia/Shanghai')).isoformat(timespec='seconds')
 p('编制时间：'+when+'。本报告覆盖 1031 优化轮次；v0.1 原始实施报告、失败运行和已封存归档保持原样。')
-p('源码工作区提交：`'+commit+'`。各原生运行实际执行的输入以该运行 `source_snapshot/` 与 `manifest.json` 为准，不能仅用后来提交覆盖原始来源。')
+p('编制时 Git HEAD：`'+commit+'`。'+('当时还有未提交的源码修改，不能将此 HEAD 单独当作完整代码版本。' if source_dirty else '编制时所列源码相对该提交没有未提交修改。')+'各原生运行的后端输入以该运行 source_snapshot/ 与 manifest.json 为准；外部控制脚本和宿主的实际输入另以 RPC 日志、提示与会话记录核对。公开源码的完整文件校验见 SOURCE_MANIFEST.json。')
 h('1. 结论与当前验收状态')
-statuses=[['动作连续性','原生/分段/连续通行对照已完成；保留刹车、取消和动态障碍响应。'],['座椅匹配','12 个基础人物完整坐下/起身通过，进入途中和坐稳后取消通过；头颈顶点检查均未检测到进入靠背。' if seat else '待检查'],['插件产品','共享 Runtime、Kit 扩展、MCP/CLI、Codex 和 Claude 薄插件已实现；20 个 MCP 工具。'],['真实 Codex','三项自然语言任务经原生事件和状态核对通过。' if host and host['passed'] else '尚未通过最终核对。'],['真实 Claude','安装校验和 MCP 连接已通过；未登录，三项自然语言任务未执行。'],['50 人新通行回归','已关闭，需按逐人活动与几何门槛判定，见第 10 节。' if large else '仍在运行；不能提前计为新版本容量通过。']]
+population_status=('完整 600 仿真秒人数门槛通过；有限失败另列，不等于实时。' if largesummary and largesummary.get('functional_population_gate_passed') else '已关闭但完整人数门槛未通过，见第 10 节。') if large else '仍在运行；不能提前计为新版本容量通过。'
+statuses=[['动作连续性','原生/分段/连续通行对照已完成；保留刹车、取消和动态障碍响应。'],['座椅匹配','12 个基础人物完整坐下/起身通过，进入途中和坐稳后取消通过；头颈顶点检查均未检测到进入靠背。' if seat else '待检查'],['帧率与实时性','同组组合优化改善吞吐和长帧；完整 30 人 1080p 仍未达到 24 实际更新/墙钟秒或 RTF 0.8。'],['插件产品','共享 Runtime、Kit 扩展、MCP/CLI、Codex 和 Claude 薄插件已实现；20 个 MCP 工具。'],['真实 Codex','三项自然语言任务经原生事件和状态核对通过。' if host and host['passed'] else '尚未通过最终核对。'],['真实 Claude','安装校验和 MCP 连接已通过；未登录，三项自然语言任务未执行。'],['50 人新通行回归',population_status]]
 table(['工作线','结果'],statuses)
 p('“通过”严格区分动作完成、接触代理测量、顶点穿透检查、人数容量和实时性能。当前仍不宣称完全无滑步、精确全身碰撞、24 FPS 实时人群或任意人物/椅子自动兼容。')
 h('2. 最终产品定位')
 p('ROSClaw SimPeople 是一个让 Agent 在 Isaac Sim 中安排人物和群体活动，并依据真实执行结果继续控制的插件项目。人物逻辑共用一套运行时；Codex 与 Claude Code 的入口只负责工具接入、安装配置与工作流。')
 table(['组件','职责'],[['Runtime','原生任务监督、资源占用、通行预约、改令和取消结算。'],['Kit 扩展','附着已有场景，所有 USD/Behavior 写入在主线程执行，管理自有图层。'],['MCP 与 CLI','同一控制接口；异步 task_id、批量逐项结果、汇总、分页与事件游标。'],['宿主插件','Codex 可移植 manifest/MCP/Skill；Claude plugin manifest/MCP/Skill。']])
 p('Agent 提交活动后由 Runtime 持续执行。MCP 断开不会删除活动；一个会话同时只有一个逻辑写控制者，其他客户端可观察。该机制协调本机可信客户端，不代替网络认证。')
+p('当前附着扩展使用直接原生导航与自有会话图层；独立厂房模式另有场景专用预约调度器。独立模式的 50 人容量不自动转移到任意附着场景，外部场景需单独验证。连续通行可用 `simpeople serve --scenario industrial_life --traffic-profile corridor --gpu 0 --duration 3600` 启用。')
 h('3. 滑步排查与连续通行')
 p('先实测同一默认人物、相同长直线/转角/走跑切换/终点停止。原生直达与原分段预约的差异，支持了中间子任务反复刹停影响连续性的判断。新增安全走廊预约后，仍使用原生移动与最终刹车，争用时保留保守规划，动态障碍出现时先刹停再重规划。没有靠人物根或骨骼写入掩盖问题。')
 rows=[]
@@ -89,7 +92,15 @@ followup=read('reports/optimization_1031_final_performance.json') or []
 if followup:
  table(['最终连续顺序对照','RTF','实际更新/墙钟秒','p95 ms','实际 retrace'],[[x['run_id'],fmt(x['metrics']['rtf']),fmt(x['metrics']['measured_updates_per_wall_second'],2),fmt(x['metrics']['frame_time_p95_s']*1000,1),str(x['runtime_settings'].get('rt2_retrace'))] for x in followup if x.get('metrics') and not x.get('tracy')])
  p('这组补测在 50 人运行关闭且进程退出后进行，每次启动前核对没有其他本项目 Kit。默认画质基线紧接可选 retrace 配置测试；此前未生效与重叠的尝试仍列为无效对照。')
+ valid=[x for x in followup if x.get('metrics') and not x.get('tracy')]
+ if len(valid)==2:
+  b,o=[x['metrics'] for x in valid];p(f'同组默认/可选 retrace 的吞吐差约 {(o["rtf"]/b["rtf"]-1)*100:.1f}%，p95 间隔降低约 {(1-o["frame_time_p95_s"]/b["frame_time_p95_s"])*100:.1f}%。不同默认基线轮次本身也有波动，不将单轮小差异外推为稳定保证。')
 p('运行模式已提供：interactive 默认 1280×720；generation 默认 1920×1080；audit 开启精细观测；experimental 明确实验用途。模式名称不是人数或实时性能证书；分辨率可显式指定。')
+interactive=read('reports/optimization_1031_interactive_performance.json')
+if interactive and interactive.get('metrics'):
+ m=interactive['metrics'];c=interactive['config'];p(f'交互模式实测：10 人、seed 42、连续通行、{c["width"]}×{c["height"]}、完整 RGB/编码；30 墙钟秒预热和 120 墙钟秒窗口。RTF {m["rtf"]:.3f}，实际更新/墙钟秒 {m["measured_updates_per_wall_second"]:.2f}，p95 间隔 {m["frame_time_p95_s"]*1000:.1f} ms。该短测不替代 600 仿真秒人数功能门槛，也不与 1080p 表混为同画质对照。')
+ p('该档'+('达到本次 24 更新/秒与 RTF 0.8 的测量目标；仍仅为当前共享环境样本。' if interactive.get('realtime_24_updates_and_rtf_08') else '仍未达到 24 实际更新/墙钟秒及 RTF 0.8，因此尚无通过该标准的实时人数档。'))
+ p(source('reports/optimization_1031_interactive_performance.json','交互模式实际测量与录制回执')+'。')
 h('8. 剖析范围与限制')
 trace=run('opt1031-final30-trace-04','profile_summary.json')
 if trace and trace.get('main_thread_phase_wall_fraction'):
@@ -113,25 +124,39 @@ p('v0.1 的 50 人三个种子各 600 仿真秒、每人至少 2 周期记录继
 if large:
  counts=large['task_status_counts'];p(f'本轮 {LARGE} 已关闭：仿真 {large["sim_elapsed_s"]:.2f} s，RTF {large["rtf"]:.3f}；成功 {counts["succeeded"]}、失败 {counts["failed"]}、清理取消 {counts["cancelled"]}。')
  if largesummary:p('逐人容量判定：`'+str(largesummary.get('functional_population_gate_passed'))+'`。详细参与/周期和几何结果以对应 summary 为准。')
+ if largesummary:
+  s=largesummary;r=s['richness'];g=s['trajectory_proxies'];p(f'参与 {r["moving_participants"]}/{r["instances"]}，基础人物 {r["base_identities"]}、外观 {r["appearances"]}、角色 {r["role_types"]}；最少角色周期 {s["minimum_role_cycles"]}，暂停人物 {len(s["suspended_actors"])}。持续根重叠代理 {len(g["sustained_overlap_segments"])} 段，根位移跳变 {len(g["root_discontinuities"])} 次。失败按代码：`'+json.dumps(s['failures_by_code'],ensure_ascii=False)+'`。')
+  recording=run(LARGE,'recording_metrics.json')
+  if recording:p(f'录制关闭核对：写入 {recording["frames_written"]} 帧，丢弃 {recording["dropped_frames"]} 帧，空 RGB {recording["empty_rgb_frames"]} 帧；队列容量 {recording["queue_capacity"]}，最大深度 {recording["max_queue_depth"]}，编码线程 {recording["encoder_threads"]}，提交等待 p95 {recording["submit_wait_p95_s"]*1000:.2f} ms。')
+  failed=Counter((t['error']['code'],t['error']['message']) for t in (run(LARGE,'tasks.json') or []) if t['status']=='failed')
+  table(['最终运行失败代码','原始原因','次数'],[[code,message,str(count)] for (code,message),count in failed.items()])
 else:p(f'本轮 `{LARGE}` 是新连续通行策略的 50 人 seed 17 /600 仿真秒回归，目前未关闭，尚不能提前计为通过。')
 p('首轮新通行长测未通过：274.8 仿真秒时 person_025 连续失败后暂停。共有 8 次排队超时、1 次坐下步骤在接近途中超时、2 次清理 STOP_FAILED。50/50 人有严格位移参与，但最少周期为 0，不能冒充完整容量通过。')
 p('修复将 12 人以上的连续通行限制为已完整预约的 12 米步行/18 米慢跑区段，仍在每个区段末端原生刹停，不占住整条跨厂房路线。取消坐下接近时，只有实际站稳并远离所有离座点的包络才直接释放椅子；近椅、坐姿及离座途中继续正常清理。修复后的原生复测单独保存，不改写首轮结果。')
 
 p('首轮长测与宿主控制验证曾同时运行于不同 GPU；它验证功能持续运行，不是独占负载的速度基准。首次受控吞吐对照没有并行启动本轮另一自有 Kit。外部已有 Isaac 应用始终未停止。')
 p(source('runs/'+LARGE+'/metrics.json','本轮 50 人指标（关闭后生成）')+'；'+source('runs/'+LARGE_FIRST+'/native_controller_lease_check.json','实际双客户端读写控制权核对')+'。')
-ownership=run(LARGE,'mcp_ownership_acceptance.json')
+p(source('runs/'+LARGE+'/acceptance_summary.json','最终逐人容量与轨迹代理核对')+'；'+source('runs/'+LARGE+'/framing_audit.json','实际人物初始画幅核对')+'。')
+crowdmedia=read('reports/optimization_1031_assets/crowd50_media_manifest.json')
+if crowdmedia:
+ p(source('reports/optimization_1031_crowd50_demo.mp4','本轮 50 人连续展示视频')+'：实际录像第 9000–9749 帧，约 300–325 仿真秒；只添加标题，保持连续片段，播放速度不代表墙钟实时性能。')
+ownership=run('opt1031-regression50-seed17-02','mcp_ownership_acceptance.json')
 if ownership and ownership.get('passed'):
  p('本轮还通过三个独立 stdio 会话核对插件默认身份：Codex 获得控制后断开，Claude 可读取但获得 CONTROLLER_BUSY，Codex 重连保持同一代际并释放，控制者恢复为空；未请求修改人物活动。该检查验证传输和协调，不冒充 Claude 自然语言验收。')
+p('第二轮 bounded 通行运行完成了 600 仿真秒，但只有 49/50 人完成角色周期，157 个活动成功、7 个失败；最少周期仍为 0，人数门槛未通过。person_030 的一个目标产生 70 个短路段、来回重访相同节点，通道等待仅约 2.4 秒，定位为重规划振荡。')
+p('新增每个目标内部的软路径历史代价，降低重复折返倾向；没有把走过的节点变成禁行区，唯一安全退路仍允许。仅用于 12 人以上连续通行的后备网格规划；几何预约、动态障碍、速度与终态判据保持原值。第三轮运行单独验收，不覆盖前两轮失败。')
+p('人数功能门槛允许有限失败；即使全员完成周期，也不表示排队成功率、交通效率或实时吞吐优于历史分段策略。本轮保留全部排队超时，连续通行仍为可选 profile，默认不改为该策略。')
 cleanup=run('opt1031-cleanup-corridor-13-02','cleanup_acceptance.json')
 if cleanup:
  p('定点原生回归：远处坐下接近取消在 '+fmt(cleanup['distant_approach_cancel']['elapsed_sim_s'],2)+' 仿真秒内结算并释放座位，未返回椅子；13 人实例条件下的有限通道路线实际依次经过两个 via 与最终目标。此前减速未结束就选择 egress 的失败也保留在 cleanup-corridor-13-01。')
 h('11. 安装、维护与开放源码')
 code("python3 -m pip install -e '.[mcp,assets,video]'\nexport SIMPEOPLE_ISAAC_DIR=/path/to/isaac-sim\nexport SIMPEOPLE_CHARACTER_DIR=/path/to/Isaac/People/Characters\npython3 scripts/cache_assets.py\nsimpeople serve --scenario industrial_life --gpu 0 --duration 3600")
 p('发布采用单独允许列表导出和全新 Git 历史，不把本地原始想法文档、旧私有历史、NVIDIA 模型/动作/纹理、用户凭据或完整运行日志推上公网。代码为 MIT；NVIDIA 资产和第三方依赖遵从各自许可。插件包和共享源码分别验证。')
-p('已公开仓库：[ros-claw/simpeople](https://github.com/ros-claw/simpeople)。是否已公开、公开提交及文件校验，以发布清单为准。编辑式源码安装是支持的启动方式；单独 wheel 不包含场景、配置与缓存准备脚本。')
+p('已公开仓库：[ros-claw/simpeople](https://github.com/ros-claw/simpeople)。发布提交及文件校验见发布清单。编辑式源码安装是支持的启动方式；单独 wheel 不包含场景、配置与缓存准备脚本。')
 h('12. 验证、保留失败与剩余工作')
-p('当前代码单元测试覆盖协议、幂等、代际控制、取消资源、批量逐项结果、读分页、事件游标、空间筛选、局部导航边、远处坐下取消与有限通道预约。工作区已通过 80 项测试。该测试数不被当作人物动画验收；人物结论来自前述实际 Kit 运行。')
+p('当前代码单元测试覆盖协议、幂等、代际控制、取消资源、批量逐项结果、读分页、事件游标、空间筛选、局部导航边、远处坐下取消与有限通道预约。工作区已通过 82 项测试。该测试数不被当作人物动画验收；人物结论来自前述实际 Kit 运行。')
 table(['保留的尝试','问题与处理'],[['motion-A-native-01','没有及时提交人物活动，空场运行未作为有效动作基线。'],['motion-C-corridor-01','密集 NavMesh 点拖慢慢跑；后续保留转角简化重测。'],['gait-corridor-12-01','首次完整网格预计算引发未知结果超时；按需局部边与相同 request_id 重试后重跑。'],['seat-calibrated-v3-12-01','6 人过早开始保持后发生对齐丢失；进入效应器稳定判据修正，保持阈值不放宽。'],['host-codex-01','端点未转发导致连接拒绝，0 人创建；显式环境配置后新运行通过。'],['perf30-03 / perf30-06','无活动 RGB 图的原型下界、混入启动缓冲的剖析，均未冒充最终稳定成本。']])
+table(['后续保留的尝试','结果及处理'],[['regression50-seed17-01 / -02','首轮提前暂停；第二轮 600 秒只有 49/50 周期通过。分别修复远处坐下取消、通行区段长度与重规划振荡，第三轮独立判定。'],['cleanup-corridor-13-01','减速结束前选离座点导致返回椅子；等实际停稳后再判断，-02 定点原生回归通过。'],['final30-retrace01-01 / -02','首次设置被原生渲染初始化重置，第二次虽生效但有测试进程重叠；均不作受控收益依据。'],['final30-trace-01 / -02 / -03','分别为缺自定义区间、旧 psutil 接口不兼容、端口冲突。-04 核对监听者 PID 和稳态窗口后使用。']])
 p('剩余边界：Claude 自然语言验收需要本机登录；实时 24 FPS/RTF 0.8 未达；没有精确全身三角形、受力平衡、足端接触力、机器人深度/LiDAR或任意骨骼/椅子自动适配保证。多人移动目标跟随维持原有受限状态。')
 p('原生 Behavior API、Tracy 与性能配置依据本机 SDK 绑定和 NVIDIA 官方资料核对：[Behavior API](https://docs.omniverse.nvidia.com/kit/docs/behavior-simulation/latest/behavior-simulation/api.html)、[Tracy 指南](https://docs.isaacsim.omniverse.nvidia.com/6.2.0/utilities/debugging/profiling_performance.html)、[性能手册](https://docs.isaacsim.omniverse.nvidia.com/6.2.0/reference_material/sim_performance_optimization_handbook.html)。宿主格式核对 [OpenAI 插件文档](https://developers.openai.com/plugins/build/plugins) 与 [Claude 插件参考](https://code.claude.com/docs/en/plugins-reference)。')
 
@@ -152,6 +177,6 @@ css='''@page{size:A4;margin:17mm 14mm}body{font:11pt "Noto Sans CJK SC","Microso
 page='<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>SimPeople 优化实施报告</title><style>'+css+'</style></head><body><h1>ROSClaw SimPeople<br>优化实施报告</h1>'+''.join(body)+'</body></html>'
 (OUT/'OPTIMIZATION_20261031.html').write_text(page)
 for ext,content in [('md',text),('html',page)]: (OUT/('ROSClaw_SimPeople_优化实施报告_20261031.'+ext)).write_text(content)
-inputs=['configs/quality_catalog.json','reports/optimization_1031_performance.json','runs/'+SEAT+'/seat_quality.json','runs/'+SEAT+'/seat_acceptance.json','runs/'+GAIT+'/gait_pool_quality.json','runs/'+GAIT+'/gait_pool_acceptance.json','runs/'+HOST+'/host_acceptance.json','reports/optimization_1031_claude_status.json']
-provenance={'generated_at':when,'workspace_commit':commit,'sources':[{'path':s,'sha256':hashlib.sha256((ROOT/s).read_bytes()).hexdigest()} for s in inputs if (ROOT/s).exists()], 'native_runs':MOTION+[SEAT,GAIT,HOST,LARGE],'pending_large_run':large is None,'pending_trace':not bool(trace)}
+inputs=['configs/quality_catalog.json','reports/optimization_1031_performance.json','runs/'+SEAT+'/seat_quality.json','runs/'+SEAT+'/seat_acceptance.json','runs/'+GAIT+'/gait_pool_quality.json','runs/'+GAIT+'/gait_pool_acceptance.json','runs/'+HOST+'/host_acceptance.json','reports/optimization_1031_claude_status.json','reports/optimization_1031_final_performance.json','reports/optimization_1031_optional_performance.json','reports/optimization_1031_interactive_performance.json','reports/optimization_1031_launcher_validation.json','reports/optimization_1031_assets/crowd50_media_manifest.json','runs/'+LARGE+'/acceptance_summary.json','runs/opt1031-regression50-seed17-02/mcp_ownership_acceptance.json','runs/opt1031-final30-trace-04/profile_summary.json']
+provenance={'generated_at':when,'workspace_commit':commit,'working_tree_source_dirty':source_dirty,'sources':[{'path':s,'sha256':hashlib.sha256((ROOT/s).read_bytes()).hexdigest()} for s in inputs if (ROOT/s).exists()], 'native_runs':MOTION+[SEAT,GAIT,HOST,LARGE],'pending_large_run':large is None,'pending_trace':not bool(trace)}
 (ASSETS/'report_sources.json').write_text(json.dumps(provenance,ensure_ascii=False,indent=2));print(json.dumps({'markdown':str(OUT/'OPTIMIZATION_20261031.md'),'html':str(OUT/'OPTIMIZATION_20261031.html'),'sections':sum(x[0]=='h' for x in blocks),'characters':len(text),'large_closed':large is not None},ensure_ascii=False))

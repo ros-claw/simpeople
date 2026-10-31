@@ -9,5 +9,6 @@
     "loggedIn": false,
     "authMethod": "none"
   },
-  "natural_language_acceptance": "not run: local login is required"
+  "natural_language_acceptance": "not run: local login is required",
+  "authentication_checked_at_utc": "2026-10-31T01:45:14.632129+00:00"
 }

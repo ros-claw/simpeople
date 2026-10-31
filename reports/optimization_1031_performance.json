@@ -1,0 +1,3719 @@
+[
+  {
+    "run_id": "opt1031-perf30-01-full",
+    "returncode": 0,
+    "capture": "full",
+    "performance_profile": "baseline",
+    "tracy": false,
+    "metrics": {
+      "sim_elapsed_s": 25.766666666667106,
+      "wall_elapsed_s": 150.0447055688128,
+      "rtf": 0.1596353141758945,
+      "overall_rtf": 0.17172659687648972,
+      "warmup_target_wall_s": 30.0,
+      "measurement_wall_s": 119.85652067093179,
+      "measurement_sim_s": 19.133333333333788,
+      "rendered_updates": 773,
+      "updates_per_wall_second": 5.151797906294604,
+      "measured_updates_per_wall_second": 4.7974027343799905,
+      "frame_time_median_s": 0.16005461942404509,
+      "frame_time_p95_s": 0.41313199372962117,
+      "task_status_counts": {
+        "accepted": 0,
+        "running": 0,
+        "paused": 0,
+        "blocked": 0,
+        "succeeded": 0,
+        "failed": 0,
+        "cancelled": 30
+      },
+      "actors": {
+        "person_001": {
+          "completed_activities": 0
+        },
+        "person_002": {
+          "completed_activities": 0
+        },
+        "person_003": {
+          "completed_activities": 0
+        },
+        "person_004": {
+          "completed_activities": 0
+        },
+        "person_005": {
+          "completed_activities": 0
+        },
+        "person_006": {
+          "completed_activities": 0
+        },
+        "person_007": {
+          "completed_activities": 0
+        },
+        "person_008": {
+          "completed_activities": 0
+        },
+        "person_009": {
+          "completed_activities": 0
+        },
+        "person_010": {
+          "completed_activities": 0
+        },
+        "person_011": {
+          "completed_activities": 0
+        },
+        "person_012": {
+          "completed_activities": 0
+        },
+        "person_013": {
+          "completed_activities": 0
+        },
+        "person_014": {
+          "completed_activities": 0
+        },
+        "person_015": {
+          "completed_activities": 0
+        },
+        "person_016": {
+          "completed_activities": 0
+        },
+        "person_017": {
+          "completed_activities": 0
+        },
+        "person_018": {
+          "completed_activities": 0
+        },
+        "person_019": {
+          "completed_activities": 0
+        },
+        "person_020": {
+          "completed_activities": 0
+        },
+        "person_021": {
+          "completed_activities": 0
+        },
+        "person_022": {
+          "completed_activities": 0
+        },
+        "person_023": {
+          "completed_activities": 0
+        },
+        "person_024": {
+          "completed_activities": 0
+        },
+        "person_025": {
+          "completed_activities": 0
+        },
+        "person_026": {
+          "completed_activities": 0
+        },
+        "person_027": {
+          "completed_activities": 0
+        },
+        "person_028": {
+          "completed_activities": 0
+        },
+        "person_029": {
+          "completed_activities": 0
+        },
+        "person_030": {
+          "completed_activities": 0
+        }
+      },
+      "exit_code": 0,
+      "video_timebase": "simulation frames",
+      "camera_resolution": [
+        1920,
+        1080
+      ],
+      "recorded_frames": 773,
+      "rgb_readback_frames": 773,
+      "performance_profile": "full",
+      "population": {
+        "person_001": {
+          "role": "commuter",
+          "asset_id": "default",
+          "index": 0,
+          "home_m": [
+            -18.5,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.11541438766307,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_002": {
+          "role": "patrol",
+          "asset_id": "female_adult_business_02",
+          "index": 1,
+          "home_m": [
+            -15.8,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.2000860417813355,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_003": {
+          "role": "visitor",
+          "asset_id": "female_adult_medical_01",
+          "index": 2,
+          "home_m": [
+            -13.1,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 2.200234546952954,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_004": {
+          "role": "rest",
+          "asset_id": "female_adult_police_01",
+          "index": 3,
+          "home_m": [
+            -10.399999999999999,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.785685905190582,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_005": {
+          "role": "queue",
+          "asset_id": "female_adult_police_02",
+          "index": 4,
+          "home_m": [
+            -7.699999999999999,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.891769713312099,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_006": {
+          "role": "runner",
+          "asset_id": "female_adult_police_03",
+          "index": 5,
+          "home_m": [
+            -5.0,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.41359589938329,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_007": {
+          "role": "responder",
+          "asset_id": "male_adult_construction_01",
+          "index": 6,
+          "home_m": [
+            -2.299999999999997,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 7.137436541638763,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_008": {
+          "role": "commuter",
+          "asset_id": "male_adult_construction_02",
+          "index": 7,
+          "home_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.6955106610353292,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_009": {
+          "role": "patrol",
+          "asset_id": "male_adult_construction_03",
+          "index": 8,
+          "home_m": [
+            3.1000000000000014,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 3.3753745574821634,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_010": {
+          "role": "visitor",
+          "asset_id": "male_adult_construction_05",
+          "index": 9,
+          "home_m": [
+            5.800000000000001,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.23837775550456275,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_011": {
+          "role": "rest",
+          "asset_id": "male_adult_medical_01",
+          "index": 10,
+          "home_m": [
+            8.5,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.749103798428827,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_012": {
+          "role": "queue",
+          "asset_id": "male_adult_police_04",
+          "index": 11,
+          "home_m": [
+            11.200000000000003,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.042842304826899,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_013": {
+          "role": "runner",
+          "asset_id": "default_accent",
+          "index": 12,
+          "home_m": [
+            13.900000000000006,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.212287757470909,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_014": {
+          "role": "responder",
+          "asset_id": "female_adult_business_02_accent",
+          "index": 13,
+          "home_m": [
+            16.6,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.590701205493188,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_015": {
+          "role": "commuter",
+          "asset_id": "female_adult_medical_01_accent",
+          "index": 14,
+          "home_m": [
+            20.0,
+            -18.5,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.199075502236186,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_016": {
+          "role": "patrol",
+          "asset_id": "female_adult_police_01_accent",
+          "index": 15,
+          "home_m": [
+            20.0,
+            -15.8,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.359531844825733,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_017": {
+          "role": "visitor",
+          "asset_id": "female_adult_police_02_accent",
+          "index": 16,
+          "home_m": [
+            20.0,
+            -13.1,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.7635249763255736,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_018": {
+          "role": "rest",
+          "asset_id": "female_adult_police_03_accent",
+          "index": 17,
+          "home_m": [
+            20.0,
+            -10.399999999999999,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.71412547100727,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_019": {
+          "role": "queue",
+          "asset_id": "male_adult_construction_01_accent",
+          "index": 18,
+          "home_m": [
+            20.0,
+            -7.699999999999999,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 6.475443653422613,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_020": {
+          "role": "runner",
+          "asset_id": "male_adult_construction_02_accent",
+          "index": 19,
+          "home_m": [
+            20.0,
+            -5.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.051990077424488135,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_021": {
+          "role": "responder",
+          "asset_id": "male_adult_construction_03_accent",
+          "index": 20,
+          "home_m": [
+            20.0,
+            -2.299999999999997,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 6.446554014662463,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_022": {
+          "role": "commuter",
+          "asset_id": "male_adult_construction_05_accent",
+          "index": 21,
+          "home_m": [
+            20.0,
+            0.40000000000000213,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.585115159905815,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_023": {
+          "role": "patrol",
+          "asset_id": "male_adult_medical_01_accent",
+          "index": 22,
+          "home_m": [
+            20.0,
+            3.1000000000000014,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 2.722004132143935,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_024": {
+          "role": "visitor",
+          "asset_id": "male_adult_police_04_accent",
+          "index": 23,
+          "home_m": [
+            20.0,
+            5.800000000000001,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.2438359984942524,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_025": {
+          "role": "rest",
+          "asset_id": "default",
+          "index": 24,
+          "home_m": [
+            20.0,
+            8.5,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 7.65770457765425,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_026": {
+          "role": "queue",
+          "asset_id": "female_adult_business_02",
+          "index": 25,
+          "home_m": [
+            20.0,
+            11.200000000000003,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 2.692756360901014,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_027": {
+          "role": "runner",
+          "asset_id": "female_adult_medical_01",
+          "index": 26,
+          "home_m": [
+            20.0,
+            13.900000000000006,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.7419667470411833,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_028": {
+          "role": "responder",
+          "asset_id": "female_adult_police_01",
+          "index": 27,
+          "home_m": [
+            20.0,
+            16.6,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.7737310146677121,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_029": {
+          "role": "commuter",
+          "asset_id": "female_adult_police_02",
+          "index": 28,
+          "home_m": [
+            18.5,
+            20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 6.779954930779678,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_030": {
+          "role": "patrol",
+          "asset_id": "female_adult_police_03",
+          "index": 29,
+          "home_m": [
+            15.8,
+            20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.8298082509351286,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        }
+      },
+      "stage_time_medians_s": {
+        "commands_s": 3.0449125915765762e-05,
+        "kit_and_render_s": 0.10463130613788962,
+        "supervisor_s": 0.014912244863808155,
+        "journal_s": 0.004713521804660559,
+        "rgb_and_encode_s": 0.019757733214646578
+      }
+    }
+  },
+  {
+    "run_id": "opt1031-perf30-02-no-encode",
+    "returncode": 0,
+    "capture": "no_encode",
+    "performance_profile": "baseline",
+    "tracy": false,
+    "metrics": {
+      "sim_elapsed_s": 36.50000000000049,
+      "wall_elapsed_s": 150.0345623777248,
+      "rtf": 0.23914309255437313,
+      "overall_rtf": 0.24327727839208563,
+      "warmup_target_wall_s": 30.0,
+      "measurement_wall_s": 119.87244273070246,
+      "measurement_sim_s": 28.666666666667172,
+      "rendered_updates": 1095,
+      "updates_per_wall_second": 7.298318351762471,
+      "measured_updates_per_wall_second": 7.182634977534127,
+      "frame_time_median_s": 0.1176944519393146,
+      "frame_time_p95_s": 0.25305599300190806,
+      "task_status_counts": {
+        "accepted": 0,
+        "running": 0,
+        "paused": 0,
+        "blocked": 0,
+        "succeeded": 0,
+        "failed": 0,
+        "cancelled": 30
+      },
+      "actors": {
+        "person_001": {
+          "completed_activities": 0
+        },
+        "person_002": {
+          "completed_activities": 0
+        },
+        "person_003": {
+          "completed_activities": 0
+        },
+        "person_004": {
+          "completed_activities": 0
+        },
+        "person_005": {
+          "completed_activities": 0
+        },
+        "person_006": {
+          "completed_activities": 0
+        },
+        "person_007": {
+          "completed_activities": 0
+        },
+        "person_008": {
+          "completed_activities": 0
+        },
+        "person_009": {
+          "completed_activities": 0
+        },
+        "person_010": {
+          "completed_activities": 0
+        },
+        "person_011": {
+          "completed_activities": 0
+        },
+        "person_012": {
+          "completed_activities": 0
+        },
+        "person_013": {
+          "completed_activities": 0
+        },
+        "person_014": {
+          "completed_activities": 0
+        },
+        "person_015": {
+          "completed_activities": 0
+        },
+        "person_016": {
+          "completed_activities": 0
+        },
+        "person_017": {
+          "completed_activities": 0
+        },
+        "person_018": {
+          "completed_activities": 0
+        },
+        "person_019": {
+          "completed_activities": 0
+        },
+        "person_020": {
+          "completed_activities": 0
+        },
+        "person_021": {
+          "completed_activities": 0
+        },
+        "person_022": {
+          "completed_activities": 0
+        },
+        "person_023": {
+          "completed_activities": 0
+        },
+        "person_024": {
+          "completed_activities": 0
+        },
+        "person_025": {
+          "completed_activities": 0
+        },
+        "person_026": {
+          "completed_activities": 0
+        },
+        "person_027": {
+          "completed_activities": 0
+        },
+        "person_028": {
+          "completed_activities": 0
+        },
+        "person_029": {
+          "completed_activities": 0
+        },
+        "person_030": {
+          "completed_activities": 0
+        }
+      },
+      "exit_code": 0,
+      "video_timebase": "simulation frames",
+      "camera_resolution": [
+        1920,
+        1080
+      ],
+      "recorded_frames": 0,
+      "rgb_readback_frames": 1095,
+      "performance_profile": "no_encode",
+      "population": {
+        "person_001": {
+          "role": "commuter",
+          "asset_id": "default",
+          "index": 0,
+          "home_m": [
+            -18.5,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.11541438766307,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_002": {
+          "role": "patrol",
+          "asset_id": "female_adult_business_02",
+          "index": 1,
+          "home_m": [
+            -15.8,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.2000860417813355,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_003": {
+          "role": "visitor",
+          "asset_id": "female_adult_medical_01",
+          "index": 2,
+          "home_m": [
+            -13.1,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 2.200234546952954,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_004": {
+          "role": "rest",
+          "asset_id": "female_adult_police_01",
+          "index": 3,
+          "home_m": [
+            -10.399999999999999,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.785685905190582,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_005": {
+          "role": "queue",
+          "asset_id": "female_adult_police_02",
+          "index": 4,
+          "home_m": [
+            -7.699999999999999,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.891769713312099,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_006": {
+          "role": "runner",
+          "asset_id": "female_adult_police_03",
+          "index": 5,
+          "home_m": [
+            -5.0,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.41359589938329,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_007": {
+          "role": "responder",
+          "asset_id": "male_adult_construction_01",
+          "index": 6,
+          "home_m": [
+            -2.299999999999997,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 7.137436541638763,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_008": {
+          "role": "commuter",
+          "asset_id": "male_adult_construction_02",
+          "index": 7,
+          "home_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.6955106610353292,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_009": {
+          "role": "patrol",
+          "asset_id": "male_adult_construction_03",
+          "index": 8,
+          "home_m": [
+            3.1000000000000014,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 3.3753745574821634,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_010": {
+          "role": "visitor",
+          "asset_id": "male_adult_construction_05",
+          "index": 9,
+          "home_m": [
+            5.800000000000001,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.23837775550456275,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_011": {
+          "role": "rest",
+          "asset_id": "male_adult_medical_01",
+          "index": 10,
+          "home_m": [
+            8.5,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.749103798428827,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_012": {
+          "role": "queue",
+          "asset_id": "male_adult_police_04",
+          "index": 11,
+          "home_m": [
+            11.200000000000003,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.042842304826899,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_013": {
+          "role": "runner",
+          "asset_id": "default_accent",
+          "index": 12,
+          "home_m": [
+            13.900000000000006,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.212287757470909,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_014": {
+          "role": "responder",
+          "asset_id": "female_adult_business_02_accent",
+          "index": 13,
+          "home_m": [
+            16.6,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.590701205493188,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_015": {
+          "role": "commuter",
+          "asset_id": "female_adult_medical_01_accent",
+          "index": 14,
+          "home_m": [
+            20.0,
+            -18.5,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.199075502236186,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_016": {
+          "role": "patrol",
+          "asset_id": "female_adult_police_01_accent",
+          "index": 15,
+          "home_m": [
+            20.0,
+            -15.8,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.359531844825733,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_017": {
+          "role": "visitor",
+          "asset_id": "female_adult_police_02_accent",
+          "index": 16,
+          "home_m": [
+            20.0,
+            -13.1,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.7635249763255736,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_018": {
+          "role": "rest",
+          "asset_id": "female_adult_police_03_accent",
+          "index": 17,
+          "home_m": [
+            20.0,
+            -10.399999999999999,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.71412547100727,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_019": {
+          "role": "queue",
+          "asset_id": "male_adult_construction_01_accent",
+          "index": 18,
+          "home_m": [
+            20.0,
+            -7.699999999999999,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 6.475443653422613,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_020": {
+          "role": "runner",
+          "asset_id": "male_adult_construction_02_accent",
+          "index": 19,
+          "home_m": [
+            20.0,
+            -5.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.051990077424488135,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_021": {
+          "role": "responder",
+          "asset_id": "male_adult_construction_03_accent",
+          "index": 20,
+          "home_m": [
+            20.0,
+            -2.299999999999997,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 6.446554014662463,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_022": {
+          "role": "commuter",
+          "asset_id": "male_adult_construction_05_accent",
+          "index": 21,
+          "home_m": [
+            20.0,
+            0.40000000000000213,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.585115159905815,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_023": {
+          "role": "patrol",
+          "asset_id": "male_adult_medical_01_accent",
+          "index": 22,
+          "home_m": [
+            20.0,
+            3.1000000000000014,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 2.722004132143935,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_024": {
+          "role": "visitor",
+          "asset_id": "male_adult_police_04_accent",
+          "index": 23,
+          "home_m": [
+            20.0,
+            5.800000000000001,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.2438359984942524,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_025": {
+          "role": "rest",
+          "asset_id": "default",
+          "index": 24,
+          "home_m": [
+            20.0,
+            8.5,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 7.65770457765425,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_026": {
+          "role": "queue",
+          "asset_id": "female_adult_business_02",
+          "index": 25,
+          "home_m": [
+            20.0,
+            11.200000000000003,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 2.692756360901014,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_027": {
+          "role": "runner",
+          "asset_id": "female_adult_medical_01",
+          "index": 26,
+          "home_m": [
+            20.0,
+            13.900000000000006,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.7419667470411833,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_028": {
+          "role": "responder",
+          "asset_id": "female_adult_police_01",
+          "index": 27,
+          "home_m": [
+            20.0,
+            16.6,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.7737310146677121,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_029": {
+          "role": "commuter",
+          "asset_id": "female_adult_police_02",
+          "index": 28,
+          "home_m": [
+            18.5,
+            20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 6.779954930779678,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_030": {
+          "role": "patrol",
+          "asset_id": "female_adult_police_03",
+          "index": 29,
+          "home_m": [
+            15.8,
+            20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.8298082509351286,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        }
+      },
+      "stage_time_medians_s": {
+        "commands_s": 2.6283320039510727e-05,
+        "kit_and_render_s": 0.0877663278952241,
+        "supervisor_s": 0.009055010974407196,
+        "journal_s": 0.0029882043600082397,
+        "rgb_and_encode_s": 0.014959092251956463
+      }
+    }
+  },
+  {
+    "run_id": "opt1031-perf30-03-render-only",
+    "returncode": 0,
+    "capture": "render_only",
+    "performance_profile": "baseline",
+    "tracy": false,
+    "metrics": {
+      "sim_elapsed_s": 45.96666666666662,
+      "wall_elapsed_s": 150.03540477296337,
+      "rtf": 0.31886699449520256,
+      "overall_rtf": 0.30637213087287174,
+      "warmup_target_wall_s": 30.0,
+      "measurement_wall_s": 120.0082395710051,
+      "measurement_sim_s": 38.26666666666664,
+      "rendered_updates": 1379,
+      "updates_per_wall_second": 9.191163926186162,
+      "measured_updates_per_wall_second": 9.574342596036272,
+      "frame_time_median_s": 0.06924550281837583,
+      "frame_time_p95_s": 0.24888940574601293,
+      "task_status_counts": {
+        "accepted": 0,
+        "running": 0,
+        "paused": 0,
+        "blocked": 0,
+        "succeeded": 0,
+        "failed": 0,
+        "cancelled": 30
+      },
+      "actors": {
+        "person_001": {
+          "completed_activities": 0
+        },
+        "person_002": {
+          "completed_activities": 0
+        },
+        "person_003": {
+          "completed_activities": 0
+        },
+        "person_004": {
+          "completed_activities": 0
+        },
+        "person_005": {
+          "completed_activities": 0
+        },
+        "person_006": {
+          "completed_activities": 0
+        },
+        "person_007": {
+          "completed_activities": 0
+        },
+        "person_008": {
+          "completed_activities": 0
+        },
+        "person_009": {
+          "completed_activities": 0
+        },
+        "person_010": {
+          "completed_activities": 0
+        },
+        "person_011": {
+          "completed_activities": 0
+        },
+        "person_012": {
+          "completed_activities": 0
+        },
+        "person_013": {
+          "completed_activities": 0
+        },
+        "person_014": {
+          "completed_activities": 0
+        },
+        "person_015": {
+          "completed_activities": 0
+        },
+        "person_016": {
+          "completed_activities": 0
+        },
+        "person_017": {
+          "completed_activities": 0
+        },
+        "person_018": {
+          "completed_activities": 0
+        },
+        "person_019": {
+          "completed_activities": 0
+        },
+        "person_020": {
+          "completed_activities": 0
+        },
+        "person_021": {
+          "completed_activities": 0
+        },
+        "person_022": {
+          "completed_activities": 0
+        },
+        "person_023": {
+          "completed_activities": 0
+        },
+        "person_024": {
+          "completed_activities": 0
+        },
+        "person_025": {
+          "completed_activities": 0
+        },
+        "person_026": {
+          "completed_activities": 0
+        },
+        "person_027": {
+          "completed_activities": 0
+        },
+        "person_028": {
+          "completed_activities": 0
+        },
+        "person_029": {
+          "completed_activities": 0
+        },
+        "person_030": {
+          "completed_activities": 0
+        }
+      },
+      "exit_code": 0,
+      "video_timebase": "simulation frames",
+      "camera_resolution": [
+        1920,
+        1080
+      ],
+      "recorded_frames": 0,
+      "rgb_readback_frames": 0,
+      "performance_profile": "render_only",
+      "population": {
+        "person_001": {
+          "role": "commuter",
+          "asset_id": "default",
+          "index": 0,
+          "home_m": [
+            -18.5,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.11541438766307,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_002": {
+          "role": "patrol",
+          "asset_id": "female_adult_business_02",
+          "index": 1,
+          "home_m": [
+            -15.8,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.2000860417813355,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_003": {
+          "role": "visitor",
+          "asset_id": "female_adult_medical_01",
+          "index": 2,
+          "home_m": [
+            -13.1,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 2.200234546952954,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_004": {
+          "role": "rest",
+          "asset_id": "female_adult_police_01",
+          "index": 3,
+          "home_m": [
+            -10.399999999999999,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.785685905190582,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_005": {
+          "role": "queue",
+          "asset_id": "female_adult_police_02",
+          "index": 4,
+          "home_m": [
+            -7.699999999999999,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.891769713312099,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_006": {
+          "role": "runner",
+          "asset_id": "female_adult_police_03",
+          "index": 5,
+          "home_m": [
+            -5.0,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.41359589938329,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_007": {
+          "role": "responder",
+          "asset_id": "male_adult_construction_01",
+          "index": 6,
+          "home_m": [
+            -2.299999999999997,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 7.137436541638763,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_008": {
+          "role": "commuter",
+          "asset_id": "male_adult_construction_02",
+          "index": 7,
+          "home_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.6955106610353292,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_009": {
+          "role": "patrol",
+          "asset_id": "male_adult_construction_03",
+          "index": 8,
+          "home_m": [
+            3.1000000000000014,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 3.3753745574821634,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_010": {
+          "role": "visitor",
+          "asset_id": "male_adult_construction_05",
+          "index": 9,
+          "home_m": [
+            5.800000000000001,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.23837775550456275,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_011": {
+          "role": "rest",
+          "asset_id": "male_adult_medical_01",
+          "index": 10,
+          "home_m": [
+            8.5,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.749103798428827,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_012": {
+          "role": "queue",
+          "asset_id": "male_adult_police_04",
+          "index": 11,
+          "home_m": [
+            11.200000000000003,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.042842304826899,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_013": {
+          "role": "runner",
+          "asset_id": "default_accent",
+          "index": 12,
+          "home_m": [
+            13.900000000000006,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.212287757470909,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_014": {
+          "role": "responder",
+          "asset_id": "female_adult_business_02_accent",
+          "index": 13,
+          "home_m": [
+            16.6,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.590701205493188,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_015": {
+          "role": "commuter",
+          "asset_id": "female_adult_medical_01_accent",
+          "index": 14,
+          "home_m": [
+            20.0,
+            -18.5,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.199075502236186,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_016": {
+          "role": "patrol",
+          "asset_id": "female_adult_police_01_accent",
+          "index": 15,
+          "home_m": [
+            20.0,
+            -15.8,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.359531844825733,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_017": {
+          "role": "visitor",
+          "asset_id": "female_adult_police_02_accent",
+          "index": 16,
+          "home_m": [
+            20.0,
+            -13.1,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.7635249763255736,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_018": {
+          "role": "rest",
+          "asset_id": "female_adult_police_03_accent",
+          "index": 17,
+          "home_m": [
+            20.0,
+            -10.399999999999999,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.71412547100727,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_019": {
+          "role": "queue",
+          "asset_id": "male_adult_construction_01_accent",
+          "index": 18,
+          "home_m": [
+            20.0,
+            -7.699999999999999,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 6.475443653422613,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_020": {
+          "role": "runner",
+          "asset_id": "male_adult_construction_02_accent",
+          "index": 19,
+          "home_m": [
+            20.0,
+            -5.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.051990077424488135,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_021": {
+          "role": "responder",
+          "asset_id": "male_adult_construction_03_accent",
+          "index": 20,
+          "home_m": [
+            20.0,
+            -2.299999999999997,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 6.446554014662463,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_022": {
+          "role": "commuter",
+          "asset_id": "male_adult_construction_05_accent",
+          "index": 21,
+          "home_m": [
+            20.0,
+            0.40000000000000213,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.585115159905815,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_023": {
+          "role": "patrol",
+          "asset_id": "male_adult_medical_01_accent",
+          "index": 22,
+          "home_m": [
+            20.0,
+            3.1000000000000014,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 2.722004132143935,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_024": {
+          "role": "visitor",
+          "asset_id": "male_adult_police_04_accent",
+          "index": 23,
+          "home_m": [
+            20.0,
+            5.800000000000001,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.2438359984942524,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_025": {
+          "role": "rest",
+          "asset_id": "default",
+          "index": 24,
+          "home_m": [
+            20.0,
+            8.5,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 7.65770457765425,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_026": {
+          "role": "queue",
+          "asset_id": "female_adult_business_02",
+          "index": 25,
+          "home_m": [
+            20.0,
+            11.200000000000003,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 2.692756360901014,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_027": {
+          "role": "runner",
+          "asset_id": "female_adult_medical_01",
+          "index": 26,
+          "home_m": [
+            20.0,
+            13.900000000000006,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.7419667470411833,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_028": {
+          "role": "responder",
+          "asset_id": "female_adult_police_01",
+          "index": 27,
+          "home_m": [
+            20.0,
+            16.6,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.7737310146677121,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_029": {
+          "role": "commuter",
+          "asset_id": "female_adult_police_02",
+          "index": 28,
+          "home_m": [
+            18.5,
+            20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 6.779954930779678,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_030": {
+          "role": "patrol",
+          "asset_id": "female_adult_police_03",
+          "index": 29,
+          "home_m": [
+            15.8,
+            20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.8298082509351286,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        }
+      },
+      "stage_time_medians_s": {
+        "commands_s": 3.0059833079576492e-05,
+        "kit_and_render_s": 0.04839812591671944,
+        "supervisor_s": 0.01317489705979824,
+        "journal_s": 0.0038548801094293594,
+        "rgb_and_encode_s": 2.133892849087715e-05
+      }
+    }
+  },
+  {
+    "run_id": "opt1031-perf30-04-none",
+    "returncode": 0,
+    "capture": "none",
+    "performance_profile": "baseline",
+    "tracy": false,
+    "metrics": {
+      "sim_elapsed_s": 58.43333333333258,
+      "wall_elapsed_s": 150.05609600199386,
+      "rtf": 0.3724911631399707,
+      "overall_rtf": 0.38940992662208235,
+      "warmup_target_wall_s": 30.0,
+      "measurement_wall_s": 120.00284684123471,
+      "measurement_sim_s": 44.69999999999928,
+      "rendered_updates": 1754,
+      "updates_per_wall_second": 11.68896197310567,
+      "measured_updates_per_wall_second": 11.183068029840017,
+      "frame_time_median_s": 0.05652737361378968,
+      "frame_time_p95_s": 0.2522126170806587,
+      "task_status_counts": {
+        "accepted": 0,
+        "running": 0,
+        "paused": 0,
+        "blocked": 0,
+        "succeeded": 0,
+        "failed": 0,
+        "cancelled": 30
+      },
+      "actors": {
+        "person_001": {
+          "completed_activities": 0
+        },
+        "person_002": {
+          "completed_activities": 0
+        },
+        "person_003": {
+          "completed_activities": 0
+        },
+        "person_004": {
+          "completed_activities": 0
+        },
+        "person_005": {
+          "completed_activities": 0
+        },
+        "person_006": {
+          "completed_activities": 0
+        },
+        "person_007": {
+          "completed_activities": 0
+        },
+        "person_008": {
+          "completed_activities": 0
+        },
+        "person_009": {
+          "completed_activities": 0
+        },
+        "person_010": {
+          "completed_activities": 0
+        },
+        "person_011": {
+          "completed_activities": 0
+        },
+        "person_012": {
+          "completed_activities": 0
+        },
+        "person_013": {
+          "completed_activities": 0
+        },
+        "person_014": {
+          "completed_activities": 0
+        },
+        "person_015": {
+          "completed_activities": 0
+        },
+        "person_016": {
+          "completed_activities": 0
+        },
+        "person_017": {
+          "completed_activities": 0
+        },
+        "person_018": {
+          "completed_activities": 0
+        },
+        "person_019": {
+          "completed_activities": 0
+        },
+        "person_020": {
+          "completed_activities": 0
+        },
+        "person_021": {
+          "completed_activities": 0
+        },
+        "person_022": {
+          "completed_activities": 0
+        },
+        "person_023": {
+          "completed_activities": 0
+        },
+        "person_024": {
+          "completed_activities": 0
+        },
+        "person_025": {
+          "completed_activities": 0
+        },
+        "person_026": {
+          "completed_activities": 0
+        },
+        "person_027": {
+          "completed_activities": 0
+        },
+        "person_028": {
+          "completed_activities": 0
+        },
+        "person_029": {
+          "completed_activities": 0
+        },
+        "person_030": {
+          "completed_activities": 0
+        }
+      },
+      "exit_code": 0,
+      "video_timebase": "simulation frames",
+      "camera_resolution": null,
+      "recorded_frames": 0,
+      "rgb_readback_frames": 0,
+      "performance_profile": "none",
+      "population": {
+        "person_001": {
+          "role": "commuter",
+          "asset_id": "default",
+          "index": 0,
+          "home_m": [
+            -18.5,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.11541438766307,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_002": {
+          "role": "patrol",
+          "asset_id": "female_adult_business_02",
+          "index": 1,
+          "home_m": [
+            -15.8,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.2000860417813355,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_003": {
+          "role": "visitor",
+          "asset_id": "female_adult_medical_01",
+          "index": 2,
+          "home_m": [
+            -13.1,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 2.200234546952954,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_004": {
+          "role": "rest",
+          "asset_id": "female_adult_police_01",
+          "index": 3,
+          "home_m": [
+            -10.399999999999999,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.785685905190582,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_005": {
+          "role": "queue",
+          "asset_id": "female_adult_police_02",
+          "index": 4,
+          "home_m": [
+            -7.699999999999999,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.891769713312099,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_006": {
+          "role": "runner",
+          "asset_id": "female_adult_police_03",
+          "index": 5,
+          "home_m": [
+            -5.0,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.41359589938329,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_007": {
+          "role": "responder",
+          "asset_id": "male_adult_construction_01",
+          "index": 6,
+          "home_m": [
+            -2.299999999999997,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 7.137436541638763,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_008": {
+          "role": "commuter",
+          "asset_id": "male_adult_construction_02",
+          "index": 7,
+          "home_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.6955106610353292,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_009": {
+          "role": "patrol",
+          "asset_id": "male_adult_construction_03",
+          "index": 8,
+          "home_m": [
+            3.1000000000000014,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 3.3753745574821634,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_010": {
+          "role": "visitor",
+          "asset_id": "male_adult_construction_05",
+          "index": 9,
+          "home_m": [
+            5.800000000000001,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.23837775550456275,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_011": {
+          "role": "rest",
+          "asset_id": "male_adult_medical_01",
+          "index": 10,
+          "home_m": [
+            8.5,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.749103798428827,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_012": {
+          "role": "queue",
+          "asset_id": "male_adult_police_04",
+          "index": 11,
+          "home_m": [
+            11.200000000000003,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.042842304826899,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_013": {
+          "role": "runner",
+          "asset_id": "default_accent",
+          "index": 12,
+          "home_m": [
+            13.900000000000006,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.212287757470909,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_014": {
+          "role": "responder",
+          "asset_id": "female_adult_business_02_accent",
+          "index": 13,
+          "home_m": [
+            16.6,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.590701205493188,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_015": {
+          "role": "commuter",
+          "asset_id": "female_adult_medical_01_accent",
+          "index": 14,
+          "home_m": [
+            20.0,
+            -18.5,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.199075502236186,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_016": {
+          "role": "patrol",
+          "asset_id": "female_adult_police_01_accent",
+          "index": 15,
+          "home_m": [
+            20.0,
+            -15.8,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.359531844825733,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_017": {
+          "role": "visitor",
+          "asset_id": "female_adult_police_02_accent",
+          "index": 16,
+          "home_m": [
+            20.0,
+            -13.1,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.7635249763255736,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_018": {
+          "role": "rest",
+          "asset_id": "female_adult_police_03_accent",
+          "index": 17,
+          "home_m": [
+            20.0,
+            -10.399999999999999,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.71412547100727,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_019": {
+          "role": "queue",
+          "asset_id": "male_adult_construction_01_accent",
+          "index": 18,
+          "home_m": [
+            20.0,
+            -7.699999999999999,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 6.475443653422613,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_020": {
+          "role": "runner",
+          "asset_id": "male_adult_construction_02_accent",
+          "index": 19,
+          "home_m": [
+            20.0,
+            -5.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.051990077424488135,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_021": {
+          "role": "responder",
+          "asset_id": "male_adult_construction_03_accent",
+          "index": 20,
+          "home_m": [
+            20.0,
+            -2.299999999999997,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 6.446554014662463,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_022": {
+          "role": "commuter",
+          "asset_id": "male_adult_construction_05_accent",
+          "index": 21,
+          "home_m": [
+            20.0,
+            0.40000000000000213,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.585115159905815,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_023": {
+          "role": "patrol",
+          "asset_id": "male_adult_medical_01_accent",
+          "index": 22,
+          "home_m": [
+            20.0,
+            3.1000000000000014,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 2.722004132143935,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_024": {
+          "role": "visitor",
+          "asset_id": "male_adult_police_04_accent",
+          "index": 23,
+          "home_m": [
+            20.0,
+            5.800000000000001,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.2438359984942524,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_025": {
+          "role": "rest",
+          "asset_id": "default",
+          "index": 24,
+          "home_m": [
+            20.0,
+            8.5,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 7.65770457765425,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_026": {
+          "role": "queue",
+          "asset_id": "female_adult_business_02",
+          "index": 25,
+          "home_m": [
+            20.0,
+            11.200000000000003,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 2.692756360901014,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_027": {
+          "role": "runner",
+          "asset_id": "female_adult_medical_01",
+          "index": 26,
+          "home_m": [
+            20.0,
+            13.900000000000006,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.7419667470411833,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_028": {
+          "role": "responder",
+          "asset_id": "female_adult_police_01",
+          "index": 27,
+          "home_m": [
+            20.0,
+            16.6,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.7737310146677121,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_029": {
+          "role": "commuter",
+          "asset_id": "female_adult_police_02",
+          "index": 28,
+          "home_m": [
+            18.5,
+            20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 6.779954930779678,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_030": {
+          "role": "patrol",
+          "asset_id": "female_adult_police_03",
+          "index": 29,
+          "home_m": [
+            15.8,
+            20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.8298082509351286,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        }
+      },
+      "stage_time_medians_s": {
+        "commands_s": 2.9857736080884933e-05,
+        "kit_and_render_s": 0.03420734778046608,
+        "supervisor_s": 0.014400032814592123,
+        "journal_s": 0.0039676399901509285,
+        "rgb_and_encode_s": 1.3106036931276321e-05
+      }
+    }
+  },
+  {
+    "run_id": "opt1031-perf30-05-full",
+    "returncode": 0,
+    "capture": "full",
+    "performance_profile": "optimized",
+    "tracy": false,
+    "metrics": {
+      "sim_elapsed_s": 32.73333333333404,
+      "wall_elapsed_s": 150.04159807087854,
+      "rtf": 0.22470437752075098,
+      "overall_rtf": 0.21816172151053106,
+      "warmup_target_wall_s": 30.0,
+      "measurement_wall_s": 119.86118664219975,
+      "measurement_sim_s": 26.933333333334048,
+      "rendered_updates": 982,
+      "updates_per_wall_second": 6.5448516453157914,
+      "measured_updates_per_wall_second": 6.7494743099362395,
+      "frame_time_median_s": 0.12152343988418579,
+      "frame_time_p95_s": 0.26806447515264153,
+      "task_status_counts": {
+        "accepted": 0,
+        "running": 0,
+        "paused": 0,
+        "blocked": 0,
+        "succeeded": 0,
+        "failed": 0,
+        "cancelled": 30
+      },
+      "actors": {
+        "person_001": {
+          "completed_activities": 0
+        },
+        "person_002": {
+          "completed_activities": 0
+        },
+        "person_003": {
+          "completed_activities": 0
+        },
+        "person_004": {
+          "completed_activities": 0
+        },
+        "person_005": {
+          "completed_activities": 0
+        },
+        "person_006": {
+          "completed_activities": 0
+        },
+        "person_007": {
+          "completed_activities": 0
+        },
+        "person_008": {
+          "completed_activities": 0
+        },
+        "person_009": {
+          "completed_activities": 0
+        },
+        "person_010": {
+          "completed_activities": 0
+        },
+        "person_011": {
+          "completed_activities": 0
+        },
+        "person_012": {
+          "completed_activities": 0
+        },
+        "person_013": {
+          "completed_activities": 0
+        },
+        "person_014": {
+          "completed_activities": 0
+        },
+        "person_015": {
+          "completed_activities": 0
+        },
+        "person_016": {
+          "completed_activities": 0
+        },
+        "person_017": {
+          "completed_activities": 0
+        },
+        "person_018": {
+          "completed_activities": 0
+        },
+        "person_019": {
+          "completed_activities": 0
+        },
+        "person_020": {
+          "completed_activities": 0
+        },
+        "person_021": {
+          "completed_activities": 0
+        },
+        "person_022": {
+          "completed_activities": 0
+        },
+        "person_023": {
+          "completed_activities": 0
+        },
+        "person_024": {
+          "completed_activities": 0
+        },
+        "person_025": {
+          "completed_activities": 0
+        },
+        "person_026": {
+          "completed_activities": 0
+        },
+        "person_027": {
+          "completed_activities": 0
+        },
+        "person_028": {
+          "completed_activities": 0
+        },
+        "person_029": {
+          "completed_activities": 0
+        },
+        "person_030": {
+          "completed_activities": 0
+        }
+      },
+      "exit_code": 0,
+      "video_timebase": "simulation frames",
+      "camera_resolution": [
+        1920,
+        1080
+      ],
+      "recorded_frames": 982,
+      "rgb_readback_frames": 982,
+      "performance_profile": "full",
+      "population": {
+        "person_001": {
+          "role": "commuter",
+          "asset_id": "default",
+          "index": 0,
+          "home_m": [
+            -18.5,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.11541438766307,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_002": {
+          "role": "patrol",
+          "asset_id": "female_adult_business_02",
+          "index": 1,
+          "home_m": [
+            -15.8,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.2000860417813355,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_003": {
+          "role": "visitor",
+          "asset_id": "female_adult_medical_01",
+          "index": 2,
+          "home_m": [
+            -13.1,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 2.200234546952954,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_004": {
+          "role": "rest",
+          "asset_id": "female_adult_police_01",
+          "index": 3,
+          "home_m": [
+            -10.399999999999999,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.785685905190582,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_005": {
+          "role": "queue",
+          "asset_id": "female_adult_police_02",
+          "index": 4,
+          "home_m": [
+            -7.699999999999999,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.891769713312099,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_006": {
+          "role": "runner",
+          "asset_id": "female_adult_police_03",
+          "index": 5,
+          "home_m": [
+            -5.0,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.41359589938329,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_007": {
+          "role": "responder",
+          "asset_id": "male_adult_construction_01",
+          "index": 6,
+          "home_m": [
+            -2.299999999999997,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 7.137436541638763,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_008": {
+          "role": "commuter",
+          "asset_id": "male_adult_construction_02",
+          "index": 7,
+          "home_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.6955106610353292,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_009": {
+          "role": "patrol",
+          "asset_id": "male_adult_construction_03",
+          "index": 8,
+          "home_m": [
+            3.1000000000000014,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 3.3753745574821634,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_010": {
+          "role": "visitor",
+          "asset_id": "male_adult_construction_05",
+          "index": 9,
+          "home_m": [
+            5.800000000000001,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.23837775550456275,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_011": {
+          "role": "rest",
+          "asset_id": "male_adult_medical_01",
+          "index": 10,
+          "home_m": [
+            8.5,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.749103798428827,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_012": {
+          "role": "queue",
+          "asset_id": "male_adult_police_04",
+          "index": 11,
+          "home_m": [
+            11.200000000000003,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.042842304826899,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_013": {
+          "role": "runner",
+          "asset_id": "default_accent",
+          "index": 12,
+          "home_m": [
+            13.900000000000006,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.212287757470909,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_014": {
+          "role": "responder",
+          "asset_id": "female_adult_business_02_accent",
+          "index": 13,
+          "home_m": [
+            16.6,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.590701205493188,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_015": {
+          "role": "commuter",
+          "asset_id": "female_adult_medical_01_accent",
+          "index": 14,
+          "home_m": [
+            20.0,
+            -18.5,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.199075502236186,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_016": {
+          "role": "patrol",
+          "asset_id": "female_adult_police_01_accent",
+          "index": 15,
+          "home_m": [
+            20.0,
+            -15.8,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.359531844825733,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_017": {
+          "role": "visitor",
+          "asset_id": "female_adult_police_02_accent",
+          "index": 16,
+          "home_m": [
+            20.0,
+            -13.1,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.7635249763255736,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_018": {
+          "role": "rest",
+          "asset_id": "female_adult_police_03_accent",
+          "index": 17,
+          "home_m": [
+            20.0,
+            -10.399999999999999,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.71412547100727,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_019": {
+          "role": "queue",
+          "asset_id": "male_adult_construction_01_accent",
+          "index": 18,
+          "home_m": [
+            20.0,
+            -7.699999999999999,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 6.475443653422613,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_020": {
+          "role": "runner",
+          "asset_id": "male_adult_construction_02_accent",
+          "index": 19,
+          "home_m": [
+            20.0,
+            -5.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.051990077424488135,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_021": {
+          "role": "responder",
+          "asset_id": "male_adult_construction_03_accent",
+          "index": 20,
+          "home_m": [
+            20.0,
+            -2.299999999999997,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 6.446554014662463,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_022": {
+          "role": "commuter",
+          "asset_id": "male_adult_construction_05_accent",
+          "index": 21,
+          "home_m": [
+            20.0,
+            0.40000000000000213,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.585115159905815,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_023": {
+          "role": "patrol",
+          "asset_id": "male_adult_medical_01_accent",
+          "index": 22,
+          "home_m": [
+            20.0,
+            3.1000000000000014,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 2.722004132143935,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_024": {
+          "role": "visitor",
+          "asset_id": "male_adult_police_04_accent",
+          "index": 23,
+          "home_m": [
+            20.0,
+            5.800000000000001,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.2438359984942524,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_025": {
+          "role": "rest",
+          "asset_id": "default",
+          "index": 24,
+          "home_m": [
+            20.0,
+            8.5,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 7.65770457765425,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_026": {
+          "role": "queue",
+          "asset_id": "female_adult_business_02",
+          "index": 25,
+          "home_m": [
+            20.0,
+            11.200000000000003,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 2.692756360901014,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_027": {
+          "role": "runner",
+          "asset_id": "female_adult_medical_01",
+          "index": 26,
+          "home_m": [
+            20.0,
+            13.900000000000006,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.7419667470411833,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_028": {
+          "role": "responder",
+          "asset_id": "female_adult_police_01",
+          "index": 27,
+          "home_m": [
+            20.0,
+            16.6,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.7737310146677121,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_029": {
+          "role": "commuter",
+          "asset_id": "female_adult_police_02",
+          "index": 28,
+          "home_m": [
+            18.5,
+            20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 6.779954930779678,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_030": {
+          "role": "patrol",
+          "asset_id": "female_adult_police_03",
+          "index": 29,
+          "home_m": [
+            15.8,
+            20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.8298082509351286,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        }
+      },
+      "stage_time_medians_s": {
+        "commands_s": 2.430705353617668e-05,
+        "kit_and_render_s": 0.09206094220280647,
+        "supervisor_s": 0.0062337713316082954,
+        "journal_s": 0.002909637987613678,
+        "rgb_and_encode_s": 0.016667433083057404
+      }
+    }
+  },
+  {
+    "run_id": "opt1031-perf30-06-full",
+    "returncode": 0,
+    "capture": "full",
+    "performance_profile": "optimized",
+    "tracy": true,
+    "metrics": {
+      "sim_elapsed_s": 10.999999999999972,
+      "wall_elapsed_s": 50.08961248397827,
+      "rtf": 0.19776017187007783,
+      "overall_rtf": 0.219606410481184,
+      "warmup_target_wall_s": 30.0,
+      "measurement_wall_s": 20.05796530796215,
+      "measurement_sim_s": 3.9666666666666535,
+      "rendered_updates": 330,
+      "updates_per_wall_second": 6.588192314435537,
+      "measured_updates_per_wall_second": 5.98266066161582,
+      "frame_time_median_s": 0.15256774448789656,
+      "frame_time_p95_s": 0.2940609510987997,
+      "task_status_counts": {
+        "accepted": 0,
+        "running": 0,
+        "paused": 0,
+        "blocked": 0,
+        "succeeded": 0,
+        "failed": 0,
+        "cancelled": 30
+      },
+      "actors": {
+        "person_001": {
+          "completed_activities": 0
+        },
+        "person_002": {
+          "completed_activities": 0
+        },
+        "person_003": {
+          "completed_activities": 0
+        },
+        "person_004": {
+          "completed_activities": 0
+        },
+        "person_005": {
+          "completed_activities": 0
+        },
+        "person_006": {
+          "completed_activities": 0
+        },
+        "person_007": {
+          "completed_activities": 0
+        },
+        "person_008": {
+          "completed_activities": 0
+        },
+        "person_009": {
+          "completed_activities": 0
+        },
+        "person_010": {
+          "completed_activities": 0
+        },
+        "person_011": {
+          "completed_activities": 0
+        },
+        "person_012": {
+          "completed_activities": 0
+        },
+        "person_013": {
+          "completed_activities": 0
+        },
+        "person_014": {
+          "completed_activities": 0
+        },
+        "person_015": {
+          "completed_activities": 0
+        },
+        "person_016": {
+          "completed_activities": 0
+        },
+        "person_017": {
+          "completed_activities": 0
+        },
+        "person_018": {
+          "completed_activities": 0
+        },
+        "person_019": {
+          "completed_activities": 0
+        },
+        "person_020": {
+          "completed_activities": 0
+        },
+        "person_021": {
+          "completed_activities": 0
+        },
+        "person_022": {
+          "completed_activities": 0
+        },
+        "person_023": {
+          "completed_activities": 0
+        },
+        "person_024": {
+          "completed_activities": 0
+        },
+        "person_025": {
+          "completed_activities": 0
+        },
+        "person_026": {
+          "completed_activities": 0
+        },
+        "person_027": {
+          "completed_activities": 0
+        },
+        "person_028": {
+          "completed_activities": 0
+        },
+        "person_029": {
+          "completed_activities": 0
+        },
+        "person_030": {
+          "completed_activities": 0
+        }
+      },
+      "exit_code": 0,
+      "video_timebase": "simulation frames",
+      "camera_resolution": [
+        1920,
+        1080
+      ],
+      "recorded_frames": 330,
+      "rgb_readback_frames": 330,
+      "performance_profile": "full",
+      "population": {
+        "person_001": {
+          "role": "commuter",
+          "asset_id": "default",
+          "index": 0,
+          "home_m": [
+            -18.5,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.11541438766307,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_002": {
+          "role": "patrol",
+          "asset_id": "female_adult_business_02",
+          "index": 1,
+          "home_m": [
+            -15.8,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.2000860417813355,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_003": {
+          "role": "visitor",
+          "asset_id": "female_adult_medical_01",
+          "index": 2,
+          "home_m": [
+            -13.1,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 2.200234546952954,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_004": {
+          "role": "rest",
+          "asset_id": "female_adult_police_01",
+          "index": 3,
+          "home_m": [
+            -10.399999999999999,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.785685905190582,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_005": {
+          "role": "queue",
+          "asset_id": "female_adult_police_02",
+          "index": 4,
+          "home_m": [
+            -7.699999999999999,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.891769713312099,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_006": {
+          "role": "runner",
+          "asset_id": "female_adult_police_03",
+          "index": 5,
+          "home_m": [
+            -5.0,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.41359589938329,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_007": {
+          "role": "responder",
+          "asset_id": "male_adult_construction_01",
+          "index": 6,
+          "home_m": [
+            -2.299999999999997,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 7.137436541638763,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_008": {
+          "role": "commuter",
+          "asset_id": "male_adult_construction_02",
+          "index": 7,
+          "home_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.6955106610353292,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_009": {
+          "role": "patrol",
+          "asset_id": "male_adult_construction_03",
+          "index": 8,
+          "home_m": [
+            3.1000000000000014,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 3.3753745574821634,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_010": {
+          "role": "visitor",
+          "asset_id": "male_adult_construction_05",
+          "index": 9,
+          "home_m": [
+            5.800000000000001,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.23837775550456275,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_011": {
+          "role": "rest",
+          "asset_id": "male_adult_medical_01",
+          "index": 10,
+          "home_m": [
+            8.5,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.749103798428827,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_012": {
+          "role": "queue",
+          "asset_id": "male_adult_police_04",
+          "index": 11,
+          "home_m": [
+            11.200000000000003,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.042842304826899,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_013": {
+          "role": "runner",
+          "asset_id": "default_accent",
+          "index": 12,
+          "home_m": [
+            13.900000000000006,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.212287757470909,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_014": {
+          "role": "responder",
+          "asset_id": "female_adult_business_02_accent",
+          "index": 13,
+          "home_m": [
+            16.6,
+            -20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.590701205493188,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_015": {
+          "role": "commuter",
+          "asset_id": "female_adult_medical_01_accent",
+          "index": 14,
+          "home_m": [
+            20.0,
+            -18.5,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.199075502236186,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_016": {
+          "role": "patrol",
+          "asset_id": "female_adult_police_01_accent",
+          "index": 15,
+          "home_m": [
+            20.0,
+            -15.8,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.359531844825733,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_017": {
+          "role": "visitor",
+          "asset_id": "female_adult_police_02_accent",
+          "index": 16,
+          "home_m": [
+            20.0,
+            -13.1,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.7635249763255736,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_018": {
+          "role": "rest",
+          "asset_id": "female_adult_police_03_accent",
+          "index": 17,
+          "home_m": [
+            20.0,
+            -10.399999999999999,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.71412547100727,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_019": {
+          "role": "queue",
+          "asset_id": "male_adult_construction_01_accent",
+          "index": 18,
+          "home_m": [
+            20.0,
+            -7.699999999999999,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 6.475443653422613,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_020": {
+          "role": "runner",
+          "asset_id": "male_adult_construction_02_accent",
+          "index": 19,
+          "home_m": [
+            20.0,
+            -5.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.051990077424488135,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_021": {
+          "role": "responder",
+          "asset_id": "male_adult_construction_03_accent",
+          "index": 20,
+          "home_m": [
+            20.0,
+            -2.299999999999997,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 6.446554014662463,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_022": {
+          "role": "commuter",
+          "asset_id": "male_adult_construction_05_accent",
+          "index": 21,
+          "home_m": [
+            20.0,
+            0.40000000000000213,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 5.585115159905815,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_023": {
+          "role": "patrol",
+          "asset_id": "male_adult_medical_01_accent",
+          "index": 22,
+          "home_m": [
+            20.0,
+            3.1000000000000014,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 2.722004132143935,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_024": {
+          "role": "visitor",
+          "asset_id": "male_adult_police_04_accent",
+          "index": 23,
+          "home_m": [
+            20.0,
+            5.800000000000001,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 1.2438359984942524,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_025": {
+          "role": "rest",
+          "asset_id": "default",
+          "index": 24,
+          "home_m": [
+            20.0,
+            8.5,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 7.65770457765425,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_026": {
+          "role": "queue",
+          "asset_id": "female_adult_business_02",
+          "index": 25,
+          "home_m": [
+            20.0,
+            11.200000000000003,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 2.692756360901014,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_027": {
+          "role": "runner",
+          "asset_id": "female_adult_medical_01",
+          "index": 26,
+          "home_m": [
+            20.0,
+            13.900000000000006,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.7419667470411833,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_028": {
+          "role": "responder",
+          "asset_id": "female_adult_police_01",
+          "index": 27,
+          "home_m": [
+            20.0,
+            16.6,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 0.7737310146677121,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_029": {
+          "role": "commuter",
+          "asset_id": "female_adult_police_02",
+          "index": 28,
+          "home_m": [
+            18.5,
+            20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 6.779954930779678,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        },
+        "person_030": {
+          "role": "patrol",
+          "asset_id": "female_adult_police_03",
+          "index": 29,
+          "home_m": [
+            15.8,
+            20.0,
+            0
+          ],
+          "suspended": false,
+          "suspended_reason": null,
+          "next_start": 4.8298082509351286,
+          "cycle": 0,
+          "failures": 0,
+          "last_task": null
+        }
+      },
+      "stage_time_medians_s": {
+        "commands_s": 5.113543011248112e-05,
+        "kit_and_render_s": 0.09758045361377299,
+        "supervisor_s": 0.030301657505333424,
+        "journal_s": 0.003410911187529564,
+        "rgb_and_encode_s": 0.0166532089933753
+      }
+    }
+  }
+]

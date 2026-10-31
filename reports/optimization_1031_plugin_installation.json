@@ -37,5 +37,15 @@
       ],
       "installation_scope": "own SimPeople marketplace/plugin; unrelated plugins unchanged"
     }
-  ]
+  ],
+  "installed_default_identity_verified": {
+    "codex": {
+      "controller_id": "simpeople-codex",
+      "config_sha256": "1e7ec9bcf35b8b93bdb81b3ac21f7bb66738121b9be67a0ea0d75589cd4ea7c1"
+    },
+    "claude": {
+      "controller_id": "simpeople-claude",
+      "config_sha256": "de0d3db74769fd100bfe81e700c9e9c49f3ffef778e3bd2f7c6ee34c2d12f0f0"
+    }
+  }
 }

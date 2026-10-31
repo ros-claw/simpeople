@@ -38,7 +38,7 @@ For a local checkout:
 claude --plugin-dir /absolute/path/to/simpeople/plugins/claude
 ```
 
-The repository also contains a marketplace manifest. After the repository is published:
+The public repository contains a marketplace manifest:
 
 ```text
 /plugin marketplace add ros-claw/simpeople
@@ -54,6 +54,8 @@ The repository also contains a marketplace manifest. After the repository is pub
 `people_crowd(state)` returns counts and a bounded page. Use selectors (`actor_ids`, `role`, `group`, `region_m`) for activity/cancel batches. Batch acceptance is per item and is not atomic. Use task IDs to confirm terminal results. `people_crowd(events)` exposes an incremental bounded cursor; refresh state when history rolls over. Full durable events remain in the run journal.
 
 Modes describe intent: interactive, generation, audit and experimental. Actual real-time and population capacities are published independently. Continuous corridor travel is opt-in while population regression is being validated; the conservative segmented profile remains available.
+
+For the standalone motion-quality profile, add `--traffic-profile corridor` to the serve command. The attaching extension uses direct native navigation and its own session overlay. It does not install the factory-specific reservation scheduler into a user's scene; attached-scene population capacity requires separate validation.
 
 ### Unattended Codex CLI validation
 

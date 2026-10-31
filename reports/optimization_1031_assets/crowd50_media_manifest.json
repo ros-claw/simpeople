@@ -1,0 +1,45 @@
+{
+  "run_id": "opt1031-regression50-seed17-03",
+  "continuous_excerpt": true,
+  "source": "runs/opt1031-regression50-seed17-03/raw_video.mp4",
+  "source_sha256": "1f0ad04a40a71acf28b0a34ebc2507b1ff9a59d13a1d0f35d00cf62188fe1c55",
+  "start_frame_zero_based": 9000,
+  "end_frame_exclusive": 9750,
+  "first_frame_identity": {
+    "sample": 9000,
+    "video_frame": 9000,
+    "video_file": "raw_video.mp4",
+    "recording_id": "rgb-1793408422151354878",
+    "sim_time": 300.06666666668974,
+    "timeline_before_step": 300.0333333333564,
+    "app_updates": 4,
+    "app_dt_sum_s": 0.06666666666666667,
+    "last_app_dt_s": 0.016666666666666666
+  },
+  "last_frame_identity": {
+    "sample": 9749,
+    "video_frame": 9749,
+    "video_file": "raw_video.mp4",
+    "recording_id": "rgb-1793408422151354878",
+    "sim_time": 325.0333333333763,
+    "timeline_before_step": 325.0000000000429,
+    "app_updates": 4,
+    "app_dt_sum_s": 0.06666666666666667,
+    "last_app_dt_s": 0.016666666666666666
+  },
+  "scope": "25 seconds of actual simulation-time rendering with title overlay; not wall-clock throughput",
+  "files": [
+    {
+      "path": "reports/optimization_1031_crowd50_demo.mp4",
+      "bytes": 1489367,
+      "sha256": "70795071ebad206f51efaa4fb8365b8631b8b2cc7e0af60b5aceb145b667c425"
+    }
+  ],
+  "probe": {
+    "width": 1920,
+    "height": 1080,
+    "avg_frame_rate": "30/1",
+    "start_time": "0.000000",
+    "nb_read_frames": "750"
+  }
+}

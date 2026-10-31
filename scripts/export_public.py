@@ -5,7 +5,9 @@ ROOT=Path(__file__).resolve().parents[1]
 DIRS={'src','scripts','configs','extensions','schemas','skills','plugins','docs','tests','.agents','.claude-plugin'}
 FILES={'LICENSE','THIRD_PARTY.md','pyproject.toml','requirements-controller.txt','.gitignore'}
 REPORTS={'reports/capability_matrix.json','reports/phase_gates.json','reports/REFERENCE_ACCEPTANCE.md','reports/OPTIMIZATION_20261031.md','reports/optimization_1031_gates.json','reports/optimization_1031_results.json','reports/optimization_1031_claude_status.json','reports/optimization_1031_plugin_installation.json','reports/optimization_1031_launcher_validation.json','reports/optimization_1031_final_performance.json'}
+REPORTS|={'reports/optimization_1031_performance.json','reports/optimization_1031_optional_performance.json','reports/optimization_1031_interactive_performance.json'}
 ASSETS={'reports/optimization_1031_assets/seat_before.png','reports/optimization_1031_assets/seat_after.png','reports/optimization_1031_assets/media_manifest.json'}
+ASSETS|={'reports/optimization_1031_assets/crowd50_media_manifest.json'}
 p=argparse.ArgumentParser();p.add_argument('--destination',required=True);a=p.parse_args();destination=Path(a.destination).resolve()
 if subprocess.run(['git','diff','--quiet','HEAD','--'],cwd=ROOT).returncode:
  raise ValueError('commit the source changes before exporting a versioned snapshot')
@@ -28,7 +30,7 @@ for name in paths:
  if name.startswith('reports/') and rel.suffix=='.md':
   text=target.read_text()
   text=re.sub(r'\[([^\]]+)\]\((?:\.\./)?(?:runs|dist)/[^)]+\)',r'`\1` (local reference evidence)',text)
-  text=re.sub(r'\[([^\]]+)\]\((?:\.\./)?reports/(optimization_1031_[^/)]+\.mp4)\)',r'[\1](https://github.com/ros-claw/simpeople/releases/download/demos-20261031/\2)',text)
+  text=re.sub(r'\[([^\]]+)\]\((?:\.\./)?reports/(optimization_1031_[^/)]+\.mp4)\)',lambda m:'['+m[1]+'](https://github.com/ros-claw/simpeople/releases/download/'+('v0.2.0-preview' if m[2]=='optimization_1031_crowd50_demo.mp4' else 'demos-20261031')+'/'+m[2]+')',text)
   target.write_text(text)
  manifest[name]=hashlib.sha256(target.read_bytes()).hexdigest()
 readme=ROOT/'docs/public_readme.md';shutil.copy2(readme,destination/'README.md');manifest['README.md']=hashlib.sha256(readme.read_bytes()).hexdigest()

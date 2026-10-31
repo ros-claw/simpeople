@@ -12,6 +12,7 @@ from pxr import Usd,UsdGeom,UsdPhysics
 from .adapter import NativeBackend
 from simpeople.core.errors import SimPeopleError
 from simpeople.core.traffic import ReservationGrid, simplify_polyline,polyline_prefix,VerifiedLazyEdges
+from simpeople.core.route_history import history_path
 
 class ReservationNativeBackend(NativeBackend):
     def __init__(self,*args,**kwargs):
@@ -189,6 +190,9 @@ class ReservationNativeBackend(NativeBackend):
                 # A bounded corridor may end before the next mandatory via.
                 # Native success only confirms this submitted target list.
                 job['goal_index']=job['continuous_next_goal_index'];job['continuous_active']=False
+            if self.corridor_profile and len(self.instances)>12 and job.get('history_segment'):
+                visits=job.setdefault('grid_visits',{});node=self.grid.nearest(obs['position_m'])
+                visits[node]=visits.get(node,0)+1
             self.grid.release(handle);job['native_task_id']=None
         goal=job['goals'][job['goal_index']]
         if math.dist(obs['position_m'][:2],goal[:2])<=.3 and obs['speed_mps']<.15:
@@ -200,6 +204,9 @@ class ReservationNativeBackend(NativeBackend):
                 self.emit('traffic_native_started',route_id=rid,native_task_id=job['native_task_id'],action='sit');return
             else:self.complete(rid,job,'succeeded');return
         if self.corridor_profile and self.start_continuous_corridor(handle,rid,job,obs):return
+        history_enabled=self.corridor_profile and len(self.instances)>12
+        if history_enabled and job.get('history_goal_index')!=job['goal_index']:
+            job['grid_visits']={};job['history_goal_index']=job['goal_index']
         blocked=self.grid.blocked(handle,self.positions)
         starts=heapq.nsmallest(12,self.grid.nodes,key=lambda n:math.dist(self.grid.point(n)[:2],obs['position_m'][:2]))
         start=next((n for n in starts if n not in blocked and self.grid.can_reserve(handle,self.grid.sweep(obs['position_m'],self.grid.point(n)),self.positions,obs['position_m'],self.grid.point(n))
@@ -208,7 +215,7 @@ class ReservationNativeBackend(NativeBackend):
         if start is None:self.block(rid,job);return
         ends=heapq.nsmallest(12,self.grid.nodes,key=lambda n:math.dist(self.grid.point(n)[:2],goal[:2]))
         end=next((n for n in ends if n not in blocked and self.grid_connection(self.grid.point(n),goal,node_is_start=True)),None)
-        path=self.grid.path(start,end,blocked) if end is not None else None
+        path=(history_path(self.grid,start,end,blocked,job.get('grid_visits',{})) if history_enabled else self.grid.path(start,end,blocked)) if end is not None else None
         if not path:self.block(rid,job);return
         here=obs['position_m'];center=self.grid.point(start)
         if math.dist(here[:2],center[:2])>.35:destination=center
@@ -224,11 +231,11 @@ class ReservationNativeBackend(NativeBackend):
         cells=self.grid.sweep(here,destination)
         if not self.grid.reserve(handle,cells,self.positions,here,destination):self.block(rid,job);return
         if job['status']=='blocked':self.emit('traffic_wait_ended',route_id=rid,wait_sim_s=self.now-job['blocked_since'])
-        job.update(status='running',blocked_since=None,segment_goal=destination,continuous_active=False)
+        job.update(status='running',blocked_since=None,segment_goal=destination,continuous_active=False,history_segment=history_enabled)
         spec={'action':'move_to','target':destination,'gait':job['step'].get('gait','walk')}
         if 'speed_mps' in job['step']:spec['speed_mps']=job['step']['speed_mps']
         job['native_task_id']=super().start(handle,spec)
-        self.emit('traffic_native_started',route_id=rid,native_task_id=job['native_task_id'],action='move_to',target_m=destination,reserved_cells=len(cells))
+        self.emit('traffic_native_started',route_id=rid,native_task_id=job['native_task_id'],action='move_to',target_m=destination,reserved_cells=len(cells),replan_history_nodes=len(job.get('grid_visits',{})))
 
     def start_continuous_corridor(self,handle,rid,job,obs):
         candidate=job.get('corridor_candidate')
@@ -260,7 +267,7 @@ class ReservationNativeBackend(NativeBackend):
         spec={'action':'move_to','target':points[-1],'gait':job['step'].get('gait','walk')}
         if len(points)>2:spec['via']=points[1:-1]
         if 'speed_mps' in job['step']:spec['speed_mps']=job['step']['speed_mps']
-        job.update(status='running',blocked_since=None,segment_goal=points[-1],continuous_active=True,continuous_next_goal_index=next_goal)
+        job.update(status='running',blocked_since=None,segment_goal=points[-1],continuous_active=True,continuous_next_goal_index=next_goal,history_segment=False)
         job['native_task_id']=super().start(handle,spec)
         self.emit('traffic_native_started',route_id=rid,native_task_id=job['native_task_id'],action='continuous_corridor',
                   points_m=points,dense_navmesh_samples=dense_count,reserved_cells=len(self.grid.claims[handle]),final_auto_brake=True,horizon_m=horizon)

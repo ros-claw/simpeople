@@ -1,6 +1,6 @@
 {
   "scope": "1031 quality/product iteration; historical v0.1 population gates are separate",
-  "source_commit": "2b177467a8554676dc1ca68646f6cc5b5be69444",
+  "source_commit": "4615a22e6eaa8c488634e4a65df567c768ea5985",
   "gates": {
     "motion": {
       "passed": true,
@@ -36,10 +36,15 @@
       "status": "closed",
       "evidence": "runs/opt1031-regression50-seed17-01/acceptance_summary.json"
     },
-    "population50": {
-      "passed": null,
-      "status": "pending native run",
+    "population50_bounded_attempt": {
+      "passed": false,
+      "status": "closed",
       "evidence": "runs/opt1031-regression50-seed17-02/acceptance_summary.json"
+    },
+    "population50": {
+      "passed": true,
+      "status": "closed",
+      "evidence": "runs/opt1031-regression50-seed17-03/acceptance_summary.json"
     },
     "cleanup_and_bounded_vias": {
       "passed": true,
@@ -47,11 +52,20 @@
     },
     "performance30_realtime": {
       "passed": false,
-      "evidence": "runs/opt1031-final30-full-01/metrics.json"
+      "evidence": "runs/opt1031-final30-full-02/metrics.json"
+    },
+    "interactive10_realtime": {
+      "passed": false,
+      "evidence": "reports/optimization_1031_interactive_performance.json",
+      "scope": "720p throughput sample, not a 600-second population gate"
     },
     "tracy_steady_window": {
-      "passed": null,
+      "passed": true,
       "evidence": "runs/opt1031-final30-trace-04/profile_summary.json"
+    },
+    "population50_initial_framing": {
+      "passed": true,
+      "evidence": "runs/opt1031-regression50-seed17-03/framing_audit.json"
     },
     "mcp_reconnect_ownership": {
       "passed": true,
@@ -85,19 +99,39 @@
     },
     {
       "path": "reports/optimization_1031_claude_status.json",
-      "sha256": "5c42b077709d6f7a7a0cbd7e6e97db06d7f376a095c766704cab638214f11847"
+      "sha256": "18d54de7e1c986b485ff31a3e2a0f0640aadce3ddc0ddbaf6204b8c7cc486115"
     },
     {
       "path": "runs/opt1031-regression50-seed17-01/acceptance_summary.json",
       "sha256": "5738a2987fd5e23662662213fef585749aa84e24eaabb659dac92c3c9d90b739"
     },
     {
+      "path": "runs/opt1031-regression50-seed17-02/acceptance_summary.json",
+      "sha256": "554fd112eaab8d1f2c3cbb6efc72fbd8eafb49fa4ce5189eda05abc9603f677d"
+    },
+    {
+      "path": "runs/opt1031-regression50-seed17-03/acceptance_summary.json",
+      "sha256": "bec86af179a2090ac38a2732aeb895a04447cce0278b427b4513a6274eadf585"
+    },
+    {
       "path": "runs/opt1031-cleanup-corridor-13-02/cleanup_acceptance.json",
       "sha256": "07cea30658fe851e915c2742691e74d3d3fee34bf95c45ccbc82caea6e426e2e"
     },
     {
-      "path": "runs/opt1031-final30-full-01/metrics.json",
-      "sha256": "a13c7e717e6c6133fefddf58f19fc2e94f5e853d3f6eb712948f5bf7b3ecd7b9"
+      "path": "runs/opt1031-final30-full-02/metrics.json",
+      "sha256": "179fcba2eda2caf5e59eb5a065891f2c0c39a9a5f3bc9a5630252e17cd2b11ed"
+    },
+    {
+      "path": "reports/optimization_1031_interactive_performance.json",
+      "sha256": "6835560d4bf03bfa53fc27eba1567ca9e9e89657037b45ef16ffb90e8b0e7f69"
+    },
+    {
+      "path": "runs/opt1031-final30-trace-04/profile_summary.json",
+      "sha256": "ac469d56c983985c51a015df6eda82c2740c25fae0109aac7032965f82c4918c"
+    },
+    {
+      "path": "runs/opt1031-regression50-seed17-03/framing_audit.json",
+      "sha256": "20917b01c17d7ccc388b198ec77524eab288fc1223cce72765f3c4033d6ee662"
     },
     {
       "path": "runs/opt1031-regression50-seed17-02/mcp_ownership_acceptance.json",
