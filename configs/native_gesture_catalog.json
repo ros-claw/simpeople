@@ -1,0 +1,183 @@
+{
+  "schema_version": "simpeople.quality-catalog.v1",
+  "records": [
+    {
+      "quality_revision_sha256": "68d5587fa61e8f4f65bac6a23f6b76fbb6fa6f58d4c9bd24285adec95d0141b4",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human",
+      "asset_revision_sha256": "68d5587fa61e8f4f65bac6a23f6b76fbb6fa6f58d4c9bd24285adec95d0141b4",
+      "kind": "head_look",
+      "status": "discovered",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "max_hold_duration_s": 0.6,
+      "head_local_forward": [
+        0.2034550791918125,
+        1.2273066642910703e-16,
+        -0.9790842817403684
+      ],
+      "domain": {
+        "min_distance_m": 0.4,
+        "max_distance_m": 2,
+        "max_yaw_deg": 45,
+        "max_pitch_deg": 40
+      },
+      "scope": "Integrated Root lifecycle candidate; fresh actual Native qualification required. Previous evidence retained in git, not transferred.",
+      "stage_up_axis": "Z",
+      "meters_per_unit": 1,
+      "startup_profiles": {
+        "basic": {
+          "status": "verified",
+          "max_hold_duration_s": 2.0,
+          "implementation_sha256": "bde6d950825cfe9ab0285fdd781570ecb7737fa8c0c0477c8e0ad95c7af6f8da",
+          "scope": "ActualRoot130code/exacttwoassets/basicIdle/fixed30/zerojitter/APIseed42. II20holds/61samples plus8actuallegacyreturns/source/continuityverified. Freshstrictrepeatonly; default7base notqualified.",
+          "evidence_run": "iter1116ii-pausedguard-basic2-discovery-01",
+          "evidence_sha256": "be80ec618bb4c46a61490ff1266749235dec42e636eb61ba70ae07cf72cddd9f",
+          "replay_audit_sha256": "11e3d57bd2002529aa216ceb272f41001e2e01f8977b45a88eed8bacbf3ad4e3",
+          "continuity_audit_sha256": "755a9fb51cb34a5174772c425daa78707076c65e199c047bf21e2fba4a272925",
+          "source_audit_sha256": "a704ed2e7f87b31859aa59ac92c79e10439e12bc66d1e24eb33d3adb9b9715f5",
+          "legacy_regression_run": "iter1116ii-pausedguard-legacy8-01",
+          "legacy_review_sha256": "c53caf145181245716edb1c60ec2dd3fc969c364a66c0ba14cc9ac482ffe36ae",
+          "legacy_return_review_sha256": "e8c230eb1e56fb2f312653ece78d54be68f4d99d772dcf52f7ac5541b741ec3c"
+        }
+      }
+    },
+    {
+      "quality_revision_sha256": "68d5587fa61e8f4f65bac6a23f6b76fbb6fa6f58d4c9bd24285adec95d0141b4",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human",
+      "asset_revision_sha256": "68d5587fa61e8f4f65bac6a23f6b76fbb6fa6f58d4c9bd24285adec95d0141b4",
+      "kind": "reach_hand",
+      "status": "discovered",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "max_hold_duration_s": 0.6,
+      "head_local_forward": [
+        0.2034550791918125,
+        1.2273066642910703e-16,
+        -0.9790842817403684
+      ],
+      "domain": {
+        "min_height_m": 1,
+        "max_height_m": 1.5,
+        "min_forward_m": 0.1,
+        "max_forward_m": 0.55,
+        "max_arm_fraction": 0.95
+      },
+      "scope": "Integrated Root lifecycle candidate; fresh actual Native qualification required. Previous evidence retained in git, not transferred.",
+      "stage_up_axis": "Z",
+      "meters_per_unit": 1,
+      "startup_profiles": {
+        "basic": {
+          "status": "verified",
+          "max_hold_duration_s": 2.0,
+          "implementation_sha256": "bde6d950825cfe9ab0285fdd781570ecb7737fa8c0c0477c8e0ad95c7af6f8da",
+          "scope": "ActualRoot130code/exacttwoassets/basicIdle/fixed30/zerojitter/APIseed42. II20holds/61samples plus8actuallegacyreturns/source/continuityverified. Freshstrictrepeatonly; default7base notqualified.",
+          "evidence_run": "iter1116ii-pausedguard-basic2-discovery-01",
+          "evidence_sha256": "be80ec618bb4c46a61490ff1266749235dec42e636eb61ba70ae07cf72cddd9f",
+          "replay_audit_sha256": "11e3d57bd2002529aa216ceb272f41001e2e01f8977b45a88eed8bacbf3ad4e3",
+          "continuity_audit_sha256": "755a9fb51cb34a5174772c425daa78707076c65e199c047bf21e2fba4a272925",
+          "source_audit_sha256": "a704ed2e7f87b31859aa59ac92c79e10439e12bc66d1e24eb33d3adb9b9715f5",
+          "legacy_regression_run": "iter1116ii-pausedguard-legacy8-01",
+          "legacy_review_sha256": "c53caf145181245716edb1c60ec2dd3fc969c364a66c0ba14cc9ac482ffe36ae",
+          "legacy_return_review_sha256": "e8c230eb1e56fb2f312653ece78d54be68f4d99d772dcf52f7ac5541b741ec3c"
+        }
+      }
+    },
+    {
+      "quality_revision_sha256": "b822677b325040b22297a477ad4ed8f5e96d160d06286f2df9b6d80a252f1563",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "asset_revision_sha256": "b822677b325040b22297a477ad4ed8f5e96d160d06286f2df9b6d80a252f1563",
+      "kind": "head_look",
+      "status": "discovered",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "max_hold_duration_s": 0.6,
+      "head_local_forward": [
+        -2.9103630096423455e-11,
+        -2.4139881132923027e-06,
+        0.9999999999970864
+      ],
+      "domain": {
+        "min_distance_m": 0.4,
+        "max_distance_m": 2,
+        "max_yaw_deg": 45,
+        "max_pitch_deg": 40
+      },
+      "scope": "Integrated Root lifecycle candidate; fresh actual Native qualification required. Previous evidence retained in git, not transferred.",
+      "stage_up_axis": "Z",
+      "meters_per_unit": 1,
+      "startup_profiles": {
+        "basic": {
+          "status": "verified",
+          "max_hold_duration_s": 2.0,
+          "implementation_sha256": "bde6d950825cfe9ab0285fdd781570ecb7737fa8c0c0477c8e0ad95c7af6f8da",
+          "scope": "ActualRoot130code/exacttwoassets/basicIdle/fixed30/zerojitter/APIseed42. II20holds/61samples plus8actuallegacyreturns/source/continuityverified. Freshstrictrepeatonly; default7base notqualified.",
+          "evidence_run": "iter1116ii-pausedguard-basic2-discovery-01",
+          "evidence_sha256": "be80ec618bb4c46a61490ff1266749235dec42e636eb61ba70ae07cf72cddd9f",
+          "replay_audit_sha256": "11e3d57bd2002529aa216ceb272f41001e2e01f8977b45a88eed8bacbf3ad4e3",
+          "continuity_audit_sha256": "755a9fb51cb34a5174772c425daa78707076c65e199c047bf21e2fba4a272925",
+          "source_audit_sha256": "a704ed2e7f87b31859aa59ac92c79e10439e12bc66d1e24eb33d3adb9b9715f5",
+          "legacy_regression_run": "iter1116ii-pausedguard-legacy8-01",
+          "legacy_review_sha256": "c53caf145181245716edb1c60ec2dd3fc969c364a66c0ba14cc9ac482ffe36ae",
+          "legacy_return_review_sha256": "e8c230eb1e56fb2f312653ece78d54be68f4d99d772dcf52f7ac5541b741ec3c"
+        }
+      }
+    },
+    {
+      "quality_revision_sha256": "b822677b325040b22297a477ad4ed8f5e96d160d06286f2df9b6d80a252f1563",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "asset_revision_sha256": "b822677b325040b22297a477ad4ed8f5e96d160d06286f2df9b6d80a252f1563",
+      "kind": "reach_hand",
+      "status": "discovered",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "max_hold_duration_s": 0.6,
+      "head_local_forward": [
+        -2.9103630096423455e-11,
+        -2.4139881132923027e-06,
+        0.9999999999970864
+      ],
+      "domain": {
+        "min_height_m": 1,
+        "max_height_m": 1.5,
+        "min_forward_m": 0.1,
+        "max_forward_m": 0.55,
+        "max_arm_fraction": 0.95
+      },
+      "scope": "Integrated Root lifecycle candidate; fresh actual Native qualification required. Previous evidence retained in git, not transferred.",
+      "stage_up_axis": "Z",
+      "meters_per_unit": 1,
+      "startup_profiles": {
+        "basic": {
+          "status": "verified",
+          "max_hold_duration_s": 2.0,
+          "implementation_sha256": "bde6d950825cfe9ab0285fdd781570ecb7737fa8c0c0477c8e0ad95c7af6f8da",
+          "scope": "ActualRoot130code/exacttwoassets/basicIdle/fixed30/zerojitter/APIseed42. II20holds/61samples plus8actuallegacyreturns/source/continuityverified. Freshstrictrepeatonly; default7base notqualified.",
+          "evidence_run": "iter1116ii-pausedguard-basic2-discovery-01",
+          "evidence_sha256": "be80ec618bb4c46a61490ff1266749235dec42e636eb61ba70ae07cf72cddd9f",
+          "replay_audit_sha256": "11e3d57bd2002529aa216ceb272f41001e2e01f8977b45a88eed8bacbf3ad4e3",
+          "continuity_audit_sha256": "755a9fb51cb34a5174772c425daa78707076c65e199c047bf21e2fba4a272925",
+          "source_audit_sha256": "a704ed2e7f87b31859aa59ac92c79e10439e12bc66d1e24eb33d3adb9b9715f5",
+          "legacy_regression_run": "iter1116ii-pausedguard-legacy8-01",
+          "legacy_review_sha256": "c53caf145181245716edb1c60ec2dd3fc969c364a66c0ba14cc9ac482ffe36ae",
+          "legacy_return_review_sha256": "e8c230eb1e56fb2f312653ece78d54be68f4d99d772dcf52f7ac5541b741ec3c"
+        }
+      }
+    }
+  ]
+}

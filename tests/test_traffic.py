@@ -1,5 +1,24 @@
 from simpeople.core.traffic import ReservationGrid
 from simpeople.core.quality import QualityAudit
+import pytest
+
+
+def test_corridor_retry_staggering_is_stable_bounded_and_distributed():
+    from simpeople.core.traffic import corridor_retry_delay
+    actors=[f'q_{i:02d}' for i in range(50)]+['巡视员甲']
+    delays={actor:corridor_retry_delay(actor) for actor in actors}
+    assert all(.2<=delay<=.3+1e-9 for delay in delays.values())
+    assert len(set(delays.values()))==11
+    assert {actor:corridor_retry_delay(actor) for actor in reversed(actors)}==delays
+    # An actor recreated in a new episode keeps this scheduling value; the
+    # native instance/route tokens remain separate from this logical key.
+    assert corridor_retry_delay('q_06')==delays['q_06']
+
+
+@pytest.mark.parametrize('invalid',[None,1,''])
+def test_corridor_retry_requires_a_logical_actor_identity(invalid):
+    from simpeople.core.traffic import corridor_retry_delay
+    with pytest.raises(ValueError):corridor_retry_delay(invalid)
 
 def grid():
     nodes={(x,y) for x in range(-2,3) for y in range(-2,3)}

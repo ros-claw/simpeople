@@ -2,6 +2,22 @@
 import heapq
 import math
 
+BODY_CLEARANCE_M = .9
+# Tolerate accumulated floating-point clock error at the exact budget boundary.
+WAIT_BUDGET_CLOCK_TOLERANCE_S = 1e-9
+
+
+def corridor_retry_delay(actor_id):
+    """Stable per-logical-actor staggering, independent of physical UUIDs.
+
+    This changes scheduling jitter only. Native handles and instance/route
+    tokens must still fence ownership, cancellation and reservations.
+    """
+    if not isinstance(actor_id,str) or not actor_id:
+        raise ValueError('a nonempty logical actor ID is required')
+    return .2+(sum(actor_id.encode('utf-8'))%11)*.01
+
+
 class ReservationGrid:
     def __init__(self,nodes,edges,cell_m=1.25,margin_m=.45):
         self.nodes=set(nodes);self.edges=edges;self.cell=cell_m;self.margin=margin_m;self.claims={}
@@ -19,7 +35,7 @@ class ReservationGrid:
         cells=set()
         for other,p in positions.items():
             if other!=actor:
-                cells.update(n for n in self.footprint(p) if math.dist(self.point(n)[:2],p[:2])<.9)
+                cells.update(n for n in self.footprint(p) if math.dist(self.point(n)[:2],p[:2])<BODY_CLEARANCE_M)
         cells.update(self.claimed(actor))
         return cells
     def claimed(self,actor):
@@ -33,7 +49,7 @@ class ReservationGrid:
             if other==actor:continue
             t=max(0,min(1,((p[0]-start[0])*dx+(p[1]-start[1])*dy)/length2)) if length2 else 0
             distance=math.hypot(start[0]+t*dx-p[0],start[1]+t*dy-p[1])
-            if distance<.9:
+            if distance<BODY_CLEARANCE_M:
                 # A close initial configuration may only move away, never further in.
                 initial=math.dist(start[:2],p[:2])
                 if t>1e-6 or math.dist(end[:2],p[:2])<=initial+.05:return False
@@ -45,17 +61,18 @@ class ReservationGrid:
     def reserve(self,actor,cells,positions,start=None,end=None):
         if not self.can_reserve(actor,cells,positions,start,end):return False
         self.claims[actor]=set(cells);return True
-    def reserve_polyline(self,actor,points,positions):
+    def reserve_polyline(self,actor,points,positions,*,extra_cells=()):
         """Atomically claim every leg, including clearance and final braking area."""
         if len(points)<2:return False
         cells=set()
         for start,end in zip(points,points[1:]):
             cells.update(self.sweep(start,end))
             if not self.clearance(actor,start,end,positions):return False
+        cells.update(extra_cells)
         if cells & self.claimed(actor):return False
         self.claims[actor]=cells;return True
     def release(self,actor):self.claims.pop(actor,None)
-    def path(self,start,goal,blocked):
+    def path(self,start,goal,blocked,edges=None):
         if goal in blocked or start not in self.nodes or goal not in self.nodes:return None
         queue=[(0,0,start)];cost={start:0};parent={}
         while queue:
@@ -65,7 +82,7 @@ class ReservationGrid:
                 path=[goal]
                 while path[-1]!=start:path.append(parent[path[-1]])
                 return list(reversed(path))
-            for nxt in self.edges.get(node,[]):
+            for nxt in (edges if edges is not None else self.edges).get(node,[]):
                 if nxt in blocked:continue
                 new=g+1
                 if new<cost.get(nxt,math.inf):
@@ -117,3 +134,118 @@ class VerifiedLazyEdges:
                 if other in self.nodes and self.validator(node,other):neighbors.append(other)
             self.cache[node]=neighbors
         return self.cache[node]
+
+class ClearanceEdges:
+    """Per-query dynamic edge feasibility over the unchanged NavMesh graph.
+
+    Free endpoints do not imply a clear segment. Cache directed edges only for
+    one immutable position/claim snapshot, preserving the move-away exception.
+    """
+    def __init__(self,grid,actor,positions):
+        from .body_buckets import BodyBuckets
+        self.grid=grid;self.actor=actor;self.positions=positions;self.claimed=grid.claimed(actor);self.cache={}
+        self.bodies=BodyBuckets(positions,BODY_CLEARANCE_M)
+    def get(self,node,default=None):
+        if node not in self.grid.nodes:return default
+        if node not in self.cache:
+            start=self.grid.point(node);valid=[]
+            for other in self.grid.edges.get(node,[]):
+                end=self.grid.point(other)
+                if self.grid.sweep(start,end) & self.claimed:continue
+                if self.grid.clearance(self.actor,start,end,self.bodies.candidates(start,end)):valid.append(other)
+            self.cache[node]=valid
+        return self.cache[node]
+
+class FairGate:
+    """Older infeasible intents fence conflicting newcomers while holders drain.
+
+    These are admission fences, never physical claims. Grant requires the caller's
+    ordinary clearance/reservation checks too. Only generations already occupying
+    the old conflict area may drain through it; a reused actor name is insufficient.
+    """
+    def __init__(self,max_wait_sim_s=30):
+        self.pending={};self.sequence=0;self.max_wait_sim_s=max_wait_sim_s
+
+    def request(self,key,actor,cells,now,drainers=(),occupant_token=None,origin_cells=(),goal_cells=(),scope='corridor'):
+        if key not in self.pending:
+            self.sequence+=1;self.pending[key]={'key':key,'actor':actor,'cells':set(cells),'since':now,
+                'sequence':self.sequence,'drainers':set(drainers),'occupant_token':occupant_token,'origin_cells':set(origin_cells),'goal_cells':set(goal_cells),'scope':scope,
+                'conflicting_bypasses':0,'budget_reported':False,'state':'waiting','wait_since':now}
+        elif self.pending[key]['state']=='active' or self.pending[key]['scope']!=scope:
+            # A completed movement segment may advance the protected horizon,
+            # but it does not make a still-unfinished route a new arrival.
+            self.pending[key].update(cells=set(cells),drainers=set(drainers),goal_cells=set(goal_cells),scope=scope)
+        self.pending[key]['origin_cells']=set(origin_cells)
+        return self.pending[key]
+
+    def blockers(self,key,cells,exit_cells=None):
+        row=self.pending[key];order=(row['since'],row['sequence'],row['actor'])
+        def drains(old):
+            return key in old['drainers'] or (row['occupant_token'] is not None and row['occupant_token'] in old['drainers']
+                and row['origin_cells'] & old['cells'] and exit_cells is not None and
+                (not (exit_cells & old['cells']) or
+                 (row['origin_cells'] & old['goal_cells'] and not (exit_cells & old['goal_cells']))))
+        return [old for old in self.pending.values() if old['key']!=key and
+                (old['since'],old['sequence'],old['actor'])<order and old['cells'] & cells and not drains(old)]
+
+    def allowed(self,key,cells,exit_cells=None):return not self.blockers(key,cells,exit_cells)
+
+    def grant(self,key,now):
+        row=self.pending.get(key)
+        if row is None:return None
+        since=row['wait_since'] if row['wait_since'] is not None else now
+        result={'since_sim_time':since,'priority_since_sim_time':row['since'],'wait_sim_s':now-since,'conflicting_bypasses':row['conflicting_bypasses']}
+        row.update(state='active',wait_since=None,budget_reported=False)
+        return result
+
+    def waiting(self,key,now):
+        row=self.pending[key]
+        if row['wait_since'] is None:row['wait_since']=now
+        row['state']='waiting'
+
+    def cancel(self,key):self.pending.pop(key,None)
+
+    def trim_active(self,key,cells,occupant_token):
+        """Trim only this generation's active corridor; preserve age and order."""
+        row=self.pending.get(key)
+        if not row or row['state']!='active' or row['scope']!='corridor' or row['occupant_token']!=occupant_token:return False
+        row['cells'].difference_update(cells)
+        return True
+
+    def violations(self,now):
+        rows=[]
+        for row in self.pending.values():
+            if row['wait_since'] is not None and now-row['wait_since']>self.max_wait_sim_s+WAIT_BUDGET_CLOCK_TOLERANCE_S and not row['budget_reported']:
+                row['budget_reported']=True;rows.append({'key':row['key'],'actor':row['actor'],'wait_sim_s':now-row['wait_since'],
+                    'max_wait_sim_s':self.max_wait_sim_s,'conflicting_bypasses':row['conflicting_bypasses']})
+        return rows
+
+class WaitGraph:
+    """Report persistent directed wait cycles; detection does not free occupancy."""
+    def __init__(self,persistence_s=3):self.persistence_s=persistence_s;self.since={};self.reported=set()
+    def update(self,graph,now):
+        # Kosaraju over at most the managed crowd, without recursive graph imports.
+        nodes=set(graph)|{v for values in graph.values() for v in values};seen=set();order=[]
+        def visit(node):
+            if node in seen:return
+            seen.add(node)
+            for other in sorted(graph.get(node,())):visit(other)
+            order.append(node)
+        for node in sorted(nodes):visit(node)
+        reverse={n:set() for n in nodes}
+        for node,values in graph.items():
+            for other in values:reverse[other].add(node)
+        seen=set();cycles=set()
+        for node in reversed(order):
+            if node in seen:continue
+            stack=[node];group=set()
+            while stack:
+                item=stack.pop()
+                if item in seen:continue
+                seen.add(item);group.add(item);stack.extend(reverse[item]-seen)
+            if len(group)>1 or node in graph.get(node,()):cycles.add(tuple(sorted(group)))
+        self.since={key:self.since.get(key,now) for key in cycles};self.reported &= cycles;result=[]
+        for key,since in self.since.items():
+            if now-since>=self.persistence_s and key not in self.reported:
+                self.reported.add(key);result.append({'members':list(key),'since_sim_time':since,'duration_sim_s':now-since})
+        return result

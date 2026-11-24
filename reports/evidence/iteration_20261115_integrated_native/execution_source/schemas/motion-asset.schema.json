@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rosclaw.local/simpeople/motion-asset.v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "request_id",
+    "spec_sha256",
+    "rig_sha256",
+    "binding",
+    "sample_rate",
+    "frames",
+    "corrected",
+    "raw_decoded",
+    "raw_network",
+    "native_execution_verified",
+    "retarget_verified"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "simpeople.motion-asset.v1"
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+    },
+    "spec_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "rig_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "binding": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "session_id",
+            "episode_id",
+            "actor_id",
+            "actor_instance_id",
+            "control_epoch",
+            "task_id",
+            "context_revision"
+          ],
+          "properties": {
+            "session_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "episode_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "actor_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "actor_instance_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "task_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "control_epoch": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "context_revision": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        }
+      ]
+    },
+    "sample_rate": {
+      "const": 30
+    },
+    "frames": {
+      "type": "integer",
+      "minimum": 18,
+      "maximum": 58
+    },
+    "corrected": {
+      "type": "object",
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "raw_decoded": {
+      "type": "object",
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "raw_network": {
+      "type": "object",
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "native_execution_verified": {
+      "const": false
+    },
+    "retarget_verified": {
+      "const": false
+    }
+  },
+  "description": "A worker artifact is produced motion data. Retargeting and native execution require separate evidence and derived catalog entries."
+}

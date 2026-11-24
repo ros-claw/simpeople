@@ -30,10 +30,35 @@
       "enum": [
         "report",
         "replan_or_report"
-      ]
+      ],
+      "description": "replan_or_report requires a backend with bounded recovery: at most 2 stop/release-future/replan attempts toward the same goal, without extending the original deadline."
     },
     "on_cancel": {
       "const": "stop_activity"
+    },
+    "command_id": {
+      "$ref": "#/$defs/id"
+    },
+    "attempt_id": {
+      "$ref": "#/$defs/id"
+    },
+    "controller_id": {
+      "$ref": "#/$defs/id"
+    },
+    "session_id": {
+      "$ref": "#/$defs/id"
+    },
+    "episode_id": {
+      "$ref": "#/$defs/id"
+    },
+    "if_busy": {
+      "enum": [
+        "supersede",
+        "reject"
+      ]
+    },
+    "actor_instance_id": {
+      "$ref": "#/$defs/id"
     }
   },
   "$defs": {
@@ -75,7 +100,9 @@
             "leave_seat",
             "follow",
             "custom_action",
-            "queue"
+            "queue",
+            "head_look",
+            "reach_hand"
           ]
         },
         "target": {
@@ -122,6 +149,17 @@
           "items": {
             "$ref": "#/$defs/target"
           }
+        },
+        "interaction_revision": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "Bind a registered seat/queue or explicit resource to a geometry revision; checked again during execution."
+        },
+        "hand": {
+          "enum": [
+            "left",
+            "right"
+          ]
         }
       },
       "allOf": [
@@ -135,7 +173,9 @@
                   "sit",
                   "follow",
                   "custom_action",
-                  "queue"
+                  "queue",
+                  "head_look",
+                  "reach_hand"
                 ]
               }
             }
@@ -155,7 +195,9 @@
                   "sit",
                   "follow",
                   "custom_action",
-                  "queue"
+                  "queue",
+                  "head_look",
+                  "reach_hand"
                 ]
               }
             }
@@ -178,6 +220,95 @@
             "properties": {
               "target": {
                 "$ref": "#/$defs/id"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "interaction_revision"
+            ]
+          },
+          "then": {
+            "properties": {
+              "action": {
+                "enum": [
+                  "sit",
+                  "queue",
+                  "wait",
+                  "custom_action",
+                  "head_look",
+                  "reach_hand"
+                ]
+              }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "action": {
+                      "enum": [
+                        "wait",
+                        "custom_action",
+                        "head_look",
+                        "reach_hand"
+                      ]
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "resource_id"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "action": {
+                "const": "reach_hand"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "hand"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "hand"
+            ]
+          },
+          "then": {
+            "properties": {
+              "action": {
+                "const": "reach_hand"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "action": {
+                "enum": [
+                  "head_look",
+                  "reach_hand"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "duration_s": {
+                "maximum": 5
               }
             }
           }

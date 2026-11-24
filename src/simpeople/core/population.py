@@ -136,13 +136,36 @@ class Population:
                 assignment['suspended']=True;e.event('population_actor_suspended',actor_id=aid,error=err.as_dict())
 
 class Queues:
-    def __init__(self):self.members={}
-    def join(self,queue,actor,capacity):
-        members=self.members.setdefault(queue,[])
-        if actor in members:return members.index(actor)
-        if len(members)>=capacity:raise SimPeopleError('RESOURCE_BUSY','queue is full',queue=queue)
-        members.append(actor);return len(members)-1
+    """Physical slots plus a bounded FIFO outside queue, fenced by lease token."""
+    def __init__(self,max_outside=8,on_event=None,clock=None):
+        from .admission import Admission
+        self.admission=Admission(max_outside,on_event);self.clock=clock or (lambda:0.)
+    @staticmethod
+    def key(actor,token):return tuple(token) if token is not None else ('legacy',actor)
+    @property
+    def members(self):
+        return {q:[self.admission.tickets[k]['actor_id'] for k in r['order'] if self.admission.tickets[k]['status']!='waiting'] for q,r in self.admission.resources.items()}
+    def join(self,queue,actor,capacity,token=None,now=None):
+        now=self.clock() if now is None else now;key=self.key(actor,token)
+        previous=self.admission.find(queue,key)
+        if token is None and previous and previous['status'] not in {'waiting','admitted','serving','exiting'}:
+            self.admission.keys.pop((queue,key),None)
+        for ticket_id in self.admission.resources.get(queue,{}).get('order',[]):
+            row=self.admission.tickets[ticket_id]
+            if row['actor_id']==actor and row['lease_token']!=key:raise SimPeopleError('RESOURCE_BUSY','previous queue lease still active',queue=queue)
+        ticket=self.admission.request_admission(queue,key,now,actor_id=actor,capacity=capacity)
+        if ticket['status']=='rejected':raise SimPeopleError('ADMISSION_FULL','outside queue is full',resource_id=queue,ticket=ticket)
+        if not ticket['inside']:raise SimPeopleError('RESOURCE_BUSY','waiting outside physical queue',resource_id=queue,ticket=ticket)
+        return self.members[queue].index(actor)
+    def ticket(self,queue,actor,token=None):return self.admission.find(queue,self.key(actor,token))
+    def mark(self,queue,actor,token,status):
+        row=self.ticket(queue,actor,token)
+        if row:self.admission.transition(row['ticket_id'],status,self.clock())
     def index(self,queue,actor):return self.members[queue].index(actor)
-    def remove(self,actor):
-        for members in self.members.values():
-            if actor in members:members.remove(actor)
+    def remove(self,actor,token=None,now=None,reason='completed'):
+        now=self.clock() if now is None else now;key=self.key(actor,token)
+        for resource in self.admission.snapshot().values():
+            for row in resource['tickets']:
+                if row['actor_id']==actor and row['lease_token'] in {('legacy',actor),key}:
+                    self.admission.release(row['lease_token'],now,resource_id=row['resource_id'],physical_clear=True,reason=reason)
+    def snapshot(self):return self.admission.snapshot()

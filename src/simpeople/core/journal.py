@@ -35,17 +35,26 @@ class Journal:
             self.measured_times.append(dt)
             if self.measured_start_sim is None:self.measured_start_sim=engine.sim_time;self.measured_start_wall=now
         for aid,a in engine.actors.items():
-            row={'actor_id':aid,'episode_id':engine.episode_id,'sim_time':engine.sim_time,
+            row={'actor_id':aid,'actor_instance_id':a.get('actor_instance_id'),'episode_id':engine.episode_id,'session_id':engine.session_id,'sim_time':engine.sim_time,
                  'task_id':a['task_id'],'control_epoch':a['control_epoch'],
                  **engine.backend.observe(a['handle'])}
             if frame_identity is not None:row['frame_identity']=frame_identity
             if getattr(engine.backend,'quality_sampling',False):
+                # Independent stream binding for read-only wait snapshots.
+                # Backend body generation differs from Engine actor_instance_id.
+                row['native_actor_prim_path']=a['handle']
+                instance=getattr(engine.backend,'instances',{}).get(a['handle'],{})
+                row['traffic_body_instance_id']=instance.get('traffic_instance_id')
                 task=engine.tasks.get(a['task_id'])
                 if task:
                     row['task_step_index']=task['step_index'];row['task_step_phase']=task['step_phase']
                     row['requested_step']=task['steps'][task['step_index']] if task['step_index']<len(task['steps']) else None
                 route=getattr(engine.backend,'routes',{}).get(getattr(engine.backend,'owner_routes',{}).get(a['handle']))
                 if route:row['traffic']={k:route.get(k) for k in ('phase','status','segment_goal','native_task_id','retries','blocked_since')}
+                grid=getattr(engine.backend,'grid',None)
+                if grid is not None:row['traffic_claim_cells']=sorted(grid.claims.get(a['handle'],set()))
+                stop=getattr(engine.backend,'local_yield_stops',{}).get(a['handle'])
+                if stop:row['cancelled_yield_settlement']={k:stop[k] for k in ('route_id','body_generation','started_sim_time','stable_since','stable_samples')}
             self.trajectory.write(json.dumps(row,allow_nan=False)+'\n')
         if self.frames%30==0:
             self.performance.write(json.dumps({'sim_time':engine.sim_time,'wall_elapsed_s':now-self.start_wall,

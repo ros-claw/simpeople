@@ -1,0 +1,5276 @@
+{
+  "schema_version": "simpeople.benchmark.v1",
+  "case_id": "release_wide_50_seed17_v2",
+  "category": "ordinary",
+  "scene": {
+    "id": "industrial",
+    "revision": "1a0738138fa636df676512588618750247e41603274584944809990fda7e34d1"
+  },
+  "actors": [
+    {
+      "actor_id": "person_001",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -18.5,
+        -20.0,
+        0
+      ],
+      "role": "commuter"
+    },
+    {
+      "actor_id": "person_002",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -15.8,
+        -20.0,
+        0
+      ],
+      "role": "patrol"
+    },
+    {
+      "actor_id": "person_003",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -13.1,
+        -20.0,
+        0
+      ],
+      "role": "visitor"
+    },
+    {
+      "actor_id": "person_004",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -10.399999999999999,
+        -20.0,
+        0
+      ],
+      "role": "rest"
+    },
+    {
+      "actor_id": "person_005",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -7.699999999999999,
+        -20.0,
+        0
+      ],
+      "role": "queue"
+    },
+    {
+      "actor_id": "person_006",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -5.0,
+        -20.0,
+        0
+      ],
+      "role": "runner"
+    },
+    {
+      "actor_id": "person_007",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -2.299999999999997,
+        -20.0,
+        0
+      ],
+      "role": "responder"
+    },
+    {
+      "actor_id": "person_008",
+      "asset_id": "default",
+      "spawn_anchor": [
+        0.40000000000000213,
+        -20.0,
+        0
+      ],
+      "role": "commuter"
+    },
+    {
+      "actor_id": "person_009",
+      "asset_id": "default",
+      "spawn_anchor": [
+        3.1000000000000014,
+        -20.0,
+        0
+      ],
+      "role": "patrol"
+    },
+    {
+      "actor_id": "person_010",
+      "asset_id": "default",
+      "spawn_anchor": [
+        5.800000000000001,
+        -20.0,
+        0
+      ],
+      "role": "visitor"
+    },
+    {
+      "actor_id": "person_011",
+      "asset_id": "default",
+      "spawn_anchor": [
+        8.5,
+        -20.0,
+        0
+      ],
+      "role": "rest"
+    },
+    {
+      "actor_id": "person_012",
+      "asset_id": "default",
+      "spawn_anchor": [
+        11.200000000000003,
+        -20.0,
+        0
+      ],
+      "role": "queue"
+    },
+    {
+      "actor_id": "person_013",
+      "asset_id": "default",
+      "spawn_anchor": [
+        13.900000000000006,
+        -20.0,
+        0
+      ],
+      "role": "runner"
+    },
+    {
+      "actor_id": "person_014",
+      "asset_id": "default",
+      "spawn_anchor": [
+        16.6,
+        -20.0,
+        0
+      ],
+      "role": "responder"
+    },
+    {
+      "actor_id": "person_015",
+      "asset_id": "default",
+      "spawn_anchor": [
+        20.0,
+        -18.5,
+        0
+      ],
+      "role": "commuter"
+    },
+    {
+      "actor_id": "person_016",
+      "asset_id": "default",
+      "spawn_anchor": [
+        20.0,
+        -15.8,
+        0
+      ],
+      "role": "patrol"
+    },
+    {
+      "actor_id": "person_017",
+      "asset_id": "default",
+      "spawn_anchor": [
+        20.0,
+        -13.1,
+        0
+      ],
+      "role": "visitor"
+    },
+    {
+      "actor_id": "person_018",
+      "asset_id": "default",
+      "spawn_anchor": [
+        20.0,
+        -10.399999999999999,
+        0
+      ],
+      "role": "rest"
+    },
+    {
+      "actor_id": "person_019",
+      "asset_id": "default",
+      "spawn_anchor": [
+        20.0,
+        -7.699999999999999,
+        0
+      ],
+      "role": "queue"
+    },
+    {
+      "actor_id": "person_020",
+      "asset_id": "default",
+      "spawn_anchor": [
+        20.0,
+        -5.0,
+        0
+      ],
+      "role": "runner"
+    },
+    {
+      "actor_id": "person_021",
+      "asset_id": "default",
+      "spawn_anchor": [
+        20.0,
+        -2.299999999999997,
+        0
+      ],
+      "role": "responder"
+    },
+    {
+      "actor_id": "person_022",
+      "asset_id": "default",
+      "spawn_anchor": [
+        20.0,
+        0.40000000000000213,
+        0
+      ],
+      "role": "commuter"
+    },
+    {
+      "actor_id": "person_023",
+      "asset_id": "default",
+      "spawn_anchor": [
+        20.0,
+        3.1000000000000014,
+        0
+      ],
+      "role": "patrol"
+    },
+    {
+      "actor_id": "person_024",
+      "asset_id": "default",
+      "spawn_anchor": [
+        20.0,
+        5.800000000000001,
+        0
+      ],
+      "role": "visitor"
+    },
+    {
+      "actor_id": "person_025",
+      "asset_id": "default",
+      "spawn_anchor": [
+        20.0,
+        8.5,
+        0
+      ],
+      "role": "rest"
+    },
+    {
+      "actor_id": "person_026",
+      "asset_id": "default",
+      "spawn_anchor": [
+        20.0,
+        11.200000000000003,
+        0
+      ],
+      "role": "queue"
+    },
+    {
+      "actor_id": "person_027",
+      "asset_id": "default",
+      "spawn_anchor": [
+        20.0,
+        13.900000000000006,
+        0
+      ],
+      "role": "runner"
+    },
+    {
+      "actor_id": "person_028",
+      "asset_id": "default",
+      "spawn_anchor": [
+        20.0,
+        16.6,
+        0
+      ],
+      "role": "responder"
+    },
+    {
+      "actor_id": "person_029",
+      "asset_id": "default",
+      "spawn_anchor": [
+        18.5,
+        20.0,
+        0
+      ],
+      "role": "commuter"
+    },
+    {
+      "actor_id": "person_030",
+      "asset_id": "default",
+      "spawn_anchor": [
+        15.8,
+        20.0,
+        0
+      ],
+      "role": "patrol"
+    },
+    {
+      "actor_id": "person_031",
+      "asset_id": "default",
+      "spawn_anchor": [
+        13.1,
+        20.0,
+        0
+      ],
+      "role": "visitor"
+    },
+    {
+      "actor_id": "person_032",
+      "asset_id": "default",
+      "spawn_anchor": [
+        10.399999999999999,
+        20.0,
+        0
+      ],
+      "role": "rest"
+    },
+    {
+      "actor_id": "person_033",
+      "asset_id": "default",
+      "spawn_anchor": [
+        7.699999999999999,
+        20.0,
+        0
+      ],
+      "role": "queue"
+    },
+    {
+      "actor_id": "person_034",
+      "asset_id": "default",
+      "spawn_anchor": [
+        5.0,
+        20.0,
+        0
+      ],
+      "role": "runner"
+    },
+    {
+      "actor_id": "person_035",
+      "asset_id": "default",
+      "spawn_anchor": [
+        2.299999999999997,
+        20.0,
+        0
+      ],
+      "role": "responder"
+    },
+    {
+      "actor_id": "person_036",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -0.40000000000000213,
+        20.0,
+        0
+      ],
+      "role": "commuter"
+    },
+    {
+      "actor_id": "person_037",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -3.1000000000000014,
+        20.0,
+        0
+      ],
+      "role": "patrol"
+    },
+    {
+      "actor_id": "person_038",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -5.800000000000001,
+        20.0,
+        0
+      ],
+      "role": "visitor"
+    },
+    {
+      "actor_id": "person_039",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -8.5,
+        20.0,
+        0
+      ],
+      "role": "rest"
+    },
+    {
+      "actor_id": "person_040",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -11.200000000000003,
+        20.0,
+        0
+      ],
+      "role": "queue"
+    },
+    {
+      "actor_id": "person_041",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -13.900000000000006,
+        20.0,
+        0
+      ],
+      "role": "runner"
+    },
+    {
+      "actor_id": "person_042",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -16.6,
+        20.0,
+        0
+      ],
+      "role": "responder"
+    },
+    {
+      "actor_id": "person_043",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -20.0,
+        18.5,
+        0
+      ],
+      "role": "commuter"
+    },
+    {
+      "actor_id": "person_044",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -20.0,
+        15.8,
+        0
+      ],
+      "role": "patrol"
+    },
+    {
+      "actor_id": "person_045",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -20.0,
+        13.1,
+        0
+      ],
+      "role": "visitor"
+    },
+    {
+      "actor_id": "person_046",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -20.0,
+        10.399999999999999,
+        0
+      ],
+      "role": "rest"
+    },
+    {
+      "actor_id": "person_047",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -20.0,
+        7.699999999999999,
+        0
+      ],
+      "role": "queue"
+    },
+    {
+      "actor_id": "person_048",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -20.0,
+        5.0,
+        0
+      ],
+      "role": "runner"
+    },
+    {
+      "actor_id": "person_049",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -20.0,
+        2.299999999999997,
+        0
+      ],
+      "role": "responder"
+    },
+    {
+      "actor_id": "person_050",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -20.0,
+        -0.40000000000000213,
+        0
+      ],
+      "role": "commuter"
+    }
+  ],
+  "requests": [
+    {
+      "request_case_id": "person_001_cycle0",
+      "actor_id": "person_001",
+      "at_s": 4.577574626902202,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -15.3,
+            5.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 12.618079869487598
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -18.5,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.5306237763183734
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_002_cycle0",
+      "actor_id": "person_002",
+      "at_s": 4.894244616100634,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -17.5,
+            -18.75,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -17.5,
+            16.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.862294331116523
+        },
+        {
+          "action": "move_to",
+          "target": [
+            17.5,
+            -18.75,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -15.8,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.087524925680225
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_003_cycle0",
+      "actor_id": "person_003",
+      "at_s": 6.40841487637521,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_2",
+          "duration_s": 4.664821464948892
+        },
+        {
+          "action": "move_to",
+          "target": [
+            5.7,
+            5.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.517418981176387
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -13.1,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_004_cycle0",
+      "actor_id": "person_004",
+      "at_s": 4.912959063395629,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            12.7,
+            5.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.531495385300548
+        },
+        {
+          "action": "sit",
+          "target": "seat_03",
+          "duration_s": 5.439483473509151
+        },
+        {
+          "action": "leave_seat"
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -10.399999999999999,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.901588400020939
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_005_cycle0",
+      "actor_id": "person_005",
+      "at_s": 5.789351556878286,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_1",
+          "duration_s": 4.77736569996571
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -7.699999999999999,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.368918470465387
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_006_cycle0",
+      "actor_id": "person_006",
+      "at_s": 7.036898188814947,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -18.0,
+            18,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            18.0,
+            18,
+            0
+          ],
+          "gait": "run",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            18.0,
+            16.5,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.425718573370071
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -5.0,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.1607547599271433
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_007_cycle0",
+      "actor_id": "person_007",
+      "at_s": 7.853554586467835,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "wait",
+          "duration_s": 11.633449968199335
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -13.75,
+            -0.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.3337079103627194
+        },
+        {
+          "action": "move_to",
+          "target": [
+            5.7,
+            12.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.528275403853619
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -2.299999999999997,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_008_cycle0",
+      "actor_id": "person_008",
+      "at_s": 6.9874050710031215,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            12.7,
+            12.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.798464743917603
+        },
+        {
+          "action": "move_to",
+          "target": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.376553142833611
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_009_cycle0",
+      "actor_id": "person_009",
+      "at_s": 2.3748532489973195,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -17.5,
+            -16.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -15.0,
+            16.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.710345468723814
+        },
+        {
+          "action": "move_to",
+          "target": [
+            17.5,
+            -16.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            3.1000000000000014,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.38850669742849
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_010_cycle0",
+      "actor_id": "person_010",
+      "at_s": 6.8545955471006925,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_0",
+          "duration_s": 4.827934050342475
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -7.0,
+            5.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.895279419361465
+        },
+        {
+          "action": "move_to",
+          "target": [
+            5.800000000000001,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_011_cycle0",
+      "actor_id": "person_011",
+      "at_s": 0.32633409620999654,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            7.0,
+            5.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.755819436125333
+        },
+        {
+          "action": "sit",
+          "target": "seat_04",
+          "duration_s": 7.022414152322501
+        },
+        {
+          "action": "leave_seat"
+        },
+        {
+          "action": "move_to",
+          "target": [
+            8.5,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.951068058669762
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_012_cycle0",
+      "actor_id": "person_012",
+      "at_s": 7.7483916812725635,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_2",
+          "duration_s": 4.624601964233643
+        },
+        {
+          "action": "move_to",
+          "target": [
+            11.200000000000003,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.674720367443717
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_013_cycle0",
+      "actor_id": "person_013",
+      "at_s": 7.4734717052184125,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -16.8,
+            18,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            16.8,
+            18,
+            0
+          ],
+          "gait": "run",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            16.8,
+            16.5,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.413492897118696
+        },
+        {
+          "action": "move_to",
+          "target": [
+            13.900000000000006,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.827612831657692
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_014_cycle0",
+      "actor_id": "person_014",
+      "at_s": 3.7695313241523936,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "wait",
+          "duration_s": 7.272863882149416
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -11.25,
+            -0.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 2.4406365398143395
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -7.0,
+            12.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.85136097794776
+        },
+        {
+          "action": "move_to",
+          "target": [
+            16.6,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_015_cycle0",
+      "actor_id": "person_015",
+      "at_s": 7.052340093566525,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            7.0,
+            12.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 8.85823317647312
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            -18.5,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.379651180078468
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_016_cycle0",
+      "actor_id": "person_016",
+      "at_s": 0.9847134506300899,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -17.5,
+            -13.75,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -12.5,
+            16.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.244185990443586
+        },
+        {
+          "action": "move_to",
+          "target": [
+            17.5,
+            -13.75,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            -15.8,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.227500234903152
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_017_cycle0",
+      "actor_id": "person_017",
+      "at_s": 7.632299166396114,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_1",
+          "duration_s": 5.490466805477089
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -12.7,
+            5.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.641314259870225
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            -13.1,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_018_cycle0",
+      "actor_id": "person_018",
+      "at_s": 4.469873537756743,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -5.7,
+            5.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.5052626823476585
+        },
+        {
+          "action": "sit",
+          "target": "seat_05",
+          "duration_s": 8.722806837884981
+        },
+        {
+          "action": "leave_seat"
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            -10.399999999999999,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.9933603210059605
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_019_cycle0",
+      "actor_id": "person_019",
+      "at_s": 6.824074794734676,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_0",
+          "duration_s": 4.335747413510582
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            -7.699999999999999,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.277882600923858
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_020_cycle0",
+      "actor_id": "person_020",
+      "at_s": 1.5051213931026348,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -15.6,
+            18,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            15.6,
+            18,
+            0
+          ],
+          "gait": "run",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            15.6,
+            16.5,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.262874677045284
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            -5.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.446443130361834
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_021_cycle0",
+      "actor_id": "person_021",
+      "at_s": 0.5443055438528059,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "wait",
+          "duration_s": 5.776542676721566
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -8.75,
+            -0.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 2.2631136326372463
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -12.7,
+            12.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.8488720714742906
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            -2.299999999999997,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_022_cycle0",
+      "actor_id": "person_022",
+      "at_s": 3.3238148281808986,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -5.7,
+            12.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.719853812961639
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            0.40000000000000213,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.257670236351372
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_023_cycle0",
+      "actor_id": "person_023",
+      "at_s": 6.975726104674027,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -17.5,
+            -11.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -10.0,
+            16.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.751637444115119
+        },
+        {
+          "action": "move_to",
+          "target": [
+            17.5,
+            -11.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            3.1000000000000014,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.936076125809525
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_024_cycle0",
+      "actor_id": "person_024",
+      "at_s": 2.2695553248650358,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_2",
+          "duration_s": 4.208233350375291
+        },
+        {
+          "action": "move_to",
+          "target": [
+            15.3,
+            12.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.678289323104624
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            5.800000000000001,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_025_cycle0",
+      "actor_id": "person_025",
+      "at_s": 0.5562646922399033,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -15.3,
+            4.4,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.0505532260639496
+        },
+        {
+          "action": "sit",
+          "target": "seat_00",
+          "duration_s": 9.291850704122087
+        },
+        {
+          "action": "leave_seat"
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            8.5,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.284460363175562
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_026_cycle0",
+      "actor_id": "person_026",
+      "at_s": 3.6052930561564835,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_1",
+          "duration_s": 3.3575869261023863
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            11.200000000000003,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.160381878972981
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_027_cycle0",
+      "actor_id": "person_027",
+      "at_s": 2.118198981398524,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -14.4,
+            18,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            14.4,
+            18,
+            0
+          ],
+          "gait": "run",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            14.4,
+            16.5,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.252295692261615
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            13.900000000000006,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.27855015808069
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_028_cycle0",
+      "actor_id": "person_028",
+      "at_s": 1.0675466070290334,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "wait",
+          "duration_s": 5.602729275768556
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -6.25,
+            -0.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.2773573667814593
+        },
+        {
+          "action": "move_to",
+          "target": [
+            12.7,
+            4.4,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.5950750669222353
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            16.6,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_029_cycle0",
+      "actor_id": "person_029",
+      "at_s": 2.3338814107617845,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -15.3,
+            11.399999999999999,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 11.67313077998163
+        },
+        {
+          "action": "move_to",
+          "target": [
+            18.5,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.667067290479663
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_030_cycle0",
+      "actor_id": "person_030",
+      "at_s": 0.6370161886348962,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -17.5,
+            -8.75,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -7.5,
+            16.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.514619381509558
+        },
+        {
+          "action": "move_to",
+          "target": [
+            17.5,
+            -8.75,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            15.8,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.886568128345634
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_031_cycle0",
+      "actor_id": "person_031",
+      "at_s": 1.9314249847152913,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_0",
+          "duration_s": 5.430063145500995
+        },
+        {
+          "action": "move_to",
+          "target": [
+            5.7,
+            11.399999999999999,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.081328124425365
+        },
+        {
+          "action": "move_to",
+          "target": [
+            13.1,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_032_cycle0",
+      "actor_id": "person_032",
+      "at_s": 5.418212691203396,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            12.7,
+            11.399999999999999,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.137195206616747
+        },
+        {
+          "action": "sit",
+          "target": "seat_01",
+          "duration_s": 10.908846908685085
+        },
+        {
+          "action": "leave_seat"
+        },
+        {
+          "action": "move_to",
+          "target": [
+            10.399999999999999,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.244374131755814
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_033_cycle0",
+      "actor_id": "person_033",
+      "at_s": 2.3813094461107758,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_2",
+          "duration_s": 2.4954034738550175
+        },
+        {
+          "action": "move_to",
+          "target": [
+            7.699999999999999,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.021015650674462
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_034_cycle0",
+      "actor_id": "person_034",
+      "at_s": 5.703411955751987,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -13.2,
+            18,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            13.2,
+            18,
+            0
+          ],
+          "gait": "run",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            13.2,
+            16.5,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.298445190969954
+        },
+        {
+          "action": "move_to",
+          "target": [
+            5.0,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.048698837710642
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_035_cycle0",
+      "actor_id": "person_035",
+      "at_s": 0.3210075077462049,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "wait",
+          "duration_s": 11.659794129350132
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -3.75,
+            -0.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 2.0516589956243876
+        },
+        {
+          "action": "move_to",
+          "target": [
+            7.0,
+            4.4,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.808937474133568
+        },
+        {
+          "action": "move_to",
+          "target": [
+            2.299999999999997,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_036_cycle0",
+      "actor_id": "person_036",
+      "at_s": 4.884034858471615,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            14.0,
+            4.4,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.431035007820141
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -0.40000000000000213,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.511557309302996
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_037_cycle0",
+      "actor_id": "person_037",
+      "at_s": 6.638012469207094,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -17.5,
+            -6.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -5.0,
+            16.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.0656704437943265
+        },
+        {
+          "action": "move_to",
+          "target": [
+            17.5,
+            -6.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -3.1000000000000014,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.870400134258864
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_038_cycle0",
+      "actor_id": "person_038",
+      "at_s": 4.96627499284051,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_1",
+          "duration_s": 5.646669675791862
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -7.0,
+            11.399999999999999,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.207037494229981
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -5.800000000000001,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_039_cycle0",
+      "actor_id": "person_039",
+      "at_s": 1.128906431162945,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            7.0,
+            11.399999999999999,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.068607885490712
+        },
+        {
+          "action": "sit",
+          "target": "seat_02",
+          "duration_s": 11.536020858831662
+        },
+        {
+          "action": "leave_seat"
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -8.5,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.433113285794459
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_040_cycle0",
+      "actor_id": "person_040",
+      "at_s": 3.9366718381499943,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_0",
+          "duration_s": 3.018341193971291
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -11.200000000000003,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.988634437648342
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_041_cycle0",
+      "actor_id": "person_041",
+      "at_s": 1.7970136604828095,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -12.0,
+            18,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            12.0,
+            18,
+            0
+          ],
+          "gait": "run",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            12.0,
+            16.5,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.701196875283905
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -13.900000000000006,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.254589962157687
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_042_cycle0",
+      "actor_id": "person_042",
+      "at_s": 0.9736991811336253,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "wait",
+          "duration_s": 10.871513128403288
+        },
+        {
+          "action": "move_to",
+          "target": [
+            8.75,
+            -0.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.626229151391829
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -5.7,
+            4.4,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.669019001994508
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -16.6,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_043_cycle0",
+      "actor_id": "person_043",
+      "at_s": 4.98138878302817,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            8.3,
+            4.4,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 11.449917387333526
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -20.0,
+            18.5,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.087122118740988
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_044_cycle0",
+      "actor_id": "person_044",
+      "at_s": 1.006073397733796,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -17.5,
+            -3.75,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -2.5,
+            16.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.411651681274223
+        },
+        {
+          "action": "move_to",
+          "target": [
+            17.5,
+            -3.75,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -20.0,
+            15.8,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.072113946958165
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_045_cycle0",
+      "actor_id": "person_045",
+      "at_s": 7.279664261670554,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_2",
+          "duration_s": 5.192852037436283
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -12.7,
+            11.399999999999999,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.33476855941587
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -20.0,
+            13.1,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_046_cycle0",
+      "actor_id": "person_046",
+      "at_s": 5.292081087308522,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -5.7,
+            11.399999999999999,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.93742107584441
+        },
+        {
+          "action": "sit",
+          "target": "seat_03",
+          "duration_s": 8.455259461092044
+        },
+        {
+          "action": "leave_seat"
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -20.0,
+            10.399999999999999,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.882887158338811
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_047_cycle0",
+      "actor_id": "person_047",
+      "at_s": 7.864181088530768,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_1",
+          "duration_s": 2.1293827097903137
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -20.0,
+            7.699999999999999,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.246503633534525
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_048_cycle0",
+      "actor_id": "person_048",
+      "at_s": 2.0092974154361913,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -10.8,
+            18,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            10.8,
+            18,
+            0
+          ],
+          "gait": "run",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            10.8,
+            16.5,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.558467913714066
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -20.0,
+            5.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.512107309193224
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_049_cycle0",
+      "actor_id": "person_049",
+      "at_s": 1.6818032249421675,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "wait",
+          "duration_s": 11.781815682313038
+        },
+        {
+          "action": "move_to",
+          "target": [
+            11.25,
+            -0.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.2489664291834712
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -15.3,
+            3.1,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.054572446326199
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -20.0,
+            2.299999999999997,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_050_cycle0",
+      "actor_id": "person_050",
+      "at_s": 3.3076583520454275,
+      "deadline_s": 600,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -8.3,
+            3.1,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 13.730615417975564
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -20.0,
+            -0.40000000000000213,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.749540888469431
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_001_cycle1",
+      "actor_id": "person_001",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_001_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -15.3,
+            5.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 11.480581455520685
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -18.5,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.980235571918914
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_002_cycle1",
+      "actor_id": "person_002",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_002_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -17.5,
+            -18.75,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -17.5,
+            16.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.391214992209938
+        },
+        {
+          "action": "move_to",
+          "target": [
+            17.5,
+            -18.75,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -15.8,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.010048153835001
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_003_cycle1",
+      "actor_id": "person_003",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_003_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_2",
+          "duration_s": 3.7484415700699176
+        },
+        {
+          "action": "move_to",
+          "target": [
+            5.7,
+            5.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.659123529054524
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -13.1,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_004_cycle1",
+      "actor_id": "person_004",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_004_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            12.7,
+            5.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.57070200171214
+        },
+        {
+          "action": "sit",
+          "target": "seat_03",
+          "duration_s": 11.596632895161942
+        },
+        {
+          "action": "leave_seat"
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -10.399999999999999,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.267714439212472
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_005_cycle1",
+      "actor_id": "person_005",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_005_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_1",
+          "duration_s": 3.8279796225858442
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -7.699999999999999,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.5548248785774685
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_006_cycle1",
+      "actor_id": "person_006",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_006_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -18.0,
+            18,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            18.0,
+            18,
+            0
+          ],
+          "gait": "run",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            18.0,
+            16.5,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.702589400120052
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -5.0,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.895899436409316
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_007_cycle1",
+      "actor_id": "person_007",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_007_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "wait",
+          "duration_s": 8.765344611124297
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -13.75,
+            -0.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.310971671940146
+        },
+        {
+          "action": "move_to",
+          "target": [
+            5.7,
+            12.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.476387341628547
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -2.299999999999997,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_008_cycle1",
+      "actor_id": "person_008",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_008_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            12.7,
+            12.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 13.723561028381283
+        },
+        {
+          "action": "move_to",
+          "target": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.47251347261437
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_009_cycle1",
+      "actor_id": "person_009",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_009_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -17.5,
+            -16.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -15.0,
+            16.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.43854798942661
+        },
+        {
+          "action": "move_to",
+          "target": [
+            17.5,
+            -16.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            3.1000000000000014,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.073674354556439
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_010_cycle1",
+      "actor_id": "person_010",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_010_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_0",
+          "duration_s": 5.816338880540144
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -7.0,
+            5.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.978412791405143
+        },
+        {
+          "action": "move_to",
+          "target": [
+            5.800000000000001,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_011_cycle1",
+      "actor_id": "person_011",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_011_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            7.0,
+            5.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.878906445766388
+        },
+        {
+          "action": "sit",
+          "target": "seat_04",
+          "duration_s": 9.952414608136166
+        },
+        {
+          "action": "leave_seat"
+        },
+        {
+          "action": "move_to",
+          "target": [
+            8.5,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.930877934987791
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_012_cycle1",
+      "actor_id": "person_012",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_012_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_2",
+          "duration_s": 3.285545116825339
+        },
+        {
+          "action": "move_to",
+          "target": [
+            11.200000000000003,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.260558172283707
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_013_cycle1",
+      "actor_id": "person_013",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_013_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -16.8,
+            18,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            16.8,
+            18,
+            0
+          ],
+          "gait": "run",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            16.8,
+            16.5,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.19181914409309
+        },
+        {
+          "action": "move_to",
+          "target": [
+            13.900000000000006,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.30649385860847
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_014_cycle1",
+      "actor_id": "person_014",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_014_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "wait",
+          "duration_s": 6.73193755100831
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -11.25,
+            -0.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.567633401751113
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -7.0,
+            12.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.3289253851349425
+        },
+        {
+          "action": "move_to",
+          "target": [
+            16.6,
+            -20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_015_cycle1",
+      "actor_id": "person_015",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_015_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            7.0,
+            12.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 11.93116842889194
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            -18.5,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.881323394069147
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_016_cycle1",
+      "actor_id": "person_016",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_016_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -17.5,
+            -13.75,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -12.5,
+            16.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.311880789778915
+        },
+        {
+          "action": "move_to",
+          "target": [
+            17.5,
+            -13.75,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            -15.8,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.676634329506065
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_017_cycle1",
+      "actor_id": "person_017",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_017_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_1",
+          "duration_s": 4.979287457415331
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -12.7,
+            5.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.927735488846304
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            -13.1,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_018_cycle1",
+      "actor_id": "person_018",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_018_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -5.7,
+            5.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.179537316083132
+        },
+        {
+          "action": "sit",
+          "target": "seat_05",
+          "duration_s": 9.273717649434118
+        },
+        {
+          "action": "leave_seat"
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            -10.399999999999999,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.235865694632275
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_019_cycle1",
+      "actor_id": "person_019",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_019_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_0",
+          "duration_s": 2.210503822172268
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            -7.699999999999999,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.657678595543409
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_020_cycle1",
+      "actor_id": "person_020",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_020_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -15.6,
+            18,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            15.6,
+            18,
+            0
+          ],
+          "gait": "run",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            15.6,
+            16.5,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.8102988737650456
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            -5.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.5225554027837127
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_021_cycle1",
+      "actor_id": "person_021",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_021_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "wait",
+          "duration_s": 7.448077819153228
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -8.75,
+            -0.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 2.7605357885892436
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -12.7,
+            12.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.192689244013328
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            -2.299999999999997,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_022_cycle1",
+      "actor_id": "person_022",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_022_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -5.7,
+            12.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 12.112819413336616
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            0.40000000000000213,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.014878164757352
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_023_cycle1",
+      "actor_id": "person_023",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_023_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -17.5,
+            -11.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -10.0,
+            16.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.111544114502534
+        },
+        {
+          "action": "move_to",
+          "target": [
+            17.5,
+            -11.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            3.1000000000000014,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.241230759992628
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_024_cycle1",
+      "actor_id": "person_024",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_024_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_2",
+          "duration_s": 4.355211652387944
+        },
+        {
+          "action": "move_to",
+          "target": [
+            15.3,
+            12.7,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.0103423924454766
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            5.800000000000001,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_025_cycle1",
+      "actor_id": "person_025",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_025_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -15.3,
+            4.4,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.90264769037439
+        },
+        {
+          "action": "sit",
+          "target": "seat_00",
+          "duration_s": 11.501731383237123
+        },
+        {
+          "action": "leave_seat"
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            8.5,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.145162380636975
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_026_cycle1",
+      "actor_id": "person_026",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_026_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_1",
+          "duration_s": 2.4917478467789818
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            11.200000000000003,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.246559960194907
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_027_cycle1",
+      "actor_id": "person_027",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_027_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -14.4,
+            18,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            14.4,
+            18,
+            0
+          ],
+          "gait": "run",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            14.4,
+            16.5,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.818582613972113
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            13.900000000000006,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.9015862918111788
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_028_cycle1",
+      "actor_id": "person_028",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_028_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "wait",
+          "duration_s": 5.522947526185405
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -6.25,
+            -0.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 2.2531133426601277
+        },
+        {
+          "action": "move_to",
+          "target": [
+            12.7,
+            4.4,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.9373491392045157
+        },
+        {
+          "action": "move_to",
+          "target": [
+            20.0,
+            16.6,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_029_cycle1",
+      "actor_id": "person_029",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_029_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -15.3,
+            11.399999999999999,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 11.884108762997178
+        },
+        {
+          "action": "move_to",
+          "target": [
+            18.5,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.326553768688528
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_030_cycle1",
+      "actor_id": "person_030",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_030_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -17.5,
+            -8.75,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -7.5,
+            16.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.209251271192237
+        },
+        {
+          "action": "move_to",
+          "target": [
+            17.5,
+            -8.75,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            15.8,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.354209800564557
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_031_cycle1",
+      "actor_id": "person_031",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_031_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_0",
+          "duration_s": 5.943007965484753
+        },
+        {
+          "action": "move_to",
+          "target": [
+            5.7,
+            11.399999999999999,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.887054673600505
+        },
+        {
+          "action": "move_to",
+          "target": [
+            13.1,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_032_cycle1",
+      "actor_id": "person_032",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_032_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            12.7,
+            11.399999999999999,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.274994324565414
+        },
+        {
+          "action": "sit",
+          "target": "seat_01",
+          "duration_s": 6.564937218817294
+        },
+        {
+          "action": "leave_seat"
+        },
+        {
+          "action": "move_to",
+          "target": [
+            10.399999999999999,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.5733429016319125
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_033_cycle1",
+      "actor_id": "person_033",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_033_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_2",
+          "duration_s": 2.985777886628591
+        },
+        {
+          "action": "move_to",
+          "target": [
+            7.699999999999999,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.874515545300214
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_034_cycle1",
+      "actor_id": "person_034",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_034_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -13.2,
+            18,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            13.2,
+            18,
+            0
+          ],
+          "gait": "run",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            13.2,
+            16.5,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.746843108656431
+        },
+        {
+          "action": "move_to",
+          "target": [
+            5.0,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.413432489623387
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_035_cycle1",
+      "actor_id": "person_035",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_035_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "wait",
+          "duration_s": 9.142734187370454
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -3.75,
+            -0.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.1849917314625196
+        },
+        {
+          "action": "move_to",
+          "target": [
+            7.0,
+            4.4,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.977833503772882
+        },
+        {
+          "action": "move_to",
+          "target": [
+            2.299999999999997,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_036_cycle1",
+      "actor_id": "person_036",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_036_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            14.0,
+            4.4,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 13.319052425421518
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -0.40000000000000213,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.676021484540872
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_037_cycle1",
+      "actor_id": "person_037",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_037_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -17.5,
+            -6.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -5.0,
+            16.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.456446360457585
+        },
+        {
+          "action": "move_to",
+          "target": [
+            17.5,
+            -6.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -3.1000000000000014,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.466035935619873
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_038_cycle1",
+      "actor_id": "person_038",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_038_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_1",
+          "duration_s": 3.565947969022234
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -7.0,
+            11.399999999999999,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.1890155150313544
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -5.800000000000001,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_039_cycle1",
+      "actor_id": "person_039",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_039_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            7.0,
+            11.399999999999999,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.315401986833322
+        },
+        {
+          "action": "sit",
+          "target": "seat_02",
+          "duration_s": 11.36174764345411
+        },
+        {
+          "action": "leave_seat"
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -8.5,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.385836560658671
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_040_cycle1",
+      "actor_id": "person_040",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_040_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_0",
+          "duration_s": 3.9882421733046973
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -11.200000000000003,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.998123005873363
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_041_cycle1",
+      "actor_id": "person_041",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_041_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -12.0,
+            18,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            12.0,
+            18,
+            0
+          ],
+          "gait": "run",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            12.0,
+            16.5,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.714164687378461
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -13.900000000000006,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.351510782365677
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_042_cycle1",
+      "actor_id": "person_042",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_042_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "wait",
+          "duration_s": 7.684968329768343
+        },
+        {
+          "action": "move_to",
+          "target": [
+            8.75,
+            -0.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.0758325033358807
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -5.7,
+            4.4,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.60042852276029
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -16.6,
+            20.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_043_cycle1",
+      "actor_id": "person_043",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_043_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            8.3,
+            4.4,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.7191992492684545
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -20.0,
+            18.5,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.18063953419663
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_044_cycle1",
+      "actor_id": "person_044",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_044_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -17.5,
+            -3.75,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -2.5,
+            16.25,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.421775160023196
+        },
+        {
+          "action": "move_to",
+          "target": [
+            17.5,
+            -3.75,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -20.0,
+            15.8,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.308781882621471
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_045_cycle1",
+      "actor_id": "person_045",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_045_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_2",
+          "duration_s": 5.6506333347633495
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -12.7,
+            11.399999999999999,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.097103750149668
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -20.0,
+            13.1,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_046_cycle1",
+      "actor_id": "person_046",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_046_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -5.7,
+            11.399999999999999,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.417438206401428
+        },
+        {
+          "action": "sit",
+          "target": "seat_03",
+          "duration_s": 11.590667148653832
+        },
+        {
+          "action": "leave_seat"
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -20.0,
+            10.399999999999999,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 3.144712442314843
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_047_cycle1",
+      "actor_id": "person_047",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_047_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_1",
+          "duration_s": 4.687321339569404
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -20.0,
+            7.699999999999999,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 6.938949880137546
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_048_cycle1",
+      "actor_id": "person_048",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_048_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -10.8,
+            18,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            10.8,
+            18,
+            0
+          ],
+          "gait": "run",
+          "timeout_s": 240
+        },
+        {
+          "action": "move_to",
+          "target": [
+            10.8,
+            16.5,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 7.937354095610162
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -20.0,
+            5.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.230737043985405
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_049_cycle1",
+      "actor_id": "person_049",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_049_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "wait",
+          "duration_s": 7.343534092176995
+        },
+        {
+          "action": "move_to",
+          "target": [
+            11.25,
+            -0.0,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 2.3895521686224983
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -15.3,
+            3.1,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 4.77884533979555
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -20.0,
+            2.299999999999997,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "person_050_cycle1",
+      "actor_id": "person_050",
+      "at_s": 0,
+      "deadline_s": 600,
+      "depends_on": [
+        "person_050_cycle0"
+      ],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -8.3,
+            3.1,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 13.551541867871602
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -20.0,
+            -0.40000000000000213,
+            0
+          ],
+          "gait": "walk",
+          "timeout_s": 240
+        },
+        {
+          "action": "wait",
+          "duration_s": 5.705074229736257
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    }
+  ],
+  "submission_mode": "closed_loop",
+  "busy_policy": "queue",
+  "max_pending_per_actor": 2,
+  "duration_s": 600,
+  "finite": true,
+  "capture_profile": "full",
+  "seed_derivation": "sha256(seed:actor:cycle), independent of completion order"
+}

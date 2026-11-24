@@ -1,0 +1,157 @@
+{
+  "schema_version": "simpeople.benchmark.v1",
+  "case_id": "r3_exit_blocked4_v1",
+  "category": "fault_injection",
+  "scene": {
+    "id": "industrial",
+    "revision": "1a0738138fa636df676512588618750247e41603274584944809990fda7e34d1"
+  },
+  "actors": [
+    {
+      "actor_id": "q_00",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -15,
+        -15,
+        0
+      ]
+    },
+    {
+      "actor_id": "q_01",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -15,
+        -16.25,
+        0
+      ]
+    },
+    {
+      "actor_id": "blocker_0",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -12.5,
+        -15,
+        0
+      ]
+    },
+    {
+      "actor_id": "blocker_1",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -17.5,
+        -15,
+        0
+      ]
+    }
+  ],
+  "requests": [
+    {
+      "request_case_id": "queue_00",
+      "actor_id": "q_00",
+      "at_s": 0,
+      "deadline_s": 50,
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_0",
+          "duration_s": 1.2,
+          "timeout_s": 50
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -18.5,
+            -20.0,
+            0
+          ],
+          "timeout_s": 50
+        }
+      ],
+      "expected_outcome": "succeeded"
+    },
+    {
+      "request_case_id": "queue_01",
+      "actor_id": "q_01",
+      "at_s": 0,
+      "deadline_s": 50,
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_0",
+          "duration_s": 1.2,
+          "timeout_s": 50
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -15.8,
+            -20.0,
+            0
+          ],
+          "timeout_s": 50
+        }
+      ],
+      "expected_outcome": "succeeded"
+    },
+    {
+      "request_case_id": "blocker_0",
+      "actor_id": "blocker_0",
+      "at_s": 0,
+      "deadline_s": 50,
+      "steps": [
+        {
+          "action": "wait",
+          "duration_s": 8
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -12.5,
+            -10,
+            0
+          ],
+          "timeout_s": 40
+        }
+      ],
+      "expected_outcome": "succeeded"
+    },
+    {
+      "request_case_id": "blocker_1",
+      "actor_id": "blocker_1",
+      "at_s": 0,
+      "deadline_s": 50,
+      "steps": [
+        {
+          "action": "wait",
+          "duration_s": 8
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -17.5,
+            -10,
+            0
+          ],
+          "timeout_s": 40
+        }
+      ],
+      "expected_outcome": "succeeded"
+    }
+  ],
+  "submission_mode": "open_arrival",
+  "busy_policy": "reject",
+  "max_pending_per_actor": 2,
+  "duration_s": 60,
+  "finite": true,
+  "capture_profile": "full",
+  "checkpoints": [
+    {
+      "label": "exit_still_occupied",
+      "at_s": 5,
+      "kind": "queue_exit_blocked",
+      "actor_id": "q_00",
+      "resource_id": "queue_0"
+    }
+  ],
+  "stop_when_complete": true
+}

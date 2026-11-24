@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "simpeople": {
+      "command": "simpeople",
+      "args": [
+        "mcp"
+      ],
+      "env": {
+        "SIMPEOPLE_ENDPOINT": "http://127.0.0.1:8768",
+        "SIMPEOPLE_CONTROLLER_ID": "simpeople-custom"
+      }
+    }
+  }
+}

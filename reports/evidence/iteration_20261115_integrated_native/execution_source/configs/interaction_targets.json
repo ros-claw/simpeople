@@ -1,0 +1,104 @@
+{
+  "schema_version": "simpeople.interaction-overlays.v1",
+  "targets": [
+    {
+      "semantic_id": "work_00",
+      "kind": "workstation",
+      "prim_path": "/World/Workstations/Desk_0",
+      "approach": "work_00",
+      "capacity": 1,
+      "allowed_actions": [
+        "wait",
+        "look_at"
+      ]
+    },
+    {
+      "semantic_id": "work_01",
+      "kind": "workstation",
+      "prim_path": "/World/Workstations/Desk_1",
+      "approach": "work_01",
+      "capacity": 1,
+      "allowed_actions": [
+        "wait",
+        "look_at"
+      ]
+    },
+    {
+      "semantic_id": "work_02",
+      "kind": "workstation",
+      "prim_path": "/World/Workstations/Desk_2",
+      "approach": "work_02",
+      "capacity": 1,
+      "allowed_actions": [
+        "wait",
+        "look_at"
+      ]
+    },
+    {
+      "semantic_id": "work_03",
+      "kind": "workstation",
+      "prim_path": "/World/Workstations/Desk_3",
+      "approach": "work_03",
+      "capacity": 1,
+      "allowed_actions": [
+        "wait",
+        "look_at"
+      ]
+    },
+    {
+      "semantic_id": "work_04",
+      "kind": "workstation",
+      "prim_path": "/World/Workstations/Desk_4",
+      "approach": "work_04",
+      "capacity": 1,
+      "allowed_actions": [
+        "wait",
+        "look_at"
+      ]
+    },
+    {
+      "semantic_id": "work_05",
+      "kind": "workstation",
+      "prim_path": "/World/Workstations/Desk_5",
+      "approach": "work_05",
+      "capacity": 1,
+      "allowed_actions": [
+        "wait",
+        "look_at"
+      ]
+    },
+    {
+      "semantic_id": "work_06",
+      "kind": "workstation",
+      "prim_path": "/World/Workstations/Desk_6",
+      "approach": "work_06",
+      "capacity": 1,
+      "allowed_actions": [
+        "wait",
+        "look_at"
+      ]
+    },
+    {
+      "semantic_id": "work_07",
+      "kind": "workstation",
+      "prim_path": "/World/Workstations/Desk_7",
+      "approach": "work_07",
+      "capacity": 1,
+      "allowed_actions": [
+        "wait",
+        "look_at"
+      ]
+    },
+    {
+      "semantic_id": "workbench_a",
+      "kind": "workstation",
+      "prim_path": "/World/Workbench",
+      "approach": "workbench_a",
+      "capacity": 1,
+      "allowed_actions": [
+        "wait",
+        "look_at"
+      ]
+    }
+  ]
+}

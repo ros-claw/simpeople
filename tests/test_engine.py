@@ -59,6 +59,33 @@ def test_invalid_replacement_keeps_old_task(engine):
     with pytest.raises(SimPeopleError):submit(engine,'bad',steps=[{'action':'move_to','target':'bad'}])
     assert engine.actors['a']['task_id']==tid and engine.tasks[tid]['status']=='accepted'
 
+
+def test_canonical_native_handoff_starts_before_another_world_tick(engine):
+    old=submit(engine,steps=[{'action':'custom_action','target':'base','duration_s':12}]);engine.tick(0)
+    def prepare(handle,step,previous):
+        assert previous['task_id']==old
+        return step['target']=='generated'
+    engine.backend.prepare_immediate_motion_start=prepare
+    new=submit(engine,'canonical',steps=[{'action':'custom_action','target':'generated','duration_s':2}])
+    assert engine.tasks[old]['status']=='cancelled'
+    assert engine.tasks[new]['status']=='running'
+    assert engine.tasks[new]['native_task_id']==2
+    assert engine.backend.started==['custom_action','custom_action']
+    assert engine.backend.stops==0
+    assert engine.tasks[old]['native_handoff_requested'] is True
+    assert engine.sim_time==0
+    assert len([e for e in engine.journal.events if e['kind']=='native_task_bound' and e['task_id']==new])==1
+
+
+def test_canonical_entry_rejection_preserves_old_task_epoch_and_native_controller(engine):
+    old=submit(engine);engine.tick(0);before=copy.deepcopy(engine.actors['a']);stops=engine.backend.stops
+    def reject(*args):raise SimPeopleError('MOTION_ENTRY_NOT_READY','actual pose changed')
+    engine.backend.prepare_immediate_motion_start=reject
+    with pytest.raises(SimPeopleError,match='actual pose'):
+        submit(engine,'bad_canonical',steps=[{'action':'custom_action','target':'generated','duration_s':2}])
+    assert engine.actors['a']==before
+    assert engine.tasks[old]['status']=='running' and engine.backend.stops==stops
+
 def test_new_control_invalidates_old_activity(engine):
     old=submit(engine);engine.tick(0);new=submit(engine,'replacement')
     engine.tick(.1);engine.tick(2)

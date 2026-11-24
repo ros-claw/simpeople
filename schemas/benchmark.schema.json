@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Frozen SimPeople benchmark v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "case_id",
+    "scene",
+    "actors",
+    "requests",
+    "capture_profile",
+    "duration_s",
+    "submission_mode",
+    "busy_policy"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "simpeople.benchmark.v1"
+    },
+    "case_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+    },
+    "scene": {
+      "type": "object",
+      "required": [
+        "id",
+        "revision"
+      ]
+    },
+    "actors": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "required": [
+          "actor_id",
+          "spawn_anchor"
+        ],
+        "properties": {
+          "actor_id": {
+            "type": "string"
+          },
+          "spawn_anchor": {
+            "type": [
+              "array",
+              "string"
+            ]
+          }
+        }
+      }
+    },
+    "requests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "request_case_id",
+          "actor_id",
+          "deadline_s",
+          "steps"
+        ],
+        "properties": {
+          "request_case_id": {
+            "type": "string"
+          },
+          "actor_id": {
+            "type": "string"
+          },
+          "at_s": {
+            "type": "number",
+            "minimum": 0
+          },
+          "deadline_s": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "depends_on": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "steps": {
+            "type": "array",
+            "minItems": 1
+          },
+          "think_s": {
+            "type": "number",
+            "minimum": 0
+          },
+          "expected_outcome": {
+            "enum": [
+              "succeeded",
+              "failed",
+              "cancelled"
+            ]
+          },
+          "on_blocked": {
+            "enum": [
+              "report",
+              "replan_or_report"
+            ]
+          },
+          "expected_error_code": {
+            "type": "string"
+          },
+          "expected_physical_stop": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "submission_mode": {
+      "enum": [
+        "open_arrival",
+        "closed_loop"
+      ]
+    },
+    "busy_policy": {
+      "enum": [
+        "reject",
+        "queue",
+        "supersede"
+      ]
+    },
+    "max_pending_per_actor": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100
+    },
+    "duration_s": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "finite": {
+      "type": "boolean"
+    },
+    "capture_profile": {
+      "enum": [
+        "full",
+        "no_encode",
+        "render_only",
+        "none"
+      ]
+    },
+    "stop_when_complete": {
+      "type": "boolean",
+      "description": "Finite native fault probes may stop only after every expected terminal/error predicate, event and checkpoint has been observed. Continuous windows cannot stop early."
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "event_id",
+          "at_s",
+          "method",
+          "params"
+        ],
+        "properties": {
+          "method": {
+            "enum": [
+              "cancel",
+              "move_prop"
+            ]
+          }
+        }
+      }
+    },
+    "checkpoints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "label",
+          "at_s",
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "const": "queue_exit_blocked"
+          }
+        }
+      }
+    },
+    "runtime_policy": {
+      "type": "object"
+    }
+  }
+}

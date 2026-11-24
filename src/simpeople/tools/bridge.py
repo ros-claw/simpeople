@@ -46,7 +46,8 @@ class Bridge:
         for _ in range(32):
             try:request,future,received=self.queue.get_nowait()
             except Empty:break
-            self.engine.event('command_applied',method=request.get('method'),received_wall_time=received)
+            correlation={k:request.get('params',{}).get(k) for k in ('request_id','command_id','attempt_id')}
+            self.engine.event('command_applied',method=request.get('method'),received_wall_time=received,**correlation)
             try:response={'result':self.engine.call(request.get('method',''),request.get('params',{}))}
             except SimPeopleError as e:response={'error':e.as_dict()}
             except (KeyError,TypeError,ValueError) as e:response={'error':{'code':'INVALID_REQUEST','message':str(e)}}

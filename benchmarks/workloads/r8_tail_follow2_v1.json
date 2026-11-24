@@ -1,0 +1,74 @@
+{
+  "schema_version": "simpeople.benchmark.v1",
+  "case_id": "r8_tail_follow2_v1",
+  "category": "traffic",
+  "scene": {
+    "id": "industrial",
+    "revision": "1a0738138fa636df676512588618750247e41603274584944809990fda7e34d1"
+  },
+  "submission_mode": "open_arrival",
+  "busy_policy": "reject",
+  "max_pending_per_actor": 2,
+  "duration_s": 50,
+  "finite": true,
+  "capture_profile": "full",
+  "stop_when_complete": true,
+  "actors": [
+    {
+      "actor_id": "leader",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -10,
+        -5,
+        0
+      ]
+    },
+    {
+      "actor_id": "follower",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -12.5,
+        -5,
+        0
+      ]
+    }
+  ],
+  "requests": [
+    {
+      "request_case_id": "leader",
+      "actor_id": "leader",
+      "at_s": 0,
+      "deadline_s": 45,
+      "expected_outcome": "succeeded",
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            10,
+            -5,
+            0
+          ],
+          "timeout_s": 45
+        }
+      ]
+    },
+    {
+      "request_case_id": "follower",
+      "actor_id": "follower",
+      "at_s": 0.3,
+      "deadline_s": 45,
+      "expected_outcome": "succeeded",
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            6.25,
+            -5,
+            0
+          ],
+          "timeout_s": 45
+        }
+      ]
+    }
+  ]
+}

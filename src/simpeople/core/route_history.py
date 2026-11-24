@@ -7,8 +7,8 @@ unchanged; only the choice between currently available paths is affected.
 import heapq
 import math
 
-def history_path(grid,start,goal,blocked,visits):
-    if not visits:return grid.path(start,goal,blocked)
+def history_path(grid,start,goal,blocked,visits,edges=None):
+    if not visits:return grid.path(start,goal,blocked,edges=edges)
     if goal in blocked or start not in grid.nodes or goal not in grid.nodes:return None
     queue=[(0,0,start)];cost={start:0};parent={}
     while queue:
@@ -18,7 +18,7 @@ def history_path(grid,start,goal,blocked,visits):
             path=[goal]
             while path[-1]!=start:path.append(parent[path[-1]])
             return list(reversed(path))
-        for nxt in grid.edges.get(node,[]):
+        for nxt in (edges if edges is not None else grid.edges).get(node,[]):
             if nxt in blocked:continue
             # A bounded, positive cost discourages repeated reversals without
             # forbidding a route that has to traverse an earlier node again.

@@ -59,3 +59,64 @@ def test_boolean_is_not_a_control_generation():
     e=Engine(Backend(),Journal())
     with pytest.raises(SimPeopleError):e.call('control_session',{'request_id':'take','controller_id':'qa','action':'takeover','expected_epoch':False})
     assert e.controller_id is None
+
+
+def test_bound_batch_items_preserve_busy_actor_and_allow_another_actor():
+    e=Engine(Backend(),Journal())
+    for aid in ['a','b']:e.call('spawn',{'request_id':'spawn_'+aid,'actor_id':aid})
+    old=e.call('run_activity',{'request_id':'old','actor_id':'a','steps':[{'action':'wait','duration_s':10}]})['task_id']
+    r=e.call('batch',{'request_id':'bound','operation':'run_activity','items':[{'actor_id':aid,'actor_instance_id':e.actors[aid]['actor_instance_id'],'if_busy':'reject','on_blocked':'report','steps':[{'action':'wait','duration_s':1}]} for aid in ['a','b']]})
+    assert r['accepted']==1 and r['rejected']==1
+    assert r['results'][0]['error']['code']=='ACTOR_BUSY'
+    assert e.actors['a']['task_id']==old and e.tasks[old]['status']=='accepted'
+    assert e.actors['b']['task_id']==r['results'][1]['result']['task_id']
+
+
+def test_stale_batch_instance_cannot_assign_work_to_recreated_actor():
+    e=Engine(Backend(),Journal());e.call('spawn',{'request_id':'spawn1','actor_id':'a'});old=e.actors['a']['actor_instance_id']
+    e.call('despawn',{'request_id':'delete','actor_id':'a'});e.call('spawn',{'request_id':'spawn2','actor_id':'a'})
+    stopped=e.backend.stops
+    r=e.call('batch',{'request_id':'stale','operation':'run_activity','items':[{'actor_id':'a','actor_instance_id':old,'steps':[{'action':'wait','duration_s':1}]}]})
+    assert r['results'][0]['error']['code']=='ACTOR_INSTANCE_MISMATCH'
+    assert e.actors['a']['task_id'] is None and e.backend.stops==stopped
+
+
+@pytest.mark.parametrize('bound',[True,False])
+def test_batch_cancel_task_cannot_be_labeled_as_another_actor(bound):
+    e=Engine(Backend(),Journal())
+    for aid in ['a','b']:e.call('spawn',{'request_id':'spawn_'+aid,'actor_id':aid})
+    tid=e.call('run_activity',{'request_id':'old','actor_id':'a','steps':[{'action':'wait','duration_s':10}]})['task_id']
+    item={'actor_id':'b','task_id':tid}
+    if bound:item['actor_instance_id']=e.actors['b']['actor_instance_id']
+    r=e.call('batch',{'request_id':'badcancel','operation':'cancel','items':[item]})
+    assert r['results'][0]['error']['code']=='INVALID_REQUEST'
+    assert not e.tasks[tid]['cancel_requested'] and e.backend.stops==0
+
+
+def test_bad_batch_envelope_reports_the_exact_fields_before_any_write():
+    e=Engine(Backend(),Journal())
+    with pytest.raises(SimPeopleError) as error:e.call('batch',{'request_id':'bad','operation':'spawn','items':[{'actor_id':'a'},{'actor_id':'b','mystery':1}]})
+    assert error.value.details['item_index']==1
+    assert error.value.details['unsupported_fields']==['mystery']
+    assert 'spawn_anchor' in error.value.details['allowed_item_fields']
+    assert not e.actors
+
+
+def test_old_task_cannot_use_either_instance_id_to_cancel_a_new_instance():
+    e=Engine(Backend(),Journal());e.call('spawn',{'request_id':'spawn1','actor_id':'a'});old_instance=e.actors['a']['actor_instance_id']
+    old=e.call('run_activity',{'request_id':'old','actor_id':'a','steps':[{'action':'wait','duration_s':10}]})['task_id']
+    e.call('despawn',{'request_id':'delete','actor_id':'a'});e.call('spawn',{'request_id':'spawn2','actor_id':'a'})
+    new_instance=e.actors['a']['actor_instance_id'];new=e.call('run_activity',{'request_id':'new','actor_id':'a','steps':[{'action':'wait','duration_s':10}]})['task_id'];stops=e.backend.stops
+    for i,instance in enumerate([old_instance,new_instance]):
+        result=e.call('batch',{'request_id':'late_'+str(i),'operation':'cancel','items':[{'task_id':old,'actor_instance_id':instance}]})
+        assert result['results'][0]['error']['code']=='ACTOR_INSTANCE_MISMATCH'
+    assert e.actors['a']['task_id']==new and not e.tasks[new]['cancel_requested'] and e.backend.stops==stops
+
+
+def test_single_cancel_rejects_conflicting_actor_and_task_before_native_stop():
+    e=Engine(Backend(),Journal())
+    for aid in ['a','b']:e.call('spawn',{'request_id':'spawn_'+aid,'actor_id':aid})
+    tid=e.call('run_activity',{'request_id':'old','actor_id':'a','steps':[{'action':'wait','duration_s':10}]})['task_id'];before=[e.actors[a]['control_epoch'] for a in ['a','b']]
+    with pytest.raises(SimPeopleError) as error:e.call('cancel',{'request_id':'wrong','actor_id':'b','task_id':tid})
+    assert error.value.code=='INVALID_REQUEST' and not e.tasks[tid]['cancel_requested']
+    assert before==[e.actors[a]['control_epoch'] for a in ['a','b']] and e.backend.stops==0

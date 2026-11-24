@@ -1,0 +1,11 @@
+{
+  "schema_version": "simpeople.custom_actions.v1",
+  "actions": {
+    "zombie_walk": {
+      "label": "丧尸原地拖步循环（实验）",
+      "skeleton": "<local-prepared-directory>/zombie_skeleton.usdc",
+      "clip": "<local-prepared-directory>/zombie_clip.usdc",
+      "clearance_radius_m": 2
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "mode": "director",
+  "title": "换班时刻 · 动作增强版",
+  "fps": 30,
+  "frames": 720,
+  "clock": "simulation",
+  "activity_profile": "lively",
+  "source": "SimPeople_ShiftChange_Codex_Production_Kit.zip + user action expansion",
+  "people": 32
+}

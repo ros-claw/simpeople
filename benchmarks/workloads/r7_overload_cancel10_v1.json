@@ -1,0 +1,376 @@
+{
+  "schema_version": "simpeople.benchmark.v1",
+  "case_id": "r7_overload_cancel10_v1",
+  "category": "overload",
+  "scene": {
+    "id": "industrial",
+    "revision": "1a0738138fa636df676512588618750247e41603274584944809990fda7e34d1"
+  },
+  "actors": [
+    {
+      "actor_id": "q_00",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -15,
+        -15,
+        0
+      ]
+    },
+    {
+      "actor_id": "q_01",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -15,
+        -16.25,
+        0
+      ]
+    },
+    {
+      "actor_id": "q_02",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -15,
+        -17.5,
+        0
+      ]
+    },
+    {
+      "actor_id": "q_03",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -15,
+        -18.75,
+        0
+      ]
+    },
+    {
+      "actor_id": "q_04",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -20,
+        -20,
+        0
+      ]
+    },
+    {
+      "actor_id": "q_05",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -17.5,
+        -20,
+        0
+      ]
+    },
+    {
+      "actor_id": "q_06",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -12.5,
+        -20,
+        0
+      ]
+    },
+    {
+      "actor_id": "q_07",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -10,
+        -20,
+        0
+      ]
+    },
+    {
+      "actor_id": "q_08",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -7.5,
+        -20,
+        0
+      ]
+    },
+    {
+      "actor_id": "q_09",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -5,
+        -20,
+        0
+      ]
+    }
+  ],
+  "requests": [
+    {
+      "request_case_id": "queue_00",
+      "actor_id": "q_00",
+      "at_s": 0,
+      "deadline_s": 110,
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_0",
+          "duration_s": 1.2,
+          "timeout_s": 110
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -20,
+            -6,
+            0
+          ],
+          "timeout_s": 110
+        }
+      ],
+      "expected_outcome": "succeeded"
+    },
+    {
+      "request_case_id": "queue_01",
+      "actor_id": "q_01",
+      "at_s": 0,
+      "deadline_s": 110,
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_0",
+          "duration_s": 1.2,
+          "timeout_s": 110
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -20,
+            -8,
+            0
+          ],
+          "timeout_s": 110
+        }
+      ],
+      "expected_outcome": "succeeded"
+    },
+    {
+      "request_case_id": "queue_02",
+      "actor_id": "q_02",
+      "at_s": 0,
+      "deadline_s": 110,
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_0",
+          "duration_s": 1.2,
+          "timeout_s": 110
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -20,
+            -10,
+            0
+          ],
+          "timeout_s": 110
+        }
+      ],
+      "expected_outcome": "succeeded"
+    },
+    {
+      "request_case_id": "queue_03",
+      "actor_id": "q_03",
+      "at_s": 0,
+      "deadline_s": 110,
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_0",
+          "duration_s": 1.2,
+          "timeout_s": 110
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -20,
+            -12,
+            0
+          ],
+          "timeout_s": 110
+        }
+      ],
+      "expected_outcome": "succeeded"
+    },
+    {
+      "request_case_id": "queue_04",
+      "actor_id": "q_04",
+      "at_s": 0,
+      "deadline_s": 110,
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_0",
+          "duration_s": 1.2,
+          "timeout_s": 110
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -20,
+            -14,
+            0
+          ],
+          "timeout_s": 110
+        }
+      ],
+      "expected_outcome": "succeeded"
+    },
+    {
+      "request_case_id": "queue_05",
+      "actor_id": "q_05",
+      "at_s": 0,
+      "deadline_s": 110,
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_0",
+          "duration_s": 1.2,
+          "timeout_s": 110
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -20,
+            -16,
+            0
+          ],
+          "timeout_s": 110
+        }
+      ],
+      "expected_outcome": "cancelled",
+      "expected_physical_stop": true
+    },
+    {
+      "request_case_id": "queue_06",
+      "actor_id": "q_06",
+      "at_s": 0,
+      "deadline_s": 110,
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_0",
+          "duration_s": 1.2,
+          "timeout_s": 110
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -2.299999999999997,
+            -20.0,
+            0
+          ],
+          "timeout_s": 110
+        }
+      ],
+      "expected_outcome": "failed",
+      "expected_error_code": "ADMISSION_FULL"
+    },
+    {
+      "request_case_id": "queue_07",
+      "actor_id": "q_07",
+      "at_s": 0,
+      "deadline_s": 110,
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_0",
+          "duration_s": 1.2,
+          "timeout_s": 110
+        },
+        {
+          "action": "move_to",
+          "target": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "timeout_s": 110
+        }
+      ],
+      "expected_outcome": "failed",
+      "expected_error_code": "ADMISSION_FULL"
+    },
+    {
+      "request_case_id": "queue_08",
+      "actor_id": "q_08",
+      "at_s": 0,
+      "deadline_s": 110,
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_0",
+          "duration_s": 1.2,
+          "timeout_s": 110
+        },
+        {
+          "action": "move_to",
+          "target": [
+            3.1000000000000014,
+            -20.0,
+            0
+          ],
+          "timeout_s": 110
+        }
+      ],
+      "expected_outcome": "failed",
+      "expected_error_code": "ADMISSION_FULL"
+    },
+    {
+      "request_case_id": "queue_09",
+      "actor_id": "q_09",
+      "at_s": 0,
+      "deadline_s": 110,
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_0",
+          "duration_s": 1.2,
+          "timeout_s": 110
+        },
+        {
+          "action": "move_to",
+          "target": [
+            5.800000000000001,
+            -20.0,
+            0
+          ],
+          "timeout_s": 110
+        }
+      ],
+      "expected_outcome": "failed",
+      "expected_error_code": "ADMISSION_FULL"
+    }
+  ],
+  "submission_mode": "open_arrival",
+  "busy_policy": "reject",
+  "max_pending_per_actor": 2,
+  "duration_s": 120,
+  "finite": true,
+  "capture_profile": "full",
+  "stop_when_complete": true,
+  "runtime_policy": {
+    "schema_version": "simpeople.runtime-policy.v1",
+    "queue_outside_capacity": 2,
+    "resource_waiter_capacity": 32,
+    "traffic_fairness_enabled": true,
+    "max_conflicting_bypasses": 0,
+    "max_wait_sim_s": 30.0,
+    "cycle_detection_sim_s": 3.0,
+    "recovery_after_wait_sim_s": 8.0,
+    "max_recovery_attempts": 2
+  },
+  "events": [
+    {
+      "event_id": "cancel_outside_during_overload",
+      "at_s": 5,
+      "method": "cancel",
+      "params": {
+        "actor_id": "q_05"
+      }
+    }
+  ]
+}

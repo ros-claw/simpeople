@@ -31,10 +31,10 @@
     },
     "floor_stretch": {
       "label": "地面拉伸",
-      "skeleton": "animation://AnimationRig_DS/ReallusionRig.usda",
-      "clip": "animation://DanceCard_DS/nv_mocap_sit_up_stretches.usda",
+      "skeleton": "cache://behavior/MotionLibrary/Human/HumanMotionLibrary.usd",
+      "clip": "cache://legacy/floor_tail_eq01/floor_stretch.usda",
       "clearance_radius_m": 2.5,
-      "pelvis_lift_m": 0.16
+      "playback_mode": "loop"
     },
     "inspect_low": {
       "label": "俯身检查",

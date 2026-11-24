@@ -1,0 +1,1628 @@
+{
+  "schema_version": "simpeople.commandbench.v1",
+  "scene": "industrial_life",
+  "repetitions": 3,
+  "case_count": 20,
+  "holdout_policy": "c16-c20 are not executed or used for tuning before formal frozen evaluation; no outcomes yet.",
+  "cases": [
+    {
+      "case_id": "c01",
+      "split": "development",
+      "category": "single_move",
+      "polarity": "positive",
+      "prompt": "让 a 走到 [-15,-2,0]，真正到达并停稳后报告。b、c 保持原任务。",
+      "fixture": {
+        "actors": [
+          {
+            "actor_id": "a",
+            "asset_id": "default",
+            "position_m": [
+              -15,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "b",
+            "asset_id": "default",
+            "position_m": [
+              -11,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "c",
+            "asset_id": "default",
+            "position_m": [
+              -7,
+              -6,
+              0
+            ],
+            "group": "other",
+            "role": "waiting"
+          }
+        ]
+      },
+      "targets": [
+        "a"
+      ],
+      "preserve": [
+        "b",
+        "c"
+      ],
+      "budget": {
+        "wall_s": 900,
+        "sim_s": 180,
+        "tool_calls": 80,
+        "input_tokens": 2000000,
+        "output_tokens": 12000,
+        "max_repairs": 2
+      },
+      "predicates": [
+        {
+          "kind": "succeeded",
+          "actor_id": "a",
+          "actions": [
+            "move_to"
+          ]
+        },
+        {
+          "kind": "goal",
+          "actor_id": "a",
+          "target": [
+            -15,
+            -2,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "c02",
+      "split": "development",
+      "category": "sequential_activity",
+      "polarity": "positive",
+      "prompt": "给 a 一条完整顺序活动：走到 [-15,-4,0]，等待 1 仿真秒，再走到 [-17,-4,0] 停稳。b、c 不变。",
+      "fixture": {
+        "actors": [
+          {
+            "actor_id": "a",
+            "asset_id": "default",
+            "position_m": [
+              -15,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "b",
+            "asset_id": "default",
+            "position_m": [
+              -11,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "c",
+            "asset_id": "default",
+            "position_m": [
+              -7,
+              -6,
+              0
+            ],
+            "group": "other",
+            "role": "waiting"
+          }
+        ]
+      },
+      "targets": [
+        "a"
+      ],
+      "preserve": [
+        "b",
+        "c"
+      ],
+      "budget": {
+        "wall_s": 900,
+        "sim_s": 180,
+        "tool_calls": 80,
+        "input_tokens": 2000000,
+        "output_tokens": 12000,
+        "max_repairs": 2
+      },
+      "predicates": [
+        {
+          "kind": "succeeded",
+          "actor_id": "a",
+          "actions": [
+            "move_to",
+            "wait",
+            "move_to"
+          ]
+        },
+        {
+          "kind": "goal",
+          "actor_id": "a",
+          "target": [
+            -17,
+            -4,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "c03",
+      "split": "development",
+      "category": "native_jog",
+      "polarity": "positive",
+      "prompt": "让 a 用已验证的 run 慢跑到 [-15,0,0] 后停稳。只调度 a；不要将原生 Jog 说成冲刺。",
+      "fixture": {
+        "actors": [
+          {
+            "actor_id": "a",
+            "asset_id": "default",
+            "position_m": [
+              -15,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "b",
+            "asset_id": "default",
+            "position_m": [
+              -11,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "c",
+            "asset_id": "default",
+            "position_m": [
+              -7,
+              -6,
+              0
+            ],
+            "group": "other",
+            "role": "waiting"
+          }
+        ]
+      },
+      "targets": [
+        "a"
+      ],
+      "preserve": [
+        "b",
+        "c"
+      ],
+      "budget": {
+        "wall_s": 900,
+        "sim_s": 180,
+        "tool_calls": 80,
+        "input_tokens": 2000000,
+        "output_tokens": 12000,
+        "max_repairs": 2
+      },
+      "predicates": [
+        {
+          "kind": "succeeded",
+          "actor_id": "a",
+          "actions": [
+            "move_to"
+          ]
+        },
+        {
+          "kind": "goal",
+          "actor_id": "a",
+          "target": [
+            -15,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "c04",
+      "split": "development",
+      "category": "seat_lifecycle",
+      "polarity": "positive",
+      "prompt": "让 a 坐到 seat_00 休息 1 仿真秒，完整起身、离座，让出座位后走到 [10,-11,0] 停稳。其他人不变。",
+      "fixture": {
+        "actors": [
+          {
+            "actor_id": "a",
+            "asset_id": "default",
+            "position_m": [
+              7.5,
+              -11,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "b",
+            "asset_id": "default",
+            "position_m": [
+              -11,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "c",
+            "asset_id": "default",
+            "position_m": [
+              -7,
+              -6,
+              0
+            ],
+            "group": "other",
+            "role": "waiting"
+          }
+        ]
+      },
+      "targets": [
+        "a"
+      ],
+      "preserve": [
+        "b",
+        "c"
+      ],
+      "budget": {
+        "wall_s": 900,
+        "sim_s": 180,
+        "tool_calls": 80,
+        "input_tokens": 2000000,
+        "output_tokens": 12000,
+        "max_repairs": 2
+      },
+      "predicates": [
+        {
+          "kind": "succeeded",
+          "actor_id": "a",
+          "actions": [
+            "sit",
+            "leave_seat",
+            "move_to"
+          ]
+        },
+        {
+          "kind": "goal",
+          "actor_id": "a",
+          "target": [
+            10,
+            -11,
+            0
+          ]
+        },
+        {
+          "kind": "seat_clear",
+          "actor_id": "a"
+        }
+      ]
+    },
+    {
+      "case_id": "c05",
+      "split": "development",
+      "category": "spawn_group_batch",
+      "polarity": "positive",
+      "prompt": "用批量接口新建 d、e 两人，default 外观、group=extra，位置分别 [-17,-10,0] 与 [-13,-10,0]。固定新组的实际 ID 集合，只给 extra 组批量安排等待 1 仿真秒并验证全部完成；原来的 a、b、c 不变。",
+      "fixture": {
+        "actors": [
+          {
+            "actor_id": "a",
+            "asset_id": "default",
+            "position_m": [
+              -15,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "b",
+            "asset_id": "default",
+            "position_m": [
+              -11,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "c",
+            "asset_id": "default",
+            "position_m": [
+              -7,
+              -6,
+              0
+            ],
+            "group": "other",
+            "role": "waiting"
+          }
+        ]
+      },
+      "targets": [
+        "d",
+        "e"
+      ],
+      "preserve": [
+        "a",
+        "b",
+        "c"
+      ],
+      "budget": {
+        "wall_s": 900,
+        "sim_s": 180,
+        "tool_calls": 80,
+        "input_tokens": 2000000,
+        "output_tokens": 12000,
+        "max_repairs": 2
+      },
+      "predicates": [
+        {
+          "kind": "succeeded",
+          "actor_id": "d",
+          "actions": [
+            "wait"
+          ]
+        },
+        {
+          "kind": "succeeded",
+          "actor_id": "e",
+          "actions": [
+            "wait"
+          ]
+        },
+        {
+          "kind": "batch",
+          "operation": "spawn",
+          "actors": [
+            "d",
+            "e"
+          ]
+        },
+        {
+          "kind": "batch",
+          "operation": "run_activity",
+          "actors": [
+            "d",
+            "e"
+          ]
+        }
+      ],
+      "created_actors": [
+        "d",
+        "e"
+      ]
+    },
+    {
+      "case_id": "c06",
+      "split": "development",
+      "category": "subset_retarget",
+      "polarity": "positive",
+      "prompt": "crew 组的 a、b 原先都在等。只把 a 改派到 [-15,-2,0]、b 改派到 [-11,-2,0]，用批量接口提交并等两人实际到达停稳。c 继续自己的原任务。",
+      "fixture": {
+        "actors": [
+          {
+            "actor_id": "a",
+            "asset_id": "default",
+            "position_m": [
+              -15,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "b",
+            "asset_id": "default",
+            "position_m": [
+              -11,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "c",
+            "asset_id": "default",
+            "position_m": [
+              -7,
+              -6,
+              0
+            ],
+            "group": "other",
+            "role": "waiting"
+          }
+        ]
+      },
+      "targets": [
+        "a",
+        "b"
+      ],
+      "preserve": [
+        "c"
+      ],
+      "budget": {
+        "wall_s": 900,
+        "sim_s": 180,
+        "tool_calls": 80,
+        "input_tokens": 2000000,
+        "output_tokens": 12000,
+        "max_repairs": 2
+      },
+      "predicates": [
+        {
+          "kind": "succeeded",
+          "actor_id": "a",
+          "actions": [
+            "move_to"
+          ]
+        },
+        {
+          "kind": "succeeded",
+          "actor_id": "b",
+          "actions": [
+            "move_to"
+          ]
+        },
+        {
+          "kind": "goal",
+          "actor_id": "a",
+          "target": [
+            -15,
+            -2,
+            0
+          ]
+        },
+        {
+          "kind": "goal",
+          "actor_id": "b",
+          "target": [
+            -11,
+            -2,
+            0
+          ]
+        },
+        {
+          "kind": "batch",
+          "operation": "run_activity",
+          "actors": [
+            "a",
+            "b"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "c07",
+      "split": "development",
+      "category": "region_selection",
+      "polarity": "positive",
+      "prompt": "先查询并固定矩形 region_m=[-16,-7,-10,-5] 中的人物 ID，仅给这个快照集合批量安排等待 1 仿真秒，其他人不变。",
+      "fixture": {
+        "actors": [
+          {
+            "actor_id": "a",
+            "asset_id": "default",
+            "position_m": [
+              -15,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "b",
+            "asset_id": "default",
+            "position_m": [
+              -11,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "c",
+            "asset_id": "default",
+            "position_m": [
+              -7,
+              -6,
+              0
+            ],
+            "group": "other",
+            "role": "waiting"
+          }
+        ]
+      },
+      "targets": [
+        "a",
+        "b"
+      ],
+      "preserve": [
+        "c"
+      ],
+      "budget": {
+        "wall_s": 900,
+        "sim_s": 180,
+        "tool_calls": 80,
+        "input_tokens": 2000000,
+        "output_tokens": 12000,
+        "max_repairs": 2
+      },
+      "predicates": [
+        {
+          "kind": "succeeded",
+          "actor_id": "a",
+          "actions": [
+            "wait"
+          ]
+        },
+        {
+          "kind": "succeeded",
+          "actor_id": "b",
+          "actions": [
+            "wait"
+          ]
+        },
+        {
+          "kind": "batch",
+          "operation": "run_activity",
+          "actors": [
+            "a",
+            "b"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "c08",
+      "split": "development",
+      "category": "cancel_move_restore",
+      "polarity": "positive",
+      "prompt": "让 a 朝 [-15,16,0] 走。观察到真实位移后中途取消，等 cancelled 且确认已经停稳，再给同一人安排等待 1 仿真秒并等成功。不要动 b、c。",
+      "fixture": {
+        "actors": [
+          {
+            "actor_id": "a",
+            "asset_id": "default",
+            "position_m": [
+              -15,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "b",
+            "asset_id": "default",
+            "position_m": [
+              -11,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "c",
+            "asset_id": "default",
+            "position_m": [
+              -7,
+              -6,
+              0
+            ],
+            "group": "other",
+            "role": "waiting"
+          }
+        ]
+      },
+      "targets": [
+        "a"
+      ],
+      "preserve": [
+        "b",
+        "c"
+      ],
+      "budget": {
+        "wall_s": 900,
+        "sim_s": 180,
+        "tool_calls": 80,
+        "input_tokens": 2000000,
+        "output_tokens": 12000,
+        "max_repairs": 2
+      },
+      "predicates": [
+        {
+          "kind": "cancelled_then_wait",
+          "actor_id": "a",
+          "actions": [
+            "move_to"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "c09",
+      "split": "development",
+      "category": "physical_queue_fifo",
+      "polarity": "positive",
+      "prompt": "按 a 然后 b 的次序让两人加入 queue_0，各服务 1 仿真秒并完整退出。a 退出后去 [-19,-17.5,0]，b 退出后去 [-11,-17.5,0]，不要停在队列出口。等两条活动实际成功，c 不变。",
+      "fixture": {
+        "actors": [
+          {
+            "actor_id": "a",
+            "asset_id": "default",
+            "position_m": [
+              -17.5,
+              -18.75,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "b",
+            "asset_id": "default",
+            "position_m": [
+              -13.75,
+              -18.75,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "c",
+            "asset_id": "default",
+            "position_m": [
+              -7,
+              -6,
+              0
+            ],
+            "group": "other",
+            "role": "waiting"
+          }
+        ]
+      },
+      "targets": [
+        "a",
+        "b"
+      ],
+      "preserve": [
+        "c"
+      ],
+      "budget": {
+        "wall_s": 900,
+        "sim_s": 180,
+        "tool_calls": 80,
+        "input_tokens": 2000000,
+        "output_tokens": 12000,
+        "max_repairs": 2
+      },
+      "predicates": [
+        {
+          "kind": "succeeded",
+          "actor_id": "a",
+          "actions": [
+            "queue",
+            "move_to"
+          ]
+        },
+        {
+          "kind": "succeeded",
+          "actor_id": "b",
+          "actions": [
+            "queue",
+            "move_to"
+          ]
+        },
+        {
+          "kind": "goal",
+          "actor_id": "a",
+          "target": [
+            -19,
+            -17.5,
+            0
+          ]
+        },
+        {
+          "kind": "goal",
+          "actor_id": "b",
+          "target": [
+            -11,
+            -17.5,
+            0
+          ]
+        },
+        {
+          "kind": "fifo",
+          "actors": [
+            "a",
+            "b"
+          ],
+          "target": "queue_0"
+        }
+      ]
+    },
+    {
+      "case_id": "c10",
+      "split": "development",
+      "category": "shared_seat",
+      "polarity": "positive",
+      "prompt": "只有一把 seat_00。按 a、b 次序提交两条使用它的活动：各坐 1 仿真秒、起身让开，再让 a 去 [5,-11,0]、b 去 [10,-11,0]。允许有序等待，不能取消占位者或换椅子；等两人都成功，c 不变。",
+      "fixture": {
+        "actors": [
+          {
+            "actor_id": "a",
+            "asset_id": "default",
+            "position_m": [
+              7.5,
+              -11,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "b",
+            "asset_id": "default",
+            "position_m": [
+              10,
+              -11,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "c",
+            "asset_id": "default",
+            "position_m": [
+              -7,
+              -6,
+              0
+            ],
+            "group": "other",
+            "role": "waiting"
+          }
+        ]
+      },
+      "targets": [
+        "a",
+        "b"
+      ],
+      "preserve": [
+        "c"
+      ],
+      "budget": {
+        "wall_s": 900,
+        "sim_s": 180,
+        "tool_calls": 80,
+        "input_tokens": 2000000,
+        "output_tokens": 12000,
+        "max_repairs": 2
+      },
+      "predicates": [
+        {
+          "kind": "succeeded",
+          "actor_id": "a",
+          "actions": [
+            "sit",
+            "leave_seat",
+            "move_to"
+          ]
+        },
+        {
+          "kind": "succeeded",
+          "actor_id": "b",
+          "actions": [
+            "sit",
+            "leave_seat",
+            "move_to"
+          ]
+        },
+        {
+          "kind": "goal",
+          "actor_id": "a",
+          "target": [
+            5,
+            -11,
+            0
+          ]
+        },
+        {
+          "kind": "goal",
+          "actor_id": "b",
+          "target": [
+            10,
+            -11,
+            0
+          ]
+        },
+        {
+          "kind": "seat_clear",
+          "actor_id": "a"
+        },
+        {
+          "kind": "seat_clear",
+          "actor_id": "b"
+        }
+      ]
+    },
+    {
+      "case_id": "c11",
+      "split": "development",
+      "category": "unknown_target",
+      "polarity": "negative",
+      "prompt": "请求 a 去 semantic_id=not_a_real_station。请先验证；若目标不存在，准确报告 TARGET_INVALID 并保留 a 原计划，不能猜测或换目标。其他人也不能动。",
+      "fixture": {
+        "actors": [
+          {
+            "actor_id": "a",
+            "asset_id": "default",
+            "position_m": [
+              -15,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "b",
+            "asset_id": "default",
+            "position_m": [
+              -11,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "c",
+            "asset_id": "default",
+            "position_m": [
+              -7,
+              -6,
+              0
+            ],
+            "group": "other",
+            "role": "waiting"
+          }
+        ]
+      },
+      "targets": [],
+      "preserve": [
+        "a",
+        "b",
+        "c"
+      ],
+      "budget": {
+        "wall_s": 900,
+        "sim_s": 180,
+        "tool_calls": 80,
+        "input_tokens": 2000000,
+        "output_tokens": 12000,
+        "max_repairs": 2
+      },
+      "predicates": [
+        {
+          "kind": "negative",
+          "codes": [
+            "TARGET_INVALID"
+          ],
+          "required_tool": "people_validate_activity"
+        }
+      ]
+    },
+    {
+      "case_id": "c12",
+      "split": "development",
+      "category": "unsupported_grasp",
+      "polarity": "negative",
+      "prompt": "要求 a 用真实抓取力抓起工作台，这是硬要求，不能换成伸手或动画。请查能力；不支持就明确报告 ACTION_UNSUPPORTED，保留所有人物原任务。",
+      "fixture": {
+        "actors": [
+          {
+            "actor_id": "a",
+            "asset_id": "default",
+            "position_m": [
+              -15,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "b",
+            "asset_id": "default",
+            "position_m": [
+              -11,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "c",
+            "asset_id": "default",
+            "position_m": [
+              -7,
+              -6,
+              0
+            ],
+            "group": "other",
+            "role": "waiting"
+          }
+        ]
+      },
+      "targets": [],
+      "preserve": [
+        "a",
+        "b",
+        "c"
+      ],
+      "budget": {
+        "wall_s": 900,
+        "sim_s": 180,
+        "tool_calls": 80,
+        "input_tokens": 2000000,
+        "output_tokens": 12000,
+        "max_repairs": 2
+      },
+      "predicates": [
+        {
+          "kind": "negative",
+          "codes": [
+            "ACTION_UNSUPPORTED"
+          ],
+          "required_tool": "people_list_actions"
+        }
+      ]
+    },
+    {
+      "case_id": "c13",
+      "split": "development",
+      "category": "unreachable",
+      "polarity": "negative",
+      "prompt": "让 a 去场景已有的 unreachable 位置。请核查路径与实际任务结果，不可达时明确报告 TARGET_UNREACHABLE，不能传送、替换目标或把接受请求说成到达。b、c 不变。",
+      "fixture": {
+        "actors": [
+          {
+            "actor_id": "a",
+            "asset_id": "default",
+            "position_m": [
+              -15,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "b",
+            "asset_id": "default",
+            "position_m": [
+              -11,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "c",
+            "asset_id": "default",
+            "position_m": [
+              -7,
+              -6,
+              0
+            ],
+            "group": "other",
+            "role": "waiting"
+          }
+        ]
+      },
+      "targets": [
+        "a"
+      ],
+      "preserve": [
+        "b",
+        "c"
+      ],
+      "budget": {
+        "wall_s": 900,
+        "sim_s": 180,
+        "tool_calls": 80,
+        "input_tokens": 2000000,
+        "output_tokens": 12000,
+        "max_repairs": 2
+      },
+      "predicates": [
+        {
+          "kind": "unreachable",
+          "actor_id": "a",
+          "target": "unreachable"
+        },
+        {
+          "kind": "negative",
+          "codes": [
+            "TARGET_UNREACHABLE"
+          ],
+          "required_tool": "people_get_state"
+        }
+      ]
+    },
+    {
+      "case_id": "c14",
+      "split": "development",
+      "category": "motion_service_offline",
+      "polarity": "negative",
+      "prompt": "请实际查询可选动作生成服务状态（可用诊断 job_id=offline_probe、expected_worker=probe），本会话没有配置 worker。准确报告服务关闭/能力不支持，不要编造已执行姿态或播放生成动作，所有人物保持原任务。",
+      "fixture": {
+        "actors": [
+          {
+            "actor_id": "a",
+            "asset_id": "default",
+            "position_m": [
+              -15,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "b",
+            "asset_id": "default",
+            "position_m": [
+              -11,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "c",
+            "asset_id": "default",
+            "position_m": [
+              -7,
+              -6,
+              0
+            ],
+            "group": "other",
+            "role": "waiting"
+          }
+        ]
+      },
+      "targets": [],
+      "preserve": [
+        "a",
+        "b",
+        "c"
+      ],
+      "budget": {
+        "wall_s": 900,
+        "sim_s": 180,
+        "tool_calls": 80,
+        "input_tokens": 2000000,
+        "output_tokens": 12000,
+        "max_repairs": 2
+      },
+      "predicates": [
+        {
+          "kind": "negative",
+          "codes": [
+            "ACTION_UNSUPPORTED"
+          ],
+          "required_tool": "people_motion"
+        }
+      ]
+    },
+    {
+      "case_id": "c15",
+      "split": "development",
+      "category": "partial_batch",
+      "polarity": "positive",
+      "prompt": "用一个批量请求分别给 a 安排走到 [-15,-2,0]，给 b 安排去 not_a_real_station。逐项检查：a 的合法任务要实际完成，b 的坏目标应拒绝且保留原任务，不替换、不重试 b；c 不变。",
+      "fixture": {
+        "actors": [
+          {
+            "actor_id": "a",
+            "asset_id": "default",
+            "position_m": [
+              -15,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "b",
+            "asset_id": "default",
+            "position_m": [
+              -11,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "c",
+            "asset_id": "default",
+            "position_m": [
+              -7,
+              -6,
+              0
+            ],
+            "group": "other",
+            "role": "waiting"
+          }
+        ]
+      },
+      "targets": [
+        "a"
+      ],
+      "preserve": [
+        "b",
+        "c"
+      ],
+      "budget": {
+        "wall_s": 900,
+        "sim_s": 180,
+        "tool_calls": 80,
+        "input_tokens": 2000000,
+        "output_tokens": 12000,
+        "max_repairs": 2
+      },
+      "predicates": [
+        {
+          "kind": "succeeded",
+          "actor_id": "a",
+          "actions": [
+            "move_to"
+          ]
+        },
+        {
+          "kind": "goal",
+          "actor_id": "a",
+          "target": [
+            -15,
+            -2,
+            0
+          ]
+        },
+        {
+          "kind": "batch",
+          "operation": "run_activity",
+          "actors": [
+            "a",
+            "b"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "c16",
+      "split": "holdout",
+      "category": "cancel_seated_restore",
+      "polarity": "positive",
+      "prompt": "a 已经在 seat_00 坐稳，正在长期休息。现在中途取消它，等实际起身、退出让出位、停稳、座位释放及 cancelled，再安排等待 1 仿真秒并等成功。b、c 原任务不变。",
+      "fixture": {
+        "actors": [
+          {
+            "actor_id": "a",
+            "asset_id": "default",
+            "position_m": [
+              7.5,
+              -11,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "b",
+            "asset_id": "default",
+            "position_m": [
+              -11,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "c",
+            "asset_id": "default",
+            "position_m": [
+              -7,
+              -6,
+              0
+            ],
+            "group": "other",
+            "role": "waiting"
+          }
+        ],
+        "seated_actor": "a"
+      },
+      "targets": [
+        "a"
+      ],
+      "preserve": [
+        "b",
+        "c"
+      ],
+      "budget": {
+        "wall_s": 900,
+        "sim_s": 180,
+        "tool_calls": 80,
+        "input_tokens": 2000000,
+        "output_tokens": 12000,
+        "max_repairs": 2
+      },
+      "predicates": [
+        {
+          "kind": "cancelled_then_wait",
+          "actor_id": "a",
+          "actions": [
+            "sit"
+          ]
+        },
+        {
+          "kind": "seat_clear",
+          "actor_id": "a"
+        }
+      ]
+    },
+    {
+      "case_id": "c17",
+      "split": "holdout",
+      "category": "group_workstation",
+      "polarity": "positive",
+      "prompt": "固定 group=crew 的巡视员集合，只把 a 派到 work_00、b 派到 work_01，各在对应工作台资源上等待 1 仿真秒，再分别退到 [-17,5,0] 与 [-10,5,0] 停稳。批量提交，核查两人实际成功；c 不变。",
+      "fixture": {
+        "actors": [
+          {
+            "actor_id": "a",
+            "asset_id": "default",
+            "position_m": [
+              -15,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "b",
+            "asset_id": "default",
+            "position_m": [
+              -11,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "c",
+            "asset_id": "default",
+            "position_m": [
+              -7,
+              -6,
+              0
+            ],
+            "group": "other",
+            "role": "waiting"
+          }
+        ]
+      },
+      "targets": [
+        "a",
+        "b"
+      ],
+      "preserve": [
+        "c"
+      ],
+      "budget": {
+        "wall_s": 900,
+        "sim_s": 180,
+        "tool_calls": 80,
+        "input_tokens": 2000000,
+        "output_tokens": 12000,
+        "max_repairs": 2
+      },
+      "predicates": [
+        {
+          "kind": "succeeded",
+          "actor_id": "a",
+          "actions": [
+            "move_to",
+            "wait",
+            "move_to"
+          ]
+        },
+        {
+          "kind": "succeeded",
+          "actor_id": "b",
+          "actions": [
+            "move_to",
+            "wait",
+            "move_to"
+          ]
+        },
+        {
+          "kind": "goal",
+          "actor_id": "a",
+          "target": [
+            -17,
+            5,
+            0
+          ]
+        },
+        {
+          "kind": "goal",
+          "actor_id": "b",
+          "target": [
+            -10,
+            5,
+            0
+          ]
+        },
+        {
+          "kind": "batch",
+          "operation": "run_activity",
+          "actors": [
+            "a",
+            "b"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "c18",
+      "split": "holdout",
+      "category": "unsupported_hold",
+      "polarity": "negative",
+      "prompt": "让 a 原地看向 [-15,-8,1.6] 并保持整整 2 秒；不能缩短保持时间、转全身代替转头，或临时开实验能力。查当前精确资产证据，若不支持便报告 ACTION_UNSUPPORTED，所有人的原任务保留。",
+      "fixture": {
+        "actors": [
+          {
+            "actor_id": "a",
+            "asset_id": "default",
+            "position_m": [
+              -15,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "b",
+            "asset_id": "default",
+            "position_m": [
+              -11,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "c",
+            "asset_id": "default",
+            "position_m": [
+              -7,
+              -6,
+              0
+            ],
+            "group": "other",
+            "role": "waiting"
+          }
+        ]
+      },
+      "targets": [],
+      "preserve": [
+        "a",
+        "b",
+        "c"
+      ],
+      "budget": {
+        "wall_s": 900,
+        "sim_s": 180,
+        "tool_calls": 80,
+        "input_tokens": 2000000,
+        "output_tokens": 12000,
+        "max_repairs": 2
+      },
+      "predicates": [
+        {
+          "kind": "negative",
+          "codes": [
+            "ACTION_UNSUPPORTED"
+          ],
+          "required_tool": "people_list_actions"
+        }
+      ]
+    },
+    {
+      "case_id": "c19",
+      "split": "holdout",
+      "category": "batch_overload",
+      "polarity": "negative",
+      "prompt": "需要一个原子请求创建 101 人，不能拆成小批次，不能部分创建。先核查批量容量；若超过上限，明确报告 INVALID_REQUEST，保留场内全部原人物和任务，不能调用 populate 代替。",
+      "fixture": {
+        "actors": [
+          {
+            "actor_id": "a",
+            "asset_id": "default",
+            "position_m": [
+              -15,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "b",
+            "asset_id": "default",
+            "position_m": [
+              -11,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "c",
+            "asset_id": "default",
+            "position_m": [
+              -7,
+              -6,
+              0
+            ],
+            "group": "other",
+            "role": "waiting"
+          }
+        ]
+      },
+      "targets": [],
+      "preserve": [
+        "a",
+        "b",
+        "c"
+      ],
+      "budget": {
+        "wall_s": 900,
+        "sim_s": 180,
+        "tool_calls": 80,
+        "input_tokens": 2000000,
+        "output_tokens": 12000,
+        "max_repairs": 2
+      },
+      "predicates": [
+        {
+          "kind": "negative",
+          "codes": [
+            "INVALID_REQUEST"
+          ],
+          "required_tool": "people_session"
+        }
+      ]
+    },
+    {
+      "case_id": "c20",
+      "split": "holdout",
+      "category": "failed_target_recovery",
+      "polarity": "positive",
+      "prompt": "这是一次有限恢复测试：先给 a 提交去 unreachable 的任务，必须观察其实际失败并确认 TARGET_UNREACHABLE。然后只修复 a 一次，改去 [-15,-2,0]，等实际成功停稳；不要恢复已经失败的旧任务，也不要动 b、c。",
+      "fixture": {
+        "actors": [
+          {
+            "actor_id": "a",
+            "asset_id": "default",
+            "position_m": [
+              -15,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "b",
+            "asset_id": "default",
+            "position_m": [
+              -11,
+              -6,
+              0
+            ],
+            "group": "crew",
+            "role": "patrol"
+          },
+          {
+            "actor_id": "c",
+            "asset_id": "default",
+            "position_m": [
+              -7,
+              -6,
+              0
+            ],
+            "group": "other",
+            "role": "waiting"
+          }
+        ]
+      },
+      "targets": [
+        "a"
+      ],
+      "preserve": [
+        "b",
+        "c"
+      ],
+      "budget": {
+        "wall_s": 900,
+        "sim_s": 180,
+        "tool_calls": 80,
+        "input_tokens": 2000000,
+        "output_tokens": 12000,
+        "max_repairs": 2
+      },
+      "predicates": [
+        {
+          "kind": "failed_then_recovered",
+          "actor_id": "a",
+          "target": "unreachable"
+        },
+        {
+          "kind": "goal",
+          "actor_id": "a",
+          "target": [
+            -15,
+            -2,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

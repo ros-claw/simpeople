@@ -1,0 +1,167 @@
+{
+  "schema_version": "simpeople.quality-catalog.v1",
+  "records": [
+    {
+      "quality_revision_sha256": "68d5587fa61e8f4f65bac6a23f6b76fbb6fa6f58d4c9bd24285adec95d0141b4",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human",
+      "asset_revision_sha256": "68d5587fa61e8f4f65bac6a23f6b76fbb6fa6f58d4c9bd24285adec95d0141b4",
+      "kind": "head_look",
+      "status": "discovered",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "max_hold_duration_s": 0.6,
+      "head_local_forward": [
+        0.2034550791918125,
+        1.2273066642910703e-16,
+        -0.9790842817403684
+      ],
+      "domain": {
+        "min_distance_m": 0.4,
+        "max_distance_m": 2,
+        "max_yaw_deg": 45,
+        "max_pitch_deg": 40
+      },
+      "scope": "Integrated candidate: fresh Native qualification required.",
+      "stage_up_axis": "Z",
+      "meters_per_unit": 1,
+      "startup_profiles": {
+        "basic": {
+          "status": "discovered",
+          "max_hold_duration_s": 2.0,
+          "implementation_sha256": "79491c52ab4ead4254a0fc8c23f06d86ae37e5295fd5356949345737af5da036",
+          "scope": "Integrated candidate: no prior runtime proof transferred.",
+          "precursor_evidence_run": "iter1114g-gesture2-idle-basic-01",
+          "discovery_evidence_run": "iter1114j-gesture2-profile-discovered-01",
+          "discovery_evidence_sha256": "78ec4ad273f06e3cffa14e4d4be702e9c3e3336332b2a9229e23e95ac2738b2d",
+          "discovery_replay_audit_sha256": "1527e18ec9c8d868ba429c26842423451ba25bdfb5e13ec4773d3925c714b128"
+        }
+      }
+    },
+    {
+      "quality_revision_sha256": "68d5587fa61e8f4f65bac6a23f6b76fbb6fa6f58d4c9bd24285adec95d0141b4",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human",
+      "asset_revision_sha256": "68d5587fa61e8f4f65bac6a23f6b76fbb6fa6f58d4c9bd24285adec95d0141b4",
+      "kind": "reach_hand",
+      "status": "discovered",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "max_hold_duration_s": 0.6,
+      "head_local_forward": [
+        0.2034550791918125,
+        1.2273066642910703e-16,
+        -0.9790842817403684
+      ],
+      "domain": {
+        "min_height_m": 1,
+        "max_height_m": 1.5,
+        "min_forward_m": 0.1,
+        "max_forward_m": 0.55,
+        "max_arm_fraction": 0.95
+      },
+      "scope": "Integrated candidate: fresh Native qualification required.",
+      "stage_up_axis": "Z",
+      "meters_per_unit": 1,
+      "startup_profiles": {
+        "basic": {
+          "status": "discovered",
+          "max_hold_duration_s": 2.0,
+          "implementation_sha256": "79491c52ab4ead4254a0fc8c23f06d86ae37e5295fd5356949345737af5da036",
+          "scope": "Integrated candidate: no prior runtime proof transferred.",
+          "precursor_evidence_run": "iter1114g-gesture2-idle-basic-01",
+          "discovery_evidence_run": "iter1114j-gesture2-profile-discovered-01",
+          "discovery_evidence_sha256": "78ec4ad273f06e3cffa14e4d4be702e9c3e3336332b2a9229e23e95ac2738b2d",
+          "discovery_replay_audit_sha256": "1527e18ec9c8d868ba429c26842423451ba25bdfb5e13ec4773d3925c714b128"
+        }
+      }
+    },
+    {
+      "quality_revision_sha256": "b822677b325040b22297a477ad4ed8f5e96d160d06286f2df9b6d80a252f1563",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "asset_revision_sha256": "b822677b325040b22297a477ad4ed8f5e96d160d06286f2df9b6d80a252f1563",
+      "kind": "head_look",
+      "status": "discovered",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "max_hold_duration_s": 0.6,
+      "head_local_forward": [
+        -2.9103630096423455e-11,
+        -2.4139881132923027e-06,
+        0.9999999999970864
+      ],
+      "domain": {
+        "min_distance_m": 0.4,
+        "max_distance_m": 2,
+        "max_yaw_deg": 45,
+        "max_pitch_deg": 40
+      },
+      "scope": "Integrated candidate: fresh Native qualification required.",
+      "stage_up_axis": "Z",
+      "meters_per_unit": 1,
+      "startup_profiles": {
+        "basic": {
+          "status": "discovered",
+          "max_hold_duration_s": 2.0,
+          "implementation_sha256": "79491c52ab4ead4254a0fc8c23f06d86ae37e5295fd5356949345737af5da036",
+          "scope": "Integrated candidate: no prior runtime proof transferred.",
+          "precursor_evidence_run": "iter1114g-gesture2-idle-basic-01",
+          "discovery_evidence_run": "iter1114j-gesture2-profile-discovered-01",
+          "discovery_evidence_sha256": "78ec4ad273f06e3cffa14e4d4be702e9c3e3336332b2a9229e23e95ac2738b2d",
+          "discovery_replay_audit_sha256": "1527e18ec9c8d868ba429c26842423451ba25bdfb5e13ec4773d3925c714b128"
+        }
+      }
+    },
+    {
+      "quality_revision_sha256": "b822677b325040b22297a477ad4ed8f5e96d160d06286f2df9b6d80a252f1563",
+      "motion_revision_sha256": "97660585d57bd8c99746e92288d0c5cf7c702317ad1683218f7e35698b6f2cb7",
+      "rig_id": "Human-auto-retarget-validated",
+      "asset_revision_sha256": "b822677b325040b22297a477ad4ed8f5e96d160d06286f2df9b6d80a252f1563",
+      "kind": "reach_hand",
+      "status": "discovered",
+      "runtime_revision": {
+        "isaac_version": "6.2.0-rc.14+release.52805.02189a84.gl",
+        "behavior_extension": "omni.anim.behavior.core-110.4.0+110.4.0.lx64.r.cp312.u7f4",
+        "navigation_extension": "omni.anim.navigation.core-110.4.0+110.4.0.lx64.r.cp312.u7f4"
+      },
+      "max_hold_duration_s": 0.6,
+      "head_local_forward": [
+        -2.9103630096423455e-11,
+        -2.4139881132923027e-06,
+        0.9999999999970864
+      ],
+      "domain": {
+        "min_height_m": 1,
+        "max_height_m": 1.5,
+        "min_forward_m": 0.1,
+        "max_forward_m": 0.55,
+        "max_arm_fraction": 0.95
+      },
+      "scope": "Integrated candidate: fresh Native qualification required.",
+      "stage_up_axis": "Z",
+      "meters_per_unit": 1,
+      "startup_profiles": {
+        "basic": {
+          "status": "discovered",
+          "max_hold_duration_s": 2.0,
+          "implementation_sha256": "79491c52ab4ead4254a0fc8c23f06d86ae37e5295fd5356949345737af5da036",
+          "scope": "Integrated candidate: no prior runtime proof transferred.",
+          "precursor_evidence_run": "iter1114g-gesture2-idle-basic-01",
+          "discovery_evidence_run": "iter1114j-gesture2-profile-discovered-01",
+          "discovery_evidence_sha256": "78ec4ad273f06e3cffa14e4d4be702e9c3e3336332b2a9229e23e95ac2738b2d",
+          "discovery_replay_audit_sha256": "1527e18ec9c8d868ba429c26842423451ba25bdfb5e13ec4773d3925c714b128"
+        }
+      }
+    }
+  ]
+}

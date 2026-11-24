@@ -1,0 +1,88 @@
+{
+  "schema_version": "simpeople.benchmark.v1",
+  "case_id": "r6_recovery_replan_or_report_v1",
+  "category": "fault_injection",
+  "scene": {
+    "id": "industrial",
+    "revision": "1a0738138fa636df676512588618750247e41603274584944809990fda7e34d1"
+  },
+  "submission_mode": "open_arrival",
+  "busy_policy": "reject",
+  "max_pending_per_actor": 2,
+  "duration_s": 60,
+  "finite": true,
+  "capture_profile": "full",
+  "stop_when_complete": true,
+  "actors": [
+    {
+      "actor_id": "recover",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -2.5,
+        -10,
+        0
+      ]
+    },
+    {
+      "actor_id": "blocker",
+      "asset_id": "default",
+      "spawn_anchor": [
+        2.5,
+        -10,
+        0
+      ]
+    }
+  ],
+  "requests": [
+    {
+      "request_case_id": "recover",
+      "actor_id": "recover",
+      "at_s": 0.3,
+      "deadline_s": 50,
+      "on_blocked": "replan_or_report",
+      "expected_outcome": "succeeded",
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            2.5,
+            -10,
+            0
+          ],
+          "timeout_s": 45
+        },
+        {
+          "action": "move_to",
+          "target": [
+            5,
+            -15,
+            0
+          ],
+          "timeout_s": 20
+        }
+      ]
+    },
+    {
+      "request_case_id": "blocker",
+      "actor_id": "blocker",
+      "at_s": 0,
+      "deadline_s": 50,
+      "expected_outcome": "succeeded",
+      "steps": [
+        {
+          "action": "wait",
+          "duration_s": 24
+        },
+        {
+          "action": "move_to",
+          "target": [
+            8.75,
+            -15,
+            0
+          ],
+          "timeout_s": 30
+        }
+      ]
+    }
+  ]
+}

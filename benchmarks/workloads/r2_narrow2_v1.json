@@ -1,0 +1,96 @@
+{
+  "schema_version": "simpeople.benchmark.v1",
+  "case_id": "r2_narrow2_v1",
+  "category": "ordinary",
+  "scene": {
+    "id": "industrial_narrow_probe_v1",
+    "revision": "737962e39fe2c22b87167375d2f33dbb4bc482bad644d378bf0d819724ebd6ff"
+  },
+  "submission_mode": "open_arrival",
+  "busy_policy": "reject",
+  "max_pending_per_actor": 2,
+  "duration_s": 60,
+  "finite": true,
+  "capture_profile": "full",
+  "actors": [
+    {
+      "actor_id": "holder",
+      "spawn_anchor": [
+        1.25,
+        -10,
+        0
+      ],
+      "asset_id": "default"
+    },
+    {
+      "actor_id": "old_west",
+      "spawn_anchor": [
+        -3.75,
+        -11.25,
+        0
+      ],
+      "asset_id": "default"
+    }
+  ],
+  "requests": [
+    {
+      "request_case_id": "holder",
+      "actor_id": "holder",
+      "at_s": 0,
+      "deadline_s": 50,
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -2.5,
+            -10,
+            0
+          ],
+          "timeout_s": 40
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -8.75,
+            -7.5,
+            0
+          ],
+          "timeout_s": 40
+        }
+      ]
+    },
+    {
+      "request_case_id": "old_west",
+      "actor_id": "old_west",
+      "at_s": 0.3,
+      "deadline_s": 50,
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            2.5,
+            -10,
+            0
+          ],
+          "timeout_s": 40
+        },
+        {
+          "action": "move_to",
+          "target": [
+            8.75,
+            -15,
+            0
+          ],
+          "timeout_s": 40
+        }
+      ]
+    }
+  ],
+  "fairness_expectation": {
+    "actor_id": "old_west",
+    "max_first_leg_sim_s": 30,
+    "max_conflicting_bypasses": 0,
+    "requires_finite_holder_exit": true
+  },
+  "stop_when_complete": true
+}

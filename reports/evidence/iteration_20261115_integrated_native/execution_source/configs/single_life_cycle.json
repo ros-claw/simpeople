@@ -1,0 +1,16 @@
+{
+  "schema_version": "simpeople.task.v1",
+  "request_id": "single-life-cycle",
+  "actor_id": "person_001",
+  "steps": [
+    {"action": "move_to", "target": "workbench_a", "gait": "walk"},
+    {"action": "look_at", "target": "machine_a"},
+    {"action": "wait", "duration_s": 8},
+    {"action": "move_to", "target": "chair_approach", "gait": "walk"},
+    {"action": "sit", "target": "chair_01", "duration_s": 15},
+    {"action": "leave_seat"},
+    {"action": "move_to", "target": "exit_a", "gait": "run"}
+  ],
+  "on_blocked": "replan_or_report",
+  "on_cancel": "stop_activity"
+}

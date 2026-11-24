@@ -1,0 +1,109 @@
+{
+  "schema_version": "simpeople.benchmark.v1",
+  "case_id": "r11_recorded_edge3_v1",
+  "category": "traffic",
+  "scene": {
+    "id": "industrial",
+    "revision": "1a0738138fa636df676512588618750247e41603274584944809990fda7e34d1"
+  },
+  "submission_mode": "open_arrival",
+  "busy_policy": "reject",
+  "max_pending_per_actor": 2,
+  "duration_s": 35,
+  "finite": true,
+  "capture_profile": "full",
+  "stop_when_complete": true,
+  "actors": [
+    {
+      "actor_id": "mover",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -7.5,
+        -21.25,
+        0
+      ]
+    },
+    {
+      "actor_id": "body",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -7.05,
+        -20.4,
+        0
+      ]
+    },
+    {
+      "actor_id": "witness",
+      "asset_id": "default",
+      "spawn_anchor": [
+        10,
+        -5,
+        0
+      ]
+    }
+  ],
+  "requests": [
+    {
+      "request_case_id": "mover",
+      "actor_id": "mover",
+      "at_s": 0,
+      "deadline_s": 30,
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -2.3,
+            -20,
+            0
+          ],
+          "timeout_s": 30
+        }
+      ],
+      "expected_outcome": "succeeded"
+    },
+    {
+      "request_case_id": "body",
+      "actor_id": "body",
+      "at_s": 0,
+      "deadline_s": 30,
+      "steps": [
+        {
+          "action": "wait",
+          "duration_s": 25,
+          "timeout_s": 30
+        }
+      ],
+      "expected_outcome": "cancelled",
+      "expected_error_code": "CANCELLED",
+      "expected_physical_stop": true
+    },
+    {
+      "request_case_id": "witness",
+      "actor_id": "witness",
+      "at_s": 0,
+      "deadline_s": 30,
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            15,
+            -5,
+            0
+          ],
+          "timeout_s": 30
+        }
+      ],
+      "expected_outcome": "succeeded"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "cancel_body",
+      "at_s": 0.5,
+      "method": "cancel",
+      "params": {
+        "actor_id": "body"
+      }
+    }
+  ]
+}

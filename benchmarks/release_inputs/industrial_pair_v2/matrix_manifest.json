@@ -1,0 +1,826 @@
+{
+  "schema_version": "simpeople.runtime-release-inputs.v1",
+  "cases": [
+    {
+      "input_adjustments": [],
+      "people": 10,
+      "seed": 17,
+      "layout": "wide",
+      "native_fixture_preflight_required": true,
+      "nominal_feasibility_verified": false,
+      "case_id": "release_wide_10_seed17_v2",
+      "case_sha256": "f8fcdcf515cf580830cfdeeae4f15fa9965527269a8d8e6552c2b46e869eb26d",
+      "file_sha256": "922945a8b210ba8d4335753cca6e636d1d5ff2181ad830ed25f0e9b4995a3009",
+      "requests": 20
+    },
+    {
+      "input_adjustments": [],
+      "people": 10,
+      "seed": 42,
+      "layout": "wide",
+      "native_fixture_preflight_required": true,
+      "nominal_feasibility_verified": false,
+      "case_id": "release_wide_10_seed42_v2",
+      "case_sha256": "83a93426aa02ca4dcc0272a9161a41510309dbdafa336614b3b00ab79584695a",
+      "file_sha256": "adb3550c0eba68e21fc0b8c3ecd5aabc332d55530bb2d90e1150364534be382f",
+      "requests": 20
+    },
+    {
+      "input_adjustments": [],
+      "people": 10,
+      "seed": 99,
+      "layout": "wide",
+      "native_fixture_preflight_required": true,
+      "nominal_feasibility_verified": false,
+      "case_id": "release_wide_10_seed99_v2",
+      "case_sha256": "2ce5f9dc5d6df57c2000d1559550020dead1fc4b2da89548d579ada8d26ed9f8",
+      "file_sha256": "193bf44871c176ccf6b47b4d523965caf72f513567a88189e4c7733b9bf1c959",
+      "requests": 20
+    },
+    {
+      "input_adjustments": [],
+      "people": 30,
+      "seed": 17,
+      "layout": "wide",
+      "native_fixture_preflight_required": true,
+      "nominal_feasibility_verified": false,
+      "case_id": "release_wide_30_seed17_v2",
+      "case_sha256": "cffb59060fe87aa8f46feb393d7f96db6af33bcded4a5a9a8d771b18a942c5fb",
+      "file_sha256": "babbabc3cec0eee2bb916e604ef34b9f5aef0856cf0f12f6c9eb2e7beadd9c92",
+      "requests": 60
+    },
+    {
+      "input_adjustments": [],
+      "people": 30,
+      "seed": 42,
+      "layout": "wide",
+      "native_fixture_preflight_required": true,
+      "nominal_feasibility_verified": false,
+      "case_id": "release_wide_30_seed42_v2",
+      "case_sha256": "31a9331d37ebfaab40d6cdc8c92721c5141100addc14500b6cc5dbf44b1f05be",
+      "file_sha256": "2b8c65c358f76137f07881a5fae489242e8ede25b915ab29356cb72eff3f4758",
+      "requests": 60
+    },
+    {
+      "input_adjustments": [],
+      "people": 30,
+      "seed": 99,
+      "layout": "wide",
+      "native_fixture_preflight_required": true,
+      "nominal_feasibility_verified": false,
+      "case_id": "release_wide_30_seed99_v2",
+      "case_sha256": "31dfa1016f67852b285ec478b298180398a005ac4413ebf7740e991ec0bbdc9d",
+      "file_sha256": "e309dc82e4776cf47aa88ee33e71ac99a112d5501675ae3f3f919980955f4ea1",
+      "requests": 60
+    },
+    {
+      "input_adjustments": [],
+      "people": 50,
+      "seed": 17,
+      "layout": "wide",
+      "native_fixture_preflight_required": true,
+      "nominal_feasibility_verified": false,
+      "case_id": "release_wide_50_seed17_v2",
+      "case_sha256": "8eb515555e6be2f687b4f5a150545b649bae0aa6db5286644722a0eca737261e",
+      "file_sha256": "88d761aee2e53830efdb406b5ad7138f958f69d549e199c6dad2bcf20c24514a",
+      "requests": 100
+    },
+    {
+      "input_adjustments": [],
+      "people": 50,
+      "seed": 42,
+      "layout": "wide",
+      "native_fixture_preflight_required": true,
+      "nominal_feasibility_verified": false,
+      "case_id": "release_wide_50_seed42_v2",
+      "case_sha256": "4956e50c4bb20ae65c10ecf06555671885d1bbd950b031797c8e2993f18a1185",
+      "file_sha256": "abffc2d9af7e564c0ddc00a056b2302b48e12cd40dde43504377a258e3e26cfb",
+      "requests": 100
+    },
+    {
+      "input_adjustments": [],
+      "people": 50,
+      "seed": 99,
+      "layout": "wide",
+      "native_fixture_preflight_required": true,
+      "nominal_feasibility_verified": false,
+      "case_id": "release_wide_50_seed99_v2",
+      "case_sha256": "78ebca6ec9a711199af681c50ef0d87071807903db45ac9b05450080fc266c3b",
+      "file_sha256": "00adc81d981b759cecf8253ab0f50006a581863e043f72d51ff03ce4c6749c87",
+      "requests": 100
+    },
+    {
+      "input_adjustments": [
+        {
+          "input": "spawn:person_008",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_008_cycle0:step2",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_008_cycle1:step2",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        }
+      ],
+      "people": 10,
+      "seed": 17,
+      "layout": "narrow",
+      "native_fixture_preflight_required": true,
+      "nominal_feasibility_verified": false,
+      "case_id": "release_narrow_10_seed17_v2",
+      "case_sha256": "90e5251d2b36c8a0c84acec89af0c75e582cf0e6d42ed62908c64cccea5b4ddf",
+      "file_sha256": "d170714727634013acd5990bdb62c6a32fce4bb12b98a347baaf670f3a19c919",
+      "requests": 20
+    },
+    {
+      "input_adjustments": [
+        {
+          "input": "spawn:person_008",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_008_cycle0:step2",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_008_cycle1:step2",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        }
+      ],
+      "people": 10,
+      "seed": 42,
+      "layout": "narrow",
+      "native_fixture_preflight_required": true,
+      "nominal_feasibility_verified": false,
+      "case_id": "release_narrow_10_seed42_v2",
+      "case_sha256": "c3c30c220fb94d559f213b3fbeb71097232d599afc2907a4c304598ec48ed416",
+      "file_sha256": "a59b55dc7eedde231f9f7327e0dd6a157e9a2ed01e28fc92ffb0a2e86d5086e9",
+      "requests": 20
+    },
+    {
+      "input_adjustments": [
+        {
+          "input": "spawn:person_008",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_008_cycle0:step2",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_008_cycle1:step2",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        }
+      ],
+      "people": 10,
+      "seed": 99,
+      "layout": "narrow",
+      "native_fixture_preflight_required": true,
+      "nominal_feasibility_verified": false,
+      "case_id": "release_narrow_10_seed99_v2",
+      "case_sha256": "394b812596103601ea2865eee7d141c36c779373890c0604e230191ccd686b09",
+      "file_sha256": "48961c1b5764c1b7879ed9467170aea1ab689bd9108ff8dd189642cf241d2da8",
+      "requests": 20
+    },
+    {
+      "input_adjustments": [
+        {
+          "input": "spawn:person_008",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_008_cycle0:step2",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_023_cycle0:step1",
+          "original_m": [
+            0.0,
+            16.5,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            16.5,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_008_cycle1:step2",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_023_cycle1:step1",
+          "original_m": [
+            0.0,
+            16.5,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            16.5,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        }
+      ],
+      "people": 30,
+      "seed": 17,
+      "layout": "narrow",
+      "native_fixture_preflight_required": true,
+      "nominal_feasibility_verified": false,
+      "case_id": "release_narrow_30_seed17_v2",
+      "case_sha256": "79d63dd7a100a5318698a452bf0b6b994d701fcefbd0e680e7b1f12f88f7c3ba",
+      "file_sha256": "da48532f89490be11744e20a198450c63a4c85ab34d06a9ec8059999946a231b",
+      "requests": 60
+    },
+    {
+      "input_adjustments": [
+        {
+          "input": "spawn:person_008",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_008_cycle0:step2",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_023_cycle0:step1",
+          "original_m": [
+            0.0,
+            16.5,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            16.5,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_008_cycle1:step2",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_023_cycle1:step1",
+          "original_m": [
+            0.0,
+            16.5,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            16.5,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        }
+      ],
+      "people": 30,
+      "seed": 42,
+      "layout": "narrow",
+      "native_fixture_preflight_required": true,
+      "nominal_feasibility_verified": false,
+      "case_id": "release_narrow_30_seed42_v2",
+      "case_sha256": "c66640e30be9fb255986e874e64abfcd8304195f45fd8311104e87ab8818abb3",
+      "file_sha256": "7e33c42b1f0667bc89aee0739f826cb3ab04fcaeadf1c1083e85825425f4d33d",
+      "requests": 60
+    },
+    {
+      "input_adjustments": [
+        {
+          "input": "spawn:person_008",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_008_cycle0:step2",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_023_cycle0:step1",
+          "original_m": [
+            0.0,
+            16.5,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            16.5,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_008_cycle1:step2",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_023_cycle1:step1",
+          "original_m": [
+            0.0,
+            16.5,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            16.5,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        }
+      ],
+      "people": 30,
+      "seed": 99,
+      "layout": "narrow",
+      "native_fixture_preflight_required": true,
+      "nominal_feasibility_verified": false,
+      "case_id": "release_narrow_30_seed99_v2",
+      "case_sha256": "c7d53bf8ec0ce6650a510d0b506c5fa2629402e710f5eba421f41a3e8dbd2802",
+      "file_sha256": "e627a13750a3a5972aafb6a6372c4caa084e14a33bf558ba2f6ea55e54399755",
+      "requests": 60
+    },
+    {
+      "input_adjustments": [
+        {
+          "input": "spawn:person_008",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "spawn:person_036",
+          "original_m": [
+            -0.40000000000000213,
+            20.0,
+            0
+          ],
+          "mapped_m": [
+            -1.25,
+            20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_008_cycle0:step2",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_036_cycle0:step2",
+          "original_m": [
+            -0.40000000000000213,
+            20.0,
+            0
+          ],
+          "mapped_m": [
+            -1.25,
+            20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_008_cycle1:step2",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_036_cycle1:step2",
+          "original_m": [
+            -0.40000000000000213,
+            20.0,
+            0
+          ],
+          "mapped_m": [
+            -1.25,
+            20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        }
+      ],
+      "people": 50,
+      "seed": 17,
+      "layout": "narrow",
+      "native_fixture_preflight_required": true,
+      "nominal_feasibility_verified": false,
+      "case_id": "release_narrow_50_seed17_v2",
+      "case_sha256": "d9c3e7f30c12ccb415e9a5488cb7d43c864e302adc32e4eb932af1024ad2740e",
+      "file_sha256": "63600f26d39e90945f41603756a57366d4ad5e8f0687e80ed0d1ea1bb902ae35",
+      "requests": 100
+    },
+    {
+      "input_adjustments": [
+        {
+          "input": "spawn:person_008",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "spawn:person_036",
+          "original_m": [
+            -0.40000000000000213,
+            20.0,
+            0
+          ],
+          "mapped_m": [
+            -1.25,
+            20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_008_cycle0:step2",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_036_cycle0:step2",
+          "original_m": [
+            -0.40000000000000213,
+            20.0,
+            0
+          ],
+          "mapped_m": [
+            -1.25,
+            20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_008_cycle1:step2",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_036_cycle1:step2",
+          "original_m": [
+            -0.40000000000000213,
+            20.0,
+            0
+          ],
+          "mapped_m": [
+            -1.25,
+            20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        }
+      ],
+      "people": 50,
+      "seed": 42,
+      "layout": "narrow",
+      "native_fixture_preflight_required": true,
+      "nominal_feasibility_verified": false,
+      "case_id": "release_narrow_50_seed42_v2",
+      "case_sha256": "72ea5f20ca7894bb8ad82282fb01c330831924178b703c3cd47e91bc6b3b3ce6",
+      "file_sha256": "22050791f764077561270e78f85674597f378892dd564ddb7a6008e2afc3aa86",
+      "requests": 100
+    },
+    {
+      "input_adjustments": [
+        {
+          "input": "spawn:person_008",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "spawn:person_036",
+          "original_m": [
+            -0.40000000000000213,
+            20.0,
+            0
+          ],
+          "mapped_m": [
+            -1.25,
+            20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_008_cycle0:step2",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_036_cycle0:step2",
+          "original_m": [
+            -0.40000000000000213,
+            20.0,
+            0
+          ],
+          "mapped_m": [
+            -1.25,
+            20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_008_cycle1:step2",
+          "original_m": [
+            0.40000000000000213,
+            -20.0,
+            0
+          ],
+          "mapped_m": [
+            1.25,
+            -20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        },
+        {
+          "input": "person_036_cycle1:step2",
+          "original_m": [
+            -0.40000000000000213,
+            20.0,
+            0
+          ],
+          "mapped_m": [
+            -1.25,
+            20.0,
+            0
+          ],
+          "reason": "observed wall plus0.45m navigation clearance"
+        }
+      ],
+      "people": 50,
+      "seed": 99,
+      "layout": "narrow",
+      "native_fixture_preflight_required": true,
+      "nominal_feasibility_verified": false,
+      "case_id": "release_narrow_50_seed99_v2",
+      "case_sha256": "c81d7285f5cffeef2d11ae44774b64028f9a8c654a52c77648a5cf471458e803",
+      "file_sha256": "80f9b1dc446d30a223646ead7f2b1b30e0f5c8dadfc31104b2664805cfacf147",
+      "requests": 100
+    }
+  ],
+  "scene_sources": {
+    "/data/rosclaw/sim_anim/runs/iter1114l-release-fixture-preflight-01/industrial_semantics.json": "790d23846c208aa3cbb8a382aabc8dd5950528f79531552ef0bfb39621011cc5",
+    "/data/rosclaw/sim_anim/runs/iter1114l-release-fixture-preflight-01/industrial_narrow_probe_v1_semantics.json": "cae0bf90658b6f481fadaa4834a42fec49a10ecc3096fa0d7f9c147cffa33910",
+    "/data/rosclaw/sim_anim/.runtime/verification1113/release_fixture_r02/industrial_narrow_release_v2_semantics.json": "ba60e3b0700aa6ce842fec20f3250957e8b80d6598e26dfd30cffd6782326795"
+  },
+  "generator_sha256": "40d9779739add0dbfda014957f5829c9d5e56a4c89db5fb8b6b798c84015e921",
+  "runtime_versions_frozen": false,
+  "scope": "NEW18 v2inputs; oldv1failedpreflight/inputs preserved. Narrow scene revision changes only queue_2 exit0 from wall-covered[0,-15,0]to[-1.25,-15,0], explicit metadata; geometry/capacities/requests/600s unchanged except declared original numeric projections. Derived scene must undergo fresh native preflight. Neither staticconnectivity nor input creation certifies capacity."
+}

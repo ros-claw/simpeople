@@ -1,0 +1,85 @@
+{
+  "schema_version": "simpeople.benchmark.v1",
+  "case_id": "r3_queue2_v2",
+  "category": "ordinary",
+  "scene": {
+    "id": "industrial",
+    "revision": "1a0738138fa636df676512588618750247e41603274584944809990fda7e34d1"
+  },
+  "actors": [
+    {
+      "actor_id": "q_00",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -15,
+        -15,
+        0
+      ]
+    },
+    {
+      "actor_id": "q_01",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -15,
+        -16.25,
+        0
+      ]
+    }
+  ],
+  "requests": [
+    {
+      "request_case_id": "queue_00",
+      "actor_id": "q_00",
+      "at_s": 0,
+      "deadline_s": 50,
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_0",
+          "duration_s": 1.2,
+          "timeout_s": 50
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -18.5,
+            -20.0,
+            0
+          ],
+          "timeout_s": 50
+        }
+      ],
+      "expected_outcome": "succeeded"
+    },
+    {
+      "request_case_id": "queue_01",
+      "actor_id": "q_01",
+      "at_s": 0,
+      "deadline_s": 50,
+      "steps": [
+        {
+          "action": "queue",
+          "target": "queue_0",
+          "duration_s": 1.2,
+          "timeout_s": 50
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -15.8,
+            -20.0,
+            0
+          ],
+          "timeout_s": 50
+        }
+      ],
+      "expected_outcome": "succeeded"
+    }
+  ],
+  "submission_mode": "open_arrival",
+  "busy_policy": "reject",
+  "max_pending_per_actor": 2,
+  "duration_s": 60,
+  "finite": true,
+  "capture_profile": "full"
+}

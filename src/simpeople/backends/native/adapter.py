@@ -5,6 +5,7 @@ import math
 import os
 from pathlib import Path
 import threading
+import uuid
 import carb
 import carb.eventdispatcher
 import omni.anim.behavior.core as bh
@@ -29,6 +30,7 @@ class NativeBackend:
         self.scene_id=meta.get('simpeople_scene_id',layer.identifier)
         self.scene_revision=meta.get('simpeople_scene_revision')
         self.config_dir=Path(config_dir) if config_dir else self.root/'configs'
+        self.native_seed_configuration=None;self.native_seed_sealed=False
         self.allow_unverified=allow_unverified;self.instances={};self.recorder=None;self.observations={};self.deferred_stops=set()
         behavior_file=getattr(bh,'__file__',None)
         actual_install=next((p for p in Path(behavior_file).parents if (p/'VERSION').is_file() and (p/'python.sh').is_file()),None) if behavior_file else None
@@ -77,6 +79,8 @@ class NativeBackend:
         quality_file=(Path(config_dir) if config_dir else self.root/'configs')/'quality_catalog.json'
         self.quality_catalog=QualityCatalog(json.loads(quality_file.read_text()) if quality_file.exists() else None)
         self.quality_catalog_available=quality_file.exists();self.quality_revision_cache={}
+        gesture_file=self.config_dir/'native_gesture_catalog.json'
+        self.gesture_catalog=QualityCatalog(json.loads(gesture_file.read_text()) if gesture_file.exists() else None)
         self.refresh_quality_revisions()
 
     def refresh_quality_revisions(self):
@@ -92,6 +96,37 @@ class NativeBackend:
             asset['quality_revision_sha256']=revision(Path(asset['source_uri']).parent) if Path(asset['source_uri']).is_file() else None
             asset['motion_revision_sha256']=revision(Path(asset['motion_library']).parent) if Path(asset['motion_library']).is_file() else None
             asset['locomotion_quality']=self.quality_catalog.query(asset['quality_revision_sha256'],asset['motion_revision_sha256'],asset['rig_id'],'locomotion',runtime_revision=self.runtime_revision)
+
+    def configure_native_seed(self,seed):
+        self.assert_thread()
+        if isinstance(seed,bool) or not isinstance(seed,int) or not 0<=seed<2**32:
+            raise SimPeopleError('INVALID_REQUEST','native seed must be an unsigned 32-bit integer')
+        if self.native_seed_sealed or self.instances or self.timeline.is_playing():
+            raise SimPeopleError('POLICY_UNSUPPORTED','native seed must be configured before actors and Play')
+        previous=self.native_seed_configuration
+        if previous is not None:
+            if previous['api_seed']!=seed:raise SimPeopleError('POLICY_UNSUPPORTED','native startup seed was already configured')
+            return dict(previous)
+        self.api.set_random_seed(seed)
+        self.native_seed_configuration={'api_seed':seed,'configured_before_agents':True,'configured_on_owner_thread':True}
+        return dict(self.native_seed_configuration)
+
+    def canonical_startup_quality(self,reference):
+        self.assert_thread()
+        domain=reference.get('native_startup_conditions')
+        if domain is None:return None  # Legacy clips without a declared generated domain retain their contract.
+        import carb.settings
+        from simpeople.motion.startup import startup_error
+        settings=carb.settings.get_settings();prefix='/exts/omni.anim.behavior.core/'
+        actual={'idle_tags':settings.get(prefix+'idleAnimationTags'),
+                'response_time_s':settings.get(prefix+'agentResponseTime'),
+                'response_random_offset_s':settings.get(prefix+'agentResponseTimeMaxRandomOffset'),
+                'nav_blocked_timeout_s':settings.get(prefix+'navBlockedTimeout'),
+                'seed_configuration':self.native_seed_configuration}
+        quality=startup_error(actual,domain)
+        if not quality['passed']:
+            raise SimPeopleError('MOTION_ENTRY_NOT_READY','native startup is outside this preloaded canonical domain',startup_error=quality)
+        return quality
 
     def assert_thread(self):
         if threading.get_ident()!=self.owner_thread:raise RuntimeError('Kit access outside main thread')
@@ -126,7 +161,12 @@ class NativeBackend:
         radius=max(math.dist(center[:2],p[:2]) for p in points)
         return math.dist(center[:2],obs['position_m'][:2])>radius+.3
 
+    def actor_label(self,handle):
+        instance=self.instances.get(handle)
+        return (instance.get('actor_id') or instance['parent'].rsplit('/',1)[-1]) if instance else handle
+
     def choose_free_target(self,candidates,handle):
+        blockers=set()
         for candidate in candidates:
             if candidate is None:return None
             goal=self.resolve_target(candidate)
@@ -136,9 +176,10 @@ class NativeBackend:
                 agent=self.api.get_agent(other)
                 if agent:
                     p=agent.get_world_translation();pos=self.to_public([p.x,p.y,p.z])
-                    if math.dist(goal[:2],pos[:2])<.9:occupied=True;break
+                    if math.dist(goal[:2],pos[:2])<.9:
+                        blockers.add(self.actor_label(other));occupied=True;break
             if not occupied:return candidate
-        raise SimPeopleError('RESOURCE_BUSY','all egress points are occupied')
+        raise SimPeopleError('RESOURCE_BUSY','all egress points are occupied',blocker_ids=sorted(blockers),candidate_targets=candidates)
 
     def queue_slots(self,queue):return self.semantics[queue]['slots_m']
     def queue_egress(self,queue,handle):return self.choose_free_target(self.semantics[queue]['egress_targets'],handle)
@@ -192,7 +233,10 @@ class NativeBackend:
                 asset.get('quality_revision_sha256'),asset.get('motion_revision_sha256'),asset['rig_id'],'seat',
                 template_hash(seat['seat_profile']),seat_geometry_hash(self.stage,seat),runtime_revision=self.runtime_revision)
                 for name,seat in self.semantics.items() if seat.get('kind')=='seat' and seat.get('seat_profile')}}
+        actions['look_at']={**actions['look_at'],'precision_profile':{'status':'discovered' if getattr(self,'precise_facing_probe_enabled',False) else 'unsupported','optional_field':'max_angle_deg','target_kind':'fixed_world_point','range_deg':[.1,2],'max_sim_seconds':8,'max_sdk_commands':16,'scope':'Experimental only, not Native qualified or enabled by default'}}
         from .custom_actions import describe
+        from .gestures import profile
+        actions.update({name:profile(self,handle,name) for name in ['head_look','reach_hand']})
         return {**actions,'queue':{'status':actions['walk']['status'],'implementation':'FIFO supervisor + verified walk'},
                 'custom_action':describe(self,handle)}
 
@@ -208,8 +252,30 @@ class NativeBackend:
                           'behavior_configured':'BehaviorAgentAPI' in p.GetAppliedSchemas()}
                          for p in self.stage.Traverse() if p.IsA(UsdSkel.Root)]}
 
+    def interaction_targets(self,semantic_id=None):
+        from .interactions import snapshot_targets
+        return snapshot_targets(self,semantic_id)
+
+    def interaction_path_reachable(self,handle,target):
+        self.assert_thread();agent=self.agent(handle);mesh=self.nav.get_navmesh()
+        if mesh is None:return False
+        profile=nav.NavAgentDesc(radius=max(agent.get_radius(),.45/self.mpu),height=agent.get_height(),collision_gap=.0)
+        path=mesh.query_shortest_path(start_pos=agent.get_world_translation(),end_pos=carb.Float3(*self.to_stage(target)),agent=profile)
+        points=list(path.get_points()) if path else []
+        return bool(points and math.dist(self.to_public(points[-1]),target)<=.3)
+
     def spawn(self,aid,asset_id,anchor):
         self.assert_thread()
+        # In this SDK, creating a character while paused can accept its USD
+        # instance without ever creating the Behavior agent after resume.
+        # Reject before sealing the seed, allocating an ID or authoring USD.
+        if (getattr(self,'_spawn_pause_requested',False) or
+                (not self.timeline.is_playing() and not self.timeline.is_stopped())):
+            raise SimPeopleError('POLICY_UNSUPPORTED',
+                'Native spawn requires a stopped startup or a playing timeline; resume and retry once playing',
+                stage='admission',retry_class='repair_request',timeline_state='paused',
+                supported_states=['stopped','playing'])
+        self.native_seed_sealed=True
         asset=next((a for a in self.assets if a['asset_id']==asset_id),None)
         if not asset:raise SimPeopleError('ASSET_INCOMPATIBLE','unknown asset_id',asset_id=asset_id)
         source=asset['source_uri']; motion=asset['motion_library']
@@ -221,7 +287,10 @@ class NativeBackend:
             occupied=observed.get('position_m') if observed.get('ready') else instance.get('spawn_position_m')
             if occupied and math.dist(position[:2],occupied[:2])<.9:
                 raise SimPeopleError('RESOURCE_BUSY','spawn anchor is occupied',actor_path=handle)
-        parent=f'{self.namespace}/Actors/{aid}'
+        # Behavior caches agents by their physical USD path. Reusing that path
+        # during Play can retain the old agent/root even after logical reset.
+        # Keep the public actor ID, but allocate a fresh physical incarnation.
+        parent=f'{self.namespace}/Actors/{aid}/Instance_{uuid.uuid4().hex}'
         container=UsdGeom.Xform.Define(self.stage,parent)
         container.AddTranslateOp().Set(Gf.Vec3d(*self.to_stage(position)))
         model=UsdGeom.Xform.Define(self.stage,parent+'/Character').GetPrim()
@@ -259,7 +328,7 @@ class NativeBackend:
             skelroot_prim_paths=[skel.GetPath()],motion_library_prim_path=Sdf.Path(library),motion_library_skeleton_rig='Human')
         if not ok:
             self.stage.RemovePrim(parent);raise SimPeopleError('ASSET_INCOMPATIBLE','Behavior API application failed')
-        handle=str(skel.GetPath());self.instances[handle]={'parent':parent,'asset_id':asset_id,
+        handle=str(skel.GetPath());self.instances[handle]={'parent':parent,'asset_id':asset_id,'actor_id':aid,
             'spawn_position_m':position,
             'base_identity_id':asset['base_identity_id'],'appearance_id':asset['appearance_id'],
             'appearance_overrides_applied':overrides}
@@ -272,10 +341,36 @@ class NativeBackend:
         return a
 
     def despawn(self,handle):
-        self.assert_thread();self.stage.RemovePrim(self.instances.pop(handle)['parent'])
+        self.assert_thread();instance=self.instances[handle]
+        # USD deletion alone can leave the SDK's old agent enabled. Stop only
+        # this explicitly despawned instance, and remove its native API while
+        # its SkelRoot still exists. SDK session opinions are stronger than the
+        # reference-owning root layer, so author removal there.
+        agent=self.api.get_agent(handle)
+        if agent:agent.set_enabled(False)
+        with Usd.EditContext(self.stage,self.stage.GetSessionLayer()):
+            ok,_=omni.kit.commands.execute('RemoveBehaviorAgentAPICommand',skelroot_prim_paths=[Sdf.Path(handle)],layer=self.stage.GetSessionLayer())
+            if not ok:raise SimPeopleError('BACKEND_ERROR','native actor API removal failed',actor_id=instance.get('actor_id'))
+            # Native session opinions can keep an orphan hierarchy composed
+            # after removing its weaker reference. Retire this instance's whole
+            # subtree, including any SDK-created physics, in the strongest layer.
+            if not self.stage.GetPrimAtPath(instance['parent']).SetActive(False):
+                raise SimPeopleError('BACKEND_ERROR','native actor subtree retirement failed',actor_id=instance.get('actor_id'))
+        self.stage.RemovePrim(instance['parent']);self.instances.pop(handle)
+        if instance.get('actor_id'):
+            logical=instance['parent'].rsplit('/',1)[0];prim=self.stage.GetPrimAtPath(logical)
+            if prim and not prim.GetChildren():self.stage.RemovePrim(logical)
         self.observations.pop(handle,None)
+        self.observation_frame_ids.pop(handle,None);self.deferred_stops.discard(handle)
 
     def validate(self,handle,step):
+        if step['action'] in {'head_look','reach_hand'}:
+            from .gestures import validate
+            validate(self,handle,step);return
+        if 'max_angle_deg' in step and not getattr(self,'precise_facing_probe_enabled',False):
+            raise SimPeopleError('ACTION_UNSUPPORTED','precise facing requires the explicit experimental runtime profile')
+        if 'max_angle_deg' in step and not isinstance(step.get('target'),list):
+            raise SimPeopleError('TARGET_INVALID','precise facing currently requires a fixed world coordinate point')
         action=step['action'];cap=step.get('gait','walk') if action=='move_to' else ('walk' if action=='queue' else action)
         state=self.list_actions(handle,include_quality=False).get(cap,{'status':'unsupported'})
         if action=='custom_action':
@@ -287,13 +382,90 @@ class NativeBackend:
             self.resolve_target(step['target'])
             for point in step.get('via',[]):self.resolve_target(point)
             if action in {'sit','follow','queue'}:self.resolve_path(step['target'])
+        if 'max_angle_deg' in step:
+            observation=self.observe(handle);goal=self.resolve_target(step['target'])
+            if not observation.get('ready') or math.dist(goal[:2],observation['position_m'][:2])<.05:
+                raise SimPeopleError('TARGET_INVALID','precise facing requires a distinct horizontal target')
         if action=='sit' and self.semantics.get(step['target'],{}).get('kind')!='seat':
             raise SimPeopleError('TARGET_INVALID','sit requires a calibrated seat in scene semantics')
         if action=='queue' and self.semantics.get(step['target'],{}).get('kind')!='queue':
             raise SimPeopleError('TARGET_INVALID','queue requires registered slots')
 
+    def canonical_entry_quality(self,handle,reference):
+        self.canonical_startup_quality(reference)
+        from simpeople.motion.entry import entry_error
+        asset=next(v for v in self.assets if v['asset_id']==self.instances[handle]['asset_id'])
+        if reference['source_asset_sha256']!=asset['content_hash']:raise SimPeopleError('MOTION_RIG_MISMATCH','canonical motion is for another source asset')
+        skeleton=next(UsdSkel.Skeleton(p) for p in Usd.PrimRange(self.stage.GetPrimAtPath(handle)) if p.IsA(UsdSkel.Skeleton))
+        if list(map(str,skeleton.GetJointsAttr().Get()))!=reference['joint_paths']:raise SimPeopleError('MOTION_RIG_MISMATCH','canonical motion joint layout changed')
+        agent=self.agent(handle);pose=[]
+        for index in range(len(reference['joint_paths'])):
+            point=carb.Float3(0,0,0);rotation=carb.Float4(0,0,0,1)
+            if not agent.get_joint_world_transform(index,point,rotation):raise SimPeopleError('MOTION_ENTRY_NOT_READY','canonical entry readback unavailable')
+            pose.append([*self.to_public(point),rotation.x,rotation.y,rotation.z,rotation.w])
+        observation=self.observe(handle);quality=entry_error(pose,observation['facing_direction'],reference)
+        if reference.get('native_entry_domain') is not None:
+            from simpeople.motion.entry import heading_window_error
+            domain=heading_window_error(self.instances[handle].get('canonical_heading_history',[]),observation,reference['native_entry_domain'])
+            quality['native_entry_domain']=domain
+            quality['passed']=quality['passed'] and domain['passed']
+        if not quality['passed'] or observation['speed_mps']>=.15:raise SimPeopleError('MOTION_ENTRY_NOT_READY','actual pose is outside this preloaded canonical entry',entry_error=quality,speed_mps=observation['speed_mps'])
+        return quality
+
+    def prepare_immediate_motion_start(self,handle,step,previous):
+        if step['action']!='custom_action':return False
+        entry=getattr(self,'custom_actions',{}).get(step['target'],{});reference=entry.get('canonical_entry')
+        if not reference:return False
+        base=entry.get('entry_base_action');agent=self.agent(handle)
+        if not base or not previous or previous['status']!='running' or previous.get('native_task_id')!=agent.get_action_task_id() or agent.get_task_name(agent.get_action_task_id())!=base:
+            raise SimPeopleError('MOTION_ENTRY_NOT_READY','canonical clip requires its still-owned preloaded base task',required_base_action=base)
+        self.canonical_entry_quality(handle,reference)
+        if hasattr(self,'check_action_space'):self.check_action_space(handle,step)
+        return True
+
+    def action_admission_block(self,handle):
+        from .custom_stop import ready
+        if not ready(self,handle,require_window=True):
+            record=self.instances[handle]['custom_stop']
+            return {'reason':'cancelled_custom_still_settling','since_sim_time':record['requested_sim_time'],
+                    'retired_native_task_id':record['retired_native_task_id']}
+        return None
+
+
+    def adopt_precision_idle(self,handle):
+        """Transfer only an observed Idle previously issued by this body owner.
+
+        No SDK command is issued here. Engine.start_native records the new
+        logical binding to the existing native ID. External/default IDs and
+        unresolved head/hand cleanup cannot be adopted.
+        """
+        self.assert_thread()
+        instance=self.instances[handle]
+        if instance.get('gesture'):return None
+        agent=self.agent(handle);current=agent.get_action_task_id()
+        known=instance.get('engine_native_ids',[])
+        if current<=0 or current not in known or agent.get_task_name(current)!='Idle':return None
+        if self.task_state(handle,current)!='running':return None
+        observed=self.observe(handle);speed=observed.get('speed_mps')
+        if (not observed.get('ready') or observed.get('native_task_id')!=current or observed.get('action')!='Idle'
+            or observed.get('observation_sim_time')!=self.timeline.get_current_time()
+            or isinstance(speed,bool) or not isinstance(speed,(int,float)) or not math.isfinite(speed) or not 0<=speed<.15):return None
+        if self.on_event:self.on_event('native_idle_adopted_for_precision',agent=handle,native_task_id=current,
+                                      observation_sim_time=observed['observation_sim_time'],issued_new_sdk_command=False)
+        return current
+
     def start(self,handle,step):
+        self.assert_thread()
+        if 'max_angle_deg' in step and not getattr(self,'precise_facing_probe_enabled',False):
+            raise SimPeopleError('ACTION_UNSUPPORTED','precise facing requires the explicit experimental runtime profile')
+        from .custom_stop import ready
+        if not ready(self,handle,require_window=True):
+            raise SimPeopleError('MOTION_ENTRY_NOT_READY','cancelled custom action has not exited actual Native playback')
+        self.instances[handle].pop('custom_stop',None)
         a=self.agent(handle);action=step['action']
+        if action in {'head_look','reach_hand'}:
+            from .gestures import start
+            return start(self,handle,step)
         if action=='move_to':
             goal=self.to_stage(self.resolve_target(step['target']))
             navmesh=self.nav.get_navmesh()
@@ -324,7 +496,23 @@ class NativeBackend:
         elif action=='wait':
             current=a.get_action_task_id()
             tid=current if a.get_task_name(current)=='Sit' else a.idle()
-        elif action=='look_at':tid=a.idle(facing=self.resolve_path(step['target']))
+        elif action=='look_at':
+            adopted=self.adopt_precision_idle(handle) if 'max_angle_deg' in step and '_native_facing_direction' not in step else None
+            if adopted is not None:tid=adopted
+            elif '_native_facing_direction' in step:
+                if not getattr(self,'precise_facing_probe_enabled',False) or a.get_action_task_id()!=step['_expected_native_task_id']:
+                    raise SimPeopleError('BACKEND_TASK_FAILED','precise facing lost its native owner before command')
+                direction=self.to_stage(step['_native_facing_direction']);length=math.sqrt(sum(v*v for v in direction))
+                tid=a.idle(facing=carb.Float3(*[v/length for v in direction]))
+            elif isinstance(step['target'],list):
+                # Public numeric look_at is a world point, NOT an SDK direction.
+                goal=self.resolve_target(step['target']);position=self.to_public(a.get_world_translation())
+                delta=[goal[0]-position[0],goal[1]-position[1],0.]
+                if math.hypot(*delta[:2])<.05:tid=a.idle()
+                else:
+                    direction=self.to_stage(delta);length=math.sqrt(sum(v*v for v in direction))
+                    tid=a.idle(facing=carb.Float3(*[v/length for v in direction]))
+            else:tid=a.idle(facing=self.resolve_path(step['target']))
         elif action=='sit':tid=a.sit(target=self.resolve_path(step['target']))
         elif action in {'leave_seat','settle'}:tid=a.idle()
         elif action=='follow':
@@ -333,18 +521,46 @@ class NativeBackend:
         elif action=='custom_action':
             if step['target'] not in list(a.get_custom_action_names()):
                 raise SimPeopleError('ACTION_UNSUPPORTED','clip absent from native agent',clip=step['target'])
+            reference=getattr(self,'custom_actions',{}).get(step['target'],{}).get('canonical_entry')
+            if reference:
+                quality=self.canonical_entry_quality(handle,reference)
+                if self.on_event:self.on_event('motion_canonical_entry_verified',agent=handle,clip=step['target'],entry_error=quality)
+            from .cooperative_finite_stop import validate as finite_validate, register as finite_register
+            finite_spec=finite_validate(self,handle,step)
             tid=a.custom_action(step['target'],duration=step['duration_s'])
+            if tid!=bh.BEHAVIOR_TASK_ID_INVALID:finite_register(self,handle,tid,finite_spec)
         else:raise SimPeopleError('ACTION_UNSUPPORTED',action)
         if tid==bh.BEHAVIOR_TASK_ID_INVALID:
             raise SimPeopleError('BACKEND_TASK_FAILED','native task rejected',action=action,target=step.get('target'),
                                 position_m=self.to_public(a.get_world_translation()))
+        known=self.instances[handle].setdefault('engine_native_ids',[])
+        if tid not in known:known.append(tid)
+        del known[:-32]
         return tid
 
     def stop(self,handle):
+        self.assert_thread()
+        from .gestures import stop
+        stop(self,handle)
         a=self.api.get_agent(handle)
         if a:
-            # idle is a native transition, including stand-up from Sit.
-            a.idle()
+            current=a.get_action_task_id();name=a.get_task_name(current)
+            from .cooperative_finite_stop import request as finite_request
+            if finite_request(self,handle,current,name,a):return
+            entry=getattr(self,'custom_actions',{}).get(name,{})
+            from .custom_stop import needs_settlement
+            if needs_settlement(entry):
+                previous=self.instances[handle].get('custom_stop')
+                if previous and previous['retired_native_task_id']==current:return
+                record={'retired_native_task_id':current,'clip':name,
+                        'requested_sim_time':self.timeline.get_current_time(),'actual_idle_times':[]}
+                self.instances[handle]['custom_stop']=record
+                a.cancel_task(current)
+                record['idle_request_native_task_id']=int(a.idle())
+                if self.on_event:self.on_event('native_custom_stop_requested',agent=handle,**record)
+            else:
+                # idle is a native transition, including stand-up from Sit.
+                a.idle()
         elif self.timeline.is_stopped() is False:
             self.deferred_stops.add(handle)
 
@@ -352,6 +568,23 @@ class NativeBackend:
         state=self.agent(handle).get_task_status(tid)
         return {bh.BehaviorTaskStatus.RUNNING:'running',bh.BehaviorTaskStatus.SUCCEEDED:'succeeded',
                 bh.BehaviorTaskStatus.FAILED:'failed'}[state]
+
+    def gesture_status(self,handle,tid,step,obs):
+        from .gestures import status
+        return status(self,handle,tid,step,obs)
+
+    def end_gesture(self,handle,tid):
+        from .gestures import stop
+        stop(self,handle,tid)
+
+    def gesture_stop_settled(self,handle,obs):
+        from .gestures import settled
+        from .custom_stop import ready
+        return ready(self,handle,obs) and settled(self,handle,obs)
+
+    def tick_gestures(self):
+        from .gestures import tick
+        tick(self)
 
     def observe(self,handle):
         self.assert_thread()
@@ -381,15 +614,18 @@ class NativeBackend:
             velocity=[(position[i]-previous[1]['position_m'][i])/(sim_time-previous[0]) for i in range(3)]
         joints={};joint_rotations={}
         tags=['Hips','LeftFoot','RightFoot','LeftToeBase','RightToeBase','LeftLeg','RightLeg']
-        if self.quality_sampling:tags+=['Spine1','Spine2','Chest','Neck1','Neck2','Head','LeftShoulder','RightShoulder']
+        sample_gesture=self.instances[handle].get('gesture_sampling',False)
+        sample_joints=self.quality_sampling or sample_gesture
+        if sample_joints:tags+=['Spine1','Spine2','Chest','Neck1','Neck2','Head','LeftShoulder','RightShoulder',
+            'LeftArm','RightArm','LeftForeArm','RightForeArm','LeftHand','RightHand','LeftHandMiddle2','RightHandMiddle2']
         indices=self.instances[handle].setdefault('joint_indices',{})
-        if self.quality_sampling and 'skeleton_joint_names' not in self.instances[handle]:
+        if sample_joints and 'skeleton_joint_names' not in self.instances[handle]:
             skeleton=next((UsdSkel.Skeleton(p) for p in Usd.PrimRange(self.stage.GetPrimAtPath(handle)) if p.IsA(UsdSkel.Skeleton)),None)
             if skeleton:self.instances[handle]['skeleton_joint_names']=list(skeleton.GetJointsAttr().Get())
         for tag in tags:
             if not self.performance_optimized or indices.get(tag,-1)<0:
                 indices[tag]=a.get_joint_index(tag);self.observation_counters['joint_index_queries']+=1
-                if indices[tag]<0 and self.quality_sampling:
+                if indices[tag]<0 and sample_joints:
                     names=self.instances[handle].get('skeleton_joint_names',[])
                     head=next((i for i,n in enumerate(names) if n.rsplit('/',1)[-1].rsplit(':',1)[-1]=='Head'),None)
                     if head is not None and a.get_joint_index('Head')==head:
@@ -400,7 +636,7 @@ class NativeBackend:
             jp=carb.Float3(0,0,0);jq=carb.Float4(0,0,0,1)
             if a.get_joint_world_transform(index,jp,jq):
                 joints[tag]=self.to_public([jp.x,jp.y,jp.z])
-                if self.quality_sampling:joint_rotations[tag]=[jq.x,jq.y,jq.z,jq.w]
+                if sample_joints:joint_rotations[tag]=[jq.x,jq.y,jq.z,jq.w]
         tid=a.get_action_task_id()
         result={'ready':True,'position_m':position,
             'orientation_xyzw_stage':[q.x,q.y,q.z,q.w],
@@ -413,6 +649,7 @@ class NativeBackend:
             'target_object':a.get_target_object(),
             'position_source':'BehaviorAgent.get_world_translation','observation_sim_time':sim_time,
             'asset_id':self.instances[handle]['asset_id']}
+        if sample_joints:result['joint_rotations_xyzw_stage']=joint_rotations
         if self.quality_sampling:
             result['joint_rotations_xyzw_stage']=joint_rotations
             result['quality_joint_indices']=dict(indices)
@@ -426,7 +663,7 @@ class NativeBackend:
                 profile=SeatProfile(**seat['seat_profile'])
                 if math.dist(position[:2],profile.position_m[:2])>1.8:continue
                 result.setdefault('seat_quality',{})[name]={'proxy_clearance_m':profile.proxy_clearances(joints)}
-                focused=bool(self.recorder and self.recorder.focus_actor_id==self.instances[handle]['parent'].rsplit('/',1)[-1])
+                focused=bool(self.recorder and self.recorder.focus_actor_id==self.actor_label(handle))
                 if self.observation_frame_id is not None and (self.observation_frame_id%3==0 or focused):
                     from .body_geometry import HeadNeckGeometry
                     geometry=self.instances[handle].get('head_neck_geometry')
@@ -435,6 +672,11 @@ class NativeBackend:
                     result['seat_quality'][name]['skinned_vertices']=geometry.evaluate(a,profile,self.mpu)
         self.observation_counters['sdk_samples']+=1
         result.update({k:self.instances[handle][k] for k in ['base_identity_id','appearance_id','appearance_overrides_applied']})
+        if any(v.get('canonical_entry',{}).get('native_entry_domain') is not None for v in getattr(self,'custom_actions',{}).values()):
+            history=self.instances[handle].setdefault('canonical_heading_history',[])
+            if not history or result['observation_sim_time']>history[-1]['observation_sim_time']+1e-9:
+                history.append({k:result[k] for k in ['observation_sim_time','native_task_id','action','facing_direction','speed_mps','ready']})
+                del history[:-8]
         self.observations[handle]=(sim_time,result)
         self.observation_frame_ids[handle]=self.observation_frame_id
         return result
@@ -456,11 +698,17 @@ class NativeBackend:
                     and obs.get('planar_speed_mps',obs['speed_mps'])<0.15 and obs['action']=='Sit')
 
     def is_standing(self,handle,obs):
+        from .custom_stop import ready
+        if not ready(self,handle,obs,require_window=True):return False
         hips=obs.get('joints_m',{}).get('Hips');root=obs['position_m']
         return bool(hips and hips[2]-root[2]>0.75 and obs['action'] in {'Idle',''})
 
-    def pause(self):self.timeline.pause()
-    def resume(self):self.timeline.play()
+    def pause(self):
+        self._spawn_pause_requested=True
+        self.timeline.pause()
+    def resume(self):
+        self.timeline.play()
+        self._spawn_pause_requested=False
     def record(self,p):
         if not self.recorder:raise SimPeopleError('RECORDING_UNAVAILABLE','renderer recording was not configured')
         return self.recorder.control(p)

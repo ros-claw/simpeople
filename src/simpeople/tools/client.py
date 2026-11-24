@@ -19,5 +19,8 @@ def call(method,params=None,endpoint='http://127.0.0.1:8768'):
     except (urllib.error.URLError,TimeoutError) as e:
         raise SimPeopleError('BACKEND_UNAVAILABLE',str(e)) from e
     if 'error' in result:
-        err=result['error'];raise SimPeopleError(err['code'],err.get('message',''),**err.get('details',{}))
+        err=result['error'];details=dict(err.get('details',{}))
+        for key in ('stage','retry_class'):
+            if key in err:details.setdefault(key,err[key])
+        raise SimPeopleError(err['code'],err.get('message',''),**details)
     return result['result']

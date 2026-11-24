@@ -1,0 +1,358 @@
+{
+  "schema_version": "simpeople.benchmark.v1",
+  "case_id": "r2_narrow10_v1",
+  "category": "ordinary",
+  "scene": {
+    "id": "industrial_narrow_probe_v1",
+    "revision": "737962e39fe2c22b87167375d2f33dbb4bc482bad644d378bf0d819724ebd6ff"
+  },
+  "submission_mode": "open_arrival",
+  "busy_policy": "reject",
+  "max_pending_per_actor": 2,
+  "duration_s": 80,
+  "finite": true,
+  "capture_profile": "full",
+  "actors": [
+    {
+      "actor_id": "holder",
+      "spawn_anchor": [
+        1.25,
+        -10,
+        0
+      ],
+      "asset_id": "default"
+    },
+    {
+      "actor_id": "old_west",
+      "spawn_anchor": [
+        -3.75,
+        -11.25,
+        0
+      ],
+      "asset_id": "default"
+    },
+    {
+      "actor_id": "east_0",
+      "spawn_anchor": [
+        3.75,
+        -10,
+        0
+      ],
+      "asset_id": "default"
+    },
+    {
+      "actor_id": "east_1",
+      "spawn_anchor": [
+        5,
+        -11.25,
+        0
+      ],
+      "asset_id": "default"
+    },
+    {
+      "actor_id": "east_2",
+      "spawn_anchor": [
+        5,
+        -8.75,
+        0
+      ],
+      "asset_id": "default"
+    },
+    {
+      "actor_id": "witness_0",
+      "spawn_anchor": [
+        5.0,
+        18.75,
+        0
+      ],
+      "asset_id": "default"
+    },
+    {
+      "actor_id": "witness_1",
+      "spawn_anchor": [
+        7.5,
+        18.75,
+        0
+      ],
+      "asset_id": "default"
+    },
+    {
+      "actor_id": "witness_2",
+      "spawn_anchor": [
+        10.0,
+        18.75,
+        0
+      ],
+      "asset_id": "default"
+    },
+    {
+      "actor_id": "witness_3",
+      "spawn_anchor": [
+        12.5,
+        18.75,
+        0
+      ],
+      "asset_id": "default"
+    },
+    {
+      "actor_id": "witness_4",
+      "spawn_anchor": [
+        15.0,
+        18.75,
+        0
+      ],
+      "asset_id": "default"
+    }
+  ],
+  "requests": [
+    {
+      "request_case_id": "holder",
+      "actor_id": "holder",
+      "at_s": 0,
+      "deadline_s": 50,
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -2.5,
+            -10,
+            0
+          ],
+          "timeout_s": 40
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -8.75,
+            -7.5,
+            0
+          ],
+          "timeout_s": 40
+        }
+      ]
+    },
+    {
+      "request_case_id": "old_west",
+      "actor_id": "old_west",
+      "at_s": 0.3,
+      "deadline_s": 50,
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            2.5,
+            -10,
+            0
+          ],
+          "timeout_s": 40
+        },
+        {
+          "action": "move_to",
+          "target": [
+            8.75,
+            -15,
+            0
+          ],
+          "timeout_s": 40
+        }
+      ]
+    },
+    {
+      "request_case_id": "east_0",
+      "actor_id": "east_0",
+      "at_s": 1,
+      "deadline_s": 70,
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            2.5,
+            -10,
+            0
+          ],
+          "timeout_s": 60
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -2.5,
+            -10,
+            0
+          ],
+          "timeout_s": 60
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -8.75,
+            -5.0,
+            0
+          ],
+          "timeout_s": 60
+        }
+      ]
+    },
+    {
+      "request_case_id": "east_1",
+      "actor_id": "east_1",
+      "at_s": 2,
+      "deadline_s": 70,
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            2.5,
+            -10,
+            0
+          ],
+          "timeout_s": 60
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -2.5,
+            -10,
+            0
+          ],
+          "timeout_s": 60
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -8.75,
+            -2.5,
+            0
+          ],
+          "timeout_s": 60
+        }
+      ]
+    },
+    {
+      "request_case_id": "east_2",
+      "actor_id": "east_2",
+      "at_s": 3,
+      "deadline_s": 70,
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            2.5,
+            -10,
+            0
+          ],
+          "timeout_s": 60
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -2.5,
+            -10,
+            0
+          ],
+          "timeout_s": 60
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -8.75,
+            0.0,
+            0
+          ],
+          "timeout_s": 60
+        }
+      ]
+    },
+    {
+      "request_case_id": "witness_0",
+      "actor_id": "witness_0",
+      "at_s": 0,
+      "deadline_s": 70,
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            5.0,
+            16.25,
+            0
+          ],
+          "timeout_s": 40
+        }
+      ]
+    },
+    {
+      "request_case_id": "witness_1",
+      "actor_id": "witness_1",
+      "at_s": 0,
+      "deadline_s": 70,
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            7.5,
+            16.25,
+            0
+          ],
+          "timeout_s": 40
+        }
+      ]
+    },
+    {
+      "request_case_id": "witness_2",
+      "actor_id": "witness_2",
+      "at_s": 0,
+      "deadline_s": 70,
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            10.0,
+            16.25,
+            0
+          ],
+          "timeout_s": 40
+        }
+      ]
+    },
+    {
+      "request_case_id": "witness_3",
+      "actor_id": "witness_3",
+      "at_s": 0,
+      "deadline_s": 70,
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            12.5,
+            16.25,
+            0
+          ],
+          "timeout_s": 40
+        }
+      ]
+    },
+    {
+      "request_case_id": "witness_4",
+      "actor_id": "witness_4",
+      "at_s": 0,
+      "deadline_s": 70,
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            15.0,
+            16.25,
+            0
+          ],
+          "timeout_s": 40
+        }
+      ]
+    }
+  ],
+  "fairness_expectation": {
+    "actor_id": "old_west",
+    "max_first_leg_sim_s": 30,
+    "max_conflicting_bypasses": 0,
+    "requires_finite_holder_exit": true
+  },
+  "stop_when_complete": true
+}

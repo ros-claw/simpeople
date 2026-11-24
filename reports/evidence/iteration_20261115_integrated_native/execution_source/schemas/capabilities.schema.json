@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["schema_version", "sim_version", "backend", "actions"],
+  "properties": {
+    "schema_version": {"const": "simpeople.capabilities.v1"},
+    "sim_version": {"type": "string"},
+    "backend": {"enum": ["native", "motionbricks", "crowdbricks"]},
+    "actions": {
+      "type": "object", "additionalProperties": {
+        "type": "object", "required": ["status"],
+        "properties": {"status": {"enum": ["discovered", "verified", "unsupported", "blocked"]}}
+      }
+    }
+  }
+}

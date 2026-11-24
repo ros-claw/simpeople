@@ -9,21 +9,27 @@ from collections import Counter
 from .errors import SimPeopleError
 from .protocol import identifier
 
+BATCH_ITEM_FIELDS={
+    'run_activity':{'actor_id','steps','actor_instance_id','if_busy','on_blocked'},
+    'cancel':{'actor_id','task_id','actor_instance_id'},
+    'spawn':{'actor_id','asset_id','spawn_anchor','role','group'},
+}
+
 def bounded_int(value,name,lo,hi):
     if isinstance(value,bool) or not isinstance(value,int) or not lo<=value<=hi:
         raise SimPeopleError('INVALID_REQUEST',f'{name} must be an integer in [{lo},{hi}]')
     return value
 
 class Management:
-    def controller_check(self,p):
+    def controller_check(self,p,acquire=True):
         client=identifier(p.get('controller_id','legacy-local'),'controller_id')
         if 'controller_epoch' in p:bounded_int(p['controller_epoch'],'controller_epoch',0,2**63-1)
         if p.get('controller_epoch',self.controller_epoch)!=self.controller_epoch:
             raise SimPeopleError('CONTROLLER_STALE','control generation changed',controller_epoch=self.controller_epoch)
-        if self.controller_id is None:
+        if self.controller_id is None and acquire:
             self.controller_id=client;self.controller_epoch+=1
             self.event('controller_acquired',controller_id=client,controller_epoch=self.controller_epoch)
-        if client!=self.controller_id:
+        if self.controller_id is not None and client!=self.controller_id:
             raise SimPeopleError('CONTROLLER_BUSY','another client owns this session; use explicit takeover',
                                  controller_id=self.controller_id,controller_epoch=self.controller_epoch)
 
@@ -34,6 +40,7 @@ class Management:
                 'run_mode':getattr(self.backend,'run_mode','attached'),'render_profile':getattr(self.backend,'render_profile',None),
                 'controller_id':self.controller_id,'controller_epoch':self.controller_epoch,
                 'tasks_persist_on_disconnect':True,'coordination':'local logical ownership; not authentication',
+                'batch_contract':{'version':2,'max_items':100,'atomic':False,'item_fields':{k:sorted(v) for k,v in BATCH_ITEM_FIELDS.items()}},
                 'event_cursor':self.event_sequence,'modes':['interactive','generation','audit','experimental'],
                 'capacity_status':'see versioned acceptance evidence; modes do not imply real-time capacity'}
 
@@ -80,6 +87,7 @@ class Management:
         return sorted(selected)
 
     def cmd_crowd_state(self,p):
+        from .cleanup_state import seat_cleanup_state
         ids=self.select_actors(p.get('selector'));offset=bounded_int(p.get('offset',0),'offset',0,1000000)
         limit=bounded_int(p.get('limit',20),'limit',1,100);details=bool(p.get('details',False))
         status=Counter();actions=Counter();rows=[]
@@ -89,9 +97,11 @@ class Management:
             if task and task['step_index']<len(task['steps']):actions[task['steps'][task['step_index']]['action']]+=1
         for aid in ids[offset:offset+limit]:
             a=self.actor(aid);t=self.tasks.get(a['task_id']);o=self.backend.observe(a['handle'])
-            row={'actor_id':aid,**self.actor_metadata(aid),'status':t['status'] if t else 'idle',
+            row={'actor_id':aid,'actor_instance_id':a['actor_instance_id'],**self.actor_metadata(aid),'status':t['status'] if t else 'idle',
                  'task_id':a['task_id'],'position_m':o.get('position_m'),'speed_mps':o.get('speed_mps'),
-                 'error':t.get('error') if t else None,'seat':a['seat']}
+                 'error':t.get('error') if t else None,'seat':a['seat'],
+                 'blocked_details':t.get('blocked_details') if t else None,'queue_cleanup_pending':bool(a.get('queue_cleanup')),
+                 'seat_cleanup':seat_cleanup_state(self.backend,a,o,self.sim_time)}
             if details:row.update(task=self.public(t) if t else None,observation=o)
             rows.append(row)
         return {**self.cmd_session_info({}),'sim_time':self.sim_time,'paused':self.paused,'total':len(ids),
@@ -116,14 +126,28 @@ class Management:
         if not isinstance(items,list) or len(items)>100 or any(not isinstance(x,dict) for x in items):
             raise SimPeopleError('INVALID_REQUEST','items must be at most 100 objects')
         # Validate the whole envelope before executing; item errors remain individual.
-        allowed={'actor_id','steps'} if operation=='run_activity' else {'actor_id','task_id'} if operation=='cancel' else {'actor_id','asset_id','spawn_anchor','role','group'}
-        if any(set(x)-allowed for x in items):raise SimPeopleError('INVALID_REQUEST','unsupported batch item fields')
+        allowed=BATCH_ITEM_FIELDS[operation]
+        for index,item in enumerate(items):
+            extra=set(item)-allowed
+            if extra:raise SimPeopleError('INVALID_REQUEST','unsupported batch item fields',operation=operation,item_index=index,unsupported_fields=sorted(extra),allowed_item_fields=sorted(allowed))
         results=[]
         for index,item in enumerate(items):
+            aid=item.get('actor_id')
             try:
+                task=None
+                if operation=='cancel' and item.get('task_id'):
+                    tid=item['task_id']
+                    if tid not in self.tasks:raise SimPeopleError('TASK_NOT_FOUND',tid)
+                    task=self.tasks[tid];task_actor=task['actor_id']
+                    if aid is not None and aid!=task_actor:raise SimPeopleError('INVALID_REQUEST','task and actor differ',task_id=tid,actor_id=aid,task_actor_id=task_actor)
+                    aid=task_actor
+                if item.get('actor_instance_id') is not None:
+                    current=self.actor(aid)
+                    if item['actor_instance_id']!=current['actor_instance_id'] or task and item['actor_instance_id']!=task.get('actor_instance_id'):
+                        raise SimPeopleError('ACTOR_INSTANCE_MISMATCH','actor was recreated',actor_instance_id=current['actor_instance_id'])
                 result=getattr(self,'cmd_'+operation)(copy.deepcopy(item))
-                results.append({'index':index,'actor_id':item.get('actor_id'),'result':result})
-            except SimPeopleError as err:results.append({'index':index,'actor_id':item.get('actor_id'),'error':err.as_dict()})
+                results.append({'index':index,'actor_id':aid,'result':result})
+            except SimPeopleError as err:results.append({'index':index,'actor_id':aid,'error':err.as_dict()})
         return {'results':results,'accepted':sum('error' not in r for r in results),'rejected':sum('error' in r for r in results),
                 'atomic':False,'completion':'poll task_id; accepted does not mean completed'}
 

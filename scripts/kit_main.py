@@ -1,6 +1,7 @@
 """Dedicated Isaac process. Never imports Kit in controller Python."""
 import argparse
 import hashlib
+import importlib.util
 from datetime import datetime, timezone
 import json
 from pathlib import Path
@@ -22,6 +23,7 @@ parser.add_argument('--mode',choices=['interactive','generation','audit','experi
 parser.add_argument('--duration',type=float);parser.add_argument('--run-id')
 parser.add_argument('--camera',choices=['overview','follow','seat_side','gait_side'],default='overview')
 parser.add_argument('--traffic-profile',choices=['native','segmented','corridor'],default='segmented')
+parser.add_argument('--idle-profile',choices=['default','basic'],default='default',help='Process-start native Idle menu; basic is opt-in and does not change gesture limits')
 parser.add_argument('--quality-audit',action='store_true')
 parser.add_argument('--capture-profile',choices=['full','no_encode','render_only','none'],default='full')
 parser.add_argument('--warmup-wall-s',type=float,default=30)
@@ -33,13 +35,13 @@ parser.add_argument('--cpu-threads',type=int,choices=range(1,65),default=8)
 parser.add_argument('--renderer-profile',choices=['default','ampere_retrace'],default='default')
 parser.add_argument('--cinematic-config')
 parser.add_argument('--custom-actions',action='store_true',help='Import configured local clips through the native Behavior pipeline')
+parser.add_argument('--generated-preload',help='Experimental local actions.json/acceptance.json bundle; requires --custom-actions --idle-profile basic')
+parser.add_argument('--audit-full-pose',action='store_true',help='Record read-only full Native joint transforms on the main thread')
 for name in ['serve','no-video','allow-unverified','realtime','visible']:parser.add_argument('--'+name,action='store_true')
 args=parser.parse_args()
 production_config=json.loads(Path(args.cinematic_config).read_text()) if args.cinematic_config else None
 if production_config and (args.scenario!='industrial_life' or args.capture_profile!='full' or args.serve):
     parser.error('cinematic production uses standalone industrial_life and full capture')
-from simpeople.core.modes import resolve_mode
-for key,value in resolve_mode(args.mode,args.width,args.height,args.quality_audit).items():setattr(args,key,value)
 if args.no_video:args.capture_profile='none'
 if args.people<1 or args.people>100:parser.error('people must be between 1 and 100')
 run_id=args.run_id or datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')+'-'+uuid.uuid4().hex[:8]
@@ -49,7 +51,7 @@ SNAPSHOT=directory/'source_snapshot'
 sources={}
 for base in ['src','scripts','configs','extensions','schemas','skills']:
     for path in (ROOT/base).rglob('*'):
-        if not path.is_file() or path.suffix not in {'.py','.json','.toml','.md'}:continue
+        if not path.is_file() or path.suffix not in {'.py','.cpp','.json','.toml','.md'}:continue
         data=path.read_bytes();relative=path.relative_to(ROOT);saved=SNAPSHOT/relative
         saved.parent.mkdir(parents=True,exist_ok=True);saved.write_bytes(data)
         sources[str(relative)]=hashlib.sha256(data).hexdigest()
@@ -57,6 +59,18 @@ capability_data=(ROOT/'reports/capability_matrix.json').read_bytes()
 (SNAPSHOT/'reports').mkdir(parents=True,exist_ok=True)
 (SNAPSHOT/'reports/capability_matrix.json').write_bytes(capability_data)
 sys.path.insert(0,str(SNAPSHOT/'src'))
+# Import the package only after selecting the frozen source tree. Importing
+# modes earlier pins simpeople.__path__ to the live checkout for later imports.
+from simpeople.core.modes import resolve_mode
+for key,value in resolve_mode(args.mode,args.width,args.height,args.quality_audit).items():setattr(args,key,value)
+preload_spec=importlib.util.spec_from_file_location('simpeople_frozen_preload_options',SNAPSHOT/'scripts/native_preload_options.py')
+preload_module=importlib.util.module_from_spec(preload_spec);preload_spec.loader.exec_module(preload_module)
+preload_profile=preload_module.stage_generated_preload(args.generated_preload,SNAPSHOT/'configs',
+    custom_actions=args.custom_actions,idle_profile=args.idle_profile,seed=args.seed)
+if preload_profile:
+    for name in preload_profile['snapshot_files']:
+        relative='configs/'+name;sources[relative]=hashlib.sha256((SNAPSHOT/relative).read_bytes()).hexdigest()
+    (directory/'preload_inputs.json').write_text(json.dumps(preload_profile,indent=2)+'\n')
 (directory/'manifest.json').write_text(json.dumps({'source_sha256':sources,
     'asset_cache_manifest':'../../reports/asset_cache_manifest.json','scenario':args.scenario,'seed':args.seed},indent=2))
 (directory/'bootstrap.json').write_text(json.dumps({'pid':__import__('os').getpid(),'run_id':run_id}))
@@ -67,7 +81,7 @@ app=SimulationApp({'headless':not args.visible,'active_gpu':args.gpu,'multi_gpu'
                    'profiler_backend':['tracy'] if args.tracy else [],
                    'width':args.width,'height':args.height,'limit_cpu_threads':args.cpu_threads,
                    'disable_viewport_updates':not args.visible})
-engine=journal=bridge=recorder=monitor=frame_file=app_subscription=director=None
+engine=journal=bridge=recorder=monitor=frame_file=app_subscription=director=pose_audit=None
 keep_running=True
 def stop(*_):
     global keep_running
@@ -103,6 +117,8 @@ try:
     settings.set('/exts/omni.anim.behavior.core/agentResponseTime',1/30)
     settings.set('/exts/omni.anim.behavior.core/agentResponseTimeMaxRandomOffset',0.0)
     settings.set('/exts/omni.anim.behavior.core/navBlockedTimeout',3.0)
+    from simpeople.backends.native.idle_profile import configure_idle_profile
+    idle_profile=configure_idle_profile(settings,args.idle_profile)
     from simpeople.backends.native.scene import build_scene
     from simpeople.backends.native.environments import industrial_scene,asset_validation_scene,gait_quality_scene
     from simpeople.backends.native.adapter import NativeBackend
@@ -129,6 +145,7 @@ try:
     backend_type=ReservationNativeBackend if args.scenario in {'industrial_life','native_avoidance','gait_quality_validation'} and args.traffic_profile!='native' else NativeBackend
     backend=backend_type(ROOT,semantics,args.allow_unverified,config_dir=SNAPSHOT/'configs',
                           capability_file=SNAPSHOT/'reports/capability_matrix.json')
+    backend.native_idle_profile=idle_profile
     backend.quality_sampling=args.quality_audit
     backend.run_mode=args.mode;backend.render_profile={'width':args.width,'height':args.height,'capture_profile':args.capture_profile,
         'renderer_profile':args.renderer_profile,'rt2_retrace':settings.get('/rtx/pathtracing/cached/retrace')}
@@ -136,20 +153,34 @@ try:
     backend.scene_revision=hashlib.sha256(json.dumps({'semantics':semantics,'scene_source':sources.get('src/simpeople/backends/native/scene.py'),
         'environment_source':sources.get('src/simpeople/backends/native/environments.py')},sort_keys=True).encode()).hexdigest()
     backend.performance_optimized=args.performance_profile=='optimized'
+    seed_configuration=backend.configure_native_seed(args.seed)
+    if preload_profile:
+        backend.cooperative_finite_stop_probe_enabled=True
+        backend.precise_facing_probe_enabled=True
     if args.custom_actions:
         from simpeople.backends.native.custom_actions import register
         register(backend,directory/'custom_actions')
     if args.traffic_profile=='corridor':
         if not hasattr(backend,'enable_corridor_profile'):raise RuntimeError('corridor profile is not implemented in this source revision')
         backend.enable_corridor_profile()
-    backend.api.set_random_seed(args.seed)
     journal=Journal(directory,vars(args))
+    journal.write('sdk_idle_settings.json',idle_profile)
+    journal.write('native_seed_configuration.json',seed_configuration)
     monitor=ResourceMonitor(directory,args.gpu)
     engine=Engine(backend,journal)
     if production_config:
         from simpeople.backends.native.production import ShiftChangeDirector
         director=ShiftChangeDirector(engine,production_config,directory)
     quality=QualityAudit(engine.event,broad_phase=backend.performance_optimized)
+    imported={name:str(Path(module.__file__).resolve()) for name,module in sys.modules.items()
+              if name.startswith('simpeople') and getattr(module,'__file__',None)}
+    if not all(Path(file).is_relative_to(SNAPSHOT/'src') for file in imported.values()):
+        raise RuntimeError('runtime package import escaped the frozen source snapshot')
+    journal.write('runtime_imports.json',imported)
+    if args.audit_full_pose:
+        pose_spec=importlib.util.spec_from_file_location('simpeople_frozen_pose_audit',SNAPSHOT/'scripts/native_pose_audit.py')
+        pose_module=importlib.util.module_from_spec(pose_spec);pose_spec.loader.exec_module(pose_module)
+        pose_audit=pose_module.NativePoseAudit(backend,directory)
     journal.write('environment.json',{'isaac_version':(Path(__import__('os').environ['ISAAC_PATH'])/'VERSION').read_text().strip(),
         'default_viewport_updates':args.visible,'rgb_camera_count':0 if args.capture_profile=='none' else 1,
         'capture_profile':args.capture_profile,'traffic_profile':args.traffic_profile,'quality_sampling':args.quality_audit,
@@ -158,6 +189,7 @@ try:
         'crowd_response_time_s':settings.get('/exts/omni.anim.behavior.core/agentResponseTime'),
         'crowd_response_random_offset_s':settings.get('/exts/omni.anim.behavior.core/agentResponseTimeMaxRandomOffset'),
         'native_blocked_timeout_s':settings.get('/exts/omni.anim.behavior.core/navBlockedTimeout'),
+        'native_idle_profile':idle_profile,
         'traffic_controller':backend_type.__name__,
         'overview_camera_profile':'industrial-wide-v2' if args.scenario=='industrial_life' else 'lab-v1',
         'overview_lens':{name:backend.stage.GetPrimAtPath('/World/Camera').GetAttribute(name).Get() for name in ['focalLength','horizontalAperture','verticalAperture']},
@@ -333,6 +365,7 @@ try:
                   'app_updates':frame_events['count'],'app_dt_sum_s':frame_events['dt_sum_s'],'last_app_dt_s':frame_events['last_dt_s']}
         if args.tracy:carb.profiler.end(1);trace_begin('SimPeople::RGBencode')
         if recorder and timeline.is_playing():identity['video_frame']=recorder.capture(now_sim,identity)
+        if pose_audit:pose_audit.sample(engine,identity)
         if director:director.record(identity)
         after_capture=time.monotonic()
         if args.tracy:carb.profiler.end(1);trace_begin('SimPeople::journal')
@@ -396,6 +429,7 @@ try:
 except Exception:
     (directory/'error.txt').write_text(traceback.format_exc());traceback.print_exc();exit_code=1
 finally:
+    if pose_audit:pose_audit.close()
     if frame_file and not frame_file.closed:frame_file.close()
     app_subscription=None
     if bridge:bridge.close()

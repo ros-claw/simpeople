@@ -53,6 +53,31 @@ The public repository contains a marketplace manifest:
 
 `people_crowd(state)` returns counts and a bounded page. Use selectors (`actor_ids`, `role`, `group`, `region_m`) for activity/cancel batches. Batch acceptance is per item and is not atomic. Use task IDs to confirm terminal results. `people_crowd(events)` exposes an incremental bounded cursor; refresh state when history rolls over. Full durable events remain in the run journal.
 
+For a one-time instruction, query every selected state page first and retain the
+returned actor IDs and instance IDs. Deduplicate IDs; if an ID appears with
+conflicting instances, refresh selection. Validate and submit that fixed set through
+explicit items, or use `selector.actor_ids`; a later group or region change must
+not expand the command. Paginated reads are not atomic. Refresh selection when
+the session or episode changes, and bind each existing person's instance so a
+recreated actor cannot inherit a stale plan. Repair only the failed members after
+partial acceptance, keeping successful task IDs and the original selection.
+
+Where supported, each state row's `seat_cleanup` reports physical cleanup
+separately from activity success: `pending`, `phase`, the original
+`deadline_sim_time` and `remaining_sim_s`. An activity may already be failed while
+its seat remains reserved. Later physical cleanup does not regrade that task;
+polling does not extend the original 15-second budget. A pending exit route is
+not evidence that the SDK is walking. Read actual observations, and preserve
+missing blocker or body data as unknown. The field's Native integration test is
+still pending; see the [current test status](../reports/ITERATION_20261115_SEAT_CLEANUP_API.md).
+
+Activity batch items support `actor_id`, `steps`, `actor_instance_id`, `if_busy`
+and `on_blocked`. Bind existing actors to their observed instances and put busy
+or recovery policy inside each item. Cancel items support `actor_id`/`task_id`
+and an optional instance binding; conflicting actor/task identities are rejected.
+Stale instances do not preempt recreated actors. An unknown envelope field reports
+its item index, unsupported fields and allowed fields before any item executes.
+
 Modes describe intent: interactive, generation, audit and experimental. Actual real-time and population capacities are published independently. Continuous corridor travel is opt-in while population regression is being validated; the conservative segmented profile remains available.
 
 For the standalone motion-quality profile, add `--traffic-profile corridor` to the serve command. The attaching extension uses direct native navigation and its own session overlay. It does not install the factory-specific reservation scheduler into a user's scene; attached-scene population capacity requires separate validation.
@@ -73,3 +98,36 @@ codex exec --disable apps -s read-only \
 Use this approval setting only for a local runtime whose managed actors you intend the agent to control. It scopes approval to this server and does not bypass the host filesystem sandbox. Interactive hosts can use their usual tool approval UI instead. The nested plugin MCP policy override in current public documentation did not take effect in this installed CLI build; the explicit server configuration above was verified separately. See the recorded host test outcome before treating installation as natural-language acceptance.
 
 The first native host trial correctly refused to act when its custom endpoint was not forwarded. The corrected trial explicitly supplied the local endpoint and stable controller ID in the server environment. Default plugin packages target loopback port 8768; custom sessions require this host configuration. No user credentials are needed in these variables.
+
+### CommandBench
+
+The 20-case suite and native predicates live in
+[`benchmarks/commands`](../benchmarks/commands/README.md). Real host JSONL,
+task outcomes, preserved witnesses and resource leases are graded separately
+from the host's completion message. Codex 0.168 was tested with the same complete
+effective-server compatibility configuration: endpoint/env and local approval
+overrides alone created an invalid transport, so the command and args must also
+be declared. These overrides apply only to the test process.
+
+The local driver supports Codex and a separate Claude event adapter; a pilot is
+not the required 60-attempt matrix. Claude has a native-session-free
+`--host claude --host-preflight-only` check. Its CLI startup loaded the frozen
+installed plugin with only the qualified SimPeople MCP, but authentication is
+still missing. Parser tests and that startup diagnostic are not natural-language
+acceptance. Authenticated real-host runs remain unverified. See the suite README
+for its per-session binding, Skill check and raw/normalized trace provenance.
+To test an unpublished local plugin with the documented `--plugin-dir` workflow,
+add `--host-plugin-dir /absolute/path/to/simpeople/plugins/claude`. Preflight
+validates that exact directory with the actual CLI and compares its contract
+files to the frozen worktree reference; no marketplace cache or credentials are
+modified. The later host attempt uses a frozen session copy. Authentication and
+actual Skill/MCP discovery remain separate requirements, and the result records
+the local loading mode rather than marketplace installation.
+Optional generated assets retain their separate [provider gates](motion_providers.md).
+
+CLI event capture and structured output follow the official
+[non-interactive mode documentation](https://learn.chatgpt.com/docs/non-interactive-mode);
+server-scoped settings are described in the official
+[configuration reference](https://learn.chatgpt.com/docs/config-file/config-reference).
+The local installed CLI's measured behavior takes precedence over an assumption
+that a newer documentation field already works in it.

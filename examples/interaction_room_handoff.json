@@ -1,0 +1,54 @@
+{
+  "schema_version": "simpeople.scene-handoff.v1",
+  "scene_id": "registry_small_room_v1",
+  "revision": "room_handoff_v1",
+  "frame": {
+    "meters_per_unit": 1,
+    "up_axis": "Z"
+  },
+  "navmesh": {
+    "available": true
+  },
+  "managed_namespace": "/World/SimPeople",
+  "locations": {
+    "room_work": {
+      "kind": "workstation",
+      "prim_path": "/World/Workbench",
+      "approach": "workbench_a",
+      "capacity": 1,
+      "allowed_actions": [
+        "wait",
+        "look_at"
+      ]
+    },
+    "room_queue": {
+      "kind": "queue",
+      "prim_path": "/Room/Counter",
+      "slots_m": [
+        [
+          -4,
+          2.6,
+          0
+        ],
+        [
+          -4,
+          1.35,
+          0
+        ]
+      ],
+      "egress_targets": [
+        [
+          -6.1,
+          1.35,
+          0
+        ],
+        [
+          -1.9,
+          1.35,
+          0
+        ]
+      ],
+      "capacity": 2
+    }
+  }
+}

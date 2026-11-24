@@ -1,0 +1,169 @@
+{
+  "schema_version": "simpeople.benchmark.v1",
+  "case_id": "open_queue2_v1",
+  "category": "ordinary",
+  "scene": {
+    "id": "industrial",
+    "revision": "1a0738138fa636df676512588618750247e41603274584944809990fda7e34d1"
+  },
+  "actors": [
+    {
+      "actor_id": "bench_000",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -18.5,
+        -20.0,
+        0
+      ]
+    },
+    {
+      "actor_id": "bench_001",
+      "asset_id": "default",
+      "spawn_anchor": [
+        -15.8,
+        -20.0,
+        0
+      ]
+    }
+  ],
+  "requests": [
+    {
+      "request_case_id": "bench_000_cycle0",
+      "actor_id": "bench_000",
+      "at_s": 0,
+      "deadline_s": 90,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -18.5,
+            -17.5,
+            0
+          ],
+          "timeout_s": 35
+        },
+        {
+          "action": "wait",
+          "duration_s": 1
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -18.5,
+            -20.0,
+            0
+          ],
+          "timeout_s": 35
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "bench_001_cycle0",
+      "actor_id": "bench_001",
+      "at_s": 0,
+      "deadline_s": 90,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -15.8,
+            -17.5,
+            0
+          ],
+          "timeout_s": 35
+        },
+        {
+          "action": "wait",
+          "duration_s": 1
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -15.8,
+            -20.0,
+            0
+          ],
+          "timeout_s": 35
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "bench_000_cycle1",
+      "actor_id": "bench_000",
+      "at_s": 0.25,
+      "deadline_s": 90,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -18.5,
+            -17.5,
+            0
+          ],
+          "timeout_s": 35
+        },
+        {
+          "action": "wait",
+          "duration_s": 1
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -18.5,
+            -20.0,
+            0
+          ],
+          "timeout_s": 35
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    },
+    {
+      "request_case_id": "bench_001_cycle1",
+      "actor_id": "bench_001",
+      "at_s": 0.25,
+      "deadline_s": 90,
+      "depends_on": [],
+      "steps": [
+        {
+          "action": "move_to",
+          "target": [
+            -15.8,
+            -17.5,
+            0
+          ],
+          "timeout_s": 35
+        },
+        {
+          "action": "wait",
+          "duration_s": 1
+        },
+        {
+          "action": "move_to",
+          "target": [
+            -15.8,
+            -20.0,
+            0
+          ],
+          "timeout_s": 35
+        }
+      ],
+      "expected_outcome": "succeeded",
+      "think_s": 0
+    }
+  ],
+  "submission_mode": "open_arrival",
+  "busy_policy": "queue",
+  "max_pending_per_actor": 2,
+  "duration_s": 90,
+  "finite": true,
+  "capture_profile": "full"
+}

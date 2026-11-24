@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "status",
+    "task_ids",
+    "reason_codes",
+    "summary"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "Outcome of the requested scene action or capability: completed only when the requested supported action succeeded; rejected when capability/service is unavailable or the request is refused before execution, even if its diagnostic query completed; failed for an admitted task that failed; unknown when completion is not verified. Do not call unavailable generation completed.",
+      "enum": [
+        "completed",
+        "rejected",
+        "failed",
+        "unknown"
+      ]
+    },
+    "task_ids": {
+      "type": "array",
+      "description": "Only real task IDs read from this episode. Completed activities must name their actual IDs. Preserved old task IDs may be cited as evidence, but are not newly completed work. Never invent an ID for a refused action.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reason_codes": {
+      "type": "array",
+      "description": "Use actual structured refusal/failure codes. For an unavailable service report rejected with its observed code rather than claiming the requested capability completed.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "summary": {
+      "type": "string"
+    }
+  }
+}

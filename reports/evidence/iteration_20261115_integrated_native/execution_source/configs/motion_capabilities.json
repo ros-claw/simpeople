@@ -1,0 +1,23 @@
+{
+  "schema_version": "simpeople.motion-capabilities.v1",
+  "runtime_classification": "preload_only",
+  "live_reload_verified": false,
+  "native_segment_queue_verified": false,
+  "online_application_enabled": false,
+  "qualified_generated_native_rigs": [],
+  "native_body_frame_mapping_verified": [
+    "default",
+    "female_adult_business_02"
+  ],
+  "evidence": {
+    "runtime_publication": "runs/iter1113n-native-reload-01/reload_probe.json",
+    "native_body_frame_mapping": "runs/iter1113n-actual-roundtrip-matrix-01/actual_roundtrip.json",
+    "generated_native_lifecycle": "runs/iter1113n-generated-native-chain-03/generated_native_acceptance.json",
+    "generated_quality_failure": ".runtime/verification1113/generated_chain03_quality/generated_quality.json",
+    "actual_pose_context": "runs/iter1113p-live-pose-context-03/completed.json",
+    "actual_calibration_diagnostics": "runs/iter1113p-live-pose-context-03/second_pose_bridge_diagnostic.json",
+    "canonical_preload_quality_failure": ".runtime/verification1113/canonical_quality_p10/canonical_quality.json",
+    "actual_pose_capture_guards": "runs/iter1113p-live-pose-context-05/capture_guard_checks.json"
+  },
+  "limits": "Measured support declaration, not an execution switch. Asset preparation has no native executor. Body-frame mapping and lifecycle passed; world seams/support quality failed. No runtime reload, streaming, arbitrary pose or complete generated-rig qualification."
+}

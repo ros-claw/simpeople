@@ -1,0 +1,12 @@
+{
+  "schema_version": "simpeople.runtime-policy.v1",
+  "queue_outside_capacity": 8,
+  "resource_waiter_capacity": 32,
+  "traffic_fairness_enabled": true,
+  "dynamic_edges_enabled": false,
+  "max_conflicting_bypasses": 0,
+  "max_wait_sim_s": 30.0,
+  "cycle_detection_sim_s": 3.0,
+  "recovery_after_wait_sim_s": 8.0,
+  "max_recovery_attempts": 2
+}

@@ -10,3 +10,5 @@ productions/
 dist/
 assets/characters
 assets/animations
+## Local generated Deadweight import registry contains absolute asset paths.
+/configs/deadweight/actions.json

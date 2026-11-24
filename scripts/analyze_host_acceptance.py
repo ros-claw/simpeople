@@ -2,6 +2,12 @@
 import argparse,json
 from pathlib import Path
 p=argparse.ArgumentParser();p.add_argument('directory');a=p.parse_args();d=Path(a.directory)
+if (d/'source_snapshot/benchmarks/commands/commandbench_v1.json').is_file():
+ import importlib.util
+ spec=importlib.util.spec_from_file_location('frozen_command_grader',d/'source_snapshot/src/simpeople/core/command_benchmark.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+ if not hasattr(module,'summarize'):raise SystemExit('This pilot predates the frozen summarizer; retain its per-trial results without retroactively changing its evaluator.')
+ result=module.summarize(json.loads((d/'host_manifest.json').read_text()),json.loads((d/'progress.json').read_text()))
+ (d/'host_acceptance.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2));raise SystemExit(0 if result['passed'] else 2)
 events=[json.loads(x) for x in (d/'events.jsonl').read_text().splitlines()]
 ended=[x['task'] for x in events if x['kind']=='task_ended'];states=[];results=[]
 for i in range(1,4):

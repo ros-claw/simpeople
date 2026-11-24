@@ -4,7 +4,20 @@ import re
 from .errors import SimPeopleError
 
 TERMINAL = {'succeeded', 'failed', 'cancelled'}
-ACTIONS = {'move_to','wait','look_at','sit','leave_seat','follow','custom_action','queue'}
+ACTIONS = {'move_to','wait','look_at','sit','leave_seat','follow','custom_action','queue','head_look','reach_hand'}
+STEP_FIELDS={'action','target','duration_s','timeout_s','gait','speed_mps','distance_m','tolerance_m','resource_id','via','interaction_revision','hand','max_angle_deg'}
+
+def activity_contract():
+    """Describe plan verbs separately from backend capability/gait labels."""
+    return {'schema_version':'simpeople.task.v1','step_action_values':sorted(ACTIONS),
+            'step_fields':sorted(STEP_FIELDS),
+            'capability_to_step_fields':{'walk':{'action':'move_to','gait':'walk'},'run':{'action':'move_to','gait':'run'},
+                **{a:{'action':a} for a in sorted(ACTIONS-{'move_to'})}},
+            'target_required_for':sorted({'move_to','look_at','sit','follow','custom_action','queue','head_look','reach_hand'}),
+            'duration_required_for':sorted({'wait','sit','follow','custom_action','queue','head_look','reach_hand'}),
+            'hand_required_for':{'reach_hand':['left','right']},
+            'precise_look_at':{'optional_field':'max_angle_deg','target_kind':'fixed_world_point','range_deg':[.1,2],'max_sim_seconds':8,'max_sdk_commands':16,'status':'experimental_requires_explicit_probe_runtime'},
+            'note':'walk/run are capability and gait names, not activity action values. Add a real target and required duration/hand to the selected step fields, honor actor-specific verified capability/domain, then validate the complete plan.'}
 
 def fail(message):
     raise SimPeopleError('INVALID_REQUEST', message)
@@ -36,14 +49,28 @@ def activity(params):
     for raw in steps:
         if not isinstance(raw,dict): fail('each step must be an object')
         s=dict(raw); action=s.get('action')
-        if action not in ACTIONS: raise SimPeopleError('ACTION_UNSUPPORTED',f'Unknown action: {action}')
-        allowed={'action','target','duration_s','timeout_s','gait','speed_mps','distance_m','tolerance_m','resource_id','via'}
-        if set(s)-allowed: fail('unknown step fields: '+', '.join(sorted(set(s)-allowed)))
+        if action not in ACTIONS:
+            hint=activity_contract()['capability_to_step_fields'].get(action)
+            raise SimPeopleError('ACTION_UNSUPPORTED',f'Unknown action: {action}',allowed_step_actions=sorted(ACTIONS),step_fields_hint=hint)
+        if set(s)-STEP_FIELDS: fail('unknown step fields: '+', '.join(sorted(set(s)-STEP_FIELDS)))
         if 'resource_id' in s:identifier(s['resource_id'],'resource_id')
+        if 'interaction_revision' in s:
+            if not isinstance(s['interaction_revision'],str) or not re.fullmatch(r'[0-9a-f]{64}',s['interaction_revision']):fail('interaction_revision must be a SHA256 hex digest')
+            if action not in {'sit','queue','wait','custom_action','head_look','reach_hand'} or action in {'wait','custom_action','head_look','reach_hand'} and 'resource_id' not in s:fail('interaction_revision requires a seat, queue or explicit interaction resource')
         if 'via' in s and action!='move_to':fail('via is only valid for move_to')
-        if action in {'move_to','look_at','sit','follow','custom_action','queue'}: s['target']=target(s.get('target'))
+        if 'max_angle_deg' in s:
+            if action!='look_at':fail('max_angle_deg is only valid for look_at')
+            if not isinstance(s.get('target'),list):fail('precise look_at requires a fixed world coordinate point')
+            s['max_angle_deg']=number(s['max_angle_deg'],'max_angle_deg',.1,2)
+            s.setdefault('timeout_s',8)
+            if 'resource_id' in s:fail('precise look_at cannot acquire an interaction resource')
+        if action in {'move_to','look_at','sit','follow','custom_action','queue','head_look','reach_hand'}: s['target']=target(s.get('target'))
         if action=='custom_action':s['target']=identifier(s['target'],'custom action name')
         if action in {'wait','sit','follow','custom_action','queue'}: s['duration_s']=number(s.get('duration_s'),'duration_s',0.01)
+        if action in {'head_look','reach_hand'}:s['duration_s']=number(s.get('duration_s'),'duration_s',.01,5)
+        if action=='reach_hand':
+            if s.get('hand') not in {'left','right'}:fail('reach_hand requires hand left or right')
+        elif 'hand' in s:fail('hand is only valid for reach_hand')
         if 'timeout_s' in s: s['timeout_s']=number(s['timeout_s'],'timeout_s',0.1)
         if 'distance_m' in s:s['distance_m']=number(s['distance_m'],'distance_m',0.3,20)
         if action=='move_to':
